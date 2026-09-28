@@ -6,7 +6,7 @@ The pipeline performs these stages:
 
 1. Discover Stories in an Azure DevOps sprint.
 2. Ingest each Story and its `Epic -> Feature -> Story` hierarchy into Neo4j.
-3. Extract proposed Story relationships and create Azure DevOps review Tasks.
+3. Extract Story relationships, auto-approve confident ontology-valid relationships, and create Azure DevOps Tasks for ambiguous relationships.
 4. Generate test plans, suites, scenarios, and cases after relationship review.
 5. Create Azure DevOps Tasks for test-artifact review.
 6. Generate Playwright specs after all test artifacts for that Story are approved.
@@ -23,6 +23,8 @@ The graph core is ported from the sibling `knowledgeGraph` project. It uses the 
 - Every discovered Story is linked to `Sprint:<iteration-path>` with `PLANNED_FOR`.
 - Source metadata has deterministic, approved provenance.
 - LLM entities and relationships retain model evidence and confidence.
+- Ontology-valid relationships at or above `RELATION_AUTO_APPROVE_CONFIDENCE` are approved automatically. The default threshold is `0.9`.
+- Lower-confidence relationships and ontology-invalid fallbacks require Azure DevOps review.
 - An unknown or ontology-invalid relationship is stored as `RELATES_TO` with its suggested type and `needs_review` state.
 - Rejected relationships remain in the graph with review history but are excluded from grounded Story context.
 - A correction rejects the original fallback relationship and creates the approved typed relationship atomically.
@@ -70,6 +72,7 @@ NEO4J_DATABASE=neo4j
 
 OPENROUTER_API_KEY=your-openrouter-key
 OPENROUTER_MODEL=openai/gpt-oss-120b
+RELATION_AUTO_APPROVE_CONFIDENCE=0.9
 
 ADO_ORG_URL=https://dev.azure.com/your-organization
 ADO_PROJECT=WMS
@@ -146,6 +149,7 @@ Open **Settings -> Secrets and variables -> Actions -> Variables** and create:
 | `PLAYWRIGHT_BASE_BRANCH` | No | Target PR branch; defaults to `main` |
 | `NEO4J_DATABASE` | No | Defaults to `neo4j` |
 | `OPENROUTER_MODEL` | No | Defaults to `openai/gpt-oss-120b` |
+| `RELATION_AUTO_APPROVE_CONFIDENCE` | No | Confidence from `0` to `1`; defaults to `0.9` |
 | `ADO_REVIEW_PENDING_STATE` | No | Defaults to `New`; set it to a valid Task state for the ADO process |
 | `ADO_REVIEW_COMPLETED_STATE` | No | Defaults to `Closed`; set it to the Task process's completed state |
 
@@ -175,7 +179,7 @@ The scheduled trigger runs at minutes 2, 7, 12, and so on. GitHub runs schedules
 
 ### Relationship review in Azure DevOps
 
-Ingestion creates one child Task per proposed relationship and Story. Copy the current hash from the Task description into a Task comment.
+Ingestion creates one child Task per ambiguous relationship and Story. Confident ontology-valid relationships are approved automatically. Copy the current hash from the Task description into a Task comment.
 
 Approve:
 

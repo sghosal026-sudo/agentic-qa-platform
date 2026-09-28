@@ -68,7 +68,7 @@ function llmProvenance(relation: Relation): Provenance {
     evidenceText: relation.evidence,
     confidence: relation.confidence,
     inferred: false,
-    reviewState: "needs_review",
+    reviewState: relation.state === "approved" ? "approved" : "needs_review",
   });
 }
 
@@ -135,6 +135,7 @@ export class Graph {
     const resolved = resolveSemanticRelationship(relation.type, sourceType, targetType);
     const sourceId = resolved.reversed ? relation.targetId : relation.sourceId;
     const targetId = resolved.reversed ? relation.sourceId : relation.targetId;
+    const reviewState = resolved.reviewState === "needs_review" ? "needs_review" : relation.state;
     const edge = EdgeSchema.parse({
       id: edgeKey({ sourceId, relationshipType: resolved.relationshipType, targetId }),
       sourceId,
@@ -144,7 +145,7 @@ export class Graph {
       provenance: [llmProvenance(relation)],
       confidence: relation.confidence,
       inferred: false,
-      reviewState: resolved.reviewState,
+      reviewState,
       evidence: [relation.evidence],
     });
     const target = await this.repository.getNode(relation.targetId);

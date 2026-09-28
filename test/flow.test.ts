@@ -48,23 +48,46 @@ test("relationship evidence keeps the model quote when Markdown formatting diffe
   assert.equal(relation.evidence, "Creates five locations.");
 });
 
-test("invalid model relationships are warned and skipped individually", async () => {
+test("only ambiguous model relationships require review", async () => {
   const story = { id: "ST-1", adoId: 1, title: "Story", text: "GET /warehouses returns 200.", areaPath: "QA", iterationPath: "QA\\Sprint 1" };
   const graph = {
     setup: async () => {}, node: async () => {}, hierarchy: async () => {}, propose: async () => {},
   } as unknown as GraphStore;
   const model = { json: async () => ({ relationships: [
     { targetName: "Feature", targetType: "Feature", type: "IMPLEMENTS", evidence: "GET /warehouses", confidence: 0.8, reason: "unsupported structural type" },
-    { targetName: "GET /warehouses", targetType: "Endpoint", type: "AFFECTS", evidence: "GET /warehouses returns 200.", confidence: 0.8, reason: "supported" },
+    { targetName: "GET /warehouses", targetType: "Endpoint", type: "AFFECTS", evidence: "GET /warehouses returns 200.", confidence: 0.95, reason: "explicit evidence" },
+    { targetName: "GET /warehouses", targetType: "Endpoint", type: "IMPLEMENTATION", evidence: "GET /warehouses returns 200.", confidence: 1, reason: "unsupported relationship type" },
   ] }) } as ModelClient;
-  const ado = { task: async () => ({ id: 1, hash: "hash" }), decision: async () => null };
+  let tasks = 0;
+  const ado = { task: async () => ({ id: ++tasks, hash: "hash" }), decision: async () => null };
   let run: Run | undefined;
   try {
     run = await ingestStory(story, graph, model, ado);
     assert.equal(run.status, "review_relations");
-    assert.equal(run.relations.length, 1);
+    assert.equal(run.relations.length, 2);
+    assert.equal(run.relations.find((relation) => relation.type === "AFFECTS")?.state, "approved");
+    assert.equal(run.relations.find((relation) => relation.type === "IMPLEMENTATION")?.state, "needs_review");
+    assert.equal(tasks, 1);
     assert.match(run.warnings?.[0] ?? "", /relationship #0 ignored/);
     assert.deepEqual(run.errors, []);
+  } finally {
+    if (run) await fs.rm(runPath(run.id), { recursive: true, force: true });
+  }
+});
+
+test("malformed relationship output retries and blocks before test design", async () => {
+  const story = { id: "ST-1", adoId: 1, title: "Story", text: "Known behavior.", areaPath: "QA", iterationPath: "QA\\Sprint 1" };
+  const graph = { setup: async () => {}, node: async () => {}, hierarchy: async () => {} } as unknown as GraphStore;
+  let calls = 0;
+  const model = { json: async () => { calls += 1; return { scenarios: [] }; } } as ModelClient;
+  const ado = { task: async () => ({ id: 1, hash: "hash" }), decision: async () => null };
+  let run: Run | undefined;
+  try {
+    run = await ingestStory(story, graph, model, ado);
+    assert.equal(calls, 2);
+    assert.equal(run.status, "mapping_error");
+    assert.match(run.errors[0] ?? "", /wrong JSON shape|object with relationships/);
+    assert.equal(run.artifacts.length, 0);
   } finally {
     if (run) await fs.rm(runPath(run.id), { recursive: true, force: true });
   }

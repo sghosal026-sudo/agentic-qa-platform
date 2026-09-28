@@ -41,12 +41,12 @@ export function consensus(decisions: RelationDecision[]): RelationDecision | nul
 }
 
 export async function stageReviews(run: Run, ado: WorkItemClient): Promise<void> {
-  if (run.relations.length) {
+  const reviewable = run.relations.filter((relation) => relation.state === "needs_review");
+  if (reviewable.length) {
     run.status = "review_relations";
     await saveRun(run);
   }
-  for (const relation of run.relations) {
-    if (relation.state !== "needs_review") continue;
+  for (const relation of reviewable) {
     if (!relation.storyIds.length) {
       run.status = "mapping_error";
       run.errors.push(`No Story mapped to relationship ${relation.id}`);
@@ -65,7 +65,7 @@ export async function stageReviews(run: Run, ado: WorkItemClient): Promise<void>
       await saveRun(run);
     }
   }
-  run.status = run.relations.length ? "review_relations" : "ready_design";
+  run.status = reviewable.length ? "review_relations" : "ready_design";
   await saveRun(run);
 }
 
