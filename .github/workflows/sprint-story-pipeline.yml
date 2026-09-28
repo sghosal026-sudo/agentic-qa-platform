@@ -23,8 +23,8 @@ jobs:
       ADO_ORG_URL: ${{ secrets.ADO_ORG_URL }}
       ADO_PROJECT: ${{ secrets.ADO_PROJECT }}
       ADO_PAT: ${{ secrets.ADO_PAT }}
-      ADO_REVIEW_PENDING_STATE: ${{ vars.ADO_REVIEW_PENDING_STATE || 'To Do' }}
-      ADO_REVIEW_COMPLETED_STATE: ${{ vars.ADO_REVIEW_COMPLETED_STATE || 'Done' }}
+      ADO_REVIEW_PENDING_STATE: ${{ vars.ADO_REVIEW_PENDING_STATE || 'New' }}
+      ADO_REVIEW_COMPLETED_STATE: ${{ vars.ADO_REVIEW_COMPLETED_STATE || 'Closed' }}
       NEO4J_URI: ${{ secrets.NEO4J_URI }}
       NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
       NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
@@ -76,8 +76,8 @@ jobs:
       ADO_ORG_URL: ${{ secrets.ADO_ORG_URL }}
       ADO_PROJECT: ${{ secrets.ADO_PROJECT }}
       ADO_PAT: ${{ secrets.ADO_PAT }}
-      ADO_REVIEW_PENDING_STATE: ${{ vars.ADO_REVIEW_PENDING_STATE || 'To Do' }}
-      ADO_REVIEW_COMPLETED_STATE: ${{ vars.ADO_REVIEW_COMPLETED_STATE || 'Done' }}
+      ADO_REVIEW_PENDING_STATE: ${{ vars.ADO_REVIEW_PENDING_STATE || 'New' }}
+      ADO_REVIEW_COMPLETED_STATE: ${{ vars.ADO_REVIEW_COMPLETED_STATE || 'Closed' }}
       NEO4J_URI: ${{ secrets.NEO4J_URI }}
       NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
       NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}

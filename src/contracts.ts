@@ -3,7 +3,8 @@ import type { Artifact, NodeKind, Relation, RelationDecision, Run, Spec, Story, 
 export interface GraphStore {
   setup(): Promise<void>;
   node(id: string, kind: NodeKind, name: string, content: unknown): Promise<void>;
-  hierarchy(parentId: string, childId: string): Promise<void>;
+  hierarchy(parentId: string, childId: string, source?: { adoId: number; title: string }): Promise<void>;
+  plannedFor(storyId: string, iterationPath: string, source?: { adoId: number; title: string }): Promise<void>;
   propose(relation: Relation): Promise<void>;
   decide(relation: Relation): Promise<void>;
   storyContext(storyId: string): Promise<string>;

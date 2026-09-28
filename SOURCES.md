@@ -11,3 +11,5 @@ The first draft copied the three working trees on 2026-09-28. The `domains/` cop
 The working-tree changes are listed in the original repositories' `git status`.
 
 At copy time the dirty files were `knowledgeGraph/package.json`, `knowledgeGraph/src/config/env.ts`, `knowledgeGraph/src/messaging/contract.ts`, `spec-author-agent/src/messaging/contract.ts`, `spec-generation-agent/package.json`, and `spec-generation-agent/src/messaging/contract.ts`.
+
+The graph repository, mappers, ontology, identifiers, merge rules, and their supporting text/hash utilities were later ported directly from the `knowledgeGraph` source snapshot. The framework adapter adds environment loading, `StoryPipeline` persistence, ADO review orchestration, and Playwright result mapping around that graph core.

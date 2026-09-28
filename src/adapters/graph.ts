@@ -1,103 +1,308 @@
-import neo4j, { type Driver } from "neo4j-driver";
-import { hash, required, type Artifact, type NodeKind, type Relation, type Spec, type StoryPipelineRecord } from "../core/runtime.js";
+import { GraphRepository } from "../graph/graph-repository.js";
+import { Neo4jClient } from "../graph/neo4j-client.js";
+import { EdgeSchema, NodeSchema, ProvenanceSchema, edgeKey, type Edge, type Provenance } from "../models/graph.js";
+import { resolveSemanticRelationship } from "../ontology/rules.js";
+import { NodeTypeSchema, type RelationshipType } from "../ontology/types.js";
+import type { Artifact, NodeKind, Relation, Spec, StoryPipelineRecord } from "../core/runtime.js";
+
+function properties(value: unknown): Record<string, unknown> {
+  return value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : { value };
+}
+
+function sourceProvenance(id: string, content: Record<string, unknown>): Provenance {
+  const adoId = typeof content.adoId === "number" ? content.adoId : undefined;
+  return ProvenanceSchema.parse({
+    sourceSystem: "azure-devops",
+    sourceDocument: typeof content.title === "string" ? content.title : id,
+    sourceDocumentId: adoId ? `ado:${adoId}` : `ado:${id}`,
+    extractionMethod: "deterministic",
+    confidence: 1,
+    inferred: false,
+    reviewState: "approved",
+  });
+}
+
+function agentProvenance(id: string, evidence?: string): Provenance {
+  return ProvenanceSchema.parse({
+    sourceSystem: "agentic-qa-platform",
+    sourceDocument: id,
+    sourceDocumentId: id,
+    extractionMethod: "agent",
+    evidenceText: evidence,
+    confidence: 1,
+    inferred: true,
+    reviewState: "approved",
+  });
+}
+
+function unreviewedNodeProvenance(id: string, content: Record<string, unknown>): Provenance {
+  return ProvenanceSchema.parse({
+    sourceSystem: "openrouter",
+    sourceDocument: typeof content.sourceStory === "string" ? content.sourceStory : id,
+    sourceDocumentId: typeof content.sourceStory === "string" ? `ado:${content.sourceStory}` : id,
+    extractionMethod: "llm",
+    confidence: 0.5,
+    inferred: false,
+    reviewState: "needs_review",
+  });
+}
+
+function executionProvenance(id: string): Provenance {
+  return ProvenanceSchema.parse({
+    sourceSystem: "playwright",
+    sourceDocument: id,
+    sourceDocumentId: id,
+    extractionMethod: "deterministic",
+    confidence: 1,
+    inferred: false,
+    reviewState: "approved",
+  });
+}
+
+function llmProvenance(relation: Relation): Provenance {
+  return ProvenanceSchema.parse({
+    sourceSystem: "openrouter",
+    sourceDocument: relation.source,
+    sourceDocumentId: `ado:${relation.storyIds[0] ?? relation.sourceId}`,
+    extractionMethod: "llm",
+    evidenceText: relation.evidence,
+    confidence: relation.confidence,
+    inferred: false,
+    reviewState: "needs_review",
+  });
+}
 
 export class Graph {
-  private driver: Driver;
+  private readonly repository: GraphRepository;
 
-  constructor() {
-    this.driver = neo4j.driver(process.env.NEO4J_URI ?? "bolt://localhost:7687", neo4j.auth.basic(process.env.NEO4J_USERNAME ?? "neo4j", required("NEO4J_PASSWORD")));
-  }
-
-  async query(cypher: string, params: Record<string, unknown> = {}) {
-    const session = this.driver.session({ database: process.env.NEO4J_DATABASE ?? "neo4j" });
-    try { return await session.run(cypher, params); } finally { await session.close(); }
+  constructor(private readonly client = new Neo4jClient()) {
+    this.repository = new GraphRepository(client);
   }
 
   async setup(): Promise<void> {
-    await this.query("CREATE CONSTRAINT qa_node_id IF NOT EXISTS FOR (n:Node) REQUIRE n.id IS UNIQUE");
-    await this.query("CREATE CONSTRAINT qa_story_pipeline_ado_id IF NOT EXISTS FOR (p:StoryPipeline) REQUIRE p.adoId IS UNIQUE");
+    await this.client.connect();
+    await this.client.run("CREATE CONSTRAINT qa_story_pipeline_ado_id IF NOT EXISTS FOR (p:StoryPipeline) REQUIRE p.adoId IS UNIQUE");
   }
 
   async node(id: string, kind: NodeKind, name: string, content: unknown): Promise<void> {
-    await this.query("MERGE (n:Node {id: $id}) SET n.nodeType = $kind, n.canonicalName = $name, n.propertiesJson = $content", { id, kind, name, content: JSON.stringify(content) });
+    const parsedType = NodeTypeSchema.safeParse(kind);
+    if (!parsedType.success) throw new Error(`Unsupported knowledge-graph node type: ${kind}`);
+    const data = properties(content);
+    const structural = kind === "Epic" || kind === "Feature" || kind === "Story" || kind === "Task" || kind === "Sprint";
+    const node = NodeSchema.parse({
+      id,
+      nodeType: parsedType.data,
+      canonicalName: name,
+      aliases: [],
+      description: typeof data.text === "string" ? data.text : undefined,
+      properties: data,
+      provenance: [structural ? sourceProvenance(id, data) : unreviewedNodeProvenance(id, data)],
+    });
+    await this.repository.upsertNodes([node]);
   }
 
-  async hierarchy(parentId: string, childId: string): Promise<void> {
-    const result = await this.query(
-      "MATCH (parent:Node {id: $parentId}), (child:Node {id: $childId}) MERGE (parent)-[r:CONTAINS]->(child) SET r.reviewState = 'approved', r.source = 'azure-devops' RETURN child.id AS id",
-      { parentId, childId },
-    );
-    if (!result.records.length) throw new Error(`Hierarchy ${parentId} -> ${childId} has a missing graph endpoint`);
+  async hierarchy(parentId: string, childId: string, source?: { adoId: number; title: string }): Promise<void> {
+    await this.writeEdge(parentId, "PARENT_OF", childId, {
+      provenance: [sourceProvenance(childId, source ?? {})],
+      reviewState: "approved",
+      inferred: false,
+      confidence: 1,
+    });
+  }
+
+  async plannedFor(storyId: string, iterationPath: string, source?: { adoId: number; title: string }): Promise<void> {
+    const sprintId = `Sprint:${iterationPath}`;
+    const name = iterationPath.split("\\").at(-1) ?? iterationPath;
+    await this.repository.upsertNodes([NodeSchema.parse({
+      id: sprintId,
+      nodeType: "Sprint",
+      canonicalName: name,
+      aliases: [iterationPath],
+      properties: { iterationPath },
+      provenance: [sourceProvenance(storyId, source ?? {})],
+    })]);
+    await this.writeEdge(storyId, "PLANNED_FOR", sprintId, {
+      provenance: [sourceProvenance(storyId, source ?? {})],
+      reviewState: "approved",
+      inferred: false,
+      confidence: 1,
+    });
   }
 
   async propose(relation: Relation): Promise<void> {
-    const result = await this.query(
-      "MATCH (a:Node {id: $sourceId}), (b:Node {id: $targetId}) MERGE (a)-[r:RELATES_TO {id: $id}]->(b) SET r.reviewState = 'needs_review', r.proposedType = $type, r.evidence = $evidence, r.confidence = $confidence, r.reason = $reason, r.source = $source RETURN r.id AS id",
-      { sourceId: relation.sourceId, targetId: relation.targetId, id: relation.id, type: relation.type, evidence: relation.evidence, confidence: relation.confidence, reason: relation.reason, source: relation.source },
-    );
-    if (!result.records.length) throw new Error(`Relationship ${relation.id} has a missing graph endpoint`);
+    const sourceType = NodeTypeSchema.parse(relation.sourceType);
+    const targetType = NodeTypeSchema.parse(relation.targetType);
+    const resolved = resolveSemanticRelationship(relation.type, sourceType, targetType);
+    const sourceId = resolved.reversed ? relation.targetId : relation.sourceId;
+    const targetId = resolved.reversed ? relation.sourceId : relation.targetId;
+    const edge = EdgeSchema.parse({
+      id: edgeKey({ sourceId, relationshipType: resolved.relationshipType, targetId }),
+      sourceId,
+      relationshipType: resolved.relationshipType,
+      targetId,
+      properties: { ...resolved.properties, proposalId: relation.id, reviewReason: relation.reason },
+      provenance: [llmProvenance(relation)],
+      confidence: relation.confidence,
+      inferred: false,
+      reviewState: resolved.reviewState,
+      evidence: [relation.evidence],
+    });
+    const target = await this.repository.getNode(relation.targetId);
+    if (target && target.nodeType !== "Story") {
+      await this.repository.upsertNodes([{ ...target, provenance: [llmProvenance(relation)], updatedAt: new Date() }]);
+    }
+    const result = await this.repository.upsertEdges([edge]);
+    if (result.written !== 1) throw new Error(`Relationship ${relation.id} has a missing graph endpoint`);
+    relation.graphEdgeId = edge.id;
   }
 
   async decide(relation: Relation): Promise<void> {
     const decision = relation.decisions[0];
     if (!decision) throw new Error(`Relationship ${relation.id} has no decision`);
-    const replacesFallback = relation.state === "approved" && (relation.type !== "RELATES_TO" || decision.reverse);
-    const updated = await this.query("MATCH ()-[r:RELATES_TO {id: $id}]->() SET r.reviewState = $state, r.reviewHistory = $history RETURN r.id AS id", { id: relation.id, state: replacesFallback ? "rejected" : relation.state, history: JSON.stringify(relation.decisions) });
-    if (!updated.records.length) throw new Error(`Relationship ${relation.id} is absent from the graph`);
-    if (!replacesFallback) return;
-    const type = relation.type;
-    if (!/^[A-Z_]+$/.test(type)) throw new Error("Invalid ontology relationship type");
-    const sourceId = decision.reverse ? relation.targetId : relation.sourceId;
-    const targetId = decision.reverse ? relation.sourceId : relation.targetId;
-    await this.query(`MATCH (a:Node {id: $sourceId}), (b:Node {id: $targetId}) MERGE (a)-[r:${type} {id: $id}]->(b) SET r.reviewState = 'approved', r.evidence = $evidence, r.reviewHistory = $history`, { sourceId, targetId, id: hash(`${sourceId}|${type}|${targetId}`), evidence: relation.evidence, history: JSON.stringify(relation.decisions) });
+    if (!relation.graphEdgeId) throw new Error(`Relationship ${relation.id} has no graph edge ID`);
+
+    if (decision.action === "approve") {
+      await this.repository.reviewEdge(relation.graphEdgeId, { action: "approve", reviewer: decision.reviewer, reason: decision.reason });
+      return;
+    }
+    if (decision.action === "reject") {
+      await this.repository.reviewEdge(relation.graphEdgeId, { action: "reject", reviewer: decision.reviewer, reason: decision.reason });
+      return;
+    }
+    await this.repository.reviewEdge(relation.graphEdgeId, {
+      action: "correct",
+      reviewer: decision.reviewer,
+      reason: decision.reason,
+      relationshipType: relation.type as RelationshipType,
+      reverse: decision.reverse,
+    });
   }
 
   async storyContext(storyId: string): Promise<string> {
-    const result = await this.query(
-      "MATCH (s:Node {id: $storyId, nodeType: 'Story'}) OPTIONAL MATCH (s)-[r]-(other:Node) WHERE r.reviewState = 'approved' RETURN s.propertiesJson AS story, collect({type: type(r), name: other.canonicalName, evidence: r.evidence}) AS links",
-      { storyId },
-    );
-    const row = result.records[0];
-    if (!row) throw new Error(`Story ${storyId} is absent from the graph`);
-    return JSON.stringify({ story: JSON.parse(String(row.get("story"))), links: row.get("links") });
+    const neighborhood = await this.repository.getNeighborhood([storyId], { depth: 1, maxNodes: 100, maxEdges: 200 });
+    const edges = neighborhood.edges.filter((edge) => edge.reviewState === "approved");
+    const included = new Set([storyId, ...edges.flatMap((edge) => [edge.sourceId, edge.targetId])]);
+    const nodes = neighborhood.nodes.filter((node) => included.has(node.id));
+    if (!nodes.some((node) => node.id === storyId && node.nodeType === "Story")) throw new Error(`Story ${storyId} is absent from the graph`);
+    return JSON.stringify({ nodes, edges });
   }
 
   async artifact(artifact: Artifact): Promise<void> {
-    await this.node(artifact.id, artifact.kind, artifact.name, { ...artifact.content, reviewer: artifact.reviewer, approvedAt: artifact.approvedAt, sourceHash: artifact.hash });
-    const linked = await this.query("MATCH (a:Node {id: $id}), (s:Node {id: $storyId, nodeType: 'Story'}) MERGE (a)-[r:TRACES_TO]->(s) SET r.reviewState = 'approved' RETURN a.id AS id", { id: artifact.id, storyId: artifact.storyId });
-    if (!linked.records.length) throw new Error(`Artifact ${artifact.id} has no Story mapping`);
-    if (artifact.parentId) {
-      const parent = await this.query("MATCH (p:Node {id: $parentId}), (a:Node {id: $id}) MERGE (p)-[r:CONTAINS]->(a) SET r.reviewState = 'approved' RETURN a.id AS id", { parentId: artifact.parentId, id: artifact.id });
-      if (!parent.records.length) throw new Error(`Artifact ${artifact.id} has no parent in the graph`);
+    const node = NodeSchema.parse({
+      id: artifact.id,
+      nodeType: artifact.kind,
+      canonicalName: artifact.name,
+      properties: { ...artifact.content, reviewer: artifact.reviewer, approvedAt: artifact.approvedAt, sourceHash: artifact.hash },
+      provenance: [agentProvenance(artifact.id)],
+    });
+    await this.repository.upsertNodes([node]);
+    await this.writeEdge(artifact.id, "TRACES_TO", artifact.storyId, {
+      provenance: [agentProvenance(artifact.id)],
+      reviewState: "approved",
+      inferred: true,
+      confidence: 1,
+    });
+    if (!artifact.parentId) return;
+    const parent = await this.repository.getNode(artifact.parentId);
+    if (!parent) throw new Error(`Artifact ${artifact.id} has no parent in the graph`);
+    if (artifact.kind === "TestCase" && parent.nodeType === "TestScenario") {
+      await this.writeEdge(artifact.id, "COVERS", parent.id, {
+        provenance: [agentProvenance(artifact.id)],
+        reviewState: "approved",
+        inferred: true,
+        confidence: 1,
+      });
+      return;
     }
+    await this.writeEdge(parent.id, "CONTAINS", artifact.id, {
+      provenance: [agentProvenance(artifact.id)],
+      reviewState: "approved",
+      inferred: true,
+      confidence: 1,
+    });
   }
 
   async spec(spec: Spec, sha: string): Promise<void> {
     const id = `TestSpec:${sha}:${spec.caseId}`;
-    await this.node(id, "TestSpec", spec.file, { sha, file: spec.file, status: spec.status });
-    const linked = await this.query("MATCH (a:Node {id: $id}), (c:Node {id: $caseId, nodeType: 'TestCase'}), (s:Node {id: $storyId, nodeType: 'Story'}) MERGE (a)-[:TRACES_TO {reviewState: 'approved'}]->(c) MERGE (a)-[:TRACES_TO {reviewState: 'approved'}]->(s) RETURN a.id AS id", { id, caseId: spec.caseId, storyId: spec.storyId });
-    if (!linked.records.length) throw new Error(`Spec ${id} has no Test Case or Story mapping`);
+    const node = NodeSchema.parse({
+      id,
+      nodeType: "Document",
+      canonicalName: spec.file,
+      properties: { documentKind: "test-spec", sha, file: spec.file, status: spec.status },
+      provenance: [agentProvenance(id)],
+    });
+    await this.repository.upsertNodes([node]);
+    await this.writeEdge(id, "DESCRIBES", spec.caseId, {
+      provenance: [agentProvenance(id)],
+      reviewState: "approved",
+      inferred: true,
+      confidence: 1,
+    });
+    await this.writeEdge(id, "DESCRIBES", spec.storyId, {
+      provenance: [agentProvenance(id)],
+      reviewState: "approved",
+      inferred: true,
+      confidence: 1,
+    });
   }
 
   async testRun(caseId: string, storyId: string, runId: string, sha: string, result: unknown): Promise<void> {
     const id = `TestRun:${runId}:${caseId}`;
-    await this.node(id, "TestRun", `${caseId} at ${sha.slice(0, 12)}`, { sha, result });
-    const linked = await this.query("MATCH (r:Node {id: $id}), (c:Node {id: $caseId, nodeType: 'TestCase'}), (s:Node {id: $storyId, nodeType: 'Story'}) MERGE (c)-[:EXECUTED_IN {reviewState: 'approved'}]->(r) MERGE (r)-[:TRACES_TO {reviewState: 'approved'}]->(s) RETURN r.id AS id", { id, caseId, storyId });
-    if (!linked.records.length) throw new Error(`TestRun ${id} has no Test Case or Story mapping`);
+    const node = NodeSchema.parse({
+      id,
+      nodeType: "TestRun",
+      canonicalName: `${caseId} at ${sha.slice(0, 12)}`,
+      properties: { sha, result },
+      provenance: [executionProvenance(id)],
+    });
+    await this.repository.upsertNodes([node]);
+    await this.writeEdge(caseId, "EXECUTED_IN", id, {
+      provenance: [executionProvenance(id)],
+      reviewState: "approved",
+      inferred: false,
+      confidence: 1,
+    });
+    await this.writeEdge(id, "TRACES_TO", storyId, {
+      provenance: [executionProvenance(id)],
+      reviewState: "approved",
+      inferred: true,
+      confidence: 1,
+    });
   }
 
   async storyPipeline(adoId: number): Promise<StoryPipelineRecord | null> {
-    const result = await this.query("MATCH (p:StoryPipeline {adoId: $adoId}) RETURN p.recordJson AS record", { adoId });
+    const result = await this.client.run("MATCH (p:StoryPipeline {adoId: $adoId}) RETURN p.recordJson AS record", { adoId });
     const value = result.records[0]?.get("record");
     return value ? JSON.parse(String(value)) as StoryPipelineRecord : null;
   }
 
   async saveStoryPipeline(record: StoryPipelineRecord): Promise<void> {
-    await this.query(
+    await this.client.run(
       "MERGE (p:StoryPipeline {adoId: $adoId}) SET p.revision = $revision, p.iterationPath = $iterationPath, p.stage = $stage, p.status = $status, p.updatedAt = $updatedAt, p.recordJson = $recordJson",
       { adoId: record.adoId, revision: record.revision, iterationPath: record.iterationPath, stage: record.stage, status: record.status, updatedAt: record.updatedAt, recordJson: JSON.stringify(record) },
     );
   }
 
-  async close(): Promise<void> { await this.driver.close(); }
+  async close(): Promise<void> {
+    await this.client.close();
+  }
+
+  private async writeEdge(
+    sourceId: string,
+    relationshipType: RelationshipType,
+    targetId: string,
+    values: Pick<Edge, "provenance" | "reviewState" | "inferred" | "confidence">,
+  ): Promise<void> {
+    const edge = EdgeSchema.parse({
+      id: edgeKey({ sourceId, relationshipType, targetId }),
+      sourceId,
+      relationshipType,
+      targetId,
+      properties: {},
+      evidence: values.provenance.flatMap((item) => item.evidenceText ? [item.evidenceText] : []),
+      ...values,
+    });
+    const result = await this.repository.upsertEdges([edge]);
+    if (result.written !== 1) throw new Error(`Relationship ${edge.id} has a missing graph endpoint`);
+  }
 }

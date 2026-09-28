@@ -1,19 +1,14 @@
 import { saveRun, type NodeKind, type RelationDecision, type Run } from "../core/runtime.js";
 import type { GraphStore, ReviewResult, WorkItemClient } from "../contracts.js";
-
-const allowed: Record<string, Array<[NodeKind, NodeKind]>> = {
-  RELATES_TO: [["Story", "Endpoint"], ["Story", "DataTable"], ["Story", "BusinessRule"], ["Story", "Requirement"], ["Story", "Story"]],
-  AFFECTS: [["Story", "Endpoint"], ["Story", "DataTable"], ["Story", "BusinessRule"], ["Story", "Requirement"]],
-  USES: [["Endpoint", "DataTable"]],
-  IMPLEMENTS: [["Endpoint", "BusinessRule"]],
-  DEPENDS_ON: [["Story", "Story"]],
-  TRACES_TO: [["Story", "Requirement"], ["TestCase", "Story"], ["TestScenario", "Story"], ["TestPlan", "Story"], ["TestSuite", "Story"]],
-  COVERS: [["TestCase", "TestScenario"]],
-  EXERCISES: [["TestCase", "Endpoint"], ["TestCase", "DataTable"]],
-};
+import { isSemanticEdgeAllowed, normalizeRelationshipType } from "../ontology/rules.js";
+import { NodeTypeSchema, isSemanticRelationship } from "../ontology/types.js";
 
 export function validRelation(type: string, source: NodeKind, target: NodeKind): boolean {
-  return (allowed[type] ?? []).some(([from, to]) => from === source && to === target);
+  const relationshipType = normalizeRelationshipType(type);
+  const sourceType = NodeTypeSchema.safeParse(source);
+  const targetType = NodeTypeSchema.safeParse(target);
+  return Boolean(relationshipType && isSemanticRelationship(relationshipType) && sourceType.success && targetType.success
+    && isSemanticEdgeAllowed(relationshipType, sourceType.data, targetType.data));
 }
 
 export function parseDecision(text: string, expectedHash: string, reviewer: string, taskId: number): RelationDecision | null {
@@ -30,9 +25,9 @@ export function parseDecision(text: string, expectedHash: string, reviewer: stri
   if (action === "approve") return { action, reviewer, reason, taskId, at };
   if (action === "reject" && reason) return { action, reviewer, reason, taskId, at };
   if (action === "correct" && reason) {
-    const type = fields.get("type")?.toUpperCase();
+    const type = normalizeRelationshipType(fields.get("type") ?? "");
     const direction = fields.get("direction")?.toLowerCase();
-    if (type && type in allowed && (direction === "forward" || direction === "reverse")) {
+    if (type && isSemanticRelationship(type) && (direction === "forward" || direction === "reverse")) {
       return { action, reviewer, reason, type, reverse: direction === "reverse", taskId, at };
     }
   }

@@ -7,6 +7,7 @@ import type { GraphStore, ModelClient, SprintWorkItemClient } from "./contracts.
 
 export type StoryAction = "ingestion_review" | "test_review" | "specs_generated" | "spec_review" | "executed" | "blocked" | "waiting";
 export type StoryAdvanceResult = { storyId: string; adoId: number; action: StoryAction; runId?: string; failures?: number };
+const STORY_PIPELINE_VERSION = 4;
 
 export class StoryPipeline {
   constructor(
@@ -20,11 +21,13 @@ export class StoryPipeline {
     const stories = await this.workItems.sprintStories(iterationPath);
     const eligible: Array<{ storyId: string; adoId: number; revision: number }> = [];
     for (const story of stories) {
+      await this.writeStoryStructure(story);
       const revision = story.revision ?? 0;
       let record = await this.graph.storyPipeline(story.adoId);
-      const hierarchyChanged = record && JSON.stringify(record.story.parents ?? []) !== JSON.stringify(story.parents ?? []);
-      if (!record || record.revision !== revision || hierarchyChanged) {
+      const storyChanged = record && JSON.stringify(record.story) !== JSON.stringify(story);
+      if (!record || record.version !== STORY_PIPELINE_VERSION || record.revision !== revision || storyChanged) {
         record = {
+          version: STORY_PIPELINE_VERSION,
           adoId: story.adoId,
           revision,
           iterationPath,
@@ -38,6 +41,17 @@ export class StoryPipeline {
       if (record.status !== "passed" && record.status !== "failed") eligible.push({ storyId: story.id, adoId: story.adoId, revision });
     }
     return eligible;
+  }
+
+  private async writeStoryStructure(story: StoryPipelineRecord["story"]): Promise<void> {
+    await this.graph.node(story.id, "Story", story.title, story);
+    let child = { id: story.id, adoId: story.adoId, title: story.title };
+    for (const parent of story.parents ?? []) {
+      await this.graph.node(parent.id, parent.kind, parent.title, parent);
+      await this.graph.hierarchy(parent.id, child.id, child);
+      child = { id: parent.id, adoId: parent.adoId, title: parent.title };
+    }
+    await this.graph.plannedFor(story.id, story.iterationPath, { adoId: story.adoId, title: story.title });
   }
 
   async advanceStory(adoId: number, targetFile?: string, workflowUrl?: string): Promise<StoryAdvanceResult> {

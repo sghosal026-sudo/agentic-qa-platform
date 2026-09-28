@@ -1,11 +1,13 @@
 import { createHash, randomUUID } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
+import type { NodeType } from "../ontology/types.js";
 
-export type NodeKind = "Story" | "Feature" | "Epic" | "Task" | "Endpoint" | "DataTable" | "BusinessRule" | "Requirement" | "TestPlan" | "TestSuite" | "TestScenario" | "TestCase" | "TestSpec" | "TestRun";
+export type NodeKind = NodeType | "TestSpec";
 export type RelationDecision = { action: "approve" | "reject" | "correct"; reviewer: string; reason?: string; type?: string; reverse?: boolean; taskId: number; at: string };
 export type Relation = {
   id: string; sourceId: string; sourceType: NodeKind; targetId: string; targetType: NodeKind;
+  graphEdgeId?: string;
   type: string; evidence: string; confidence: number; reason: string; storyIds: string[];
   source: string;
   state: "needs_review" | "approved" | "rejected";
@@ -17,6 +19,7 @@ export type Artifact = { id: string; kind: "TestPlan" | "TestSuite" | "TestScena
 export type Spec = { caseId: string; storyId: string; file: string; status: "generated" | "fixme"; reason?: string };
 export type Run = { id: string; status: "ingesting" | "review_relations" | "mapping_error" | "ready_design" | "review_artifacts" | "ready_specs" | "review_specs" | "executed"; stories: Story[]; relations: Relation[]; artifacts: Artifact[]; specs: Spec[]; errors: string[]; createdAt: string };
 export type StoryPipelineRecord = {
+  version?: number;
   adoId: number;
   revision: number;
   iterationPath: string;

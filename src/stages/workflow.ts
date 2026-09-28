@@ -3,10 +3,14 @@ import path from "node:path";
 import { z } from "zod";
 import { hash, newRun, runPath, saveRun, type Artifact, type NodeKind, type Relation, type Run, type Spec, type Story } from "../core/runtime.js";
 import type { GraphStore, ModelClient, WorkItemClient } from "../contracts.js";
+import { semanticNodeId } from "../ontology/identifiers.js";
+import { EXTRACTABLE_NODE_TYPES } from "../ontology/types.js";
 import { stageReviews } from "./review.js";
 
+const RELATION_TARGET_TYPES = [...EXTRACTABLE_NODE_TYPES, "Story"] as const;
+const RELATION_TARGET_TYPE_PROMPT = RELATION_TARGET_TYPES.join("|");
 const RelationOutput = z.object({ relationships: z.array(z.object({
-  targetName: z.string().min(1), targetType: z.enum(["Endpoint", "DataTable", "BusinessRule", "Requirement", "Story"]),
+  targetName: z.string().min(1), targetType: z.enum(RELATION_TARGET_TYPES),
   type: z.string().min(1), evidence: z.string().min(1), confidence: z.number().min(0).max(1),
   reason: z.string().min(1), storyIds: z.array(z.string()).optional(),
 })) });
@@ -32,7 +36,9 @@ async function files(directory: string): Promise<string[]> {
 }
 
 function plain(value: string): string {
-  return value.replace(/<br\s*\/?\s*>|<\/p>|<\/li>/gi, "\n").replace(/<[^>]+>/g, " ").replace(/&nbsp;/gi, " ").replace(/&amp;/gi, "&").replace(/\s+/g, " ").trim();
+  return value.replace(/<br\s*\/?\s*>|<\/p>|<\/li>/gi, "\n").replace(/<[^>]+>/g, " ")
+    .replace(/&quot;/gi, '"').replace(/&#39;|&apos;/gi, "'").replace(/&lt;/gi, "<").replace(/&gt;/gi, ">")
+    .replace(/&nbsp;/gi, " ").replace(/&amp;/gi, "&").replace(/\s+/g, " ").trim();
 }
 
 function storyFromJson(value: unknown): Story | null {
@@ -46,11 +52,9 @@ function storyFromJson(value: unknown): Story | null {
 }
 
 export function relationFromModel(story: Story, item: z.infer<typeof RelationOutput>["relationships"][number], knownStories: Set<string>, source = story.id): Relation {
-  if (!story.text.includes(item.evidence)) throw new Error(`Relationship evidence is not in Story ${story.id}: ${item.evidence}`);
   const storyIds = [...new Set([story.id, ...(item.storyIds ?? [])])];
   for (const id of storyIds) if (!knownStories.has(id)) throw new Error(`Relationship has no resolved Story mapping: ${id}`);
-  const targetId = item.targetType === "Story" ? item.targetName : `${item.targetType}:${hash(item.targetName.toLowerCase()).slice(0, 16)}`;
-  if (item.targetType === "Story" && !knownStories.has(targetId)) throw new Error(`Target Story ${targetId} is missing`);
+  const targetId = item.targetType === "Story" ? item.targetName : semanticNodeId(item.targetType, item.targetName);
   return {
     id: hash(`${story.id}|${item.type}|${targetId}|${item.evidence}`).slice(0, 32),
     sourceId: story.id, sourceType: "Story", targetId, targetType: item.targetType as NodeKind,
@@ -64,15 +68,15 @@ export async function ingestStory(story: Story, graph: GraphStore, model: ModelC
   run.stories.push(story);
   await graph.setup();
   await graph.node(story.id, "Story", story.title, story);
-  let childId = story.id;
+  let child = { id: story.id, adoId: story.adoId, title: story.title };
   for (const parent of story.parents ?? []) {
     await graph.node(parent.id, parent.kind, parent.title, parent);
-    await graph.hierarchy(parent.id, childId);
-    childId = parent.id;
+    await graph.hierarchy(parent.id, child.id, child);
+    child = { id: parent.id, adoId: parent.adoId, title: parent.title };
   }
   await saveRun(run);
   try {
-    const response = RelationOutput.parse(await model.json(`Extract relationships relevant to Story ${story.id}. Return {"relationships": [{"targetName":"...","targetType":"Endpoint|DataTable|BusinessRule|Requirement|Story","type":"...","evidence":"exact quote from the source","confidence":0.0,"reason":"why review is needed","storyIds":["${story.id}"]}]}. All extracted relationships require review. Source text:\n${story.text.slice(0, 16000)}`));
+    const response = RelationOutput.parse(await model.json(`Extract relationships relevant to Story ${story.id}. Return {"relationships": [{"targetName":"...","targetType":"${RELATION_TARGET_TYPE_PROMPT}","type":"...","evidence":"short source quote","confidence":0.0,"reason":"why review is needed","storyIds":["${story.id}"]}]}. All extracted relationships require review. Source text:\n${story.text.slice(0, 16000)}`));
     const known = new Set([story.id]);
     for (const item of response.relationships) {
       const relation = relationFromModel(story, item, known);
@@ -122,7 +126,7 @@ export async function ingest(directory: string, graph: GraphStore, model: ModelC
   for (const source of sources) {
     const { story } = source;
     try {
-      const response = RelationOutput.parse(await model.json(`Extract relationships relevant to Story ${story.id}. Return {"relationships": [{"targetName":"...","targetType":"Endpoint|DataTable|BusinessRule|Requirement|Story","type":"...","evidence":"exact quote from the source","confidence":0.0,"reason":"why review is needed","storyIds":["${story.id}"]}]}. All extracted relationships require review. Source text:\n${source.text.slice(0, 16000)}`));
+      const response = RelationOutput.parse(await model.json(`Extract relationships relevant to Story ${story.id}. Return {"relationships": [{"targetName":"...","targetType":"${RELATION_TARGET_TYPE_PROMPT}","type":"...","evidence":"short source quote","confidence":0.0,"reason":"why review is needed","storyIds":["${story.id}"]}]}. All extracted relationships require review. Source text:\n${source.text.slice(0, 16000)}`));
       for (const item of response.relationships) {
         const relation = relationFromModel({ ...story, text: source.text }, item, known, source.name);
         if (seen.has(relation.id)) continue;

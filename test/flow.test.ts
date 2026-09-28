@@ -8,7 +8,7 @@ import { Ado } from "../src/adapters/ado.js";
 import { hash, runPath, type Run, type StoryPipelineRecord } from "../src/core/runtime.js";
 import type { GraphStore, ModelClient, SprintWorkItemClient } from "../src/contracts.js";
 import { applyReviews, consensus, parseDecision, validRelation } from "../src/stages/review.js";
-import { approveArtifact, design, generateSpecs, ingest, ingestDesign, renderSpec, type Target } from "../src/stages/workflow.js";
+import { approveArtifact, design, generateSpecs, ingest, ingestDesign, relationFromModel, renderSpec, type Target } from "../src/stages/workflow.js";
 import { verifySpecs } from "../src/stages/execution.js";
 import { QaPipeline } from "../src/pipeline.js";
 import { StoryPipeline } from "../src/story-pipeline.js";
@@ -35,6 +35,19 @@ test("ungrounded or authenticated cases become fixme specs", () => {
   assert.equal(renderSpec({ ...item, content: { ...item.content, expected: "HTTP 200 and a list" } }, target).status, "fixme");
 });
 
+test("relationship evidence keeps the model quote when Markdown formatting differs", () => {
+  const story = { id: "ST-1", adoId: 1, title: "Story", text: "Creates [five locations](https://example.test/locations).", areaPath: "QA", iterationPath: "QA\\Sprint 1" };
+  const relation = relationFromModel(story, {
+    targetName: "five locations",
+    targetType: "Requirement",
+    type: "TRACES_TO",
+    evidence: "Creates five locations.",
+    confidence: 0.8,
+    reason: "Formatting differs but provenance retains the returned quote",
+  }, new Set([story.id]));
+  assert.equal(relation.evidence, "Creates five locations.");
+});
+
 test("the CI pipeline coordinates injected integrations and closes the graph", async () => {
   const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "qa-pipeline-"));
   await fs.writeFile(path.join(temporary, "story.json"), JSON.stringify({
@@ -52,6 +65,7 @@ test("the CI pipeline coordinates injected integrations and closes the graph", a
       setup: async () => {},
       node: async () => {},
       hierarchy: async () => {},
+      plannedFor: async () => {},
       propose: async () => {},
       decide: async () => {},
       storyContext: async () => "{}",
@@ -86,7 +100,7 @@ test("sprint polling advances one Story without blocking another", async () => {
   const records = new Map<number, StoryPipelineRecord>();
   const hierarchy: string[] = [];
   const graph = {
-    setup: async () => {}, node: async () => {}, hierarchy: async (parentId: string, childId: string) => { hierarchy.push(`${parentId}->${childId}`); }, propose: async () => {}, decide: async () => {}, storyContext: async () => "{}",
+    setup: async () => {}, node: async () => {}, hierarchy: async (parentId: string, childId: string) => { hierarchy.push(`${parentId}->${childId}`); }, plannedFor: async () => {}, propose: async () => {}, decide: async () => {}, storyContext: async () => "{}",
     artifact: async () => {}, spec: async () => {}, testRun: async () => {},
     storyPipeline: async (adoId: number) => records.get(adoId) ?? null,
     saveStoryPipeline: async (record: StoryPipelineRecord) => { records.set(record.adoId, structuredClone(record)); },
@@ -114,10 +128,11 @@ test("sprint polling advances one Story without blocking another", async () => {
   let runId: string | undefined;
   try {
     assert.deepEqual((await pipeline.pollSprint("QA\\Sprint 1")).map((item) => item.adoId), [1, 2]);
+    assert.equal(records.get(1)?.version, 4);
     const first = await pipeline.advanceStory(1, targetFile);
     runId = first.runId;
     assert.equal(first.action, "test_review");
-    assert.deepEqual(hierarchy, ["FT-1->ST-1", "EP->FT-1"]);
+    assert.deepEqual(hierarchy, ["FT-1->ST-1", "EP->FT-1", "FT-1->ST-1", "EP->FT-1"]);
     assert.equal(records.get(1)?.stage, "review_artifacts");
     assert.equal(records.get(2)?.stage, "discovered");
     const generated = await pipeline.advanceStory(1, targetFile);
@@ -141,7 +156,7 @@ test("ADO sprint discovery loads each Story's Feature and Epic parents", async (
     calls.push(url);
     let value: unknown;
     if (url.includes("wiql?")) value = { workItems: [{ id: 41 }, { id: 42 }] };
-    else if (url.includes("workitems/41?")) value = { id: 41, rev: 3, fields: { "System.WorkItemType": "User Story", "System.Title": "ST-1 First", "System.Description": "First", "System.AreaPath": "QA", "System.IterationPath": "QA\\Sprint 1" }, relations: [{ rel: "System.LinkTypes.Hierarchy-Reverse", url: parentUrl(10) }] };
+    else if (url.includes("workitems/41?")) value = { id: 41, rev: 3, fields: { "System.WorkItemType": "User Story", "System.Title": "ST-1 First", "System.Description": "Returns {&quot;items&quot;: []} &amp; succeeds.", "System.AreaPath": "QA", "System.IterationPath": "QA\\Sprint 1" }, relations: [{ rel: "System.LinkTypes.Hierarchy-Reverse", url: parentUrl(10) }] };
     else if (url.includes("workitems/42?")) value = { id: 42, rev: 4, fields: { "System.WorkItemType": "User Story", "System.Title": "ST-2 Second", "System.Description": "Second", "System.AreaPath": "QA", "System.IterationPath": "QA\\Sprint 1" }, relations: [{ rel: "System.LinkTypes.Hierarchy-Reverse", url: parentUrl(10) }] };
     else if (url.includes("workitems/10?")) value = { id: 10, rev: 2, fields: { "System.WorkItemType": "Feature", "System.Title": "FT-1 Feature", "System.Description": "Feature details" }, relations: [{ rel: "System.LinkTypes.Hierarchy-Reverse", url: parentUrl(2) }] };
     else if (url.includes("workitems/2?")) value = { id: 2, rev: 1, fields: { "System.WorkItemType": "Epic", "System.Title": "EPIC QA Quality", "System.Description": "Epic details" }, relations: [] };
@@ -150,6 +165,7 @@ test("ADO sprint discovery loads each Story's Feature and Epic parents", async (
   };
   try {
     const stories = await new Ado(fetcher as typeof fetch).sprintStories("QA\\Sprint 1");
+    assert.equal(stories[0]?.text, 'Returns {"items": []} & succeeds.');
     assert.deepEqual(stories[0]?.parents?.map((item) => [item.kind, item.id]), [["Feature", "FT-1"], ["Epic", "QA"]]);
     assert.deepEqual(stories[1]?.parents?.map((item) => [item.kind, item.id]), [["Feature", "FT-1"], ["Epic", "QA"]]);
     assert.equal(calls.filter((url) => url.includes("workitems/10?")).length, 1);

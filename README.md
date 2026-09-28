@@ -15,6 +15,22 @@ The pipeline performs these stages:
 
 Each Story has an independent pipeline record. A pending, rejected, or slow Story does not prevent another approved Story in the same sprint from advancing.
 
+## Knowledge graph behavior
+
+The graph core is ported from the sibling `knowledgeGraph` project. It uses the same node and relationship ontology, semantic relationship rules, provenance model, merge behavior, Neo4j row mapping, full-text index, traversal queries, and atomic relationship-review correction.
+
+- Sprint discovery writes all authoritative `Epic -[:PARENT_OF]-> Feature -[:PARENT_OF]-> Story` relationships before semantic extraction.
+- Every discovered Story is linked to `Sprint:<iteration-path>` with `PLANNED_FOR`.
+- Source metadata has deterministic, approved provenance.
+- LLM entities and relationships retain model evidence and confidence.
+- An unknown or ontology-invalid relationship is stored as `RELATES_TO` with its suggested type and `needs_review` state.
+- Rejected relationships remain in the graph with review history but are excluded from grounded Story context.
+- A correction rejects the original fallback relationship and creates the approved typed relationship atomically.
+- Approved test designs use the KnowledgeGraph QA relationships such as `CONTAINS`, `COVERS`, `TRACES_TO`, `EXERCISES`, and `EXECUTED_IN`.
+- A generated Playwright spec is represented as a `Document` with `documentKind: test-spec`, because `TestSpec` is not a node type in the source ontology.
+
+The `StoryPipeline` records used for CI orchestration remain separate `StoryPipeline` nodes so workflow state does not alter the knowledge ontology.
+
 ## Requirements
 
 - Node.js 22 or newer.
@@ -59,8 +75,8 @@ ADO_ORG_URL=https://dev.azure.com/your-organization
 ADO_PROJECT=WMS
 ADO_PAT=your-ado-pat
 ADO_ITERATION_PATH=WMS\Sprint 1
-ADO_REVIEW_PENDING_STATE=Pending Review
-ADO_REVIEW_COMPLETED_STATE=Done
+ADO_REVIEW_PENDING_STATE=New
+ADO_REVIEW_COMPLETED_STATE=Closed
 
 GITHUB_TOKEN=your-github-token
 ```
@@ -130,8 +146,8 @@ Open **Settings -> Secrets and variables -> Actions -> Variables** and create:
 | `PLAYWRIGHT_BASE_BRANCH` | No | Target PR branch; defaults to `main` |
 | `NEO4J_DATABASE` | No | Defaults to `neo4j` |
 | `OPENROUTER_MODEL` | No | Defaults to `openai/gpt-oss-120b` |
-| `ADO_REVIEW_PENDING_STATE` | No | Defaults to `To Do` in GitHub Actions |
-| `ADO_REVIEW_COMPLETED_STATE` | No | Defaults to `Done` |
+| `ADO_REVIEW_PENDING_STATE` | No | Defaults to `New`; set it to a valid Task state for the ADO process |
+| `ADO_REVIEW_COMPLETED_STATE` | No | Defaults to `Closed`; set it to the Task process's completed state |
 
 Example `TARGET_CONFIG_JSON` value:
 
