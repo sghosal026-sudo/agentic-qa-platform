@@ -24,8 +24,8 @@ export class StoryPipeline {
       await this.writeStoryStructure(story);
       const revision = story.revision ?? 0;
       let record = await this.graph.storyPipeline(story.adoId);
-      const storyChanged = record && JSON.stringify(record.story) !== JSON.stringify(story);
-      if (!record || record.version !== STORY_PIPELINE_VERSION || record.revision !== revision || storyChanged) {
+      const storyChanged = record && this.storyContent(record.story) !== this.storyContent(story);
+      if (!record || record.version !== STORY_PIPELINE_VERSION || storyChanged) {
         record = {
           version: STORY_PIPELINE_VERSION,
           adoId: story.adoId,
@@ -37,10 +37,20 @@ export class StoryPipeline {
           updatedAt: new Date().toISOString(),
         };
         await this.graph.saveStoryPipeline(record);
+      } else if (record.revision !== revision) {
+        record.revision = revision;
+        record.story = story;
+        record.updatedAt = new Date().toISOString();
+        await this.graph.saveStoryPipeline(record);
       }
       if (record.status !== "passed" && record.status !== "failed") eligible.push({ storyId: story.id, adoId: story.adoId, revision });
     }
     return eligible;
+  }
+
+  private storyContent(story: StoryPipelineRecord["story"]): string {
+    const { revision: _revision, ...content } = story;
+    return JSON.stringify(content);
   }
 
   private async writeStoryStructure(story: StoryPipelineRecord["story"]): Promise<void> {

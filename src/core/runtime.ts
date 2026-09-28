@@ -17,7 +17,7 @@ export type WorkItemParent = { id: string; adoId: number; revision: number; kind
 export type Story = { id: string; adoId: number; revision?: number; title: string; text: string; areaPath: string; iterationPath: string; parents?: WorkItemParent[] };
 export type Artifact = { id: string; kind: "TestPlan" | "TestSuite" | "TestScenario" | "TestCase"; name: string; storyId: string; parentId?: string; content: Record<string, unknown>; hash: string; reviewTask?: { id: number; hash: string }; reviewer?: string; approvedAt?: string };
 export type Spec = { caseId: string; storyId: string; file: string; status: "generated" | "fixme"; reason?: string };
-export type Run = { id: string; status: "ingesting" | "review_relations" | "mapping_error" | "ready_design" | "review_artifacts" | "ready_specs" | "review_specs" | "executed"; stories: Story[]; relations: Relation[]; artifacts: Artifact[]; specs: Spec[]; errors: string[]; createdAt: string };
+export type Run = { id: string; status: "ingesting" | "review_relations" | "mapping_error" | "ready_design" | "review_artifacts" | "ready_specs" | "review_specs" | "executed"; stories: Story[]; relations: Relation[]; artifacts: Artifact[]; specs: Spec[]; warnings?: string[]; errors: string[]; createdAt: string };
 export type StoryPipelineRecord = {
   version?: number;
   adoId: number;
@@ -48,13 +48,15 @@ export function runPath(id: string): string {
 }
 
 export async function newRun(): Promise<Run> {
-  const run: Run = { id: randomUUID(), status: "ingesting", stories: [], relations: [], artifacts: [], specs: [], errors: [], createdAt: new Date().toISOString() };
+  const run: Run = { id: randomUUID(), status: "ingesting", stories: [], relations: [], artifacts: [], specs: [], warnings: [], errors: [], createdAt: new Date().toISOString() };
   await saveRun(run);
   return run;
 }
 
 export async function loadRun(id: string): Promise<Run> {
-  return JSON.parse(await fs.readFile(path.join(runPath(id), "run.json"), "utf8")) as Run;
+  const run = JSON.parse(await fs.readFile(path.join(runPath(id), "run.json"), "utf8")) as Run;
+  run.warnings ??= [];
+  return run;
 }
 
 export async function saveRun(run: Run): Promise<void> {

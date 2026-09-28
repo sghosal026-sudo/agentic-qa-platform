@@ -8,7 +8,7 @@ cli.name("qa").description("CI/CD framework for the agentic QA pipeline");
 
 cli.command("ingest").argument("<directory>").action(async (directory: string) => {
   const run = await pipeline.ingest(directory);
-  console.log(JSON.stringify({ runId: run.id, status: run.status, relationships: run.relations.length, errors: run.errors }, null, 2));
+  console.log(JSON.stringify({ runId: run.id, status: run.status, relationships: run.relations.length, warnings: run.warnings ?? [], errors: run.errors }, null, 2));
 });
 
 cli.command("review-relationships").requiredOption("--run <id>").action(async ({ run: id }: { run: string }) => {

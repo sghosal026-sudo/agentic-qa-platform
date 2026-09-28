@@ -8,7 +8,7 @@ import { Ado } from "../src/adapters/ado.js";
 import { hash, runPath, type Run, type StoryPipelineRecord } from "../src/core/runtime.js";
 import type { GraphStore, ModelClient, SprintWorkItemClient } from "../src/contracts.js";
 import { applyReviews, consensus, parseDecision, validRelation } from "../src/stages/review.js";
-import { approveArtifact, design, generateSpecs, ingest, ingestDesign, relationFromModel, renderSpec, type Target } from "../src/stages/workflow.js";
+import { approveArtifact, design, generateSpecs, ingest, ingestDesign, ingestStory, relationFromModel, renderSpec, type Target } from "../src/stages/workflow.js";
 import { verifySpecs } from "../src/stages/execution.js";
 import { QaPipeline } from "../src/pipeline.js";
 import { StoryPipeline } from "../src/story-pipeline.js";
@@ -46,6 +46,28 @@ test("relationship evidence keeps the model quote when Markdown formatting diffe
     reason: "Formatting differs but provenance retains the returned quote",
   }, new Set([story.id]));
   assert.equal(relation.evidence, "Creates five locations.");
+});
+
+test("invalid model relationships are warned and skipped individually", async () => {
+  const story = { id: "ST-1", adoId: 1, title: "Story", text: "GET /warehouses returns 200.", areaPath: "QA", iterationPath: "QA\\Sprint 1" };
+  const graph = {
+    setup: async () => {}, node: async () => {}, hierarchy: async () => {}, propose: async () => {},
+  } as unknown as GraphStore;
+  const model = { json: async () => ({ relationships: [
+    { targetName: "Feature", targetType: "Feature", type: "IMPLEMENTS", evidence: "GET /warehouses", confidence: 0.8, reason: "unsupported structural type" },
+    { targetName: "GET /warehouses", targetType: "Endpoint", type: "AFFECTS", evidence: "GET /warehouses returns 200.", confidence: 0.8, reason: "supported" },
+  ] }) } as ModelClient;
+  const ado = { task: async () => ({ id: 1, hash: "hash" }), decision: async () => null };
+  let run: Run | undefined;
+  try {
+    run = await ingestStory(story, graph, model, ado);
+    assert.equal(run.status, "review_relations");
+    assert.equal(run.relations.length, 1);
+    assert.match(run.warnings?.[0] ?? "", /relationship #0 ignored/);
+    assert.deepEqual(run.errors, []);
+  } finally {
+    if (run) await fs.rm(runPath(run.id), { recursive: true, force: true });
+  }
 });
 
 test("the CI pipeline coordinates injected integrations and closes the graph", async () => {
@@ -135,6 +157,11 @@ test("sprint polling advances one Story without blocking another", async () => {
     assert.deepEqual(hierarchy, ["FT-1->ST-1", "EP->FT-1", "FT-1->ST-1", "EP->FT-1"]);
     assert.equal(records.get(1)?.stage, "review_artifacts");
     assert.equal(records.get(2)?.stage, "discovered");
+    stories[0]!.revision = 4;
+    await pipeline.pollSprint("QA\\Sprint 1");
+    assert.equal(records.get(1)?.run?.id, runId);
+    assert.equal(records.get(1)?.stage, "review_artifacts");
+    assert.equal(records.get(1)?.revision, 4);
     const generated = await pipeline.advanceStory(1, targetFile);
     assert.equal(generated.action, "specs_generated");
     assert.equal(records.get(1)?.stage, "review_specs");

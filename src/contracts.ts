@@ -41,5 +41,6 @@ export type RunSummary = {
   relationships: number;
   artifacts: number;
   specs: number;
+  warnings: string[];
   errors: string[];
 };

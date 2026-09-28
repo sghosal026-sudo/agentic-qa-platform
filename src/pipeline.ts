@@ -76,6 +76,7 @@ export class QaPipeline {
       relationships: run.relations.length,
       artifacts: run.artifacts.length,
       specs: run.specs.length,
+      warnings: run.warnings ?? [],
       errors: run.errors,
     };
   }
