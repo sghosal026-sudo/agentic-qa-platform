@@ -64,6 +64,12 @@ export async function ingestStory(story: Story, graph: GraphStore, model: ModelC
   run.stories.push(story);
   await graph.setup();
   await graph.node(story.id, "Story", story.title, story);
+  let childId = story.id;
+  for (const parent of story.parents ?? []) {
+    await graph.node(parent.id, parent.kind, parent.title, parent);
+    await graph.hierarchy(parent.id, childId);
+    childId = parent.id;
+  }
   await saveRun(run);
   try {
     const response = RelationOutput.parse(await model.json(`Extract relationships relevant to Story ${story.id}. Return {"relationships": [{"targetName":"...","targetType":"Endpoint|DataTable|BusinessRule|Requirement|Story","type":"...","evidence":"exact quote from the source","confidence":0.0,"reason":"why review is needed","storyIds":["${story.id}"]}]}. All extracted relationships require review. Source text:\n${story.text.slice(0, 16000)}`));

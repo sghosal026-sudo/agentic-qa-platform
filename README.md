@@ -22,7 +22,7 @@ Use `npm run qa -- <command>` from this folder.
 
 ## Automated sprint workflow
 
-`.github/workflows/sprint-story-pipeline.yml` polls the exact `ADO_ITERATION_PATH` every five minutes. It creates or resumes one graph-backed pipeline per ADO Story revision. Each Story has its own GitHub concurrency group, so a pending or rejected Story does not block approved Stories in the same sprint.
+`.github/workflows/sprint-story-pipeline.yml` polls the exact `ADO_ITERATION_PATH` every five minutes. It creates or resumes one graph-backed pipeline per ADO Story revision. During discovery it follows the Story's Azure DevOps parent links and stores the approved `Epic -> Feature -> Story` hierarchy in Neo4j. Each Story has its own GitHub concurrency group, so a pending or rejected Story does not block approved Stories in the same sprint.
 
 For each Story, the workflow waits for all relationship reviews, generates the test design, waits for all test-artifact reviews, generates a Story-specific Playwright PR, waits for the PR and every spec to be approved at the recorded SHA, then executes only those specs. The result is stored in Neo4j, posted to the ADO Story, and uploaded as a GitHub Actions artifact.
 

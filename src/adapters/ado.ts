@@ -1,4 +1,6 @@
-import { hash, required, type Artifact, type Relation, type RelationDecision, type Story } from "../core/runtime.js";
+import { hash, required, type Artifact, type Relation, type RelationDecision, type Story, type WorkItemParent } from "../core/runtime.js";
+
+type AdoWorkItem = { id: number; rev?: number; fields: Record<string, unknown>; relations?: Array<{ rel: string; url: string }> };
 import type { ExecutionResult } from "../contracts.js";
 import { parseDecision } from "../stages/review.js";
 
@@ -84,10 +86,12 @@ export class Ado {
     const query = `SELECT [System.Id] FROM WorkItems WHERE [System.TeamProject] = @project AND [System.IterationPath] = '${escapedIteration}' AND [System.WorkItemType] IN ('User Story', 'Product Backlog Item', 'Story') ORDER BY [System.Id]`;
     const found = await this.request<{ workItems?: Array<{ id: number }> }>("POST", "wiql?api-version=7.1", { query });
     const stories: Story[] = [];
+    const workItems = new Map<number, AdoWorkItem>();
     for (const item of found.workItems ?? []) {
-      const workItem = await this.request<{ id: number; rev?: number; fields: Record<string, unknown> }>("GET", `workitems/${item.id}?api-version=7.1`);
+      const workItem = await this.request<AdoWorkItem>("GET", `workitems/${item.id}?$expand=Relations&api-version=7.1`);
+      workItems.set(workItem.id, workItem);
       const title = String(workItem.fields["System.Title"] ?? `ADO-${workItem.id}`);
-      const code = title.match(/\b[A-Z][A-Z0-9]*-\d+\b/)?.[0] ?? `ADO-${workItem.id}`;
+      const code = workItemCode(workItem.id, title, "Story");
       stories.push({
         id: code,
         adoId: workItem.id,
@@ -96,9 +100,44 @@ export class Ado {
         text: plain(String(workItem.fields["System.Description"] ?? "")),
         areaPath: String(workItem.fields["System.AreaPath"] ?? ""),
         iterationPath: String(workItem.fields["System.IterationPath"] ?? ""),
+        parents: await this.parents(workItem, workItems),
       });
     }
     return stories;
+  }
+
+  private async parents(workItem: AdoWorkItem, workItems: Map<number, AdoWorkItem>): Promise<WorkItemParent[]> {
+    const parents: WorkItemParent[] = [];
+    const visited = new Set<number>([workItem.id]);
+    let current = workItem;
+    while (true) {
+      const parentRelations = current.relations?.filter((item) => item.rel === "System.LinkTypes.Hierarchy-Reverse") ?? [];
+      if (parentRelations.length > 1) throw new Error(`Work item ${current.id} has multiple parents`);
+      const relation = parentRelations[0];
+      if (!relation) return parents;
+      const match = relation.url.match(/\/workItems\/(\d+)\/?$/i);
+      if (!match) throw new Error(`Work item ${current.id} has an invalid parent URL`);
+      const parentId = Number(match[1]);
+      if (visited.has(parentId)) throw new Error(`Work item hierarchy contains a cycle at ${parentId}`);
+      visited.add(parentId);
+      let parent = workItems.get(parentId);
+      if (!parent) {
+        parent = await this.request<AdoWorkItem>("GET", `workitems/${parentId}?$expand=Relations&api-version=7.1`);
+        workItems.set(parentId, parent);
+      }
+      const kind = String(parent.fields["System.WorkItemType"]);
+      if (kind !== "Feature" && kind !== "Epic") throw new Error(`Unsupported parent type ${kind} for work item ${current.id}`);
+      const title = String(parent.fields["System.Title"] ?? `ADO-${parent.id}`);
+      parents.push({
+        id: workItemCode(parent.id, title, kind),
+        adoId: parent.id,
+        revision: parent.rev ?? 0,
+        kind,
+        title,
+        text: plain(String(parent.fields["System.Description"] ?? "")),
+      });
+      current = parent;
+    }
   }
 
   async artifactTask(runId: string, artifact: Artifact, story: Story): Promise<{ id: number; hash: string }> {
@@ -151,4 +190,11 @@ function escape(value: unknown): string {
 
 function plain(value: string): string {
   return value.replace(/<br\s*\/?\s*>|<\/p>|<\/li>/gi, "\n").replace(/<[^>]+>/g, " ").replace(/&nbsp;/gi, " ").replace(/&amp;/gi, "&").replace(/\s+/g, " ").trim();
+}
+
+function workItemCode(id: number, title: string, kind: "Story" | "Feature" | "Epic"): string {
+  const numbered = title.match(/\b[A-Z][A-Z0-9]*-\d+\b/)?.[0];
+  if (numbered) return numbered;
+  if (kind === "Epic") return title.match(/\bEPIC\s+([A-Z][A-Z0-9]*)\b/i)?.[1]?.toUpperCase() ?? `ADO-${id}`;
+  return `ADO-${id}`;
 }

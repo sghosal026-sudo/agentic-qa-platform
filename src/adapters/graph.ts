@@ -22,6 +22,14 @@ export class Graph {
     await this.query("MERGE (n:Node {id: $id}) SET n.nodeType = $kind, n.canonicalName = $name, n.propertiesJson = $content", { id, kind, name, content: JSON.stringify(content) });
   }
 
+  async hierarchy(parentId: string, childId: string): Promise<void> {
+    const result = await this.query(
+      "MATCH (parent:Node {id: $parentId}), (child:Node {id: $childId}) MERGE (parent)-[r:CONTAINS]->(child) SET r.reviewState = 'approved', r.source = 'azure-devops' RETURN child.id AS id",
+      { parentId, childId },
+    );
+    if (!result.records.length) throw new Error(`Hierarchy ${parentId} -> ${childId} has a missing graph endpoint`);
+  }
+
   async propose(relation: Relation): Promise<void> {
     const result = await this.query(
       "MATCH (a:Node {id: $sourceId}), (b:Node {id: $targetId}) MERGE (a)-[r:RELATES_TO {id: $id}]->(b) SET r.reviewState = 'needs_review', r.proposedType = $type, r.evidence = $evidence, r.confidence = $confidence, r.reason = $reason, r.source = $source RETURN r.id AS id",

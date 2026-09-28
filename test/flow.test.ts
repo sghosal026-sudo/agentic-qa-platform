@@ -51,6 +51,7 @@ test("the CI pipeline coordinates injected integrations and closes the graph", a
     graph: () => ({
       setup: async () => {},
       node: async () => {},
+      hierarchy: async () => {},
       propose: async () => {},
       decide: async () => {},
       storyContext: async () => "{}",
@@ -83,14 +84,18 @@ test("sprint polling advances one Story without blocking another", async () => {
   await fs.mkdir(targetProject);
   await fs.writeFile(targetFile, JSON.stringify({ projectDir: targetProject, baseUrl: "http://localhost:3000", safeEnvironments: ["http://localhost:3000"], routes: [{ method: "GET", path: "/warehouses", responses: [200] }] }));
   const records = new Map<number, StoryPipelineRecord>();
+  const hierarchy: string[] = [];
   const graph = {
-    setup: async () => {}, node: async () => {}, propose: async () => {}, decide: async () => {}, storyContext: async () => "{}",
+    setup: async () => {}, node: async () => {}, hierarchy: async (parentId: string, childId: string) => { hierarchy.push(`${parentId}->${childId}`); }, propose: async () => {}, decide: async () => {}, storyContext: async () => "{}",
     artifact: async () => {}, spec: async () => {}, testRun: async () => {},
     storyPipeline: async (adoId: number) => records.get(adoId) ?? null,
     saveStoryPipeline: async (record: StoryPipelineRecord) => { records.set(record.adoId, structuredClone(record)); },
   } as GraphStore;
   const stories = [
-    { id: "ST-1", adoId: 1, revision: 3, title: "One", text: "GET /warehouses returns 200.", areaPath: "QA", iterationPath: "QA\\Sprint 1" },
+    { id: "ST-1", adoId: 1, revision: 3, title: "One", text: "GET /warehouses returns 200.", areaPath: "QA", iterationPath: "QA\\Sprint 1", parents: [
+      { id: "FT-1", adoId: 10, revision: 2, kind: "Feature" as const, title: "Feature", text: "Feature details" },
+      { id: "EP", adoId: 20, revision: 1, kind: "Epic" as const, title: "Epic", text: "Epic details" },
+    ] },
     { id: "ST-2", adoId: 2, revision: 4, title: "Two", text: "Other behavior.", areaPath: "QA", iterationPath: "QA\\Sprint 1" },
   ];
   const workItems = {
@@ -112,6 +117,7 @@ test("sprint polling advances one Story without blocking another", async () => {
     const first = await pipeline.advanceStory(1, targetFile);
     runId = first.runId;
     assert.equal(first.action, "test_review");
+    assert.deepEqual(hierarchy, ["FT-1->ST-1", "EP->FT-1"]);
     assert.equal(records.get(1)?.stage, "review_artifacts");
     assert.equal(records.get(2)?.stage, "discovered");
     const generated = await pipeline.advanceStory(1, targetFile);
@@ -121,6 +127,37 @@ test("sprint polling advances one Story without blocking another", async () => {
   } finally {
     if (runId) await fs.rm(runPath(runId), { recursive: true, force: true });
     if (temporary.startsWith(path.resolve(os.tmpdir()) + path.sep)) await fs.rm(temporary, { recursive: true, force: true });
+  }
+});
+
+test("ADO sprint discovery loads each Story's Feature and Epic parents", async () => {
+  const previous = { org: process.env.ADO_ORG_URL, project: process.env.ADO_PROJECT, pat: process.env.ADO_PAT };
+  process.env.ADO_ORG_URL = "https://dev.azure.com/example";
+  process.env.ADO_PROJECT = "QA";
+  process.env.ADO_PAT = "test-token";
+  const calls: string[] = [];
+  const parentUrl = (id: number) => `https://dev.azure.com/example/_apis/wit/workItems/${id}`;
+  const fetcher = async (url: string): Promise<Response> => {
+    calls.push(url);
+    let value: unknown;
+    if (url.includes("wiql?")) value = { workItems: [{ id: 41 }, { id: 42 }] };
+    else if (url.includes("workitems/41?")) value = { id: 41, rev: 3, fields: { "System.WorkItemType": "User Story", "System.Title": "ST-1 First", "System.Description": "First", "System.AreaPath": "QA", "System.IterationPath": "QA\\Sprint 1" }, relations: [{ rel: "System.LinkTypes.Hierarchy-Reverse", url: parentUrl(10) }] };
+    else if (url.includes("workitems/42?")) value = { id: 42, rev: 4, fields: { "System.WorkItemType": "User Story", "System.Title": "ST-2 Second", "System.Description": "Second", "System.AreaPath": "QA", "System.IterationPath": "QA\\Sprint 1" }, relations: [{ rel: "System.LinkTypes.Hierarchy-Reverse", url: parentUrl(10) }] };
+    else if (url.includes("workitems/10?")) value = { id: 10, rev: 2, fields: { "System.WorkItemType": "Feature", "System.Title": "FT-1 Feature", "System.Description": "Feature details" }, relations: [{ rel: "System.LinkTypes.Hierarchy-Reverse", url: parentUrl(2) }] };
+    else if (url.includes("workitems/2?")) value = { id: 2, rev: 1, fields: { "System.WorkItemType": "Epic", "System.Title": "EPIC QA Quality", "System.Description": "Epic details" }, relations: [] };
+    else throw new Error(`Unexpected ADO URL: ${url}`);
+    return new Response(JSON.stringify(value), { status: 200 });
+  };
+  try {
+    const stories = await new Ado(fetcher as typeof fetch).sprintStories("QA\\Sprint 1");
+    assert.deepEqual(stories[0]?.parents?.map((item) => [item.kind, item.id]), [["Feature", "FT-1"], ["Epic", "QA"]]);
+    assert.deepEqual(stories[1]?.parents?.map((item) => [item.kind, item.id]), [["Feature", "FT-1"], ["Epic", "QA"]]);
+    assert.equal(calls.filter((url) => url.includes("workitems/10?")).length, 1);
+    assert.equal(calls.filter((url) => url.includes("workitems/2?")).length, 1);
+  } finally {
+    if (previous.org === undefined) delete process.env.ADO_ORG_URL; else process.env.ADO_ORG_URL = previous.org;
+    if (previous.project === undefined) delete process.env.ADO_PROJECT; else process.env.ADO_PROJECT = previous.project;
+    if (previous.pat === undefined) delete process.env.ADO_PAT; else process.env.ADO_PAT = previous.pat;
   }
 });
 

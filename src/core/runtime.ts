@@ -11,7 +11,8 @@ export type Relation = {
   state: "needs_review" | "approved" | "rejected";
   tasks: Record<string, { id: number; hash: string }>; decisions: RelationDecision[];
 };
-export type Story = { id: string; adoId: number; revision?: number; title: string; text: string; areaPath: string; iterationPath: string };
+export type WorkItemParent = { id: string; adoId: number; revision: number; kind: "Feature" | "Epic"; title: string; text: string };
+export type Story = { id: string; adoId: number; revision?: number; title: string; text: string; areaPath: string; iterationPath: string; parents?: WorkItemParent[] };
 export type Artifact = { id: string; kind: "TestPlan" | "TestSuite" | "TestScenario" | "TestCase"; name: string; storyId: string; parentId?: string; content: Record<string, unknown>; hash: string; reviewTask?: { id: number; hash: string }; reviewer?: string; approvedAt?: string };
 export type Spec = { caseId: string; storyId: string; file: string; status: "generated" | "fixme"; reason?: string };
 export type Run = { id: string; status: "ingesting" | "review_relations" | "mapping_error" | "ready_design" | "review_artifacts" | "ready_specs" | "review_specs" | "executed"; stories: Story[]; relations: Relation[]; artifacts: Artifact[]; specs: Spec[]; errors: string[]; createdAt: string };

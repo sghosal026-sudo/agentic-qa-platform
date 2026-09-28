@@ -22,7 +22,8 @@ export class StoryPipeline {
     for (const story of stories) {
       const revision = story.revision ?? 0;
       let record = await this.graph.storyPipeline(story.adoId);
-      if (!record || record.revision !== revision) {
+      const hierarchyChanged = record && JSON.stringify(record.story.parents ?? []) !== JSON.stringify(story.parents ?? []);
+      if (!record || record.revision !== revision || hierarchyChanged) {
         record = {
           adoId: story.adoId,
           revision,
