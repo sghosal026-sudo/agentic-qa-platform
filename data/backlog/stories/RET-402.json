@@ -1,0 +1,38 @@
+{
+  "id": 252,
+  "rev": 1,
+  "code": "RET-402",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-402 \u2014 Restock as graded",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>usable-but-not-new returns held as graded stock</strong>, so<br>that <strong>they can be sold as second-quality without being mixed with new stock</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a grade below \"as new\" but above \"scrap\", <strong>then</strong> the stock can be restocked as</li><li>graded.</li><li>- <strong>Given</strong> graded stock, <strong>then</strong> it is held in a separate location and is distinguishable from</li><li>new stock in every availability query.</li><li>- <strong>Given</strong> an order for the product as new, <strong>then</strong> graded stock is never allocated to it.</li><li>- <strong>Given</strong> a customer or channel that accepts graded stock, <strong>then</strong> it can be allocated</li><li>explicitly.</li><li>- <strong>Given</strong> graded stock, <strong>then</strong> its grade travels with it through picking and packing.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>inventory</code> |<br>| Tables | <code>disposition</code>, <code>stock_balance</code> |<br>| Risks | Graded stock mixed with new and shipped as new ([doc 05 WF 9](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/51",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/252"
+}

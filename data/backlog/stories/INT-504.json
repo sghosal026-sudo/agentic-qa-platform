@@ -1,0 +1,38 @@
+{
+  "id": 161,
+  "rev": 1,
+  "code": "INT-504",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-504 \u2014 Ledger-vs-balance drift",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>a standing report of any balance the ledger cannot explain</strong>, so<br>that <strong>the system's core promise being broken is visible immediately</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the nightly check from</li><li>[INV-801](../INV/INV-801-nightly-ledger-balance-check.md), <strong>then</strong> its findings are surfaced</li><li>as a report with product, location, expected, actual, and difference.</li><li>- <strong>Given</strong> any drift, <strong>then</strong> it is classified <strong>critical</strong> and pages a person \u2014 not</li><li>informational.</li><li>- <strong>Given</strong> drift, <strong>then</strong> the report does <strong>not</strong> correct it.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it also compares WMS on-hand against ERP on-hand per product</li><li>and lists differences above a threshold.</li><li>- <strong>Given</strong> a clean run, <strong>then</strong> the fact that the check ran and passed is recorded \u2014 silence</li><li>must not be mistaken for success.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>stock_movement</code>, reconciliation results |<br>| Risks | Balance written without a movement ([doc 09 \u00a72.2](../../../docs/09-defect-hotspots.md)); WMS/ERP drift found at year end ([doc 08 \u00a76](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/31",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/161"
+}

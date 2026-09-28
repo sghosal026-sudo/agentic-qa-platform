@@ -1,0 +1,38 @@
+{
+  "id": 257,
+  "rev": 1,
+  "code": "RET-501",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-501 \u2014 Return rate by product",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>product manager</strong>, I want <strong>to see which products come back most often</strong>, so that <strong>the<br>cause upstream can be fixed rather than the returns endlessly processed</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>then</strong> I get returns as a percentage of units shipped, per product.</li><li>- <strong>Given</strong> the report, <strong>then</strong> products with too few shipments to be meaningful are excluded.</li><li>- <strong>Given</strong> a high-rate product, <strong>then</strong> I can see the breakdown by return reason.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it is built from a daily read model.</li><li>- <strong>Given</strong> a product whose dominant reason is \"not as described\", <strong>then</strong> it is highlighted as</li><li>a likely product data problem rather than a warehouse problem.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>outbound</code> |<br>| Tables | return rate projection |<br>| Risks | Live aggregate query degrading ([doc 08 \u00a73](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/52",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/257"
+}

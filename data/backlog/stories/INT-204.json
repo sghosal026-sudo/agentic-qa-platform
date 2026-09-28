@@ -1,0 +1,38 @@
+{
+  "id": 148,
+  "rev": 1,
+  "code": "INT-204",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-204 \u2014 Retry and dead-letter failed deliveries",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>outbound delivery failures handled predictably</strong>, so that <strong>a<br>consumer outage resolves itself and a poisoned event does not block everything behind it</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a delivery failure, <strong>then</strong> it is retried with increasing delay, as in</li><li>[FDN-803](../FDN/FDN-803-retry-with-backoff.md).</li><li>- <strong>Given</strong> the consumer recovers, <strong>then</strong> queued events deliver in the correct order per</li><li>aggregate.</li><li>- <strong>Given</strong> an event failing beyond the retry limit, <strong>then</strong> it dead-letters and alerts a</li><li>person.</li><li>- <strong>Given</strong> a dead-lettered event, <strong>then</strong> events for other aggregates continue to deliver.</li><li>- <strong>Given</strong> the outbox backlog exceeding an age threshold, <strong>then</strong> an alert is raised \u2014 a</li><li>silent backlog looks exactly like a healthy queue.</li><li>- <strong>Given</strong> a fixed problem, <strong>then</strong> a dead-lettered event can be replayed.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code> |<br>| Tables | <code>outbox</code> |<br>| Risks | Poisoned event blocking the queue; backlog nobody notices ([doc 08 \u00a79](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/28",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/148"
+}

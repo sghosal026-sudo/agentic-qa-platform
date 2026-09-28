@@ -1,0 +1,31 @@
+{
+  "id": 58,
+  "rev": 1,
+  "code": "TRF-2",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "TRF-2 \u2014 Origin side",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Get the stock picked, packed, and out of the origin warehouse \u2014 reusing the outbound machinery<br>rather than duplicating it.</p>\n<h3>Scope</h3><p><strong>In.</strong> Allocation and picking for a transfer, packing, dispatch to in-transit.<br><br><strong>Out.</strong> Everything at the destination \u2014 that is [TRF-3](TRF-3-destination-side.md).</p>\n<h3>Design notes</h3><p><strong>Reuse outbound, do not reimplement it.</strong> A transfer's origin side is an order with a<br>warehouse instead of a customer. Picking, packing, and the scan discipline are identical. This<br>is why the epic sits at Stage 5 \u2014 those flows must be solid first.<br><br><strong><code>TRF-203</code> is the critical story.</strong> Dispatch moves stock from the origin location to<br><code>VIRT-INTRANSIT</code>, not to nowhere and not to the destination. The stock still exists; it is just<br>available at neither site.<br><br>Getting this wrong in either direction is bad: destroying it at dispatch means the destination<br>receipt creates stock from nothing, and crediting the destination early means both sites can<br>promise it.<br><br><strong>Record what was dispatched, line by line.</strong> The destination receipt is validated against this,<br>and it is the only evidence available when the two disagree.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| In-transit stock counted as available | [doc 05 WF 12](../../../docs/05-workflows.md) |<br>| Dispatch confirmed before loading finishes | [doc 05 WF 8](../../../docs/05-workflows.md) |<br>| Dispatch record incomplete, so receipt cannot be validated | [doc 09 \u00a79.3](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 16,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "transfers; TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/58"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 279,
+  "rev": 1,
+  "code": "TRF-104",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-104 \u2014 Cancel a transfer before dispatch",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>network planner</strong>, I want <strong>to cancel a transfer that has not left yet</strong>, so that <strong>the<br>stock returns to availability at the origin</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an allocated but undispatched transfer, <strong>when</strong> I cancel it, <strong>then</strong> every</li><li>reservation is released and any open pick tasks are cancelled, in one transaction.</li><li>- <strong>Given</strong> a dispatched transfer, <strong>then</strong> cancellation is rejected \u2014 the stock is physically</li><li>on a lorry.</li><li>- <strong>Given</strong> a rejected cancellation, <strong>then</strong> the message explains that a return transfer is the</li><li>correct route.</li><li>- <strong>Given</strong> cancellation, <strong>then</strong> the reason and acting user are recorded.</li><li>- <strong>Given</strong> cancellation, <strong>then</strong> no reservation for that transfer remains open.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code>, <code>inventory</code>, <code>outbound</code> |<br>| Tables | <code>transfer_order</code>, <code>reservation</code>, <code>pick_task</code> |<br>| Risks | Cancelling after dispatch leaves stock in limbo ([doc 05 WF 12](../../../docs/05-workflows.md)); reservation leak ([doc 09 \u00a75.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/57",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/279"
+}

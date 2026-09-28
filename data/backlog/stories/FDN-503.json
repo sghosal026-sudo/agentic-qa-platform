@@ -1,0 +1,38 @@
+{
+  "id": 90,
+  "rev": 1,
+  "code": "FDN-503",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-503 \u2014 Create a location with capacity",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>system administrator</strong>, I want <strong>to create a storage location with its capacity and<br>sequence</strong>, so that <strong>putaway can decide whether stock fits and picking can plan a route</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a zone, code, type, capacity, and pick sequence, <strong>when</strong> I create a location,</li><li><strong>then</strong> it is created and active.</li><li>- <strong>Given</strong> a missing max weight or max volume, <strong>then</strong> creation is rejected \u2014 capacity is</li><li>required, not optional.</li><li>- <strong>Given</strong> a missing pick sequence, <strong>then</strong> creation is rejected.</li><li>- <strong>Given</strong> a location code, <strong>then</strong> it follows the configured naming pattern.</li><li>- <strong>Given</strong> a duplicate code within a warehouse, <strong>then</strong> it is rejected.</li><li>- <strong>Given</strong> the location, <strong>then</strong> its mixing rules (multiple products, multiple batches) are</li><li>recorded explicitly.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>masterdata</code> |<br>| Tables | <code>location</code> |<br>| Risks | Null capacity breaks putaway suggestions ([doc 03 \u00a77.4](../../../docs/03-master-data.md)); wrong sequence costs walking daily ([doc 03 \u00a74](../../../docs/03-master-data.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/19",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/90"
+}

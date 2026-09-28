@@ -1,0 +1,58 @@
+{
+  "id": 13,
+  "rev": 2,
+  "code": "LMS",
+  "title": "LMS",
+  "type": "Epic",
+  "state": "New",
+  "assigned_to": null,
+  "effort": null,
+  "iteration_path": "LMS\\Iteration 1",
+  "area_path": "LMS",
+  "created_date": "2024-03-27T04:41:28.507Z",
+  "changed_date": "2024-03-27T04:43:18.923Z",
+  "fields": {
+    "System.AreaPath": "LMS",
+    "System.TeamProject": "LMS",
+    "System.IterationPath": "LMS\\Iteration 1",
+    "System.WorkItemType": "Epic",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2024-03-27T04:41:28.507Z",
+    "System.CreatedBy": {
+      "displayName": "Souvik Ghosal",
+      "url": "https://spsprodcin2.vssps.visualstudio.com/A0f0bfe7f-cf8d-493c-9c52-90c944606449/_apis/Identities/79bd83db-3ee2-6467-b241-abafe418ca30",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/souvikghosal/_apis/GraphProfile/MemberAvatars/aad.NzliZDgzZGItM2VlMi03NDY3LWIyNDEtYWJhZmU0MThjYTMw"
+        }
+      },
+      "id": "79bd83db-3ee2-6467-b241-abafe418ca30",
+      "uniqueName": "souvik_ghosal@pursuitsoftware.com",
+      "imageUrl": "https://dev.azure.com/souvikghosal/_apis/GraphProfile/MemberAvatars/aad.NzliZDgzZGItM2VlMi03NDY3LWIyNDEtYWJhZmU0MThjYTMw",
+      "descriptor": "aad.NzliZDgzZGItM2VlMi03NDY3LWIyNDEtYWJhZmU0MThjYTMw"
+    },
+    "System.ChangedDate": "2024-03-27T04:43:18.923Z",
+    "System.ChangedBy": {
+      "displayName": "Souvik Ghosal",
+      "url": "https://spsprodcin2.vssps.visualstudio.com/A0f0bfe7f-cf8d-493c-9c52-90c944606449/_apis/Identities/79bd83db-3ee2-6467-b241-abafe418ca30",
+      "_links": {
+        "avatar": {
+          "href": "https://dev.azure.com/souvikghosal/_apis/GraphProfile/MemberAvatars/aad.NzliZDgzZGItM2VlMi03NDY3LWIyNDEtYWJhZmU0MThjYTMw"
+        }
+      },
+      "id": "79bd83db-3ee2-6467-b241-abafe418ca30",
+      "uniqueName": "souvik_ghosal@pursuitsoftware.com",
+      "imageUrl": "https://dev.azure.com/souvikghosal/_apis/GraphProfile/MemberAvatars/aad.NzliZDgzZGItM2VlMi03NDY3LWIyNDEtYWJhZmU0MThjYTMw",
+      "descriptor": "aad.NzliZDgzZGItM2VlMi03NDY3LWIyNDEtYWJhZmU0MThjYTMw"
+    },
+    "System.CommentCount": 0,
+    "System.Title": "LMS",
+    "Microsoft.VSTS.Common.StateChangeDate": "2024-03-27T04:41:28.507Z",
+    "Microsoft.VSTS.Common.Priority": 2,
+    "Microsoft.VSTS.Common.ValueArea": "Business"
+  },
+  "relations": [],
+  "url": "https://dev.azure.com/souvikghosal/0f7aec71-8d4c-4b11-9c23-01fcf9b1c5a5/_apis/wit/workItems/13",
+  "synced_at": "2026-09-11T16:36:22Z"
+}

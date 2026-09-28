@@ -1,0 +1,38 @@
+{
+  "id": 137,
+  "rev": 1,
+  "code": "INB-403",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-403 \u2014 Report on dock-to-stock time",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>to see how long goods take from arrival to being stored</strong>,<br>so that <strong>I can tell whether stock is becoming sellable fast enough</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>then</strong> I get average and 95th-percentile time from receipt</li><li>confirmation to putaway confirmation.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it breaks down by supplier, by zone, and by hour of day.</li><li>- <strong>Given</strong> receipts still awaiting putaway, <strong>then</strong> they are shown as in-progress with their</li><li>current age.</li><li>- <strong>Given</strong> the target of four hours, <strong>then</strong> the proportion breaching it is shown.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code> |<br>| Tables | <code>receipt</code>, <code>putaway_task</code> |<br>| Risks | Live aggregate query degrading over time ([doc 08 \u00a73](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/26",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/137"
+}

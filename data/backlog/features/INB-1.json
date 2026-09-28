@@ -1,0 +1,31 @@
+{
+  "id": 23,
+  "rev": 1,
+  "code": "INB-1",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INB-1 \u2014 Advance Shipping Notice",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Capture what a supplier says is coming, so that receiving has something to check the delivery<br>against.</p>\n<h3>Scope</h3><p><strong>In.</strong> Creating, viewing, and cancelling ASNs; receiving them automatically from the ERP.<br><br><strong>Out.</strong> Purchase order management. The ERP owns that; an ASN is its shipping-side shadow.</p>\n<h3>Design notes</h3><p><strong>An ASN is an expectation, not a fact.</strong> It never creates stock. Only a confirmed receipt does<br>that. Keeping this distinction clean is what allows over-receipt, short receipt, and blind<br>receipt to be handled without special cases.<br><br><strong>Deduplicate on the supplier reference.</strong> The ERP will resend. Without a unique constraint on<br><code>(source_system, external_reference)</code>, one retried message becomes two ASNs and, eventually,<br>two receipts.<br><br><strong>Blocked products are accepted with a warning, not rejected.</strong> The truck is already coming.<br>Flag the line so receiving routes it to quarantine rather than making the clerk turn it away.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Duplicate ASN from an ERP retry | [doc 09 \u00a73.3](../../../docs/09-defect-hotspots.md) |<br>| Cancelling an ASN that has been partly received | [doc 05 WF 1](../../../docs/05-workflows.md) |<br>| Malformed ERP message dropped silently | [doc 08 \u00a76](../../../docs/08-data-sync-and-migrations.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 12,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "inbound; INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/23"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 259,
+  "rev": 1,
+  "code": "RET-503",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-503 \u2014 Return reason analysis",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>returns grouped by reason and by disposition outcome</strong>, so<br>that <strong>I can tell which returns are our fault</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>then</strong> returns are grouped by customer-stated reason and by</li><li>inspection grade.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it separates warehouse-caused returns \u2014 wrong item, wrong</li><li>quantity, damaged in packing \u2014 from other causes.</li><li>- <strong>Given</strong> a warehouse-caused return, <strong>then</strong> it can be traced to the pick and pack records</li><li>that produced the original shipment.</li><li>- <strong>Given</strong> the trend, <strong>then</strong> it is plotted over time so improvement is visible.</li><li>- <strong>Given</strong> the split, <strong>then</strong> the proportion restocked, repaired, returned to supplier, and</li><li>scrapped is shown.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>outbound</code> |<br>| Tables | return rate projection, <code>inspection</code>, <code>disposition</code> |<br>| Risks | Warehouse-caused returns invisible among all returns |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/52",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/259"
+}

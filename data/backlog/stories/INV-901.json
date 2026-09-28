@@ -1,0 +1,38 @@
+{
+  "id": 194,
+  "rev": 1,
+  "code": "INV-901",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-901 \u2014 Maintain the availability table",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>integration client</strong>, I want <strong>availability answered from a single indexed read</strong>, so<br>that <strong>the webshop can ask about hundreds of products without straining the database</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> any movement, status change, or reservation change, <strong>then</strong></li><li><code>product_availability</code> is updated in the same transaction.</li><li>- <strong>Given</strong> the projection, <strong>then</strong> it excludes quarantine, damaged stock, blocked locations,</li><li>expired batches, and virtual locations \u2014 matching</li><li>[INV-103](INV-103-query-available-quantity.md) exactly.</li><li>- <strong>Given</strong> a projection row, <strong>then</strong> it carries <code>last_updated_at</code> and every response exposes</li><li>it.</li><li>- <strong>Given</strong> allocation, <strong>then</strong> it does <strong>not</strong> read this table.</li><li>- <strong>Given</strong> the update, <strong>then</strong> it does not measurably slow confirm endpoints.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>product_availability</code>, <code>stock_balance</code> |<br>| Risks | Projection used for allocation ([doc 09 \u00a712](../../../docs/09-defect-hotspots.md)); sync update slowing hot paths ([doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | unit \u00b7 integration \u00b7 performance |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/40",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/194"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 277,
+  "rev": 1,
+  "code": "TRF-102",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-102 \u2014 Validate stock at origin",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>network planner</strong>, I want <strong>to be told when the origin cannot supply what I asked for</strong>,<br>so that <strong>I do not raise a transfer that will fail at picking</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a transfer line, <strong>then</strong> available quantity at the origin is checked and shown at</li><li>creation.</li><li>- <strong>Given</strong> insufficient stock, <strong>then</strong> the transfer is still created but the line is flagged</li><li>as unfulfillable.</li><li>- <strong>Given</strong> the check, <strong>then</strong> it excludes quarantined, damaged, blocked-location, and expired</li><li>stock.</li><li>- <strong>Given</strong> the check at creation, <strong>then</strong> it is advisory \u2014 the binding check happens at</li><li>allocation in [TRF-201](TRF-201-allocate-and-pick.md).</li><li>- <strong>Given</strong> stock that disappears between creation and allocation, <strong>then</strong> allocation fails</li><li>cleanly with a clear reason.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code>, <code>inventory</code> |<br>| Tables | <code>transfer_line</code>, <code>stock_balance</code> |<br>| Risks | Origin stock gone by picking time ([doc 09 \u00a74.5](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/57",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/277"
+}

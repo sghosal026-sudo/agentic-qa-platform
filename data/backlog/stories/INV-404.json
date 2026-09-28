@@ -1,0 +1,38 @@
+{
+  "id": 177,
+  "rev": 1,
+  "code": "INV-404",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-404 \u2014 Block a location's stock",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>blocking a location to make its stock unallocatable</strong>, so that<br><strong>a damaged rack or a contamination area is taken out of use in one action</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a location is blocked, <strong>then</strong> its stock is excluded from availability without any</li><li>balance row being edited.</li><li>- <strong>Given</strong> existing reservations against stock in that location, <strong>then</strong> they are released and</li><li>the orders flagged.</li><li>- <strong>Given</strong> the location is unblocked, <strong>then</strong> its stock returns to availability.</li><li>- <strong>Given</strong> a blocked location, <strong>then</strong> its stock can still be counted and moved out by an</li><li>authorised operator.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code>, <code>masterdata</code>, <code>outbound</code> |<br>| Tables | <code>stock_balance</code>, <code>location</code>, <code>reservation</code> |<br>| Risks | Blocked-location stock still allocated ([doc 09 \u00a78.5](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/35",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/177"
+}

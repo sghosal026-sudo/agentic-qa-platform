@@ -1,0 +1,38 @@
+{
+  "id": 112,
+  "rev": 1,
+  "code": "INB-103",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-103 \u2014 Cancel an unreceived ASN",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk</strong>, I want <strong>to cancel an ASN for a delivery that is not coming</strong>, so that<br><strong>the expected list reflects reality</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an ASN with no receipts against it, <strong>when</strong> I cancel it, <strong>then</strong> its status becomes</li><li>cancelled.</li><li>- <strong>Given</strong> an ASN that has been partly received, <strong>then</strong> cancellation is rejected \u2014 close the</li><li>outstanding lines short instead.</li><li>- <strong>Given</strong> a cancelled ASN, <strong>then</strong> no receipt can be started against it.</li><li>- <strong>Given</strong> the cancellation, <strong>then</strong> a reason is recorded and an event published.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code> |<br>| Tables | <code>asn</code> |<br>| Risks | Cancelling a partly received ASN ([doc 05 WF 1](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 2,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/23",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/112"
+}

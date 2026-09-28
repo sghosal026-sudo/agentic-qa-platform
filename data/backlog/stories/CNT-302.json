@@ -1,0 +1,38 @@
+{
+  "id": 71,
+  "rev": 1,
+  "code": "CNT-302",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-302 \u2014 Require a recount above threshold",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>large variances counted a second time before anything<br>is adjusted</strong>, so that <strong>we do not correct correct data because of one miscount</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a variance above the configured quantity or value threshold, <strong>then</strong> a recount task</li><li>is created and <strong>no adjustment is posted yet</strong>.</li><li>- <strong>Given</strong> the recount, <strong>then</strong> it is compared against the <strong>original snapshot</strong>, not against</li><li>any adjusted figure.</li><li>- <strong>Given</strong> the recount agrees with the first count, <strong>then</strong> the variance proceeds to approval.</li><li>- <strong>Given</strong> the recount differs from the first count, <strong>then</strong> a third count or supervisor</li><li>escalation is required.</li><li>- <strong>Given</strong> the recount, <strong>then</strong> it is assigned to a different person where staffing allows.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code> |<br>| Tables | <code>count_task</code>, <code>variance</code> |<br>| Risks | Recount against the adjusted figure hides the problem ([doc 09 \u00a76.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/12",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/71"
+}

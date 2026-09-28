@@ -1,0 +1,38 @@
+{
+  "id": 171,
+  "rev": 1,
+  "code": "INV-302",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-302 \u2014 Validate the destination location",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>the destination checked before stock is moved into it</strong>, so that<br><strong>stock never ends up somewhere illegal, however it was requested</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a blocked or retired destination, <strong>then</strong> the move is rejected.</li><li>- <strong>Given</strong> a destination that would exceed its max weight or max volume, <strong>then</strong> the move is</li><li>rejected with the limit named.</li><li>- <strong>Given</strong> a destination that does not allow product mixing and already holds another product,</li><li><strong>then</strong> the move is rejected.</li><li>- <strong>Given</strong> a destination that does not allow batch mixing and already holds another batch,</li><li><strong>then</strong> the move is rejected.</li><li>- <strong>Given</strong> a product with a temperature or hazmat class, <strong>then</strong> the destination zone must</li><li>permit it.</li><li>- <strong>Given</strong> a validation failure, <strong>then</strong> the error names the rule that failed, so the operator</li><li>knows what to do instead.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code>, <code>masterdata</code> |<br>| Tables | <code>stock_balance</code>, <code>location</code>, <code>product</code> |<br>| Risks | Null capacity making validation impossible ([doc 03 \u00a77.4](../../../docs/03-master-data.md)); wrong temperature class causing spoilage ([doc 03 \u00a77.6](../../../docs/03-master-data.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/34",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/171"
+}

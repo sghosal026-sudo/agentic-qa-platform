@@ -1,0 +1,31 @@
+{
+  "id": 44,
+  "rev": 1,
+  "code": "OUT-4",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "OUT-4 \u2014 Picking",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Direct pickers along an efficient route, verify by scan what they take, and record it \u2014 the<br>highest-volume activity in the warehouse and where accuracy is won or lost.</p>\n<h3>Scope</h3><p><strong>In.</strong> Task assignment, location sequencing, scan-verified confirmation, short and zero picks,<br>task reassignment, batch picking, serial capture.<br><br><strong>Out.</strong> Packing \u2014 that is [OUT-5](OUT-5-packing.md).</p>\n<h3>Design notes</h3><p><strong>Scan verification is the main accuracy control.</strong> Location scan <em>and</em> product scan. A picker<br>who takes from a nearer location and confirms the one the system asked for corrupts two<br>locations at once, with no trail. That single behaviour causes more inaccuracy than any<br>software bug.<br><br>The design consequence: <strong>make the correct action the fastest action.</strong> If overriding needs a<br>reason code and three taps and the honest path needs one, honesty wins.<br><br><strong>Build <code>OUT-404</code> alongside <code>OUT-403</code>.</strong> Short picks are five to ten percent of picks in a real<br>warehouse. A design that treats them as a later addition will have them bolted on badly under<br>pressure. The short path must resolve the remainder explicitly \u2014 re-allocate elsewhere, or<br>release and short the line. Never leave it hanging.<br><br><strong>Confirm reduces on-hand and reserved together, in one statement.</strong> Reducing one without the<br>other produces negative availability.<br><br><strong>Sequence by <code>pick_sequence</code>, not by location code string.</strong> Test it against a realistic<br>layout \u2014 this is invisible in unit tests and expensive every day.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Picking from a nearer location and confirming the asked one | [doc 05 WF 6](../../../docs/05-workflows.md) |<br>| On-hand reduced but reserved not | [doc 09 \u00a72.3](../../../docs/09-defect-hotspots.md) |<br>| Duplicate confirm on a dropped network | [doc 09 \u00a73.2](../../../docs/09-defect-hotspots.md) |<br>| Short pick with no re-allocation | [doc 09 \u00a75.4](../../../docs/09-defect-hotspots.md) |<br>| Two pickers assigned the same task | [doc 09 \u00a74.3](../../../docs/09-defect-hotspots.md) |<br>| Wrong sequence causing double walking | [doc 03 \u00a74](../../../docs/03-master-data.md) |<br>| Batch pick sorted into the wrong compartment | [doc 07 \u00a77](../../../docs/07-phased-delivery-plan.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 45,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "outbound; OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/44"
+}

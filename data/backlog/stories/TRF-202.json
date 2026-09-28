@@ -1,0 +1,38 @@
+{
+  "id": 281,
+  "rev": 1,
+  "code": "TRF-202",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-202 \u2014 Pack for transfer",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>packer at the origin</strong>, I want <strong>to record how transfer stock is packed onto pallets or<br>cartons</strong>, so that <strong>the destination can check the delivery unit by unit</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> picked transfer stock, <strong>then</strong> it can be packed into cartons or pallets with</li><li>recorded contents.</li><li>- <strong>Given</strong> a packed unit, <strong>then</strong> it carries a unique reference the destination will scan.</li><li>- <strong>Given</strong> batch or serial tracked products, <strong>then</strong> the batch and serials are recorded per</li><li>packed unit.</li><li>- <strong>Given</strong> packing, <strong>then</strong> contents are verified against what was picked.</li><li>- <strong>Given</strong> the packed units, <strong>then</strong> they form the dispatch record used by</li><li>[TRF-302](TRF-302-validate-against-dispatch.md).</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code>, <code>outbound</code> |<br>| Tables | <code>carton</code>, <code>carton_content</code>, <code>transfer_shipment</code> |<br>| Risks | Incomplete dispatch record makes receipt validation impossible ([doc 09 \u00a79.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/58",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/281"
+}

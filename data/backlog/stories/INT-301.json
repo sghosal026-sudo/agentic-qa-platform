@@ -1,0 +1,38 @@
+{
+  "id": 149,
+  "rev": 1,
+  "code": "INT-301",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-301 \u2014 Availability view",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>integration client</strong>, I want <strong>a fast endpoint for sellable quantity</strong>, so that <strong>the<br>webshop can ask about hundreds of products without straining the database</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the projection from</li><li>[INV-901](../INV/INV-901-maintain-availability-table.md), <strong>then</strong> an endpoint returns</li><li>availability for one or many products in a single read.</li><li>- <strong>Given</strong> the response, <strong>then</strong> it exposes <code>last_updated_at</code> per row.</li><li>- <strong>Given</strong> the endpoint, <strong>then</strong> its exclusion rules match</li><li>[INV-103](../INV/INV-103-query-available-quantity.md) exactly \u2014 a discrepancy between the two</li><li>is a defect.</li><li>- <strong>Given</strong> any caller, <strong>then</strong> the response states that this figure is indicative and must not</li><li>be used to commit stock.</li><li>- <strong>Given</strong> allocation, <strong>then</strong> it does not call this endpoint.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>inventory</code> |<br>| Tables | <code>product_availability</code> |<br>| Risks | Projection used to promise stock ([doc 09 \u00a712](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration \u00b7 agreement with the live query |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/29",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/149"
+}

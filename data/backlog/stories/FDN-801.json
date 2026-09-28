@@ -1,0 +1,38 @@
+{
+  "id": 105,
+  "rev": 1,
+  "code": "FDN-801",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-801 \u2014 Write events transactionally",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>events written to a table inside the business transaction</strong>, so<br>that <strong>an event never describes something that did not happen, and a change never goes<br>unannounced</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a business change that publishes an event, <strong>then</strong> the event row is inserted in the</li><li>same transaction as the change.</li><li>- <strong>Given</strong> the transaction rolls back, <strong>then</strong> no event row exists.</li><li>- <strong>Given</strong> the transaction commits, <strong>then</strong> exactly one event row exists per published event.</li><li>- <strong>Given</strong> an event row, <strong>then</strong> it carries <code>event_id</code>, <code>event_type</code>, <code>occurred_at</code>,</li><li><code>aggregate_id</code>, <code>version</code>, <code>payload</code>, and <code>correlation_id</code>.</li><li>- <strong>Given</strong> the service layer, <strong>then</strong> there is no code path that sends an event directly over</li><li>the network.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code> |<br>| Tables | <code>outbox</code> |<br>| Risks | Event published before commit ([doc 09 \u00a72.4](../../../docs/09-defect-hotspots.md)); event lost after commit ([doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | unit \u00b7 integration \u00b7 rollback |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/22",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/105"
+}

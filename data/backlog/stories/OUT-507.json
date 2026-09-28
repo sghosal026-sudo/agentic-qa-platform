@@ -1,0 +1,38 @@
+{
+  "id": 231,
+  "rev": 1,
+  "code": "OUT-507",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-507 \u2014 Void and repack a carton",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>packer</strong>, I want <strong>to void a closed carton and pack it again</strong>, so that <strong>an error found<br>after labelling can be corrected without breaking the audit trail</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a labelled carton not yet shipped, <strong>when</strong> I void it, <strong>then</strong> it is marked void</li><li>with a reason and its label is invalidated.</li><li>- <strong>Given</strong> a void, <strong>then</strong> the original carton record is retained \u2014 it is never edited or</li><li>deleted.</li><li>- <strong>Given</strong> the voided contents, <strong>then</strong> they return to the pack station for repacking into a</li><li>new carton.</li><li>- <strong>Given</strong> a shipped carton, <strong>then</strong> voiding is rejected.</li><li>- <strong>Given</strong> the void, <strong>then</strong> the acting user and reason are recorded.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>carton</code>, <code>carton_content</code> |<br>| Risks | Reopening a carton breaking \"what was in the box?\" ([doc 05 WF 7](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/45",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/231"
+}

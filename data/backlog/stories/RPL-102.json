@@ -1,0 +1,38 @@
+{
+  "id": 261,
+  "rev": 1,
+  "code": "RPL-102",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-102 \u2014 Validate min meaningfully below max",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>the system to reject rules that would cause constant<br>refilling</strong>, so that <strong>replenishment does not waste trips on two units at a time</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a max less than or equal to the min, <strong>then</strong> the rule is rejected.</li><li>- <strong>Given</strong> a gap smaller than one case quantity or the configured minimum gap, <strong>then</strong> the</li><li>rule is rejected with an explanation.</li><li>- <strong>Given</strong> a max exceeding the pick location's capacity, <strong>then</strong> the rule is rejected.</li><li>- <strong>Given</strong> a min of zero, <strong>then</strong> it is rejected \u2014 replenishment would only trigger when</li><li>already empty.</li><li>- <strong>Given</strong> existing rules that violate these checks, <strong>then</strong> they are listed by</li><li>[RPL-104](RPL-104-report-locations-without-rules.md) for correction.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code>, <code>masterdata</code> |<br>| Tables | <code>replen_rule</code>, <code>location</code> |<br>| Risks | Thrashing between min and max ([doc 09 \u00a77.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/53",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/261"
+}

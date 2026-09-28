@@ -1,0 +1,38 @@
+{
+  "id": 186,
+  "rev": 1,
+  "code": "INV-605",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-605 \u2014 Report stock expiring soon",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>a list of stock approaching expiry</strong>, so that <strong>it can<br>be sold, discounted, or moved before it becomes a write-off</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a horizon in days, <strong>when</strong> I run the report, <strong>then</strong> I get every batch expiring</li><li>within it, with quantity and location.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it can be filtered by product, zone, and warehouse.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it shows quantity already reserved separately from free stock.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it is sorted by expiry date, soonest first.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>batch</code> |<br>| Risks | Live aggregate query degrading over time ([doc 08 \u00a73](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/37",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/186"
+}

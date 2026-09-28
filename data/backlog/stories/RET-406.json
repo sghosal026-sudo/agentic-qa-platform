@@ -1,0 +1,38 @@
+{
+  "id": 256,
+  "rev": 1,
+  "code": "RET-406",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-406 \u2014 Notify the ERP for credit",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>finance team member</strong>, I want <strong>to be told the outcome of a return</strong>, so that <strong>the<br>customer is credited for what was genuinely returned in acceptable condition</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a completed disposition, <strong>then</strong> an event is published carrying the RMA, the</li><li>quantities, the grades, and the disposition outcomes.</li><li>- <strong>Given</strong> the sequencing, <strong>then</strong> the notification happens <strong>after</strong> disposition, not on</li><li>arrival \u2014 crediting on arrival refunds goods that turn out to be scrap.</li><li>- <strong>Given</strong> the event, <strong>then</strong> it goes through the outbox and is retried on failure.</li><li>- <strong>Given</strong> duplicate delivery, <strong>then</strong> the ERP is documented as required to deduplicate on</li><li><code>event_id</code>.</li><li>- <strong>Given</strong> a partly dispositioned return, <strong>then</strong> the notification covers only the completed</li><li>portion.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>platform</code> |<br>| Tables | <code>disposition</code>, <code>outbox</code> |<br>| Risks | Credit raised before inspection ([doc 05 WF 9](../../../docs/05-workflows.md)); double-crediting ([doc 09 \u00a73.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration \u00b7 event assertion |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/51",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/256"
+}

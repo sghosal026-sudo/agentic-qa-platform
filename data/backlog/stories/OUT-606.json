@@ -1,0 +1,38 @@
+{
+  "id": 237,
+  "rev": 1,
+  "code": "OUT-606",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-606 \u2014 Partial shipment of an order",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>shipping clerk</strong>, I want <strong>to ship what is ready and leave the rest outstanding</strong>, so<br>that <strong>a customer who accepts partials is not made to wait for one backordered line</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a customer who allows partial shipment, <strong>then</strong> the packed portion can ship while</li><li>the rest stays open.</li><li>- <strong>Given</strong> a customer who does not, <strong>then</strong> the order cannot ship until complete.</li><li>- <strong>Given</strong> a partial shipment, <strong>then</strong> the order status is <code>partly shipped</code>, distinct from</li><li>both <code>shipped</code> and <code>packed</code>.</li><li>- <strong>Given</strong> the shipped portion, <strong>then</strong> its reservations are consumed and the outstanding</li><li>portion keeps its reservations.</li><li>- <strong>Given</strong> the ERP notification, <strong>then</strong> it states which lines and quantities shipped.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>inventory</code> |<br>| Tables | <code>order</code>, <code>order_line</code>, <code>shipment</code>, <code>reservation</code> |<br>| Risks | Partial shipment leaving a state nothing downstream handles ([doc 04 \u00a73.5](../../../docs/04-modules.md)) |<br>| Tests | unit \u00b7 integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/46",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/237"
+}

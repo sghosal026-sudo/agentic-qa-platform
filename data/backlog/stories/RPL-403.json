@@ -1,0 +1,38 @@
+{
+  "id": 275,
+  "rev": 1,
+  "code": "RPL-403",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-403 \u2014 Prioritise tasks blocking a wave",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>replenishments that a wave is waiting on done first</strong>, so that<br><strong>committed picking work is not held up by a routine top-up elsewhere</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a task tied to a released or imminent wave, <strong>then</strong> it is issued before general</li><li>replenishment tasks.</li><li>- <strong>Given</strong> several wave-blocking tasks, <strong>then</strong> they are ordered by the wave's cut-off time.</li><li>- <strong>Given</strong> priority, <strong>then</strong> it is recalculated as waves are released and completed, not fixed</li><li>at creation.</li><li>- <strong>Given</strong> a wave-blocking task outstanding when release is attempted, <strong>then</strong> it is surfaced</li><li>by [OUT-306](../OUT/OUT-306-block-release-until-replenished.md).</li><li>- <strong>Given</strong> the priority scheme, <strong>then</strong> general tasks are not starved indefinitely.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code>, <code>outbound</code> |<br>| Tables | <code>replen_task</code>, <code>wave</code> |<br>| Risks | Replen completing after the wave is picked ([doc 09 \u00a77.3](../../../docs/09-defect-hotspots.md)); starvation of routine work |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/56",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/275"
+}

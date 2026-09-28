@@ -1,0 +1,38 @@
+{
+  "id": 193,
+  "rev": 1,
+  "code": "INV-803",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-803 \u2014 Rebuild balances from the ledger",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer recovering from an incident</strong>, I want <strong>to regenerate balances from the<br>movement ledger</strong>, so that <strong>a corrupted balance table is not a permanent loss of truth</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the movement ledger, <strong>when</strong> the rebuild runs, <strong>then</strong> balances are recalculated</li><li>from it for the requested scope.</li><li>- <strong>Given</strong> an uncorrupted database, <strong>when</strong> the rebuild runs, <strong>then</strong> every balance is</li><li>unchanged.</li><li>- <strong>Given</strong> the rebuild, <strong>then</strong> it can be scoped to one product, one location, or everything.</li><li>- <strong>Given</strong> the rebuild, <strong>then</strong> it runs in batches and does not lock the warehouse out.</li><li>- <strong>Given</strong> the rebuild, <strong>then</strong> it produces a report of every balance it changed.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>stock_movement</code> |<br>| Risks | Rebuild disagreeing with normal writes ([doc 08 \u00a75.2](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration \u00b7 invariant \u00b7 performance |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/39",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/193"
+}

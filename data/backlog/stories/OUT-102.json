@@ -1,0 +1,38 @@
+{
+  "id": 198,
+  "rev": 1,
+  "code": "OUT-102",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-102 \u2014 Validate customer and products",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>orders rejected at the edge when they reference things that do not<br>exist</strong>, so that <strong>bad data never reaches allocation</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an unknown customer, <strong>then</strong> the order is rejected naming the customer.</li><li>- <strong>Given</strong> an unknown or archived product, <strong>then</strong> the order is rejected naming the line.</li><li>- <strong>Given</strong> a discontinued product, <strong>then</strong> the order is accepted \u2014 we sell down remaining</li><li>stock.</li><li>- <strong>Given</strong> a blocked product, <strong>then</strong> the order is rejected.</li><li>- <strong>Given</strong> several invalid lines, <strong>then</strong> all of them are reported at once, not just the</li><li>first.</li><li>- <strong>Given</strong> a customer requiring minimum shelf life, <strong>then</strong> that requirement is attached to</li><li>the order for allocation to honour.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>masterdata</code> |<br>| Tables | <code>order</code>, <code>order_line</code> |<br>| Risks | Bad data accepted at the edge ([doc 08 \u00a76](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/41",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/198"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 130,
+  "rev": 1,
+  "code": "INB-305",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-305 \u2014 Suggest using capacity and zone rules",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>putaway operator</strong>, I want <strong>suggestions that account for space, weight, and zone<br>suitability</strong>, so that <strong>I stop being sent to locations where the pallet will not fit</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a task, <strong>then</strong> the suggestion respects remaining weight and volume capacity, not</li><li>just occupancy.</li><li>- <strong>Given</strong> the product, <strong>then</strong> temperature class, hazmat class, and stackability are</li><li>respected.</li><li>- <strong>Given</strong> mixing rules, <strong>then</strong> locations that do not allow a second product or batch are</li><li>excluded.</li><li>- <strong>Given</strong> several valid candidates, <strong>then</strong> the nearest to the receiving location is</li><li>preferred.</li><li>- <strong>Given</strong> the override data from [INB-304](INB-304-override-suggested-location.md), <strong>then</strong></li><li>the rule is tuned against it and the override rate is measured before and after.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>masterdata</code>, <code>inventory</code> |<br>| Tables | <code>putaway_task</code>, <code>location</code>, <code>stock_balance</code> |<br>| Risks | Null capacity ([doc 03 \u00a77.4](../../../docs/03-master-data.md)); suggestion filled by someone else ([doc 05 WF 3](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/25",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/130"
+}

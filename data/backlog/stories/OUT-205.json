@@ -1,0 +1,38 @@
+{
+  "id": 207,
+  "rev": 1,
+  "code": "OUT-205",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-205 \u2014 Re-allocate after a stock adjustment",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>picker</strong>, I want <strong>the system to notice when allocated stock disappears</strong>, so that <strong>I do<br>not find out by arriving at an empty shelf</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> <code>inventory.stock_adjusted</code> reduces stock with reservations against it, <strong>then</strong></li><li><code>outbound</code> re-evaluates the affected order lines.</li><li>- <strong>Given</strong> alternative stock exists, <strong>then</strong> the line is re-allocated automatically and the</li><li>pick task updated.</li><li>- <strong>Given</strong> no alternative exists, <strong>then</strong> the line is flagged for a supervisor and the order</li><li>state reflects it.</li><li>- <strong>Given</strong> the pick task has already been picked, <strong>then</strong> re-allocation is not attempted and</li><li>the discrepancy is escalated.</li><li>- <strong>Given</strong> the same event delivered twice, <strong>then</strong> re-allocation happens once.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>inventory</code> |<br>| Tables | <code>allocation</code>, <code>reservation</code>, <code>pick_task</code> |<br>| Risks | Adjustment silently invalidating an allocation ([doc 09 \u00a74.5](../../../docs/09-defect-hotspots.md)); duplicate event ([doc 09 \u00a73.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration \u00b7 idempotency \u00b7 event handling |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/42",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/207"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 155,
+  "rev": 1,
+  "code": "INT-402",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-402 \u2014 Throughput by hour",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>to see how much work was completed each hour</strong>, so that <strong>I<br>can staff to the real shape of the day and judge whether changes helped</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>then</strong> lines picked, units received, and putaways completed are</li><li>shown per hour.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it can be broken down by zone and by operator count.</li><li>- <strong>Given</strong> the data, <strong>then</strong> lines per operator hour is derived so productivity is comparable</li><li>across shifts of different sizes.</li><li>- <strong>Given</strong> a process change on a known date, <strong>then</strong> before-and-after comparison is possible.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it is built from a daily read model.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>outbound</code>, <code>inbound</code> |<br>| Tables | throughput projection, <code>stock_movement</code> |<br>| Risks | Optimising without a baseline ([doc 07 \u00a77](../../../docs/07-phased-delivery-plan.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/30",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/155"
+}

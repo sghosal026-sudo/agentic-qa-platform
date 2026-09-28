@@ -1,0 +1,38 @@
+{
+  "id": 204,
+  "rev": 1,
+  "code": "OUT-202",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-202 \u2014 Handle partial allocation and backorder",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>partly available lines handled explicitly</strong>, so that<br><strong>downstream code always knows what state an order is in</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a customer who allows partial shipment and partial stock, <strong>then</strong> the available</li><li>quantity is allocated and the remainder becomes an explicit backorder.</li><li>- <strong>Given</strong> a customer who does not allow partial shipment, <strong>then</strong> nothing is allocated and</li><li>the order waits whole.</li><li>- <strong>Given</strong> a backordered quantity, <strong>then</strong> it is a modelled state, not merely \"unallocated\".</li><li>- <strong>Given</strong> stock arriving later, <strong>then</strong> backordered lines are re-evaluated automatically.</li><li>- <strong>Given</strong> a partly allocated order, <strong>then</strong> its status distinguishes it from both fully</li><li>allocated and unallocated.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>inventory</code> |<br>| Tables | <code>order_line</code>, <code>allocation</code> |<br>| Risks | Ambiguous partial state that downstream code does not handle ([doc 05 WF 4](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/42",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/204"
+}

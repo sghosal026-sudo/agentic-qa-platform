@@ -1,0 +1,38 @@
+{
+  "id": 196,
+  "rev": 1,
+  "code": "INV-903",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-903 \u2014 Reconcile the projection nightly",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>the availability projection compared against the real balances on a<br>schedule</strong>, so that <strong>drift is detected rather than served to customers</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the job runs, <strong>then</strong> every projection row is compared against the computed value</li><li>from balances.</li><li>- <strong>Given</strong> any mismatch, <strong>then</strong> it is reported with product, warehouse, projected, and actual.</li><li>- <strong>Given</strong> a mismatch, <strong>then</strong> an alert is raised and the rebuild is offered \u2014 but not run</li><li>automatically.</li><li>- <strong>Given</strong> a projection row older than the configured freshness threshold, <strong>then</strong> it is</li><li>reported as stale even if it matches.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>product_availability</code>, <code>stock_balance</code> |<br>| Risks | Projection drift ([doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md)); stale data served confidently ([doc 08 \u00a75.3](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/40",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/196"
+}

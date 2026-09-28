@@ -1,0 +1,31 @@
+{
+  "id": 24,
+  "rev": 1,
+  "code": "INB-2",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INB-2 \u2014 Physical receiving",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Record what actually arrived \u2014 including all the ways it differs from what was expected \u2014 and<br>turn it into stock.</p>\n<h3>Scope</h3><p><strong>In.</strong> Starting a receipt, recording quantities, batch and expiry and serial capture, short<br>and over receipt, damage, confirmation, idempotency, blind receipt, shelf life rejection.<br><br><strong>Out.</strong> Putaway \u2014 that is [INB-3](INB-3-putaway.md). Quality inspection decisions \u2014 that is<br>[INB-402](../../stories/INB/INB-402-quality-hold.md).</p>\n<h3>Design notes</h3><p><strong><code>INB-208</code> is the most important story in the epic.</strong> Confirm must create stock, write<br>movements, close the receipt, and create putaway tasks \u2014 all in one transaction. A partial<br>commit means either a receipt that looks open (so it gets received again, doubling stock) or<br>goods on the dock with no putaway task.<br><br><strong><code>INB-209</code> is not optional.</strong> Warehouse wifi is unreliable, operators tap twice when a spinner<br>hangs, and both requests arrive. Enforce the idempotency key with a unique database constraint,<br>not a check-then-insert \u2014 two concurrent retries both pass a check.<br><br><strong>Stock always lands in a receiving location first.</strong> Never directly into a pick face. That<br>skips a control point and hides errors.<br><br><strong>Scan determines the unit of measure.</strong> A clerk scanning a case barcode and typing a unit count<br>is the classic quantity error. Show the resolved UoM prominently and require confirmation.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Partial commit on confirm | [doc 09 \u00a72.1](../../../docs/09-defect-hotspots.md) |<br>| Duplicate confirm from a scanner retry | [doc 09 \u00a73.2](../../../docs/09-defect-hotspots.md) |<br>| Case/unit confusion on quantity entry | [doc 05 WF 1](../../../docs/05-workflows.md) |<br>| Batch typed with a typo, breaking FEFO later | [doc 05 WF 1](../../../docs/05-workflows.md) |<br>| Product not in master data, truck waiting | [doc 05 WF 1](../../../docs/05-workflows.md) |<br>| Damaged goods received as good | [doc 05 WF 1](../../../docs/05-workflows.md) |<br>| Blind receipt used to bypass tolerance controls | [doc 05 WF 2](../../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 59,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "inbound; INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/24"
+}

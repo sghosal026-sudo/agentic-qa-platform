@@ -1,0 +1,31 @@
+{
+  "id": 42,
+  "rev": 1,
+  "code": "OUT-2",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "OUT-2 \u2014 Allocation",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Decide which specific stock fulfils which order line, and reserve it \u2014 correctly, under<br>concurrency, with the right batch.</p>\n<h3>Scope</h3><p><strong>In.</strong> Allocation strategy, partial allocation and backorder, FEFO, locking, re-allocation<br>after adjustment, deallocation, shelf life rules, location preference.<br><br><strong>Out.</strong> Creating the reservation rows themselves \u2014 that is<br>[INV-5](../INV/INV-5-reservations.md). Allocation decides; inventory records.</p>\n<h3>Design notes</h3><p><strong>This is the feature with the most subtle bugs in the system.</strong> Treat every story here as<br>carrying a mandatory concurrency test.<br><br><strong>The locking sequence that works:</strong><br><br><code>`</code><br>   find candidate stock (unlocked read, for shortlisting only)<br>   sort the chosen location IDs          <- prevents deadlock<br>   LOCK those balance rows<br>   RE-CHECK availability under the lock  <- this is the step people skip<br>   create reservations<br>   COMMIT<br><code>`</code><br><br>Skipping the re-check makes every test pass and production fail on the first busy morning.<br><br><strong>Never allocate from a projection.</strong> Reading <code>product_availability</code> to decide whether to<br>promise stock is how you sell the same unit twice. Projections are for looking.<br><br><strong>Keep the locked section short.</strong> No external calls, no slow queries. A long-held lock on a<br>popular product is a warehouse-wide queue.<br><br><strong><code>OUT-205</code> closes a gap people forget.</strong> A downward adjustment can leave an order allocated<br>against stock that no longer exists. Without a subscription to <code>inventory.stock_adjusted</code>, the<br>picker discovers it at the shelf.<br><br><strong>Start dumb.</strong> Stage 2 allocation is \"oldest receipt date first\". Shelf life rules, location<br>preference, and customer rules arrive at Stage 3 once real order patterns exist.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Double allocation of the last unit | [doc 09 \u00a74.1](../../../docs/09-defect-hotspots.md) |<br>| Deadlock from inconsistent lock ordering | [doc 09 \u00a74.2](../../../docs/09-defect-hotspots.md) |<br>| Allocating from a stale projection | [doc 09 \u00a712](../../../docs/09-defect-hotspots.md) |<br>| FEFO ignored for a mixed-batch location | [doc 09 \u00a74.1](../../../docs/09-defect-hotspots.md) |<br>| Stock adjusted after allocation | [doc 09 \u00a74.5](../../../docs/09-defect-hotspots.md) |<br>| Partial allocation leaving an ambiguous state | [doc 05 WF 4](../../../docs/05-workflows.md) |<br>| Long-running allocation holding locks | [doc 09 \u00a74.4](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 47,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "outbound; OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/42"
+}

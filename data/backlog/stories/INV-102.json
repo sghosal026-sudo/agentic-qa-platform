@@ -1,0 +1,38 @@
+{
+  "id": 164,
+  "rev": 1,
+  "code": "INV-102",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-102 \u2014 Query stock by product",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>to see every location holding a product</strong>, so that <strong>I can find<br>stock when a pick face is empty</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a product with stock in several locations, <strong>when</strong> I query it, <strong>then</strong> I get each</li><li>location with its quantities and status.</li><li>- <strong>Given</strong> the result, <strong>then</strong> it can be filtered by warehouse, by zone, and by status.</li><li>- <strong>Given</strong> a product with no stock, <strong>then</strong> I get an empty result.</li><li>- <strong>Given</strong> the result, <strong>then</strong> virtual locations are identified as such, so in-transit and</li><li>written-off stock are not mistaken for sellable stock.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code> |<br>| Risks | Virtual location stock counted as available ([doc 05 WF 12](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 2,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/32",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/164"
+}

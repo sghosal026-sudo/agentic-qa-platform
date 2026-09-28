@@ -1,0 +1,31 @@
+{
+  "id": 49,
+  "rev": 1,
+  "code": "RET-2",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "RET-2 \u2014 Receiving returns",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Take goods back into the building and record their condition \u2014 without any of them becoming<br>sellable yet.</p>\n<h3>Scope</h3><p><strong>In.</strong> Receiving against an RMA, blind returns with approval, quarantine landing, condition<br>recording.<br><br><strong>Out.</strong> The inspection decision \u2014 that is [RET-3](RET-3-inspection.md).</p>\n<h3>Design notes</h3><p><strong><code>RET-203</code> is the story that protects the whole epic.</strong> Returned stock lands in quarantine.<br>Always. There is no fast path, no \"obviously fine\" shortcut, no configuration flag that turns<br>it off.<br><br>Someone will ask for one, because it saves a step. It is the single most common cause of<br>reshipped damaged goods, and the customer returns it again, and the cycle repeats until<br>somebody physically intercepts it.<br><br>Enforce the quarantine landing in the service layer, and make the transition to available<br>require an inspection record to exist. Then the shortcut is impossible rather than merely<br>discouraged.<br><br><strong>Idempotency on the return line.</strong> A return processed twice creates stock from nothing and<br>credits the customer twice.<br><br><strong>Blind returns are normal.</strong> Customers send things back without an RMA constantly. Support it<br>with approval and an exception record rather than pretending it will not happen.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Returned stock going straight to available | [doc 09 \u00a78.1](../../../docs/09-defect-hotspots.md) |<br>| Return processed twice | [doc 09 \u00a78.4](../../../docs/09-defect-hotspots.md) |<br>| Quarantine stock never dispositioned | [doc 05 WF 9](../../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 18,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "returns; RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/49"
+}

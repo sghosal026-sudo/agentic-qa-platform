@@ -1,0 +1,38 @@
+{
+  "id": 75,
+  "rev": 1,
+  "code": "CNT-402",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-402 \u2014 Variance rate by product class",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>accuracy broken down by product class</strong>, so that <strong>I<br>can spot when a group of products has a master data problem</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>then</strong> I get variance rates grouped by ABC class and by product</li><li>category.</li><li>- <strong>Given</strong> a single product with repeated variances, <strong>then</strong> it is listed individually.</li><li>- <strong>Given</strong> a product whose variances cluster around its case quantity, <strong>then</strong> that pattern is</li><li>highlighted \u2014 it usually means the case quantity is wrong.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it links to the products so master data can be checked.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code>, <code>masterdata</code> |<br>| Tables | accuracy projection, <code>variance</code>, <code>product</code> |<br>| Risks | Wrong case quantity multiplying silently ([doc 03 \u00a77.1](../../../docs/03-master-data.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/13",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/75"
+}

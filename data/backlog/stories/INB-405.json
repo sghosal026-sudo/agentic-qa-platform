@@ -1,0 +1,38 @@
+{
+  "id": 139,
+  "rev": 1,
+  "code": "INB-405",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-405 \u2014 Alert on stock stranded in receiving",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>to be told when stock has sat in a receiving location too long</strong>,<br>so that <strong>it does not stay invisible to customers over a weekend</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> stock in a receiving location older than the configured threshold, <strong>then</strong> it</li><li>appears on an exception list.</li><li>- <strong>Given</strong> the check, <strong>then</strong> it runs hourly rather than daily.</li><li>- <strong>Given</strong> an item on the list, <strong>then</strong> it shows age, quantity, the receipt it came from, and</li><li>whether an open putaway task exists.</li><li>- <strong>Given</strong> stock with no putaway task at all, <strong>then</strong> it is escalated as a higher severity \u2014</li><li>that means task generation failed.</li><li>- <strong>Given</strong> the alert, <strong>then</strong> it reaches a person, not only a log.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>putaway_task</code> |<br>| Risks | Availability understated while stock sits on the dock ([doc 05 WF 3](../../../docs/05-workflows.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/26",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/139"
+}

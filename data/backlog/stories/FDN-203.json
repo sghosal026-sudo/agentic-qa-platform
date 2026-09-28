@@ -1,0 +1,38 @@
+{
+  "id": 82,
+  "rev": 1,
+  "code": "FDN-203",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-203 \u2014 Seed a demo warehouse",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>a realistic warehouse to exist after a fresh start</strong>, so that<br><strong>every later feature can be developed and demonstrated against real-looking data</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a fresh database, <strong>when</strong> the seed runs, <strong>then</strong> one warehouse, five zones, five</li><li>virtual locations, about forty locations, and about thirty products exist.</li><li>- <strong>Given</strong> the seed, <strong>then</strong> it includes deliberately awkward cases: a product with no</li><li>barcode, a product with three barcodes, a batch-tracked product with two batches (one</li><li>expiring soon), a location at exactly maximum capacity, and a blocked location holding stock.</li><li>- <strong>Given</strong> the seed, <strong>then</strong> opening stock is created as receipts with movements, not by</li><li>inserting balances directly.</li><li>- <strong>Given</strong> the seed runs twice, <strong>then</strong> it does not duplicate data.</li><li>- <strong>Given</strong> the seed, <strong>then</strong> no automated test depends on it.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>masterdata</code>, <code>inventory</code> |<br>| Tables | all master data, <code>stock_balance</code>, <code>stock_movement</code> |<br>| Risks | Clean seed data hides defects ([doc 10 \u00a76](../../../docs/10-local-deployment.md)); balances without movements break reconciliation ([doc 09 \u00a711.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/16",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/82"
+}

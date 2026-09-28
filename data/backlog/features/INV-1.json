@@ -1,0 +1,31 @@
+{
+  "id": 32,
+  "rev": 1,
+  "code": "INV-1",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INV-1 \u2014 Stock balances",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Answer \"how much of what is where\" for every question the warehouse asks \u2014 by location, by<br>product, by batch, and by status.</p>\n<h3>Scope</h3><p><strong>In.</strong> Balance queries by location, product, warehouse, and batch.<br><br><strong>Out.</strong> Changing balances \u2014 that is [INV-3](INV-3-moving-stock.md). Fast aggregate<br>availability \u2014 that is [INV-9](INV-9-availability-projection.md).</p>\n<h3>Design notes</h3><p><strong>The balance key is <code>(product, location, batch, status)</code>.</strong> Batch is null for untracked<br>products. Four rows can exist for the same product in the same location if it holds two batches<br>in two statuses \u2014 and that is correct, not a modelling error.<br><br><strong>Never store <code>qty_available</code> as an independent column.</strong> Two numbers that must agree will<br>eventually disagree. Compute it, or use a database-maintained generated column.<br><br><strong>\"How much stock is there\" is an ambiguous question.</strong> Sales means available, the floor means<br>on hand, finance means on hand plus in-transit. Name the fields precisely and never let a field<br>called <code>quantity</code> exist on its own.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Available stored separately and drifting from on-hand minus reserved | [doc 04 \u00a73.3](../../../docs/04-modules.md) |<br>| Query missing the batch dimension for tracked products | [doc 03 \u00a73](../../../docs/03-master-data.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 11,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "inventory; INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/32"
+}

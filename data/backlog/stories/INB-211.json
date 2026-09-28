@@ -1,0 +1,38 @@
+{
+  "id": 124,
+  "rev": 1,
+  "code": "INB-211",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-211 \u2014 Capture serial numbers on receipt",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk</strong>, I want <strong>to scan a serial number for each unit of a serialised<br>product</strong>, so that <strong>individual units can be traced through to the customer</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a serial-tracked product, <strong>then</strong> the received quantity must equal the number of</li><li>serials scanned.</li><li>- <strong>Given</strong> a serial already recorded in the system, <strong>then</strong> the scan is rejected as a</li><li>duplicate.</li><li>- <strong>Given</strong> the confirmation, <strong>then</strong> each serial is linked to the receipt line and the batch.</li><li>- <strong>Given</strong> a large quantity, <strong>then</strong> serials can be captured across several sessions before</li><li>confirmation.</li><li>- <strong>Given</strong> a serial-tracked product, <strong>then</strong> the receipt cannot confirm with missing serials.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>inventory</code> |<br>| Tables | <code>receipt_line</code>, serial records |<br>| Risks | Serial tracking multiplies row counts and complicates every flow ([doc 07 \u00a710](../../../docs/07-phased-delivery-plan.md)) |<br>| Tests | unit \u00b7 integration \u00b7 performance |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/24",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/124"
+}

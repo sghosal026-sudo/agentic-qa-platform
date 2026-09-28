@@ -1,0 +1,31 @@
+{
+  "id": 50,
+  "rev": 1,
+  "code": "RET-3",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "RET-3 \u2014 Inspection",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Assess what actually came back, record the assessment, and gate everything downstream on it.</p>\n<h3>Scope</h3><p><strong>In.</strong> Recording an inspection outcome, attaching evidence, requiring inspection before<br>disposition.<br><br><strong>Out.</strong> Repair work. Supplier quality claims.</p>\n<h3>Design notes</h3><p><strong>An inspection step that can be completed with one tap is not an inspection.</strong> Under time<br>pressure everything passes, and the outcome is identical to having no inspection at all \u2014<br>except now there is an audit trail saying it was checked, which is worse.<br><br>Three things make it real:<br><br>- Require a <strong>condition grade</strong>, not a yes/no.<br>- Require a <strong>reason</strong> for anything other than \"as new\".<br>- Report <strong>pass rates by inspector</strong>. An inspector passing 100% is not inspecting.<br><br><strong>Verify identity, not just condition.</strong> Customers return the wrong product surprisingly often.<br>Scan it rather than trusting the RMA line.<br><br><strong><code>RET-303</code> is the gate.</strong> Disposition cannot proceed without an inspection record. Enforce it<br>in the service layer.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Inspection is a rubber stamp | [doc 09 \u00a78.2](../../../docs/09-defect-hotspots.md) |<br>| Damaged stock restocked | [doc 09 \u00a78.1](../../../docs/09-defect-hotspots.md) |<br>| Wrong product returned and not detected | [doc 05 WF 9](../../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 13,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "returns; RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/50"
+}

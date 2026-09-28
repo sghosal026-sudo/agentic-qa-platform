@@ -1,0 +1,38 @@
+{
+  "id": 287,
+  "rev": 1,
+  "code": "TRF-401",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-401 \u2014 Report in-transit stock",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>network planner</strong>, I want <strong>to see everything currently on a lorry between sites</strong>, so<br>that <strong>stock that belongs to neither warehouse is still visible</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the report, <strong>then</strong> it lists every quantity in <code>VIRT-INTRANSIT</code> with product,</li><li>batch, origin, destination, dispatch date, and expected arrival.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it can be filtered by origin, destination, and product.</li><li>- <strong>Given</strong> in-transit stock, <strong>then</strong> it is clearly labelled as unavailable at both sites.</li><li>- <strong>Given</strong> a partly received transfer, <strong>then</strong> only the outstanding quantity appears.</li><li>- <strong>Given</strong> the total, <strong>then</strong> in-transit plus on-hand across sites reconciles with the network</li><li>total.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code>, <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>transfer_shipment</code> |<br>| Risks | In-transit counted as available ([doc 05 WF 12](../../../docs/05-workflows.md)) |<br>| Tests | integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/60",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/287"
+}

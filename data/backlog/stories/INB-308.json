@@ -1,0 +1,38 @@
+{
+  "id": 133,
+  "rev": 1,
+  "code": "INB-308",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-308 \u2014 Split a putaway across multiple destinations",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>putaway operator</strong>, I want <strong>to put part of a pallet in one place and the rest in<br>another</strong>, so that <strong>stock that does not fit in one location can still be put away properly</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a task, <strong>when</strong> I confirm part of the quantity to one location, <strong>then</strong> a movement</li><li>is written for that part and the task remains open for the remainder.</li><li>- <strong>Given</strong> the remainder is confirmed elsewhere, <strong>then</strong> a second movement is written and the</li><li>task closes.</li><li>- <strong>Given</strong> a partially completed task, <strong>then</strong> the outstanding quantity is visible and the</li><li>source stock is still shown in receiving.</li><li>- <strong>Given</strong> every split, <strong>then</strong> the sum of the movements equals the original task quantity.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>inventory</code> |<br>| Tables | <code>putaway_task</code>, <code>stock_movement</code>, <code>stock_balance</code> |<br>| Risks | Partially completed tasks abandoned, stranding stock in receiving ([doc 05 WF 3](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/25",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/133"
+}

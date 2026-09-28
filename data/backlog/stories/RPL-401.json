@@ -1,0 +1,38 @@
+{
+  "id": 273,
+  "rev": 1,
+  "code": "RPL-401",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-401 \u2014 Read demand from released and pending waves",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>replenishment planner</strong>, I want <strong>to know what upcoming waves will consume</strong>, so that<br><strong>refills happen before the shortage rather than after it</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> released and planned waves, <strong>then</strong> total demand per product per pick location can</li><li>be calculated.</li><li>- <strong>Given</strong> the calculation, <strong>then</strong> it reads wave contents through an <code>outbound</code> service call,</li><li>not by querying outbound tables directly.</li><li>- <strong>Given</strong> a wave is cancelled, <strong>then</strong> its demand is removed from the calculation.</li><li>- <strong>Given</strong> a configurable look-ahead window, <strong>then</strong> only waves within it are counted.</li><li>- <strong>Given</strong> the demand view, <strong>then</strong> it is refreshed frequently enough to act on before the</li><li>wave releases.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code>, <code>outbound</code> |<br>| Tables | demand view, <code>wave</code>, <code>order_line</code> |<br>| Risks | Reaching into another module's tables ([doc 04 \u00a76](../../../docs/04-modules.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/56",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/273"
+}

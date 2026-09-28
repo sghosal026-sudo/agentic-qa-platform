@@ -1,0 +1,22 @@
+{
+  "id": 9,
+  "rev": 1,
+  "code": "TRF",
+  "fields": {
+    "System.WorkItemType": "Epic",
+    "System.Title": "EPIC TRF \u2014 Transfers",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Goal</h3><p>Stock moves between warehouses, and is properly accounted for while it is on a lorry belonging<br>to neither site.</p>\n<h3>Business value</h3><p>Multi-site networks rebalance stock constantly. Without a transfer flow, that movement happens<br>as an ad-hoc shipment out of one system and a blind receipt into another, and the difference<br>between the two is invisible until year end.</p>\n<h3>Scope</h3><p><strong>In.</strong> Transfer orders. Origin allocation, picking, packing, and dispatch. In-transit virtual<br>stock. Destination receipt validated against the dispatch. Partial receipt. Discrepancy<br>recording and investigation. Network stock visibility.<br><br><strong>Out.</strong> Transport booking and route planning. Freight cost allocation. Customs and export<br>documentation.</p>\n<h3>Done when</h3><ul><li>A transfer can be created, allocated, picked, packed, and dispatched from the origin.</li><li>Dispatched stock sits in a virtual in-transit location, available at neither site.</li><li>The destination receipt is validated against what the origin dispatched.</li><li>A partial receipt leaves the balance in transit rather than losing it.</li><li>A quantity mismatch creates an investigation record with an owner, not an auto-adjustment.</li><li>Overdue in-transit stock is aged and escalated.</li></ul>\n<h3>Key risks</h3><p>| Risk | Why it matters | Reference |<br>|---|---|---|<br>| Dispatched but never received | Stock sits in transit forever; network total overstated | [doc 09 \u00a79.1](../../docs/09-defect-hotspots.md) |<br>| Transfer received twice | Stock created from nothing | [doc 09 \u00a79.2](../../docs/09-defect-hotspots.md) |<br>| Discrepancy auto-adjusted | Hides theft, picking errors, and receiving errors equally well | [doc 09 \u00a79.3](../../docs/09-defect-hotspots.md) |<br>| Timezone and clock differences | Receipt appears to precede dispatch | [doc 09 \u00a79.4](../../docs/09-defect-hotspots.md) |<br>| In-transit counted as available | Over-promising at both sites | [doc 05 WF 12](../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9"
+}

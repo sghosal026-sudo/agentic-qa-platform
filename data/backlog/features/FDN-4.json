@@ -1,0 +1,31 @@
+{
+  "id": 18,
+  "rev": 1,
+  "code": "FDN-4",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "FDN-4 \u2014 Audit trail",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Every write is recorded with who did it, when, and what changed \u2014 permanently, and without<br>slowing down the warehouse.</p>\n<h3>Scope</h3><p><strong>In.</strong> Automatic audit capture on writes, an audit query endpoint, table partitioning.<br><br><strong>Out.</strong> Field-level diffing of every record. Log shipping to an external SIEM.</p>\n<h3>Design notes</h3><p><strong>Append-only.</strong> Audit rows are never updated or deleted. A correction is a new row.<br><br><strong><code>audit_log</code> will be your largest table</strong> \u2014 roughly one row per API call. By month six a<br>full-table scan of it can take the database down. <code>FDN-403</code> partitions by month and moves<br>partitions older than 90 days to cold storage. This is not optional work.<br><br><strong>Do not put audit writes inside the hot business transaction</strong> if it measurably slows confirm<br>endpoints. Measure first \u2014 a single insert usually costs nothing, and correctness beats<br>speculation.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Audit table growth degrades the whole database | [doc 04 \u00a73.1](../../../docs/04-modules.md) |<br>| Audit writes slowing hot scanner paths | [doc 04 \u00a73.1](../../../docs/04-modules.md) |<br>| Some write path bypasses audit entirely | \u2014 |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 11,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "platform; FDN; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/18"
+}

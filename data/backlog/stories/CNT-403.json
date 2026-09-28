@@ -1,0 +1,38 @@
+{
+  "id": 76,
+  "rev": 1,
+  "code": "CNT-403",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-403 \u2014 Variance rate by operator",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>to see whether variances cluster around particular<br>operators</strong>, so that <strong>I can offer training where it is needed</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>then</strong> I get variance rates attributed to the operator who last</li><li>moved stock in the affected location.</li><li>- <strong>Given</strong> counters, <strong>then</strong> I also get the rate at which their counts are overturned by a</li><li>recount.</li><li>- <strong>Given</strong> an operator with too few transactions to be meaningful, <strong>then</strong> they are excluded</li><li>rather than shown with a misleading rate.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it is documented as a training signal, not a disciplinary</li><li>metric.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code>, <code>platform</code> |<br>| Tables | accuracy projection, <code>stock_movement</code> |<br>| Risks | Operator metrics driving dishonest short-pick reporting ([doc 01 \u00a73](../../../docs/01-product-overview.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/13",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/76"
+}

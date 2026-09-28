@@ -1,0 +1,38 @@
+{
+  "id": 96,
+  "rev": 1,
+  "code": "FDN-602",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-602 \u2014 Manage multiple barcodes",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>system administrator</strong>, I want <strong>a product to have several barcodes</strong>, so that <strong>the unit<br>code, the case code, and old labels still on stock all scan to the same product</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a product, <strong>when</strong> I add a barcode, <strong>then</strong> scanning it resolves to that product.</li><li>- <strong>Given</strong> a barcode already used by another product, <strong>then</strong> adding it is rejected.</li><li>- <strong>Given</strong> a barcode, <strong>then</strong> it records which UoM it represents \u2014 a case code and a unit code</li><li>behave differently on receipt.</li><li>- <strong>Given</strong> a product with several barcodes, <strong>then</strong> one is marked primary for display.</li><li>- <strong>Given</strong> a barcode is removed, <strong>then</strong> a warning notes that stock labelled with it may still</li><li>exist.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>masterdata</code> |<br>| Tables | <code>product_barcode</code> |<br>| Risks | Missing barcode forces manual entry and wrong-item picks ([doc 03 \u00a77.3](../../../docs/03-master-data.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/20",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/96"
+}

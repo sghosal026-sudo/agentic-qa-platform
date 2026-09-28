@@ -1,0 +1,38 @@
+{
+  "id": 173,
+  "rev": 1,
+  "code": "INV-304",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-304 \u2014 Lock balance rows on concurrent moves",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>balance rows locked when a decision depends on reading them</strong>, so<br>that <strong>two operators acting at the same instant cannot both take the same stock</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a move that must check availability first, <strong>then</strong> the balance row is locked for</li><li>the rest of the transaction and availability is re-checked under the lock.</li><li>- <strong>Given</strong> a transaction touching several locations, <strong>then</strong> location IDs are sorted before</li><li>locking.</li><li>- <strong>Given</strong> two transactions locking the same two locations in opposite request order, <strong>then</strong></li><li>neither deadlocks.</li><li>- <strong>Given</strong> twenty concurrent moves of one unit each against ten units of stock, <strong>then</strong></li><li>exactly ten succeed and ten are cleanly rejected.</li><li>- <strong>Given</strong> a locked section, <strong>then</strong> it contains no external calls and no slow queries.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code> |<br>| Risks | Lost update ([doc 09 \u00a74.1](../../../docs/09-defect-hotspots.md)); deadlock ([doc 09 \u00a74.2](../../../docs/09-defect-hotspots.md)); lock contention ([doc 09 \u00a74.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | concurrency (mandatory) \u00b7 load |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/34",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/173"
+}

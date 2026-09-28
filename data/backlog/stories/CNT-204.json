@@ -1,0 +1,38 @@
+{
+  "id": 69,
+  "rev": 1,
+  "code": "CNT-204",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-204 \u2014 Freeze a location during a count",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>a location's stock held still while it is counted</strong>, so<br>that <strong>the variance reflects a real difference rather than a movement that happened mid-count</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a count task is assigned, <strong>then</strong> the location is frozen and the expected quantity</li><li>per product and batch is <strong>snapshotted</strong> at that moment.</li><li>- <strong>Given</strong> a frozen location, <strong>then</strong> no new pick, putaway, or replenishment task is issued</li><li>against it.</li><li>- <strong>Given</strong> a movement occurs against a frozen location despite the freeze, <strong>then</strong> the count is</li><li>voided rather than producing a variance.</li><li>- <strong>Given</strong> the count is submitted or cancelled, <strong>then</strong> the freeze is lifted.</li><li>- <strong>Given</strong> a freeze older than a configured timeout, <strong>then</strong> it is lifted automatically and</li><li>the count voided, so a location is never frozen indefinitely.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code>, <code>inventory</code> |<br>| Tables | <code>count_task</code>, snapshot, <code>stock_balance</code> |<br>| Risks | Stock moving mid-count is the most common counting bug ([doc 09 \u00a76.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 concurrency (movement during count) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/11",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/69"
+}

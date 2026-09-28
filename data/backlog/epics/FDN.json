@@ -1,0 +1,22 @@
+{
+  "id": 2,
+  "rev": 1,
+  "code": "FDN",
+  "fields": {
+    "System.WorkItemType": "Epic",
+    "System.Title": "EPIC FDN \u2014 Foundation and Platform",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Goal</h3><p>The service starts, knows who is calling, records what they did, and holds the reference data<br>that everything else points at.</p>\n<h3>Business value</h3><p>Nothing else can be built without this. More importantly, three things here are extremely<br>expensive to retrofit: authentication, audit, and correct master data identity. Getting them<br>right in week one costs days. Getting them wrong costs months.</p>\n<h3>Scope</h3><p><strong>In.</strong> Service skeleton, configuration, logging, error handling, database and migrations,<br>users and permissions, audit trail, products, locations, zones, units of measure, partners,<br>reason codes, the event outbox.<br><br><strong>Out.</strong> Any warehouse behaviour. This epic holds no business rules about stock \u2014 it holds the<br>things stock rules will need.</p>\n<h3>Done when</h3><ul><li>One command starts the API and database, and the seed warehouse loads.</li><li>An unauthenticated request is rejected; an authorised one succeeds.</li><li>Every write is attributed to a user or API client in the audit log.</li><li>A product and a location can be created, bulk imported, and blocked.</li><li>Migrations run forward and backward cleanly.</li><li>Events written to the outbox are delivered by a worker and retried on failure.</li></ul>\n<h3>Key risks</h3><p>| Risk | Why it matters | Reference |<br>|---|---|---|<br>| SKU used as a technical key | Everything breaks at once on a catalogue renumber | [doc 03 \u00a77.2](../../docs/03-master-data.md) |<br>| Nullable fields the algorithms require | Putaway makes nonsense suggestions | [doc 03 \u00a77.4](../../docs/03-master-data.md) |<br>| Duplicate products | Stock splits; both look low | [doc 03 \u00a77.5](../../docs/03-master-data.md) |<br>| Partial bulk import | Half a catalogue, unclear which half | [doc 09 \u00a711.4](../../docs/09-defect-hotspots.md) |<br>| Permission checks scattered across routes | One endpoint gets missed | [doc 04 \u00a73.1](../../docs/04-modules.md) |<br>| Audit table growth | A full scan takes the database down by month six | [doc 04 \u00a73.1](../../docs/04-modules.md) |</p>",
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "FDN"
+  },
+  "relations": [],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2"
+}

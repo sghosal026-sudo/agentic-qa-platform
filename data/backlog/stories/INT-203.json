@@ -1,0 +1,38 @@
+{
+  "id": 147,
+  "rev": 1,
+  "code": "INT-203",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-203 \u2014 Publish stock adjustments",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>finance team member</strong>, I want <strong>to be told when stock is written on or off</strong>, so that<br><strong>the value of what we hold stays correct in the accounts</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a posted adjustment, <strong>then</strong> an event is written to the outbox carrying product,</li><li>quantity, direction, <strong>reason code</strong>, and the approver.</li><li>- <strong>Given</strong> an adjustment from a count, <strong>then</strong> the event identifies it as a count correction</li><li>and links to the count task.</li><li>- <strong>Given</strong> a scrap or write-off, <strong>then</strong> the event is distinguishable from a count correction</li><li>\u2014 they post differently.</li><li>- <strong>Given</strong> the event, <strong>then</strong> it is published only after the adjustment commits.</li><li>- <strong>Given</strong> duplicate delivery, <strong>then</strong> consumers deduplicate on <code>event_id</code>.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>inventory</code>, <code>counting</code> |<br>| Tables | <code>outbox</code>, <code>adjustment</code> |<br>| Risks | Wrong financial postings from missing reason codes ([doc 05 WF 13](../../../docs/05-workflows.md)) |<br>| Tests | integration \u00b7 event assertion |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/28",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/147"
+}

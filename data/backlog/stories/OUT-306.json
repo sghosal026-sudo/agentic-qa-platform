@@ -1,0 +1,38 @@
+{
+  "id": 216,
+  "rev": 1,
+  "code": "OUT-306",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-306 \u2014 Block release until replenishment completes",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>a wave held until its pick faces are stocked</strong>, so that <strong>pickers<br>do not hit empty locations halfway through committed work</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a wave whose demand exceeds current pick face stock, <strong>then</strong> replenishment tasks</li><li>are created before release.</li><li>- <strong>Given</strong> outstanding replenishment tasks for the wave, <strong>then</strong> release is blocked or a</li><li>prominent warning requires explicit override.</li><li>- <strong>Given</strong> an override, <strong>then</strong> the acting user and reason are recorded.</li><li>- <strong>Given</strong> replenishment tasks created for a wave, <strong>then</strong> they are prioritised above general</li><li>replenishment work.</li><li>- <strong>Given</strong> the tasks complete, <strong>then</strong> the wave becomes releasable without further action.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>replenishment</code> |<br>| Tables | <code>wave</code>, <code>replen_task</code> |<br>| Risks | Pickers hitting empty faces mid-wave ([doc 05 WF 5](../../../docs/05-workflows.md)); replen completing too late ([doc 09 \u00a77.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/43",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/216"
+}

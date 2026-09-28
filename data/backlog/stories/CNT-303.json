@@ -1,0 +1,38 @@
+{
+  "id": 72,
+  "rev": 1,
+  "code": "CNT-303",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-303 \u2014 Approve and post the adjustment",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>an approved variance to correct the stock figure</strong>, so<br>that <strong>the system matches the shelf</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an approved variance, <strong>when</strong> it is posted, <strong>then</strong> the balance is corrected, a</li><li>movement to or from a virtual location is written with a count reason code, and the count task</li><li>closes \u2014 in one transaction.</li><li>- <strong>Given</strong> a variance above the approval threshold, <strong>then</strong> it requires a supervisor, and the</li><li>counter cannot approve their own.</li><li>- <strong>Given</strong> the same posting sent twice with one idempotency key, <strong>then</strong> the balance changes</li><li>once.</li><li>- <strong>Given</strong> posting, <strong>then</strong> the adjustment links back to the count task and the count result.</li><li>- <strong>Given</strong> posting, <strong>then</strong> <code>counting.adjustment_posted</code> is published so the ERP learns of the</li><li>financial impact.</li><li>- <strong>Given</strong> stock at that location with reservations, <strong>then</strong> affected orders are re-checked.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code>, <code>inventory</code>, <code>outbound</code> |<br>| Tables | <code>variance</code>, <code>adjustment</code>, <code>stock_balance</code>, <code>stock_movement</code>, <code>outbox</code> |<br>| Risks | Adjustment posted twice ([doc 09 \u00a73.2](../../../docs/09-defect-hotspots.md)); invalidating an allocation ([doc 09 \u00a74.5](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 idempotency \u00b7 rollback \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/12",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/72"
+}

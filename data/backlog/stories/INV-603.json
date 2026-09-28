@@ -1,0 +1,38 @@
+{
+  "id": 184,
+  "rev": 1,
+  "code": "INV-603",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-603 \u2014 FEFO ordering of candidate stock",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>candidate stock returned earliest-expiry-first</strong>, so that<br><strong>allocation and replenishment ship the oldest dated stock before it expires unsold</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> several batches of an expiry-tracked product, <strong>when</strong> candidates are requested,</li><li><strong>then</strong> they are ordered by expiry date ascending.</li><li>- <strong>Given</strong> a product with no expiry tracking, <strong>then</strong> candidates are ordered by receipt date</li><li>ascending \u2014 FIFO.</li><li>- <strong>Given</strong> a location holding two batches, <strong>then</strong> ordering is applied at batch level, not</li><li>location level.</li><li>- <strong>Given</strong> an expired batch, <strong>then</strong> it does not appear among candidates at all.</li><li>- <strong>Given</strong> equal expiry dates, <strong>then</strong> the tie is broken deterministically so results are</li><li>repeatable.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>batch</code> |<br>| Risks | FEFO applied at location level ships the wrong batch ([doc 09 \u00a74.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/37",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/184"
+}

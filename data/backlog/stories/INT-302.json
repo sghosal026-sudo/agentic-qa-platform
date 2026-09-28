@@ -1,0 +1,38 @@
+{
+  "id": 150,
+  "rev": 1,
+  "code": "INT-302",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-302 \u2014 Order status view",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>customer service agent</strong>, I want <strong>order progress answered from one row</strong>, so that <strong>the<br>query stays fast as order history grows</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the projection from</li><li>[OUT-701](../OUT/OUT-701-maintain-order-status-view.md), <strong>then</strong> it is exposed for internal</li><li>and integration use.</li><li>- <strong>Given</strong> the view, <strong>then</strong> it is updated asynchronously from order events.</li><li>- <strong>Given</strong> the response, <strong>then</strong> it exposes <code>last_updated_at</code>.</li><li>- <strong>Given</strong> an order that changed seconds ago, <strong>then</strong> the view may lag \u2014 and that is documented</li><li>as acceptable for this question.</li><li>- <strong>Given</strong> the view, <strong>then</strong> it never joins the transactional tables at read time.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>outbound</code> |<br>| Tables | <code>order_status</code> |<br>| Risks | Staleness invisible to the reader ([doc 08 \u00a75.3](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/29",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/150"
+}

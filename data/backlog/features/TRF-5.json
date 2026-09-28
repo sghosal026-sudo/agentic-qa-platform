@@ -1,0 +1,31 @@
+{
+  "id": 61,
+  "rev": 1,
+  "code": "TRF-5",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "TRF-5 \u2014 Network stock view",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Show what the whole network holds \u2014 on hand at each site plus everything on a lorry between<br>them.</p>\n<h3>Scope</h3><p><strong>In.</strong> A cross-warehouse availability and in-transit view.<br><br><strong>Out.</strong> Network planning and rebalancing decisions.</p>\n<h3>Design notes</h3><p><strong>This is the clearest genuine case for a projection in the whole system.</strong> At multi-site scale<br>each warehouse may eventually run its own database, and a live cross-site aggregate query stops<br>being possible. Building it as a maintained view now means the shape does not have to change<br>later.<br><br><strong>Three quantities per product per site, and they must be named precisely:</strong> on hand, available,<br>and in transit inbound. A single \"stock\" number across a network is the fastest route to<br>over-promising at two sites at once.<br><br><strong>Refresh in minutes, not seconds.</strong> A planner deciding what to rebalance next week does not<br>need second-level freshness. Expose <code>last_updated_at</code> so they can see what they are looking at.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| In-transit counted as available at either site | [doc 05 WF 12](../../../docs/05-workflows.md) |<br>| Projection drift across sites | [doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md) |<br>| Staleness invisible to the planner | [doc 08 \u00a75.3](../../../docs/08-data-sync-and-migrations.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "transfers; TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/61"
+}

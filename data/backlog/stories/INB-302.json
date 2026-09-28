@@ -1,0 +1,38 @@
+{
+  "id": 127,
+  "rev": 1,
+  "code": "INB-302",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-302 \u2014 Suggest a destination using a simple rule",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>putaway operator</strong>, I want <strong>the system to tell me where to put the stock</strong>, so that <strong>I<br>do not have to decide for every pallet</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a putaway task, <strong>then</strong> a destination is suggested: the first active location with</li><li>room that satisfies the product's zone, temperature, and hazmat constraints.</li><li>- <strong>Given</strong> no suitable location exists, <strong>then</strong> the task is flagged for a supervisor rather</li><li>than suggesting an illegal one.</li><li>- <strong>Given</strong> the suggestion, <strong>then</strong> it is advisory \u2014 the operator may choose otherwise, subject</li><li>to [INB-304](INB-304-override-suggested-location.md).</li><li>- <strong>Given</strong> this rule, <strong>then</strong> it is deliberately simple and is replaced by</li><li>[INB-305](INB-305-capacity-and-zone-rules.md) at Stage 3.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>masterdata</code> |<br>| Tables | <code>putaway_task</code>, <code>location</code> |<br>| Risks | Null capacity making the rule unusable ([doc 03 \u00a77.4](../../../docs/03-master-data.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/25",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/127"
+}

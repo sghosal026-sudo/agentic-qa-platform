@@ -1,0 +1,22 @@
+{
+  "id": 6,
+  "rev": 1,
+  "code": "OUT",
+  "fields": {
+    "System.WorkItemType": "Epic",
+    "System.Title": "EPIC OUT \u2014 Outbound Fulfilment",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Goal</h3><p>An order arriving from the ERP becomes a shipped box, accurately and before the carrier<br>cut-off.</p>\n<h3>Business value</h3><p>This is the epic customers experience. Everything else in the warehouse exists to make this<br>work. It is also the largest epic by a wide margin, and the one with the most subtle defects \u2014<br>allocation and reservation handling account for more production incidents than any other area.</p>\n<h3>Scope</h3><p><strong>In.</strong> Order intake and validation. Allocation with locking, FEFO, and shelf life rules. Wave<br>planning and release. Pick task generation, sequencing, assignment, and scan-verified<br>confirmation. Short and zero picks. Packing with verification and weight checks. Shipment<br>creation, manifests, and dispatch. The order status projection.<br><br><strong>Out.</strong> Pricing, invoicing, and credit control. Carrier rate shopping and route planning.<br>Physical label printing \u2014 the system generates label content, a local agent prints it.</p>\n<h3>Done when</h3><ul><li>An order arrives via API, validates, and allocates against real stock under a lock.</li><li>Two orders competing for the last unit produce exactly one winner and one clean failure.</li><li>Cancelling an order releases every reservation, from every entry point.</li><li>Pick tasks are sequenced by location and confirmed with location and product scans.</li><li>A short pick resolves its remainder explicitly \u2014 re-allocated or shorted.</li><li>Packing verifies contents against the order and checks weight.</li><li>Dispatch moves stock out, releases leftover reservations, and notifies the ERP.</li></ul>\n<h3>Key risks</h3><p>| Risk | Why it matters | Reference |<br>|---|---|---|<br>| Double allocation of the last unit | Two customers promised one unit | [doc 09 \u00a74.1](../../docs/09-defect-hotspots.md) |<br>| Deadlock on multi-location allocation | Random failures during peak | [doc 09 \u00a74.2](../../docs/09-defect-hotspots.md) |<br>| Reservation not released on cancel | Stock invisible forever; availability decays | [doc 09 \u00a75.2](../../docs/09-defect-hotspots.md) |<br>| Pick reduces on-hand but not reserved | Negative availability | [doc 09 \u00a72.3](../../docs/09-defect-hotspots.md) |<br>| Short pick leaves a hanging reservation | Points at stock that is not there | [doc 09 \u00a75.4](../../docs/09-defect-hotspots.md) |<br>| Adjustment invalidates an allocation silently | Picker finds an empty shelf | [doc 09 \u00a74.5](../../docs/09-defect-hotspots.md) |<br>| Wrong pick sequence | Invisible in testing; costs hours of walking daily | [doc 03 \u00a74](../../docs/03-master-data.md) |<br>| Allocating from a projection | The same unit sold twice | [doc 09 \u00a712](../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 122,
+  "rev": 1,
+  "code": "INB-209",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-209 \u2014 Confirm idempotently so retries are safe",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk on unreliable warehouse wifi</strong>, I want <strong>tapping confirm twice to be<br>harmless</strong>, so that <strong>a lost response does not double the stock</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a confirm request with an idempotency key, <strong>when</strong> the same key is sent again,</li><li><strong>then</strong> no new stock is created and the original response is returned.</li><li>- <strong>Given</strong> two identical confirm requests sent <strong>concurrently</strong>, <strong>then</strong> exactly one is</li><li>processed.</li><li>- <strong>Given</strong> the idempotency key, <strong>then</strong> it is enforced by a unique database constraint, not by</li><li>a check-then-insert.</li><li>- <strong>Given</strong> a different key with the same content, <strong>then</strong> it is treated as a new request \u2014 the</li><li>key is the client's declaration of intent.</li><li>- <strong>Given</strong> a stored key, <strong>then</strong> it expires after a configured retention period.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>platform</code> |<br>| Tables | idempotency keys, <code>receipt</code> |<br>| Risks | Duplicate stock from a retry ([doc 09 \u00a73.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | idempotency (sequential <strong>and</strong> concurrent \u2014 mandatory) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/24",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/122"
+}

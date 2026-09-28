@@ -1,0 +1,38 @@
+{
+  "id": 117,
+  "rev": 1,
+  "code": "INB-204",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-204 \u2014 Record a short receipt with a reason",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk</strong>, I want <strong>to record that less arrived than expected</strong>, so that <strong>the<br>shortage is attributed to the supplier rather than appearing as warehouse loss later</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a quantity below what the ASN expected, <strong>then</strong> a shortage reason code is required.</li><li>- <strong>Given</strong> the short line is closed, <strong>then</strong> the ASN line's outstanding quantity is closed</li><li>short, not left open indefinitely.</li><li>- <strong>Given</strong> the clerk expects the balance to follow, <strong>then</strong> the line can instead be left open</li><li>for a later delivery.</li><li>- <strong>Given</strong> a short receipt, <strong>then</strong> a discrepancy record is created against the supplier.</li><li>- <strong>Given</strong> the confirmation, <strong>then</strong> only the quantity actually received becomes stock.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code> |<br>| Tables | <code>receipt_line</code>, <code>asn_line</code>, discrepancy |<br>| Risks | Shortages recorded as warehouse loss instead of supplier shortfall |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/24",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/117"
+}

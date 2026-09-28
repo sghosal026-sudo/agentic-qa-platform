@@ -1,0 +1,38 @@
+{
+  "id": 70,
+  "rev": 1,
+  "code": "CNT-301",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-301 \u2014 Calculate variance against the frozen snapshot",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>the difference measured against the snapshot taken when<br>the count started</strong>, so that <strong>variances mean something</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a submitted count, <strong>then</strong> variance is the counted quantity minus the <strong>snapshot</strong></li><li>quantity \u2014 never minus the current balance.</li><li>- <strong>Given</strong> a multi-batch location, <strong>then</strong> variance is calculated per batch.</li><li>- <strong>Given</strong> a product found that was not expected, <strong>then</strong> it is a positive variance for that</li><li>product.</li><li>- <strong>Given</strong> an expected product not found, <strong>then</strong> it is a full negative variance, not an</li><li>ignored line.</li><li>- <strong>Given</strong> zero variance, <strong>then</strong> the task closes with no adjustment and the result is still</li><li>recorded for accuracy metrics.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code>, <code>inventory</code> |<br>| Tables | <code>count_result</code>, <code>variance</code>, snapshot |<br>| Risks | Comparing against the live balance ([doc 09 \u00a76.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/12",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/70"
+}

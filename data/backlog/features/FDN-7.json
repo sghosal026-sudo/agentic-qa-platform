@@ -1,0 +1,31 @@
+{
+  "id": 21,
+  "rev": 1,
+  "code": "FDN-7",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "FDN-7 \u2014 Reference data",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>The small controlled lists that give every exception a name: why stock changed, who it came<br>from, and how this warehouse is configured.</p>\n<h3>Scope</h3><p><strong>In.</strong> Reason codes, partners (suppliers, customers, carriers), configuration values.<br><br><strong>Out.</strong> Supplier contracts and terms. Carrier rate cards.</p>\n<h3>Design notes</h3><p><strong>Reason codes are the difference between correcting symptoms and finding causes.</strong> \"Stock<br>changed by -3\" tells you nothing. \"Stock changed by -3, reason: damaged in handling\" aggregated<br>over a month tells you which zone has a handling problem.<br><br>Keep the list short and specific. A list with forty codes gets used as \"other\" forty different<br>ways. Review it quarterly and merge the ones nobody picks.<br><br><strong>Configuration lives in the database, not in environment variables</strong>, because a supervisor<br>changes over-receipt tolerance, not a deploy. Every change is audited.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Reason codes too vague to analyse | [doc 05 WF 13](../../../docs/05-workflows.md) |<br>| Free-text reasons instead of a controlled list | [doc 03 \u00a78](../../../docs/03-master-data.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 7,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "masterdata; FDN"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/21"
+}

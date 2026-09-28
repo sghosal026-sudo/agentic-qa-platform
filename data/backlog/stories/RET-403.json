@@ -1,0 +1,38 @@
+{
+  "id": 253,
+  "rev": 1,
+  "code": "RET-403",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-403 \u2014 Send to repair",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>repairable returns moved to a repair area</strong>, so that<br><strong>they are tracked while out of sellable stock rather than disappearing</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a repairable grade, <strong>then</strong> the stock moves to a repair location and stays out of</li><li>availability.</li><li>- <strong>Given</strong> stock in repair, <strong>then</strong> it is visible, countable, and ageing-reportable.</li><li>- <strong>Given</strong> a completed repair, <strong>then</strong> the stock re-enters inspection before it can be</li><li>restocked.</li><li>- <strong>Given</strong> an unsuccessful repair, <strong>then</strong> the stock can be scrapped through</li><li>[RET-405](RET-405-scrap-with-approval.md).</li><li>- <strong>Given</strong> stock in repair beyond a configured age, <strong>then</strong> it is escalated.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>inventory</code> |<br>| Tables | <code>disposition</code>, <code>stock_balance</code> |<br>| Risks | Stock parked in repair indefinitely and forgotten |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/51",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/253"
+}

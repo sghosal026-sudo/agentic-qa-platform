@@ -1,0 +1,38 @@
+{
+  "id": 219,
+  "rev": 1,
+  "code": "OUT-403",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-403 \u2014 Scan-verified pick confirmation",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>picker</strong>, I want <strong>to confirm a pick by scanning the location and the product</strong>, so that<br><strong>the wrong item or the wrong shelf is caught before it reaches a customer</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a pick line, <strong>then</strong> confirmation requires scanning the location <strong>and</strong> the</li><li>product \u2014 neither alone is sufficient.</li><li>- <strong>Given</strong> a scan that does not match the task, <strong>then</strong> the confirmation is rejected and</li><li>nothing changes.</li><li>- <strong>Given</strong> a batch-tracked product, <strong>then</strong> the allocated batch must also be scanned or</li><li>confirmed.</li><li>- <strong>Given</strong> a valid confirmation, <strong>then</strong> on-hand and reserved both decrease by the picked</li><li>quantity, a movement is written, and the line closes \u2014 in one transaction.</li><li>- <strong>Given</strong> a quantity greater than the task line, <strong>then</strong> it is rejected.</li><li>- <strong>Given</strong> the same confirmation sent twice with one idempotency key, <strong>then</strong> stock moves</li><li>once.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>inventory</code> |<br>| Tables | <code>pick_task_line</code>, <code>stock_balance</code>, <code>reservation</code>, <code>stock_movement</code> |<br>| Risks | Confirming a location the picker did not visit ([doc 05 WF 6](../../../docs/05-workflows.md)); on-hand/reserved divergence ([doc 09 \u00a72.3](../../../docs/09-defect-hotspots.md)); duplicate confirm ([doc 09 \u00a73.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 idempotency \u00b7 concurrency \u00b7 rollback \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/44",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/219"
+}

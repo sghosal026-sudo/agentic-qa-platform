@@ -1,0 +1,38 @@
+{
+  "id": 280,
+  "rev": 1,
+  "code": "TRF-201",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-201 \u2014 Allocate and pick for a transfer",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>picker at the origin</strong>, I want <strong>transfer picking to work exactly like customer order<br>picking</strong>, so that <strong>I do not learn a second process for the same physical job</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a transfer, <strong>then</strong> allocation reserves stock using the same locking and FEFO rules</li><li>as [OUT-2](../../features/OUT/OUT-2-allocation.md).</li><li>- <strong>Given</strong> allocation, <strong>then</strong> pick tasks are generated, sequenced, and scan-confirmed exactly</li><li>as in [OUT-4](../../features/OUT/OUT-4-picking.md).</li><li>- <strong>Given</strong> a short pick on a transfer, <strong>then</strong> the remainder is resolved explicitly, as in</li><li>[OUT-404](../OUT/OUT-404-short-pick.md).</li><li>- <strong>Given</strong> the reused flow, <strong>then</strong> it is a service call into <code>outbound</code>, not duplicated code.</li><li>- <strong>Given</strong> the picked stock, <strong>then</strong> it moves to a transfer staging location, not to</li><li><code>VIRT-CUSTOMER</code>.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code>, <code>outbound</code>, <code>inventory</code> |<br>| Tables | <code>transfer_line</code>, <code>reservation</code>, <code>pick_task</code> |<br>| Risks | Duplicating outbound logic instead of reusing it ([doc 04 \u00a76](../../../docs/04-modules.md)) |<br>| Tests | integration \u00b7 concurrency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/58",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/280"
+}

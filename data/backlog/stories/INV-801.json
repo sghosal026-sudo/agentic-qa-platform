@@ -1,0 +1,38 @@
+{
+  "id": 191,
+  "rev": 1,
+  "code": "INV-801",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-801 \u2014 Nightly ledger-vs-balance check",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>a nightly job proving that the ledger still explains every<br>balance</strong>, so that <strong>a code path writing a balance without a movement is caught the next day<br>rather than the next year</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the job runs, <strong>then</strong> it sums movements per product, location, and batch and</li><li>compares the result to the balance.</li><li>- <strong>Given</strong> every balance agrees, <strong>then</strong> the job records a clean result.</li><li>- <strong>Given</strong> any disagreement, <strong>then</strong> it is recorded with product, location, expected, actual,</li><li>and difference.</li><li>- <strong>Given</strong> a disagreement, <strong>then</strong> the job does <strong>not</strong> correct it.</li><li>- <strong>Given</strong> the job, <strong>then</strong> it also checks that reservation rows sum to <code>qty_reserved</code>.</li><li>- <strong>Given</strong> production-sized data, <strong>then</strong> the job completes within its window.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>stock_movement</code>, <code>reservation</code> |<br>| Risks | Balance written without a movement ([doc 09 \u00a72.2](../../../docs/09-defect-hotspots.md)); auto-correcting hides the cause ([doc 08 \u00a79](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration \u00b7 invariant \u00b7 performance |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/39",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/191"
+}

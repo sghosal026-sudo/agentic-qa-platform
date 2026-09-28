@@ -1,0 +1,31 @@
+{
+  "id": 34,
+  "rev": 1,
+  "code": "INV-3",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INV-3 \u2014 Moving stock",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>The single write path that every other module calls when stock needs to change hands. If this<br>is correct, the system is honest. If it is not, nothing built on it can be trusted.</p>\n<h3>Scope</h3><p><strong>In.</strong> Moving stock between locations, destination validation, negative stock prevention, row<br>locking under concurrency.<br><br><strong>Out.</strong> Deciding <em>why</em> stock should move. Inbound, outbound, counting, and replenishment<br>decide that; this feature executes and records.</p>\n<h3>Design notes</h3><p><strong>Three defences against lost updates, used together.</strong><br><br>1. Write deltas, not computed values. \"Add minus eight\", never \"set to two\". The database<br>   serialises the arithmetic.<br>2. Lock the row when you must read before writing (<code>SELECT ... FOR UPDATE</code>).<br>3. Sort location IDs before locking, so two transactions touching A and B never deadlock.<br><br><strong>Reject, do not clamp.</strong> A move that would take stock negative fails loudly. Clamping to zero<br>produces a balance that looks fine and hides the bug that caused it.<br><br><strong>Every move writes a movement, in the same transaction, always.</strong> No exceptions, no<br>convenience paths, no test helpers that skip it.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Lost update on concurrent moves | [doc 09 \u00a74.1](../../../docs/09-defect-hotspots.md) |<br>| Deadlock from inconsistent lock ordering | [doc 09 \u00a74.2](../../../docs/09-defect-hotspots.md) |<br>| Balance changed without a movement | [doc 09 \u00a72.2](../../../docs/09-defect-hotspots.md) |<br>| Lock contention on a popular product | [doc 09 \u00a74.4](../../../docs/09-defect-hotspots.md) |<br>| Move into a blocked or illegal location | [doc 05 WF 3](../../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 19,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "inventory; INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/34"
+}

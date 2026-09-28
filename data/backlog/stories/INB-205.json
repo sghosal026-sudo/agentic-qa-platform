@@ -1,0 +1,38 @@
+{
+  "id": 118,
+  "rev": 1,
+  "code": "INB-205",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-205 \u2014 Record an over-receipt within tolerance",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk</strong>, I want <strong>small over-deliveries accepted automatically</strong>, so that <strong>a<br>truck is not held up over two extra units</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a quantity above expected but within the configured tolerance, <strong>then</strong> it is</li><li>accepted without approval.</li><li>- <strong>Given</strong> the acceptance, <strong>then</strong> a discrepancy record is still created \u2014 accepted is not the</li><li>same as unrecorded.</li><li>- <strong>Given</strong> the tolerance is configured as a percentage and an absolute cap, <strong>then</strong> the</li><li>stricter of the two applies.</li><li>- <strong>Given</strong> the tolerance check, <strong>then</strong> it is enforced in the service layer, so it cannot be</li><li>bypassed by a different client.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>platform</code> |<br>| Tables | <code>receipt_line</code>, discrepancy, <code>config</code> |<br>| Risks | Tolerance applied inconsistently between API and UI ([doc 04 \u00a73.4](../../../docs/04-modules.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/24",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/118"
+}

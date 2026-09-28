@@ -1,0 +1,31 @@
+{
+  "id": 45,
+  "rev": 1,
+  "code": "OUT-5",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "OUT-5 \u2014 Packing",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Check picked items against the order, put them into cartons, and produce the labels \u2014 the last<br>automated accuracy control before the customer.</p>\n<h3>Scope</h3><p><strong>In.</strong> Scanning items into cartons, verification against the order, carton suggestion, weight<br>checks, label and packing slip content, multi-carton orders, void and repack.<br><br><strong>Out.</strong> Physical printing. The system generates label content; a local agent prints it.</p>\n<h3>Design notes</h3><p><strong>The weight check is the last chance to catch a missing item.</strong> It is also useless if product<br>weights in master data are wrong \u2014 either the tolerance is so loose it catches nothing, or it<br>false-alarms constantly and packers learn to override it. Pair <code>OUT-504</code> with a data quality<br>report on weight outliers.<br><br><strong>Snapshot descriptions at order time, not at pack time.</strong> A packing slip built from live<br>master data will show a description that differs from what the customer ordered if the product<br>was renamed in between. See [doc 03 \u00a75](../../../docs/03-master-data.md).<br><br><strong>Cartons cannot be reopened after the label is generated.</strong> Void and repack instead, keeping<br>both records. Reopening breaks the audit trail and makes \"what was in the box?\" unanswerable.<br><br><strong>Re-validate the order status at pack start.</strong> Items on a cart from an order cancelled during<br>picking must not be packed.<br><br><strong>Multi-carton orders do not ship until every carton is labelled.</strong> Half an order shipping is a<br>worse customer outcome than the whole order shipping a day later.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Weight tolerance too loose to catch a missing item | [doc 05 WF 7](../../../docs/05-workflows.md) |<br>| Product weights wrong in master data | [doc 03 \u00a73](../../../docs/03-master-data.md) |<br>| Carton closed then an error found | [doc 05 WF 7](../../../docs/05-workflows.md) |<br>| Packing slip built from live master data | [doc 03 \u00a75](../../../docs/03-master-data.md) |<br>| Multi-carton order partly labelled | [doc 05 WF 7](../../../docs/05-workflows.md) |<br>| Items from a cancelled order on the cart | [doc 05 WF 7](../../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 36,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "outbound; OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/45"
+}

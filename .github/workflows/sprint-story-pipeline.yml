@@ -1,0 +1,171 @@
+name: Sprint Story QA Pipeline
+
+on:
+  schedule:
+    - cron: "2/5 * * * *"
+  workflow_dispatch:
+    inputs:
+      iteration_path:
+        description: Exact Azure DevOps iteration path
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      stories: ${{ steps.poll.outputs.stories }}
+      has_stories: ${{ steps.poll.outputs.has_stories }}
+    env:
+      ADO_ORG_URL: ${{ secrets.ADO_ORG_URL }}
+      ADO_PROJECT: ${{ secrets.ADO_PROJECT }}
+      ADO_PAT: ${{ secrets.ADO_PAT }}
+      ADO_REVIEW_PENDING_STATE: ${{ vars.ADO_REVIEW_PENDING_STATE || 'To Do' }}
+      ADO_REVIEW_COMPLETED_STATE: ${{ vars.ADO_REVIEW_COMPLETED_STATE || 'Done' }}
+      NEO4J_URI: ${{ secrets.NEO4J_URI }}
+      NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
+      NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+      NEO4J_DATABASE: ${{ vars.NEO4J_DATABASE || 'neo4j' }}
+      ITERATION_PATH: ${{ inputs.iteration_path || vars.ADO_ITERATION_PATH }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Poll sprint Stories
+        id: poll
+        shell: bash
+        run: |
+          if [ -z "$ITERATION_PATH" ]; then
+            echo "ADO_ITERATION_PATH is required" >&2
+            exit 1
+          fi
+          npm run qa -- poll-sprint --iteration "$ITERATION_PATH" > poll.json
+          stories=$(jq -c '.stories' poll.json)
+          count=$(jq '.stories | length' poll.json)
+          echo "stories=$stories" >> "$GITHUB_OUTPUT"
+          if [ "$count" -gt 0 ]; then
+            echo "has_stories=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_stories=false" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sprint-poll-${{ github.run_id }}-${{ github.run_attempt }}
+          path: poll.json
+          retention-days: 14
+
+  process-story:
+    if: needs.discover.outputs.has_stories == 'true'
+    needs: discover
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        story: ${{ fromJson(needs.discover.outputs.stories) }}
+    concurrency:
+      group: qa-story-${{ matrix.story.adoId }}
+      cancel-in-progress: false
+    env:
+      ADO_ORG_URL: ${{ secrets.ADO_ORG_URL }}
+      ADO_PROJECT: ${{ secrets.ADO_PROJECT }}
+      ADO_PAT: ${{ secrets.ADO_PAT }}
+      ADO_REVIEW_PENDING_STATE: ${{ vars.ADO_REVIEW_PENDING_STATE || 'To Do' }}
+      ADO_REVIEW_COMPLETED_STATE: ${{ vars.ADO_REVIEW_COMPLETED_STATE || 'Done' }}
+      NEO4J_URI: ${{ secrets.NEO4J_URI }}
+      NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
+      NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+      NEO4J_DATABASE: ${{ vars.NEO4J_DATABASE || 'neo4j' }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'openai/gpt-oss-120b' }}
+      GITHUB_TOKEN: ${{ secrets.PLAYWRIGHT_REPO_TOKEN }}
+      GH_TOKEN: ${{ secrets.PLAYWRIGHT_REPO_TOKEN }}
+      PLAYWRIGHT_REPOSITORY: ${{ vars.PLAYWRIGHT_REPOSITORY }}
+      TARGET_CONFIG_JSON: ${{ vars.TARGET_CONFIG_JSON }}
+      WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Validate target repository configuration
+        shell: bash
+        run: |
+          if [ -z "$PLAYWRIGHT_REPOSITORY" ] || [ -z "$TARGET_CONFIG_JSON" ]; then
+            echo "PLAYWRIGHT_REPOSITORY and TARGET_CONFIG_JSON are required" >&2
+            exit 1
+          fi
+      - name: Check out Playwright repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.PLAYWRIGHT_REPOSITORY }}
+          token: ${{ secrets.PLAYWRIGHT_REPO_TOKEN }}
+          path: automation
+          fetch-depth: 0
+      - name: Write target configuration
+        run: node -e "require('node:fs').writeFileSync('target.config.ci.json', process.env.TARGET_CONFIG_JSON)"
+      - name: Advance Story
+        id: advance
+        shell: bash
+        run: |
+          set +e
+          npm run qa -- advance-story --ado-id "${{ matrix.story.adoId }}" --target target.config.ci.json --workflow-url "$WORKFLOW_URL" | tee advance.json
+          command_status=${PIPESTATUS[0]}
+          set -e
+          echo "action=$(jq -r '.action' advance.json)" >> "$GITHUB_OUTPUT"
+          echo "run_id=$(jq -r '.runId // empty' advance.json)" >> "$GITHUB_OUTPUT"
+          exit "$command_status"
+      - name: Publish generated specs
+        if: steps.advance.outputs.action == 'specs_generated'
+        id: publish
+        working-directory: automation
+        shell: bash
+        run: |
+          owner=${PLAYWRIGHT_REPOSITORY%%/*}
+          repo=${PLAYWRIGHT_REPOSITORY#*/}
+          branch="qa/story-${{ matrix.story.adoId }}"
+          git config user.name "qa-pipeline[bot]"
+          git config user.email "qa-pipeline[bot]@users.noreply.github.com"
+          git checkout -B "$branch"
+          git add tests/generated
+          if git diff --cached --quiet; then
+            echo "Generated specs did not change; a reviewable spec diff is required" >&2
+            exit 1
+          fi
+          git commit -m "test: generate specs for ${{ matrix.story.storyId }}"
+          git push --force-with-lease --set-upstream origin "$branch"
+          pr=$(gh pr list --repo "$PLAYWRIGHT_REPOSITORY" --head "$branch" --state open --json number --jq '.[0].number')
+          if [ -z "$pr" ]; then
+            gh pr create --repo "$PLAYWRIGHT_REPOSITORY" --head "$branch" --base "${{ vars.PLAYWRIGHT_BASE_BRANCH || 'main' }}" --title "QA specs for ${{ matrix.story.storyId }}" --body "Generated by QA run ${{ steps.advance.outputs.run_id }}."
+            pr=$(gh pr view "$branch" --repo "$PLAYWRIGHT_REPOSITORY" --json number --jq '.number')
+          fi
+          sha=$(git rev-parse HEAD)
+          echo "owner=$owner" >> "$GITHUB_OUTPUT"
+          echo "repo=$repo" >> "$GITHUB_OUTPUT"
+          echo "pr=$pr" >> "$GITHUB_OUTPUT"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+      - name: Record spec pull request
+        if: steps.advance.outputs.action == 'specs_generated'
+        run: >-
+          npm run qa -- record-spec-pr
+          --ado-id "${{ matrix.story.adoId }}"
+          --owner "${{ steps.publish.outputs.owner }}"
+          --repo "${{ steps.publish.outputs.repo }}"
+          --pr "${{ steps.publish.outputs.pr }}"
+          --sha "${{ steps.publish.outputs.sha }}"
+      - name: Upload Story run and Playwright result
+        if: always() && steps.advance.outputs.run_id != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-story-${{ matrix.story.adoId }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: runs/${{ steps.advance.outputs.run_id }}
+          if-no-files-found: error
+          retention-days: 30

@@ -1,0 +1,38 @@
+{
+  "id": 225,
+  "rev": 1,
+  "code": "OUT-501",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-501 \u2014 Scan items into a carton",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>packer</strong>, I want <strong>to scan each item as it goes into the box</strong>, so that <strong>the record of<br>what shipped is built from what I actually packed</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a picked cart or tote, <strong>when</strong> I scan it, <strong>then</strong> I see what the order should</li><li>contain.</li><li>- <strong>Given</strong> a scanned product that belongs to the order, <strong>then</strong> it is added to the open</li><li>carton.</li><li>- <strong>Given</strong> a scanned product that is not on the order, <strong>then</strong> it is rejected and flagged for</li><li>investigation.</li><li>- <strong>Given</strong> more units scanned than the order requires, <strong>then</strong> the extra is rejected.</li><li>- <strong>Given</strong> the carton, <strong>then</strong> its contents are recorded per product and per batch or serial</li><li>where tracked.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>carton</code>, <code>carton_content</code> |<br>| Risks | Packing items that were never picked ([doc 05 WF 7](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/45",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/225"
+}

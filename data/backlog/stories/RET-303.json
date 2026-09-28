@@ -1,0 +1,38 @@
+{
+  "id": 250,
+  "rev": 1,
+  "code": "RET-303",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-303 \u2014 Require inspection before disposition",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>disposition blocked until an inspection exists</strong>, so<br>that <strong>nothing returns to sale without having been examined</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a return line with no inspection record, <strong>then</strong> every disposition action is</li><li>rejected.</li><li>- <strong>Given</strong> the rule, <strong>then</strong> it is enforced in the service layer so no client can bypass it.</li><li>- <strong>Given</strong> a partly inspected line, <strong>then</strong> only the inspected quantity can be dispositioned.</li><li>- <strong>Given</strong> an inspector, <strong>then</strong> their pass rate is reportable \u2014 an inspector passing 100% is</li><li>not inspecting.</li><li>- <strong>Given</strong> a released-to-available transition, <strong>then</strong> it requires the inspection ID, matching</li><li>[INV-402](../INV/INV-402-release-from-quarantine.md).</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>inventory</code> |<br>| Tables | <code>inspection</code>, <code>disposition</code> |<br>| Risks | Damaged stock restocked ([doc 09 \u00a78.1](../../../docs/09-defect-hotspots.md)); rubber-stamping ([doc 09 \u00a78.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/50",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/250"
+}

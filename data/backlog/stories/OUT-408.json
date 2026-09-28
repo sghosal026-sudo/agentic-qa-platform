@@ -1,0 +1,38 @@
+{
+  "id": 224,
+  "rev": 1,
+  "code": "OUT-408",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-408 \u2014 Capture serial numbers on pick",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>picker</strong>, I want <strong>to scan each serial number as I pick it</strong>, so that <strong>we know exactly<br>which unit went to which customer</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a serial-tracked product, <strong>then</strong> the number of serials scanned must equal the</li><li>picked quantity.</li><li>- <strong>Given</strong> a serial not currently in that location, <strong>then</strong> the scan is rejected.</li><li>- <strong>Given</strong> a serial already shipped, <strong>then</strong> the scan is rejected.</li><li>- <strong>Given</strong> confirmation, <strong>then</strong> each serial is linked to the order line and travels through</li><li>packing and shipping.</li><li>- <strong>Given</strong> a returned serial, <strong>then</strong> it can be matched back to the order it shipped on.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>inventory</code> |<br>| Tables | serial records, <code>pick_task_line</code> |<br>| Risks | Serial tracking complicating every downstream flow ([doc 07 \u00a710](../../../docs/07-phased-delivery-plan.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/44",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/224"
+}

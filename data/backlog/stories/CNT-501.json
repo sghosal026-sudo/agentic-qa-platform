@@ -1,0 +1,38 @@
+{
+  "id": 78,
+  "rev": 1,
+  "code": "CNT-501",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-501 \u2014 Freeze the warehouse",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller running a full count</strong>, I want <strong>all stock movement stopped</strong>, so<br>that <strong>the count is a snapshot of one moment rather than a moving target</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the freeze is applied, <strong>then</strong> no receipt, pick, putaway, replenishment, or</li><li>adjustment can be confirmed.</li><li>- <strong>Given</strong> in-flight tasks at freeze time, <strong>then</strong> they must be completed or cancelled before</li><li>the freeze takes effect, and the list is shown.</li><li>- <strong>Given</strong> a transfer dispatching or arriving, <strong>then</strong> it is blocked for the duration.</li><li>- <strong>Given</strong> the freeze, <strong>then</strong> a full snapshot of every balance is captured.</li><li>- <strong>Given</strong> a frozen warehouse, <strong>then</strong> any blocked attempt returns a clear message naming the</li><li>freeze.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code>, <code>inventory</code>, all task modules |<br>| Tables | freeze state, balance snapshot |<br>| Risks | Incomplete freeze contaminating every variance ([doc 09 \u00a76.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration (one per blocked operation) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/14",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/78"
+}

@@ -1,0 +1,31 @@
+{
+  "id": 55,
+  "rev": 1,
+  "code": "RPL-3",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "RPL-3 \u2014 Executing tasks",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Get the replenishment task into an operator's hands and the stock into the pick face, with the<br>move properly recorded.</p>\n<h3>Scope</h3><p><strong>In.</strong> Assignment, scan confirmation of source and destination, completion, partial<br>replenishment.<br><br><strong>Out.</strong> The stock move itself \u2014 executed by<br>[INV-301](../../stories/INV/INV-301-move-stock-between-locations.md).</p>\n<h3>Design notes</h3><p><strong>Same scan discipline as picking.</strong> Source location, product, destination location. A<br>replenishment confirmed without scans is a stock movement recorded on trust, and it corrupts<br>two locations when it is wrong.<br><br><strong>Lock the task on assignment.</strong> Two operators sent to the same bulk pallet is the same defect<br>as two pickers on one task \u2014 one arrives to find the work done, or both confirm and the<br>movement doubles.<br><br><strong>Partial replenishment is normal</strong>, not an error. The source pallet may hold less than the<br>need, or the pick face may fill up. Record what actually moved, close the task, and let the<br>next trigger decide whether more is needed.<br><br><strong>Prioritise tasks that block a released wave.</strong> A replenishment completing after the wave has<br>been picked is a wasted trip and the pickers already shorted.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Two operators claiming the same task | [doc 09 \u00a74.3](../../../docs/09-defect-hotspots.md) |<br>| Replenishment completing after the wave is picked | [doc 09 \u00a77.3](../../../docs/09-defect-hotspots.md) |<br>| Confirming without scans | [doc 05 WF 11](../../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 18,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "replenishment; RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/55"
+}

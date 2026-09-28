@@ -1,0 +1,38 @@
+{
+  "id": 264,
+  "rev": 1,
+  "code": "RPL-201",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-201 \u2014 Detect below-minimum on stock movement",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>picker</strong>, I want <strong>the system to notice when a pick face drops low</strong>, so that <strong>it is<br>refilled before I arrive to find it empty</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> <code>inventory.stock_moved</code> reduces a pick location below its rule minimum, <strong>then</strong></li><li>evaluation is triggered for that location.</li><li>- <strong>Given</strong> a location above its minimum, <strong>then</strong> nothing happens.</li><li>- <strong>Given</strong> a scheduled run, <strong>then</strong> every rule is also evaluated periodically as a safety net.</li><li>- <strong>Given</strong> the trigger, <strong>then</strong> it uses available quantity, not on-hand \u2014 stock reserved for</li><li>an order does not count as stocked.</li><li>- <strong>Given</strong> a blocked pick location, <strong>then</strong> no evaluation occurs.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code>, <code>inventory</code> |<br>| Tables | <code>replen_rule</code>, <code>stock_balance</code> |<br>| Risks | Using on-hand instead of available under-triggers replenishment |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/54",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/264"
+}

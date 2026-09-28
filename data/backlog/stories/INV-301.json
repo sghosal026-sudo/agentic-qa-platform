@@ -1,0 +1,38 @@
+{
+  "id": 170,
+  "rev": 1,
+  "code": "INV-301",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-301 \u2014 Move stock between locations",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>one service method that moves stock</strong>, so that <strong>every module<br>changes inventory through the same correct path instead of writing its own</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> stock at a source location, <strong>when</strong> I move a quantity to a destination, <strong>then</strong></li><li>the source balance decreases, the destination increases, and a movement is written \u2014 all in</li><li>one transaction.</li><li>- <strong>Given</strong> the transaction fails at any point, <strong>then</strong> no balance changed and no movement</li><li>exists.</li><li>- <strong>Given</strong> a move, <strong>then</strong> balances are updated as deltas in a single statement, never as</li><li>read-then-write.</li><li>- <strong>Given</strong> a move of a batch-tracked product, <strong>then</strong> the batch travels with it.</li><li>- <strong>Given</strong> any module other than <code>inventory</code>, <strong>then</strong> it cannot write a balance directly.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>stock_movement</code> |<br>| Risks | Lost update ([doc 09 \u00a74.1](../../../docs/09-defect-hotspots.md)); partial commit ([doc 09 \u00a72.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 concurrency \u00b7 rollback \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/34",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/170"
+}

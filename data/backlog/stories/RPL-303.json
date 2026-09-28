@@ -1,0 +1,38 @@
+{
+  "id": 271,
+  "rev": 1,
+  "code": "RPL-303",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-303 \u2014 Complete the move",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>replenishment operator</strong>, I want <strong>confirming the task to move the stock</strong>, so that <strong>the<br>pick face shows the stock that is now physically in it</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a valid confirmation, <strong>then</strong> stock moves from bulk to the pick face, a movement is</li><li>written, and the task closes \u2014 in one transaction.</li><li>- <strong>Given</strong> the transaction fails, <strong>then</strong> nothing changed.</li><li>- <strong>Given</strong> the same confirmation sent twice with one idempotency key, <strong>then</strong> stock moves once.</li><li>- <strong>Given</strong> completion, <strong>then</strong> <code>replenishment.task_completed</code> is published.</li><li>- <strong>Given</strong> completion, <strong>then</strong> the moved stock is immediately available for allocation.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code>, <code>inventory</code> |<br>| Tables | <code>replen_task</code>, <code>stock_balance</code>, <code>stock_movement</code> |<br>| Risks | Partial commit ([doc 09 \u00a72.1](../../../docs/09-defect-hotspots.md)); duplicate confirm ([doc 09 \u00a73.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 idempotency \u00b7 rollback \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/55",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/271"
+}

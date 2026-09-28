@@ -1,0 +1,38 @@
+{
+  "id": 251,
+  "rev": 1,
+  "code": "RET-401",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-401 \u2014 Restock as new",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>inspected-as-new returns put back into sellable stock</strong>,<br>so that <strong>good goods are sold again rather than written off</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an inspection grade of \"as new\", <strong>when</strong> I restock, <strong>then</strong> the stock moves from</li><li>quarantine to a normal storage location with available status.</li><li>- <strong>Given</strong> the restock, <strong>then</strong> a <strong>new receipt date</strong> is recorded \u2014 the stock is not treated</li><li>as being as old or as fresh as the original batch.</li><li>- <strong>Given</strong> an expiry-tracked product, <strong>then</strong> the expiry re-captured at inspection is used, not</li><li>the original batch's.</li><li>- <strong>Given</strong> the restock, <strong>then</strong> a putaway task is created rather than assuming a location.</li><li>- <strong>Given</strong> the restock, <strong>then</strong> <code>returns.stock_restocked</code> is published.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>inventory</code>, <code>inbound</code> |<br>| Tables | <code>disposition</code>, <code>stock_balance</code>, <code>stock_movement</code>, <code>batch</code> |<br>| Risks | Restocked with the original expiry ([doc 09 \u00a78.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/51",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/251"
+}

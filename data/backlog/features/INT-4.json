@@ -1,0 +1,31 @@
+{
+  "id": 30,
+  "rev": 1,
+  "code": "INT-4",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INT-4 \u2014 Operational reporting",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Give supervisors the four numbers they need to run a shift, and give the team the baseline to<br>judge whether an optimisation worked.</p>\n<h3>Scope</h3><p><strong>In.</strong> Open work by zone, throughput by hour, dock-to-stock time, order cycle time.<br><br><strong>Out.</strong> Business intelligence tooling. Financial reporting. Labour management.</p>\n<h3>Design notes</h3><p><strong>Build these before the optimisation work in Stage 4, not after.</strong> Waves, batch picking, and<br>smart putaway are all supposed to make things faster. Without a baseline you cannot tell<br>whether they did, and \"it feels quicker\" is how teams ship changes that made things worse.<br><br><strong><code>INT-401</code> is the one a supervisor uses hourly.</strong> Open tasks by zone and by age shows where<br>the bottleneck is right now. It is the difference between reassigning staff at 10am and finding<br>out at 4pm that the cut-off was missed.<br><br><strong>Keep these to four.</strong> A reporting feature that grows to thirty views becomes nobody's job to<br>maintain, and the ones that matter get lost among the ones that do not.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Optimising without a baseline | [doc 07 \u00a77](../../../docs/07-phased-delivery-plan.md) |<br>| Reporting queries slowing transactional work | [doc 02 \u00a75](../../../docs/02-architecture-overview.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 16,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "platform; INT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/30"
+}

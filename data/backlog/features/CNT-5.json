@@ -1,0 +1,31 @@
+{
+  "id": 14,
+  "rev": 1,
+  "code": "CNT-5",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "CNT-5 \u2014 Full physical count",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Count the entire warehouse at once, with operations stopped \u2014 for go-live, for audit, or when<br>cycle counting has lost credibility.</p>\n<h3>Scope</h3><p><strong>In.</strong> Warehouse freeze, counting every location, reconciling and posting, unfreezing.<br><br><strong>Out.</strong> Statutory audit reporting formats. Stock valuation.</p>\n<h3>Design notes</h3><p><strong>Count with everything frozen, or with everything running \u2014 never half and half.</strong> A partial<br>freeze produces variances that are indistinguishable from real ones, which is worse than not<br>counting.<br><br><strong>The freeze must be genuinely complete.</strong> No receipts, no picks, no putaway, no replenishment,<br>no transfers dispatching or arriving. Every in-flight task must be completed or cancelled<br>before the count starts, and <code>CNT-501</code> needs an acceptance criterion for each of those paths.<br><br><strong>This is also the go-live procedure.</strong> Opening stock should come from a full physical count,<br>not from the old system's numbers \u2014 if those were reliable, part of the reason for the new<br>system would not exist. Load the result as receipts against a <code>GO-LIVE</code> reason code so the<br>ledger reconciles from day one. See [doc 08 \u00a78](../../../docs/08-data-sync-and-migrations.md).<br><br><strong>Do a verification count a week later</strong> on a sample of locations. It tells you whether the<br>opening figures were right, and it is far cheaper to find out in week one than in month six.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Incomplete freeze contaminating every variance | [doc 09 \u00a76.1](../../../docs/09-defect-hotspots.md) |<br>| Opening stock taken from the old system | [doc 09 \u00a711.3](../../../docs/09-defect-hotspots.md) |<br>| Opening stock loaded without movements | [doc 09 \u00a711.3](../../../docs/09-defect-hotspots.md) |<br>| No verification count afterwards | [doc 08 \u00a78](../../../docs/08-data-sync-and-migrations.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 26,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "counting; CNT; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/14"
+}

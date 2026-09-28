@@ -1,0 +1,38 @@
+{
+  "id": 249,
+  "rev": 1,
+  "code": "RET-302",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-302 \u2014 Attach evidence to an inspection",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>quality inspector</strong>, I want <strong>to attach photographs and notes to an inspection</strong>, so that<br><strong>a supplier claim or customer dispute can be supported later</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an inspection, <strong>then</strong> one or more images and free-text notes can be attached.</li><li>- <strong>Given</strong> a grade of damaged or scrap, <strong>then</strong> at least one piece of evidence is required.</li><li>- <strong>Given</strong> an attachment, <strong>then</strong> it records who added it and when, and cannot be deleted.</li><li>- <strong>Given</strong> an inspection, <strong>then</strong> its evidence is retrievable with the return record.</li><li>- <strong>Given</strong> storage, <strong>then</strong> attachment size and format are constrained.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>platform</code> |<br>| Tables | <code>inspection</code>, attachments |<br>| Risks | Scrap decisions with no supporting evidence |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/50",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/249"
+}

@@ -1,0 +1,8 @@
+{
+  "projectDir": "./automation",
+  "baseUrl": "http://localhost:3000",
+  "safeEnvironments": ["http://localhost:3000"],
+  "routes": [
+    { "method": "GET", "path": "/warehouses", "responses": [200], "requiresAuth": false }
+  ]
+}

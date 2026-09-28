@@ -1,0 +1,38 @@
+{
+  "id": 67,
+  "rev": 1,
+  "code": "CNT-202",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-202 \u2014 Blind count entry",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>counters never to see the expected quantity</strong>, so that<br><strong>they count what is there instead of confirming what the system thinks</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a count task response, <strong>then</strong> the expected quantity **does not appear anywhere in</li><li>the payload** \u2014 not in a hidden field, not in a nested object, not in metadata.</li><li>- <strong>Given</strong> the count client, <strong>then</strong> it cannot obtain the expected quantity through any other</li><li>endpoint while the count is open.</li><li>- <strong>Given</strong> a counter, <strong>then</strong> they scan the location and enter a quantity per product found.</li><li>- <strong>Given</strong> an unexpected product found in the location, <strong>then</strong> it can be recorded.</li><li>- <strong>Given</strong> a submitted count, <strong>then</strong> it cannot be edited after submission \u2014 a correction is a</li><li>recount.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code> |<br>| Tables | <code>count_task</code>, <code>count_result</code> |<br>| Risks | Expected quantity visible makes counts meaningless ([doc 09 \u00a76.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration (assert full payload contains no expected quantity) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/11",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/67"
+}

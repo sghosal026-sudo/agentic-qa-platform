@@ -1,0 +1,38 @@
+{
+  "id": 209,
+  "rev": 1,
+  "code": "OUT-207",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-207 \u2014 Respect minimum remaining shelf life",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>customer with a shelf life requirement</strong>, I want <strong>stock allocated only if enough life<br>remains</strong>, so that <strong>I do not receive goods my own customers will refuse</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a customer requiring N days remaining, <strong>then</strong> batches with less than N days are</li><li>excluded from allocation for that customer.</li><li>- <strong>Given</strong> the requirement, <strong>then</strong> it can be set per customer and overridden per order.</li><li>- <strong>Given</strong> stock that satisfies FEFO but fails the shelf life rule, <strong>then</strong> the rule wins and</li><li>the next batch is considered.</li><li>- <strong>Given</strong> no batch satisfies the requirement, <strong>then</strong> the line is not allocated and the</li><li>reason is explicit \u2014 not just \"no stock\".</li><li>- <strong>Given</strong> the excluded stock, <strong>then</strong> it remains available to customers without the</li><li>requirement.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>inventory</code>, <code>masterdata</code> |<br>| Tables | <code>allocation</code>, <code>batch</code>, <code>partner</code> |<br>| Risks | Silent non-allocation indistinguishable from no stock |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/42",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/209"
+}

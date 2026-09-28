@@ -1,0 +1,31 @@
+{
+  "id": 59,
+  "rev": 1,
+  "code": "TRF-3",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "TRF-3 \u2014 Destination side",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Take the transfer in at the receiving site, check it against what was sent, and get it into<br>storage.</p>\n<h3>Scope</h3><p><strong>In.</strong> Receipt against a dispatch, validation, partial receipt, putaway.<br><br><strong>Out.</strong> Discrepancy investigation \u2014 that is [TRF-4](TRF-4-in-transit.md).</p>\n<h3>Design notes</h3><p><strong>Idempotency is critical here.</strong> A transfer receipt processed twice creates stock from<br>nothing, at a site that has no ASN to reconcile against. Enforce with a unique constraint on the<br>dispatch reference plus line.<br><br><strong>A partial receipt leaves the balance in transit</strong>, not lost. The transfer stays open and the<br>outstanding quantity remains in <code>VIRT-INTRANSIT</code> until it either arrives or is investigated.<br><br><strong>Reuse inbound putaway.</strong> Transferred stock is stock arriving at a dock; it goes through the<br>same suggestion and confirmation flow as any other receipt.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Transfer received twice | [doc 09 \u00a79.2](../../../docs/09-defect-hotspots.md) |<br>| Partial receipt losing the outstanding balance | [doc 05 WF 12](../../../docs/05-workflows.md) |<br>| Quantity mismatch auto-adjusted | [doc 09 \u00a79.3](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 21,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "transfers; TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/59"
+}

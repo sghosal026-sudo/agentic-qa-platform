@@ -1,0 +1,38 @@
+{
+  "id": 254,
+  "rev": 1,
+  "code": "RET-404",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-404 \u2014 Return to supplier",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>faulty goods sent back to the supplier</strong>, so that <strong>we<br>recover the cost instead of absorbing it</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a supplier-fault grade, <strong>then</strong> the stock moves to a return-to-supplier location.</li><li>- <strong>Given</strong> a return-to-supplier shipment, <strong>then</strong> it produces a dispatch record and moves stock</li><li>to <code>VIRT-SUPPLIER</code>.</li><li>- <strong>Given</strong> the shipment, <strong>then</strong> it links to the original receipt and any discrepancy record</li><li>so the claim is evidenced.</li><li>- <strong>Given</strong> the dispatch, <strong>then</strong> the ERP is notified so a supplier credit can be pursued.</li><li>- <strong>Given</strong> stock awaiting return to supplier, <strong>then</strong> it is aged and escalated.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>inventory</code>, <code>inbound</code> |<br>| Tables | <code>disposition</code>, <code>stock_balance</code>, <code>stock_movement</code> |<br>| Risks | Supplier-fault stock written off as warehouse loss |<br>| Tests | unit \u00b7 integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/51",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/254"
+}

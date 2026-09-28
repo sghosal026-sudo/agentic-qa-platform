@@ -1,0 +1,38 @@
+{
+  "id": 201,
+  "rev": 1,
+  "code": "OUT-105",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-105 \u2014 Accept orders from the ERP",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>orders to arrive from the ERP automatically</strong>, so that<br><strong>nobody retypes them and nothing is missed</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a valid ERP order message, <strong>then</strong> an order is created.</li><li>- <strong>Given</strong> the same message replayed, <strong>then</strong> exactly one order exists \u2014 enforced by a unique</li><li>constraint on <code>(source_system, external_reference)</code>.</li><li>- <strong>Given</strong> an invalid message, <strong>then</strong> it is rejected with a reason and stored in the</li><li>dead-letter table with its original payload.</li><li>- <strong>Given</strong> an ERP cancellation message, <strong>then</strong> it runs the same cancel path as</li><li>[OUT-104](OUT-104-cancel-order.md).</li><li>- <strong>Given</strong> an ERP amendment for an unallocated order, <strong>then</strong> it is applied.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>platform</code> |<br>| Tables | <code>order</code>, <code>order_line</code>, dead-letter |<br>| Risks | ERP retry creating a duplicate order and double shipment ([doc 09 \u00a73.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration \u00b7 idempotency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/41",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/201"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 202,
+  "rev": 1,
+  "code": "OUT-106",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-106 \u2014 Amend an order line before allocation",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>customer service agent</strong>, I want <strong>to change a quantity before stock is committed</strong>, so<br>that <strong>a customer correction does not require cancelling and recreating the order</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an unallocated line, <strong>then</strong> its quantity can be changed or the line removed.</li><li>- <strong>Given</strong> an allocated line, <strong>then</strong> amendment is rejected until it is deallocated via</li><li>[OUT-206](OUT-206-deallocate-order-line.md).</li><li>- <strong>Given</strong> a picked line, <strong>then</strong> amendment is rejected outright.</li><li>- <strong>Given</strong> an amendment, <strong>then</strong> the previous values are retained in the audit trail.</li><li>- <strong>Given</strong> a line reduced to zero, <strong>then</strong> it is closed rather than left as a zero-quantity</li><li>line.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>order_line</code>, <code>audit_log</code> |<br>| Risks | Amending an allocated line leaves reservations pointing at nothing ([doc 09 \u00a75.5](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/41",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/202"
+}

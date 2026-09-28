@@ -1,0 +1,31 @@
+{
+  "id": 36,
+  "rev": 1,
+  "code": "INV-5",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INV-5 \u2014 Reservations",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Promise specific stock to a specific order line, so that two orders can never be promised the<br>same unit.</p>\n<h3>Scope</h3><p><strong>In.</strong> Creating, releasing, and consuming reservations. Reporting orphans.<br><br><strong>Out.</strong> Deciding <em>which</em> stock to reserve \u2014 that is [OUT-2](../OUT/OUT-2-allocation.md).</p>\n<h3>Design notes</h3><p><strong>Reservations leak, and this is the feature where you decide whether they will.</strong><br><br>A reservation is created in one place and released in many: on ship, on cancel, on short pick,<br>on quality hold, on order amendment, on wave cancellation, on transfer cancellation. Miss one<br>path and reserved stock accumulates silently. Availability decays over months with no visible<br>cause, and eventually someone finds a product with 500 on hand and 12 available.<br><br><strong>Build <code>INV-502</code> alongside <code>INV-501</code></strong>, never after. And build <code>INV-504</code> in the same stage,<br>because the report is the only thing that will detect the path you missed.<br><br><strong>Consume means both fields together.</strong> A pick reduces on-hand and reserved in one statement. A<br>path that reduces one without the other produces negative availability, which downstream code<br>handles unpredictably.<br><br><strong>The invariant to assert everywhere:</strong> the sum of reservation rows equals <code>qty_reserved</code> on the<br>balance, and <code>0 <= qty_reserved <= qty_on_hand</code>.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Reservation not released on cancel | [doc 09 \u00a75.2](../../../docs/09-defect-hotspots.md) |<br>| Reservation not consumed on pick | [doc 09 \u00a75.3](../../../docs/09-defect-hotspots.md) |<br>| Partial pick leaves a hanging remainder | [doc 09 \u00a75.4](../../../docs/09-defect-hotspots.md) |<br>| On-hand and reserved diverge | [doc 09 \u00a72.3](../../../docs/09-defect-hotspots.md) |<br>| Reservations surviving their order | [doc 09 \u00a75.5](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 19,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "inventory; INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/36"
+}

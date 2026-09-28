@@ -1,0 +1,38 @@
+{
+  "id": 108,
+  "rev": 1,
+  "code": "FDN-804",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-804 \u2014 Dead-letter handling",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>permanently failing events moved aside and flagged</strong>, so that<br><strong>one poisoned event does not block every event behind it</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an event that has failed the configured number of times, <strong>then</strong> it is marked dead</li><li>and stops being retried.</li><li>- <strong>Given</strong> a dead event, <strong>then</strong> it retains its full payload and its last error.</li><li>- <strong>Given</strong> an event moves to dead, <strong>then</strong> an alert reaches a human.</li><li>- <strong>Given</strong> the underlying problem is fixed, <strong>then</strong> a dead event can be replayed.</li><li>- <strong>Given</strong> a dead event for one aggregate, <strong>then</strong> events for other aggregates continue to</li><li>deliver.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code> |<br>| Tables | <code>outbox</code> |<br>| Risks | A poisoned event blocking the queue; dead letters nobody reviews ([doc 08 \u00a76](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/22",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/108"
+}

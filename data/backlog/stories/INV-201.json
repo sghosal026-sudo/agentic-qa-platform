@@ -1,0 +1,38 @@
+{
+  "id": 167,
+  "rev": 1,
+  "code": "INV-201",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-201 \u2014 Record a movement",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>every stock change written to an append-only ledger</strong>, so that<br><strong>any number can be explained and balances can always be rebuilt</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> any balance change, <strong>then</strong> a movement row is written in the same transaction.</li><li>- <strong>Given</strong> a movement, <strong>then</strong> it records from-location, to-location, product, batch, positive</li><li>quantity, type, reason code, reference, actor, timestamp, and correlation ID.</li><li>- <strong>Given</strong> a receipt, <strong>then</strong> the from-location is a virtual location, not null.</li><li>- <strong>Given</strong> a write-off, <strong>then</strong> the to-location is <code>VIRT-LOSS</code>, not null.</li><li>- <strong>Given</strong> any movement, <strong>then</strong> there is no code path that updates or deletes it.</li><li>- <strong>Given</strong> a correction is needed, <strong>then</strong> it is made by writing an opposite movement.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_movement</code> |<br>| Risks | Balance changed without a movement ([doc 09 \u00a72.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 invariant (ledger explains balance) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/33",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/167"
+}

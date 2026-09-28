@@ -1,0 +1,38 @@
+{
+  "id": 140,
+  "rev": 1,
+  "code": "INT-101",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-101 \u2014 Receive ASNs from the ERP",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk</strong>, I want <strong>expected deliveries to arrive from the ERP automatically</strong>,<br>so that <strong>nobody types them in and nothing is missed</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a valid ASN message, <strong>then</strong> an ASN is created with its lines.</li><li>- <strong>Given</strong> an unknown product or supplier, <strong>then</strong> the message is rejected with a reason</li><li>naming the field and stored in the dead-letter table.</li><li>- <strong>Given</strong> the same message replayed, <strong>then</strong> exactly one ASN exists.</li><li>- <strong>Given</strong> an update for an ASN not yet received against, <strong>then</strong> it is applied.</li><li>- <strong>Given</strong> an update for an ASN already received against, <strong>then</strong> it is rejected and flagged</li><li>for a human.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>inbound</code> |<br>| Tables | <code>asn</code>, <code>asn_line</code>, dead-letter |<br>| Risks | Duplicate ASN ([doc 09 \u00a73.3](../../../docs/09-defect-hotspots.md)); silent drop ([doc 08 \u00a76](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration \u00b7 idempotency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/27",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/140"
+}

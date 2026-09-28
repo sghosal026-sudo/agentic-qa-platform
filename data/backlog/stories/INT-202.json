@@ -1,0 +1,38 @@
+{
+  "id": 146,
+  "rev": 1,
+  "code": "INT-202",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-202 \u2014 Publish shipment confirmations",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>finance team member</strong>, I want <strong>the ERP told as soon as goods leave</strong>, so that <strong>invoices<br>are raised promptly for exactly what shipped</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a confirmed dispatch, <strong>then</strong> an event is written to the outbox in the same</li><li>transaction carrying shipped quantities per line, carrier, and tracking reference.</li><li>- <strong>Given</strong> a partial shipment, <strong>then</strong> the event states which lines and quantities shipped and</li><li>what remains outstanding.</li><li>- <strong>Given</strong> ordering, <strong>then</strong> a shipment event for an order is never delivered before that</li><li>order's earlier events.</li><li>- <strong>Given</strong> repeated delivery failure, <strong>then</strong> it dead-letters and alerts.</li><li>- <strong>Given</strong> serial-tracked products, <strong>then</strong> the shipped serials are included.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>outbound</code> |<br>| Tables | <code>outbox</code> |<br>| Risks | Lost event means no invoice ([doc 09 \u00a72.4](../../../docs/09-defect-hotspots.md)); out-of-order delivery ([doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration \u00b7 event assertion |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/28",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/146"
+}

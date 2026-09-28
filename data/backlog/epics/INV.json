@@ -1,0 +1,22 @@
+{
+  "id": 5,
+  "rev": 1,
+  "code": "INV",
+  "fields": {
+    "System.WorkItemType": "Epic",
+    "System.Title": "EPIC INV \u2014 Inventory Core",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Goal</h3><p>Know how much of what is where, in what status \u2014 and be able to explain every number from an<br>immutable record of movements.</p>\n<h3>Business value</h3><p>This is the epic the whole system rests on. Every other epic is a way of asking inventory to<br>change something. If these numbers cannot be trusted, nothing built on top of them can be.<br><br>The promise this epic makes is narrow and absolute:<br><br>> Every balance change wrote a movement. Balances can always be rebuilt from the ledger.</p>\n<h3>Scope</h3><p><strong>In.</strong> Stock balances by product, location, batch and status. The append-only movement ledger.<br>Moving stock. Status changes. Reservations. Batches and expiry. Adjustments with reason codes<br>and approval. Reconciliation. The availability projection.<br><br><strong>Out.</strong> Deciding <em>why</em> stock should move. Receiving decides that. Allocation decides that.<br>Inventory only executes and records.</p>\n<h3>Done when</h3><ul><li>Stock can be queried by location, by product, and by batch.</li><li>Every balance change has a matching movement row, verified by a reconciliation job.</li><li>Two concurrent moves against the same balance produce a correct result.</li><li>On-hand can never go negative and reserved can never exceed on-hand.</li><li>Reservations can be created, released, and consumed, and never leak.</li><li>An adjustment requires a reason code and, above a threshold, an approval.</li><li>The availability projection reconciles nightly against the balances.</li></ul>\n<h3>Key risks</h3><p>| Risk | Why it matters | Reference |<br>|---|---|---|<br>| Lost update on concurrent change | Stock silently wrong; the classic WMS bug | [doc 09 \u00a74.1](../../docs/09-defect-hotspots.md) |<br>| Balance written without a movement | The ledger stops explaining reality | [doc 09 \u00a72.2](../../docs/09-defect-hotspots.md) |<br>| On-hand and reserved diverge | Negative availability; orders fail against present stock | [doc 09 \u00a72.3](../../docs/09-defect-hotspots.md) |<br>| Reservation leaks | Stock invisible forever | [doc 09 \u00a75.2](../../docs/09-defect-hotspots.md) |<br>| Deadlock on multi-location operations | Random failures at peak | [doc 09 \u00a74.2](../../docs/09-defect-hotspots.md) |<br>| Allocating from the projection | The same unit sold twice | [doc 09 \u00a712](../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "INV; Stage 1"
+  },
+  "relations": [],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5"
+}

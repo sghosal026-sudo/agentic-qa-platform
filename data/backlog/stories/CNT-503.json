@@ -1,0 +1,38 @@
+{
+  "id": 80,
+  "rev": 1,
+  "code": "CNT-503",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-503 \u2014 Reconcile and post results",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>the full count reconciled and posted as one exercise</strong>,<br>so that <strong>the warehouse restarts from a known-correct position</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> all locations counted, <strong>then</strong> a full variance report is produced against the</li><li>freeze snapshot.</li><li>- <strong>Given</strong> variances above threshold, <strong>then</strong> recounts are required before any posting.</li><li>- <strong>Given</strong> approval, <strong>then</strong> all adjustments post with a full-count reason code linked to the</li><li>count.</li><li>- <strong>Given</strong> posting, <strong>then</strong> the total financial impact is reported and published to the ERP.</li><li>- <strong>Given</strong> posting, <strong>then</strong> the ledger-vs-balance reconciliation passes immediately afterwards.</li><li>- <strong>Given</strong> posting, <strong>then</strong> it is idempotent \u2014 a retry does not double-adjust.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code>, <code>inventory</code>, <code>platform</code> |<br>| Tables | <code>variance</code>, <code>adjustment</code>, <code>stock_balance</code>, <code>stock_movement</code> |<br>| Risks | Double posting ([doc 09 \u00a73.2](../../../docs/09-defect-hotspots.md)); ledger left unreconciled ([doc 09 \u00a711.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration \u00b7 idempotency \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/14",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/80"
+}

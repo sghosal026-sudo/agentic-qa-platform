@@ -1,0 +1,38 @@
+{
+  "id": 65,
+  "rev": 1,
+  "code": "CNT-104",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-104 \u2014 Trigger a count from a zero pick",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>a location to be counted right after a picker found<br>nothing there</strong>, so that <strong>the error is investigated while its cause is still traceable</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> <code>outbound.short_pick_recorded</code> with a zero quantity, <strong>then</strong> a count task is created</li><li>for that location.</li><li>- <strong>Given</strong> an existing open count task for the location, <strong>then</strong> no second task is created.</li><li>- <strong>Given</strong> the triggered task, <strong>then</strong> it is prioritised above scheduled counts.</li><li>- <strong>Given</strong> the task, <strong>then</strong> it links to the pick that triggered it.</li><li>- <strong>Given</strong> the same event delivered twice, <strong>then</strong> one task is created.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code>, <code>outbound</code> |<br>| Tables | <code>count_task</code> |<br>| Risks | Duplicate tasks from repeated events ([doc 09 \u00a73.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration \u00b7 idempotency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/10",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/65"
+}

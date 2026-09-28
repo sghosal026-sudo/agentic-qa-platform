@@ -1,0 +1,38 @@
+{
+  "id": 270,
+  "rev": 1,
+  "code": "RPL-302",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-302 \u2014 Scan-confirm source and destination",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>replenishment operator</strong>, I want <strong>to scan where I took stock from and where I put it</strong>,<br>so that <strong>a mistake corrupts nothing and the record matches reality</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a task, <strong>then</strong> confirmation requires scanning the source location, the product,</li><li>and the destination location.</li><li>- <strong>Given</strong> a scan that does not match the task, <strong>then</strong> confirmation is rejected.</li><li>- <strong>Given</strong> a batch-tracked product, <strong>then</strong> the batch must also be scanned or confirmed.</li><li>- <strong>Given</strong> the source has less than expected, <strong>then</strong> the operator can confirm a lower</li><li>quantity \u2014 see [RPL-304](RPL-304-partial-replenishment.md).</li><li>- <strong>Given</strong> the destination is now full, <strong>then</strong> the confirm is rejected and the shortfall</li><li>recorded.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code>, <code>inventory</code> |<br>| Tables | <code>replen_task</code> |<br>| Risks | Confirming without scans corrupts two locations ([doc 05 WF 11](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/55",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/270"
+}

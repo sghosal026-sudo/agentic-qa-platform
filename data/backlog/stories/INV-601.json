@@ -1,0 +1,38 @@
+{
+  "id": 182,
+  "rev": 1,
+  "code": "INV-601",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-601 \u2014 Create a batch on receipt",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>a batch record created when tracked stock is received</strong>, so that<br><strong>expiry and traceability follow the stock for the rest of its life</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a batch-tracked product, <strong>when</strong> stock is received with a batch number, <strong>then</strong> a</li><li>batch record is created with its expiry and receipt date.</li><li>- <strong>Given</strong> the same batch number received again for the same product, <strong>then</strong> the existing</li><li>batch record is reused, not duplicated.</li><li>- <strong>Given</strong> an expiry-tracked product with no expiry supplied, <strong>then</strong> the receipt is rejected.</li><li>- <strong>Given</strong> an untracked product, <strong>then</strong> no batch record is created and the balance batch</li><li>field stays null.</li><li>- <strong>Given</strong> a batch, <strong>then</strong> every subsequent movement of that stock carries it.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>batch</code>, <code>stock_balance</code> |<br>| Risks | Batch typed with a typo breaks FEFO ([doc 05 WF 1](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/37",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/182"
+}

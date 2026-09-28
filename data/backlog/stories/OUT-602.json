@@ -1,0 +1,38 @@
+{
+  "id": 233,
+  "rev": 1,
+  "code": "OUT-602",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-602 \u2014 Scan cartons onto a shipment",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>shipping clerk</strong>, I want <strong>to scan each carton as it is loaded</strong>, so that <strong>the manifest<br>reflects what is physically on the vehicle</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a packed and labelled carton, <strong>when</strong> I scan it onto the shipment, <strong>then</strong> it is</li><li>added.</li><li>- <strong>Given</strong> an unpacked or unlabelled carton, <strong>then</strong> the scan is rejected.</li><li>- <strong>Given</strong> a carton already on another shipment, <strong>then</strong> the scan is rejected \u2014 enforced by a</li><li>unique constraint on carton-to-shipment.</li><li>- <strong>Given</strong> a carton whose order specifies a different carrier, <strong>then</strong> a warning is shown</li><li>before it is accepted.</li><li>- <strong>Given</strong> a shipped shipment, <strong>then</strong> no further cartons can be added.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>shipment</code>, <code>shipment_carton</code>, <code>carton</code> |<br>| Risks | Carton onto the wrong vehicle or onto two shipments ([doc 05 WF 8](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration \u00b7 concurrency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/46",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/233"
+}

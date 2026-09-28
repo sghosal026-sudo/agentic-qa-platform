@@ -1,0 +1,31 @@
+{
+  "id": 57,
+  "rev": 1,
+  "code": "TRF-1",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "TRF-1 \u2014 Transfer orders",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Record an intention to move stock between warehouses, and let both sites see it.</p>\n<h3>Scope</h3><p><strong>In.</strong> Creating transfers, validating origin stock, status visibility, cancellation before<br>dispatch.<br><br><strong>Out.</strong> Deciding what should transfer \u2014 that is network planning, a separate discipline.</p>\n<h3>Design notes</h3><p><strong>Cancellation is only legal before dispatch.</strong> Once stock is in transit it is physically on a<br>lorry, and no database update changes that. A transfer that needs reversing after dispatch is a<br>new transfer in the opposite direction.<br><br><strong>Both sites see the same record.</strong> In a single-instance deployment this is trivial. It is<br>worth building the status query as if the two sites might one day be separate databases,<br>because that is the direction this epic points.<br><br><strong>Store all timestamps in UTC.</strong> Two sites in different timezones with local timestamps produce<br>event orderings where the receipt appears to precede the dispatch.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Transfer cancelled after dispatch | [doc 05 WF 12](../../../docs/05-workflows.md) |<br>| Timezone differences producing nonsensical ordering | [doc 09 \u00a79.4](../../../docs/09-defect-hotspots.md) |<br>| Origin stock unavailable by the time picking starts | [doc 09 \u00a74.5](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 16,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "transfers; TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/57"
+}

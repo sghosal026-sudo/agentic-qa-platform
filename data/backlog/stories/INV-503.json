@@ -1,0 +1,38 @@
+{
+  "id": 180,
+  "rev": 1,
+  "code": "INV-503",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-503 \u2014 Consume a reservation on pick",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>a pick to reduce on-hand and reserved together</strong>, so that<br><strong>availability never goes negative and the two numbers never drift apart</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a pick against a reservation, <strong>then</strong> <code>qty_on_hand</code> and <code>qty_reserved</code> both</li><li>decrease by the picked quantity in one statement.</li><li>- <strong>Given</strong> the pick, <strong>then</strong> the reservation row is closed or reduced accordingly.</li><li>- <strong>Given</strong> a pick larger than the reservation, <strong>then</strong> it is rejected.</li><li>- <strong>Given</strong> any sequence of picks, shorts, and cancels, <strong>then</strong></li><li><code>0 <= qty_reserved <= qty_on_hand</code> holds throughout.</li><li>- <strong>Given</strong> the pick, <strong>then</strong> the stock movement is written in the same transaction.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>reservation</code>, <code>stock_movement</code> |<br>| Risks | On-hand and reserved diverge ([doc 09 \u00a72.3](../../../docs/09-defect-hotspots.md)); reservation not consumed ([doc 09 \u00a75.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 property/invariant \u00b7 rollback |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/36",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/180"
+}

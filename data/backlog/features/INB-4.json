@@ -1,0 +1,31 @@
+{
+  "id": 26,
+  "rev": 1,
+  "code": "INB-4",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INB-4 \u2014 Receiving exceptions",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Make the things that went wrong at the dock visible, measurable, and attributable \u2014 to<br>suppliers, and to the warehouse's own process.</p>\n<h3>Scope</h3><p><strong>In.</strong> Discrepancy records, quality holds, dock-to-stock reporting, supplier performance,<br>stranded stock alerts.<br><br><strong>Out.</strong> Supplier claims and chargebacks. The data supports them; the commercial process is<br>elsewhere.</p>\n<h3>Design notes</h3><p><strong><code>INB-405</code> is cheap and catches an expensive problem.</strong> Stock sitting in a receiving location<br>over a weekend is stock the system says exists but nobody can sell, because it has no proper<br>location and no putaway task got picked up. An hourly ageing check finds it in hours instead of<br>days.<br><br><strong>Supplier performance is an aggregate, so it belongs in a read model</strong>, not a live query over<br>every historical receipt.<br><br><strong>Blind receipt volume is itself a KPI.</strong> High volume means the ASN process upstream is broken,<br>and no amount of warehouse effort will fix it.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Stock stranded in receiving | [doc 05 WF 3](../../../docs/05-workflows.md) |<br>| Quarantine stock never dispositioned | [doc 05 WF 2](../../../docs/05-workflows.md) |<br>| Hold not catching already-allocated stock | [doc 09 \u00a78.5](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 19,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "inbound; INB; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/26"
+}

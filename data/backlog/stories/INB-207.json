@@ -1,0 +1,38 @@
+{
+  "id": 120,
+  "rev": 1,
+  "code": "INB-207",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-207 \u2014 Flag damaged goods into quarantine",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk</strong>, I want <strong>to flag visibly damaged goods as I receive them</strong>, so that<br><strong>they never enter sellable stock</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a receipt line, <strong>then</strong> part of the quantity can be marked damaged with a reason.</li><li>- <strong>Given</strong> damaged quantity on confirmation, <strong>then</strong> it is created in quarantine status, not</li><li>available.</li><li>- <strong>Given</strong> damaged quantity, <strong>then</strong> it lands in a quarantine location, separate from the good</li><li>stock on the same line.</li><li>- <strong>Given</strong> the damage, <strong>then</strong> a discrepancy record is created against the supplier.</li><li>- <strong>Given</strong> damaged stock, <strong>then</strong> it is never allocated.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>inventory</code> |<br>| Tables | <code>receipt_line</code>, <code>stock_balance</code> |<br>| Risks | Damaged goods received as good ([doc 05 WF 1](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/24",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/120"
+}

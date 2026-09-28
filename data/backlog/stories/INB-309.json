@@ -1,0 +1,38 @@
+{
+  "id": 134,
+  "rev": 1,
+  "code": "INB-309",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-309 \u2014 Return an abandoned task to the pool",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>tasks that nobody completed to become available again</strong>, so that<br><strong>work does not disappear when someone goes home mid-shift</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an assigned task with no activity for the configured timeout, <strong>then</strong> it returns to</li><li>the unassigned pool.</li><li>- <strong>Given</strong> a task that was partly confirmed, <strong>then</strong> only the outstanding quantity returns to</li><li>the pool.</li><li>- <strong>Given</strong> a task is returned, <strong>then</strong> the original assignee is recorded on the task history.</li><li>- <strong>Given</strong> a task returned more than a configured number of times, <strong>then</strong> it is escalated to</li><li>a supervisor.</li><li>- <strong>Given</strong> a supervisor, <strong>then</strong> they can reassign or cancel a task manually at any time.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code> |<br>| Tables | <code>putaway_task</code> |<br>| Risks | Stock put away physically but never confirmed ([doc 05 WF 3](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/25",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/134"
+}

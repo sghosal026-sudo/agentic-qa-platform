@@ -1,0 +1,38 @@
+{
+  "id": 214,
+  "rev": 1,
+  "code": "OUT-304",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-304 \u2014 Cancel a wave",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>to cancel a wave that was released in error</strong>, so that <strong>pickers<br>are not working from a task list that should not exist</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a released wave with no picks confirmed, <strong>when</strong> I cancel it, <strong>then</strong> every pick</li><li>task is cancelled and the orders return to allocated \u2014 in one transaction.</li><li>- <strong>Given</strong> a wave with some picks already confirmed, <strong>then</strong> cancellation is rejected;</li><li>complete or short the picked lines first.</li><li>- <strong>Given</strong> cancellation, <strong>then</strong> allocations are <strong>not</strong> released \u2014 the orders stay allocated</li><li>and can be re-waved.</li><li>- <strong>Given</strong> cancellation, <strong>then</strong> no orphan pick task remains in any picker's list.</li><li>- <strong>Given</strong> cancellation, <strong>then</strong> the reason and acting user are recorded.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>wave</code>, <code>pick_task</code>, <code>order</code> |<br>| Risks | Orphan pick tasks confirmed anyway ([doc 05 WF 5](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration \u00b7 rollback |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/43",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/214"
+}

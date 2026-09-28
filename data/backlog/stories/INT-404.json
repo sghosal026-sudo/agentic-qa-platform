@@ -1,0 +1,38 @@
+{
+  "id": 157,
+  "rev": 1,
+  "code": "INT-404",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-404 \u2014 Order cycle time",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>to see how long orders take from arrival to dispatch</strong>, so<br>that <strong>I know where time is lost and whether we are meeting our promise</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>then</strong> average and 95th-percentile time from order received to</li><li>dispatched is shown.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it breaks the total into stages: waiting to allocate, waiting</li><li>to wave, picking, packing, waiting to ship.</li><li>- <strong>Given</strong> the stage breakdown, <strong>then</strong> the slowest stage is identifiable without manual</li><li>arithmetic.</li><li>- <strong>Given</strong> the on-time-dispatch target, <strong>then</strong> the proportion shipped before the promised</li><li>cut-off is shown.</li><li>- <strong>Given</strong> orders still open, <strong>then</strong> they are shown as in-progress with their current age.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>outbound</code> |<br>| Tables | throughput projection, <code>order</code>, <code>shipment</code> |<br>| Risks | Aggregate query over all order history degrading ([doc 08 \u00a73](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/30",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/157"
+}

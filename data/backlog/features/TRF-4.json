@@ -1,0 +1,31 @@
+{
+  "id": 60,
+  "rev": 1,
+  "code": "TRF-4",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "TRF-4 \u2014 In-transit management",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Keep track of stock that belongs to neither site, and make sure that anything which does not<br>arrive gets noticed.</p>\n<h3>Scope</h3><p><strong>In.</strong> In-transit reporting, ageing and escalation, discrepancy recording and investigation.<br><br><strong>Out.</strong> Insurance claims. Carrier disputes.</p>\n<h3>Design notes</h3><p><strong><code>TRF-402</code> is not optional polish.</strong> It is the only thing that will ever detect stock lost in<br>transit. A transfer dispatched and never received sits in the virtual location indefinitely:<br>neither site has the stock, neither site is missing it, and the network total is overstated by<br>the lost amount \u2014 permanently and silently.<br><br>Build the ageing report at the same time as the transfer flow, not after the first loss.<br><br><strong>Never auto-adjust a discrepancy.</strong> The origin dispatched 100, the destination received 95.<br>Auto-adjusting makes the symptom disappear and guarantees the cause persists \u2014 whether that<br>cause is theft, a picking error at origin, or a receiving error at destination.<br><br><code>TRF-404</code> makes it an investigation record with an owner and an outcome. The resolution then<br>posts the adjustment, attributed to the actual cause.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Stock lost in transit, never detected | [doc 09 \u00a79.1](../../../docs/09-defect-hotspots.md) |<br>| Discrepancy auto-adjusted | [doc 09 \u00a79.3](../../../docs/09-defect-hotspots.md) |<br>| In-transit stock counted as available | [doc 05 WF 12](../../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 21,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "transfers; TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/60"
+}

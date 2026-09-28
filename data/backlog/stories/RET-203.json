@@ -1,0 +1,38 @@
+{
+  "id": 246,
+  "rev": 1,
+  "code": "RET-203",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-203 \u2014 Land returned stock in quarantine",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>every returned unit to enter quarantine</strong>, so that<br><strong>nothing goes back on sale before someone has looked at it</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> any return receipt confirmation, <strong>then</strong> stock is created in a quarantine location</li><li>with quarantine status.</li><li>- <strong>Given</strong> any code path, <strong>then</strong> there is <strong>no</strong> route that creates returned stock as</li><li>available \u2014 enforced in the service layer, not the UI.</li><li>- <strong>Given</strong> quarantined return stock, <strong>then</strong> it is excluded from availability and can never be</li><li>allocated.</li><li>- <strong>Given</strong> the creation, <strong>then</strong> a movement from <code>VIRT-CUSTOMER</code> is written with a return</li><li>reason code.</li><li>- <strong>Given</strong> quarantined stock with no disposition after a configured period, <strong>then</strong> it appears</li><li>on an ageing report.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>stock_movement</code> |<br>| Risks | Returned stock going straight to available ([doc 09 \u00a78.1](../../../docs/09-defect-hotspots.md)); quarantine never cleared ([doc 05 WF 9](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/49",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/246"
+}

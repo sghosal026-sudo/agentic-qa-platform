@@ -1,0 +1,38 @@
+{
+  "id": 286,
+  "rev": 1,
+  "code": "TRF-304",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-304 \u2014 Putaway transferred stock",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>putaway operator at the destination</strong>, I want <strong>transferred stock to generate putaway<br>tasks like any other receipt</strong>, so that <strong>it does not sit on the dock as a special case</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a confirmed transfer receipt, <strong>then</strong> putaway tasks are created in the same</li><li>transaction, as in [INB-301](../INB/INB-301-generate-putaway-tasks.md).</li><li>- <strong>Given</strong> the tasks, <strong>then</strong> they use the same suggestion, override, and confirmation flow as</li><li>normal putaway.</li><li>- <strong>Given</strong> transferred stock, <strong>then</strong> it becomes available only once putaway is confirmed.</li><li>- <strong>Given</strong> quarantined or unexpected items from</li><li>[TRF-302](TRF-302-validate-against-dispatch.md), <strong>then</strong> their tasks target the quarantine</li><li>area.</li><li>- <strong>Given</strong> transferred stock still in receiving past the threshold, <strong>then</strong> it appears on the</li><li>stranded stock alert.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code>, <code>inbound</code>, <code>inventory</code> |<br>| Tables | <code>putaway_task</code>, <code>stock_balance</code> |<br>| Risks | Stock stranded in destination receiving ([doc 05 WF 3](../../../docs/05-workflows.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/59",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/286"
+}

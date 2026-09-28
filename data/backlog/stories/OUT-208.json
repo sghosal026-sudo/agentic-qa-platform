@@ -1,0 +1,38 @@
+{
+  "id": 210,
+  "rev": 1,
+  "code": "OUT-208",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-208 \u2014 Prefer fewer pick locations",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>picker</strong>, I want <strong>an order line satisfied from as few locations as possible</strong>, so that<br><strong>I make one stop instead of four for the same units</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a line that could be filled from one location or several, <strong>then</strong> the single</li><li>location is chosen.</li><li>- <strong>Given</strong> several single-location candidates, <strong>then</strong> a pick face is preferred over bulk.</li><li>- <strong>Given</strong> FEFO and location preference conflict, <strong>then</strong> FEFO wins for expiry-tracked</li><li>products and the rule is documented.</li><li>- <strong>Given</strong> no single location suffices, <strong>then</strong> the fewest locations are chosen.</li><li>- <strong>Given</strong> the change, <strong>then</strong> average pick locations per order line is measurable before and</li><li>after.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>inventory</code> |<br>| Tables | <code>allocation</code>, <code>stock_balance</code> |<br>| Risks | Location preference quietly overriding FEFO ([doc 09 \u00a74.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/42",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/210"
+}

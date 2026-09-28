@@ -1,0 +1,31 @@
+{
+  "id": 29,
+  "rev": 1,
+  "code": "INT-3",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INT-3 \u2014 Projections",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Pre-compute the answers that are too slow to work out on demand \u2014 and keep them honest.</p>\n<h3>Scope</h3><p><strong>In.</strong> The availability view, order status view, daily snapshot, rebuild jobs, reconciliation<br>jobs.<br><br><strong>Out.</strong> Using a projection to decide anything. Projections are for looking, not for promising.</p>\n<h3>Design notes</h3><p><strong>Add a projection only when all three are true:</strong> the query is asked often, the honest version<br>is slow, and slight staleness is acceptable <em>for that specific question</em>. The third condition<br>kills more candidates than people expect.<br><br><strong>Choose sync or async per projection, deliberately.</strong> Availability updates in the same<br>transaction as the movement \u2014 it cannot be stale. Order status updates from events \u2014 a few<br>seconds is fine, and keeping it off the dispatch transaction matters more.<br><br><strong><code>INT-304</code> ships with the projection, not after it.</strong> During an incident you need to run the<br>rebuild, not write it. And testing the rebuild against the incremental update is the only way<br>to find out that the two disagree \u2014 which they will, quietly, every day, until someone checks.<br><br><strong><code>INT-305</code> is the honesty check.</strong> Projections drift, through bugs, missed events, and manual<br>database changes. The question is only whether you find out. Compare against source on a<br>schedule and alert on any mismatch.<br><br><strong>Every projection row carries <code>last_updated_at</code>, and every response exposes it.</strong> A stale<br>number that admits it is stale is far less dangerous than one that does not.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Projection used for allocation | [doc 09 \u00a712](../../../docs/09-defect-hotspots.md) |<br>| Projection drifts from source | [doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md) |<br>| Rebuild disagrees with incremental update | [doc 08 \u00a75.2](../../../docs/08-data-sync-and-migrations.md) |<br>| Sync update slowing a hot transaction | [doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 31,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "platform; INT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/29"
+}

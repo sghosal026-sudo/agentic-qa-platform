@@ -1,0 +1,38 @@
+{
+  "id": 268,
+  "rev": 1,
+  "code": "RPL-205",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-205 \u2014 Alert when no source exists",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>to be told when a pick face needs stock and there is none</strong>, so<br>that <strong>I find out now rather than when pickers start shorting</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a below-minimum location with no available source, <strong>then</strong></li><li><code>replenishment.no_source_found</code> is published and the location appears on the exception list.</li><li>- <strong>Given</strong> the exception, <strong>then</strong> it shows the location, product, quantity needed, and total</li><li>warehouse stock of that product.</li><li>- <strong>Given</strong> the same condition persisting, <strong>then</strong> the exception is not duplicated but its age</li><li>increases.</li><li>- <strong>Given</strong> stock becoming available later, <strong>then</strong> the exception clears automatically and a</li><li>task is created.</li><li>- <strong>Given</strong> the alert, <strong>then</strong> it reaches a person, not only a log line.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code>, <code>inventory</code> |<br>| Tables | <code>replen_run</code>, <code>outbox</code> |<br>| Risks | Silent no-source condition, pick face runs dry mid-wave ([doc 09 \u00a77.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/54",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/268"
+}

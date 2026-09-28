@@ -1,0 +1,31 @@
+{
+  "id": 35,
+  "rev": 1,
+  "code": "INV-4",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INV-4 \u2014 Stock status",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Mark stock as unsellable without moving it or deleting it, so that quarantine, damage, and<br>recalls take effect immediately and reversibly.</p>\n<h3>Scope</h3><p><strong>In.</strong> Quarantine and release, marking damage, blocking a location's stock.<br><br><strong>Out.</strong> The inspection process that decides the outcome \u2014 that is<br>[RET-3](../RET/RET-3-inspection.md).</p>\n<h3>Design notes</h3><p><strong>A status change is a movement</strong>, not a silent field update. It changes what the stock can be<br>used for, so it belongs in the ledger with a reason code like everything else.<br><br><strong>A hold must be retroactive.</strong> Quarantining a batch has to catch stock that is already<br>allocated to orders, and release those reservations, inside the same transaction. Stock already<br>picked and sitting on a cart must be flagged for physical interception.<br><br>This is the difference between a recall that works and one that ships anyway \u2014 see<br>[doc 09 \u00a78.5](../../../docs/09-defect-hotspots.md).<br><br><strong>Quarantined stock can still be counted.</strong> Blocking it from allocation is not blocking it from<br>verification.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Hold does not release existing allocations | [doc 09 \u00a78.5](../../../docs/09-defect-hotspots.md) |<br>| Stock already picked when the hold lands | [doc 05 WF 14](../../../docs/05-workflows.md) |<br>| Hold scoped too narrowly for a recall | [doc 05 WF 14](../../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 16,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "inventory; INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/35"
+}

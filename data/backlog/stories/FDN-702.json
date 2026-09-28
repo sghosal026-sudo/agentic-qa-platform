@@ -1,0 +1,38 @@
+{
+  "id": 103,
+  "rev": 1,
+  "code": "FDN-702",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-702 \u2014 Partners",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>system administrator</strong>, I want <strong>suppliers, customers, and carriers recorded as<br>partners</strong>, so that <strong>receipts, orders, and shipments can reference who they involve</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a partner, <strong>then</strong> it has one or more roles: supplier, customer, or carrier.</li><li>- <strong>Given</strong> a partner code, <strong>then</strong> it is unique.</li><li>- <strong>Given</strong> a customer, <strong>then</strong> their address and any fulfilment rules (partial shipment</li><li>allowed, minimum shelf life required) are recorded.</li><li>- <strong>Given</strong> a partner in use, <strong>then</strong> it can be deactivated but not deleted.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>masterdata</code> |<br>| Tables | <code>partner</code> |<br>| Risks | \u2014 |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/21",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/103"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 89,
+  "rev": 1,
+  "code": "FDN-502",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-502 \u2014 Create a zone",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>system administrator</strong>, I want <strong>to define zones within a warehouse</strong>, so that <strong>putaway,<br>picking, and counting can reason about areas rather than individual locations</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a warehouse and a zone code and type, <strong>when</strong> I create a zone, <strong>then</strong> it is</li><li>created.</li><li>- <strong>Given</strong> a zone type, <strong>then</strong> it is one of receiving, bulk, pick, quarantine, staging, or</li><li>dock.</li><li>- <strong>Given</strong> a duplicate zone code within a warehouse, <strong>then</strong> it is rejected.</li><li>- <strong>Given</strong> a temperature-controlled zone, <strong>then</strong> its temperature class is recorded.</li><li>- <strong>Given</strong> a zone that contains locations, <strong>then</strong> it cannot be deleted.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>masterdata</code> |<br>| Tables | <code>zone</code> |<br>| Risks | \u2014 |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 2,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/19",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/89"
+}

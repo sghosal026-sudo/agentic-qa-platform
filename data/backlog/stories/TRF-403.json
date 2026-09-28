@@ -1,0 +1,38 @@
+{
+  "id": 289,
+  "rev": 1,
+  "code": "TRF-403",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-403 \u2014 Record a transfer discrepancy",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk at the destination</strong>, I want <strong>a difference between sent and received<br>recorded as an open item</strong>, so that <strong>somebody has to explain it rather than it being quietly<br>corrected</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a shortfall or excess against the dispatch, <strong>then</strong> a discrepancy record is created</li><li>with quantity, product, batch, and both sites named.</li><li>- <strong>Given</strong> the discrepancy, <strong>then</strong> the outstanding quantity <strong>stays in <code>VIRT-INTRANSIT</code></strong> \u2014</li><li>it is not written off automatically.</li><li>- <strong>Given</strong> the discrepancy, <strong>then</strong> an owner is assigned and both sites can see it.</li><li>- <strong>Given</strong> the discrepancy, <strong>then</strong> <code>transfers.transfer_discrepancy</code> is published.</li><li>- <strong>Given</strong> the record, <strong>then</strong> it captures the receiving clerk's notes and any evidence.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code>, <code>inventory</code> |<br>| Tables | transfer discrepancy, <code>stock_balance</code>, <code>outbox</code> |<br>| Risks | Auto-adjusting hides theft, picking errors, and receiving errors ([doc 09 \u00a79.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/60",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/289"
+}

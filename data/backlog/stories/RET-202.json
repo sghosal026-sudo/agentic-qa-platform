@@ -1,0 +1,38 @@
+{
+  "id": 245,
+  "rev": 1,
+  "code": "RET-202",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-202 \u2014 Blind return with approval",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>returns clerk</strong>, I want <strong>to receive goods that arrived with no RMA</strong>, so that <strong>parcels<br>customers sent without authorisation can still be processed</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> no RMA reference, <strong>then</strong> I can start a blind return recording customer, products,</li><li>and quantities.</li><li>- <strong>Given</strong> a blind return, <strong>then</strong> supervisor approval is required before confirmation.</li><li>- <strong>Given</strong> the system finds a plausible matching order, <strong>then</strong> it offers the match.</li><li>- <strong>Given</strong> an order shipped before go-live and therefore unfindable, <strong>then</strong> the return can</li><li>still be processed with an exception record.</li><li>- <strong>Given</strong> any blind return, <strong>then</strong> the stock lands in quarantine \u2014 there is no exception.</li><li>- <strong>Given</strong> blind returns, <strong>then</strong> their volume is reportable, since a high rate means the RMA</li><li>process is being bypassed.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>inventory</code> |<br>| Tables | <code>return_receipt</code>, <code>return_line</code> |<br>| Risks | Original order not found ([doc 05 WF 9](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/49",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/245"
+}

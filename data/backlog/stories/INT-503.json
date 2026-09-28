@@ -1,0 +1,38 @@
+{
+  "id": 160,
+  "rev": 1,
+  "code": "INT-503",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-503 \u2014 Orphaned reservations",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>reservations with no live order found automatically</strong>,<br>so that <strong>stock made invisible by a missed release path is recovered in days rather than<br>months</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a reservation whose order line is cancelled, shipped, archived, or missing, <strong>then</strong></li><li>it appears on the report with product, location, quantity, age, and claimed order.</li><li>- <strong>Given</strong> a balance where the sum of reservation rows does not equal <code>qty_reserved</code>, <strong>then</strong></li><li>the discrepancy is reported.</li><li>- <strong>Given</strong> any finding, <strong>then</strong> an alert reaches a person.</li><li>- <strong>Given</strong> a finding, <strong>then</strong> the report does <strong>not</strong> release anything automatically \u2014 a human</li><li>decides.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it runs nightly.</li><li>- <strong>Given</strong> an orphan, <strong>then</strong> the report links to the release path most likely responsible, so</li><li>the code bug can be found rather than only the data corrected.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>inventory</code>, <code>outbound</code> |<br>| Tables | <code>reservation</code>, <code>stock_balance</code>, <code>order_line</code> |<br>| Risks | Reservation leak ([doc 09 \u00a75.2](../../../docs/09-defect-hotspots.md)); orphans from no cross-module FKs ([doc 02 \u00a74](../../../docs/02-architecture-overview.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/31",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/160"
+}

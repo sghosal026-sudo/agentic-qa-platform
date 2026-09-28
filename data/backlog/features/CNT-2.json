@@ -1,0 +1,31 @@
+{
+  "id": 11,
+  "rev": 1,
+  "code": "CNT-2",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "CNT-2 \u2014 Counting",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Get an honest count of what is physically in a location, without the counter being influenced<br>by what the system expects.</p>\n<h3>Scope</h3><p><strong>In.</strong> Issuing tasks, blind entry, multi-batch counting, location freezing.<br><br><strong>Out.</strong> What happens to the difference \u2014 that is [CNT-3](CNT-3-variance.md).</p>\n<h3>Design notes</h3><p><strong>Blind counting is a service-layer decision, not a UI one.</strong> \"Hide the expected quantity on<br>the screen\" is not enough \u2014 anyone with developer tools can read a hidden field, and scanner<br>clients are often built by another team. The expected quantity must be <strong>absent from the API<br>payload</strong>, and <code>CNT-202</code> has an acceptance criterion asserting exactly that.<br><br>Why it matters: a counter shown \"expected 40\" glances at the shelf, sees roughly forty, and<br>enters 40. Counts always match, accuracy metrics look excellent, and real accuracy is unknown.<br><br><strong><code>CNT-204</code> is what makes the whole epic trustworthy.</strong> Freezing does two things: stops new<br>tasks being issued against the location, and captures the expected quantity at freeze time.<br>The snapshot is the baseline for variance \u2014 not the balance as it stands when the count is<br>entered.<br><br><strong>Show which batches are expected, not their quantities.</strong> A location holding two batches where<br>the counter only counts the visible one produces a phantom variance on the other. The batch<br>list is a prompt; the quantities are the answer being tested.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Stock moves during the count | [doc 09 \u00a76.1](../../../docs/09-defect-hotspots.md) |<br>| Expected quantity visible to the counter | [doc 09 \u00a76.2](../../../docs/09-defect-hotspots.md) |<br>| Only one batch counted | [doc 09 \u00a76.3](../../../docs/09-defect-hotspots.md) |<br>| Counting a location with open tasks | [doc 09 \u00a76.5](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 21,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "counting; CNT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/11"
+}

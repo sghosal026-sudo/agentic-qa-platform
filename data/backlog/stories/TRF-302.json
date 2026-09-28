@@ -1,0 +1,38 @@
+{
+  "id": 284,
+  "rev": 1,
+  "code": "TRF-302",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-302 \u2014 Validate against what was sent",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk at the destination</strong>, I want <strong>the system to compare what arrived with<br>what was sent</strong>, so that <strong>a difference is caught at the dock rather than at a stock count</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a receipt, <strong>then</strong> received quantities are compared line by line against the</li><li>dispatch record.</li><li>- <strong>Given</strong> an exact match, <strong>then</strong> the transfer closes and no discrepancy is raised.</li><li>- <strong>Given</strong> a shortfall or excess, <strong>then</strong> a discrepancy record is created \u2014 see</li><li>[TRF-403](TRF-403-record-discrepancy.md).</li><li>- <strong>Given</strong> a discrepancy, <strong>then</strong> the system does <strong>not</strong> automatically adjust either side's</li><li>stock.</li><li>- <strong>Given</strong> a product received that was not dispatched, <strong>then</strong> it is recorded as an unexpected</li><li>item and quarantined.</li><li>- <strong>Given</strong> a batch mismatch, <strong>then</strong> it is treated as a discrepancy even when quantities agree.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code> |<br>| Tables | <code>transfer_receipt</code>, <code>transfer_shipment</code> |<br>| Risks | Quantity mismatch auto-adjusted, hiding theft or picking errors ([doc 09 \u00a79.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/59",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/284"
+}

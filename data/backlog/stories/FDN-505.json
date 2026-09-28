@@ -1,0 +1,38 @@
+{
+  "id": 92,
+  "rev": 1,
+  "code": "FDN-505",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-505 \u2014 Block and unblock a location",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>to block a location</strong>, so that <strong>damaged racking or a<br>contamination area stops receiving and issuing stock immediately</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an active location, <strong>when</strong> I block it, <strong>then</strong> no new putaway, allocation, or</li><li>replenishment targets it.</li><li>- <strong>Given</strong> a location with open tasks against it, <strong>when</strong> I block it, <strong>then</strong> I am warned and</li><li>the open tasks are listed.</li><li>- <strong>Given</strong> a blocked location holding stock, <strong>then</strong> the stock is still visible and still</li><li>countable, but not allocatable.</li><li>- <strong>Given</strong> a blocked location, <strong>when</strong> I unblock it, <strong>then</strong> it becomes usable again.</li><li>- <strong>Given</strong> either change, <strong>then</strong> an event is published and an audit row written.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>masterdata</code>, <code>inventory</code> |<br>| Tables | <code>location</code> |<br>| Risks | Blocking under open tasks blocks operators mid-task ([doc 03 \u00a77.7](../../../docs/03-master-data.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/19",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/92"
+}

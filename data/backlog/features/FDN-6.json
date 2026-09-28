@@ -1,0 +1,31 @@
+{
+  "id": 20,
+  "rev": 1,
+  "code": "FDN-6",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "FDN-6 \u2014 Master data: products",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Define the things the warehouse holds stock of, with the identity, physical attributes, and<br>handling flags that every other module depends on.</p>\n<h3>Scope</h3><p><strong>In.</strong> Product records, multiple barcodes, units of measure and conversions, tracking flags,<br>bulk import, discontinuation, frozen-field enforcement.<br><br><strong>Out.</strong> Pricing. Product content and images. Purchasing and supplier catalogues.</p>\n<h3>Design notes</h3><p><strong><code>product_id</code> and <code>sku</code> are different fields.</strong> This is the highest-value design decision in<br>the whole system. SKU codes get renumbered \u2014 catalogue refreshes, supplier changes, mergers. If<br>SKU is the primary key, that means rewriting every historical row. If it is an attribute, it is<br>a one-row update.<br><br><strong>Barcodes are a list, not a field.</strong> A product commonly has a unit EAN, a different case code,<br>an internal label, and an old code still on stock received two years ago. All must scan to the<br>same product. A single <code>barcode</code> column forces manual typing, and typed codes are wrong codes.<br><br><strong>Tracking flags branch five modules.</strong> <code>requires_batch</code>, <code>requires_serial</code>, <code>requires_expiry</code><br>each add a path in receiving, putaway, allocation, picking, and counting. Recommendation: batch<br>and expiry in v1, serial at Stage 4.<br><br><strong>Some fields must freeze once stock exists.</strong> Changing <code>case_quantity</code> silently changes what<br>every existing balance means. <code>FDN-607</code> enforces this; the documented alternative is to create<br>a new product.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| SKU used as a technical key | [doc 03 \u00a77.2](../../../docs/03-master-data.md) |<br>| Wrong case quantity multiplies across every transaction | [doc 03 \u00a77.1](../../../docs/03-master-data.md) |<br>| Missing barcode forces manual entry and wrong-item picks | [doc 03 \u00a77.3](../../../docs/03-master-data.md) |<br>| Duplicate products split stock | [doc 03 \u00a77.5](../../../docs/03-master-data.md) |<br>| Frozen field changed while stock exists | [doc 03 \u00a75](../../../docs/03-master-data.md) |<br>| Partial bulk import | [doc 09 \u00a711.4](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 29,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "masterdata; FDN"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/20"
+}

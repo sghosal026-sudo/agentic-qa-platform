@@ -1,0 +1,38 @@
+{
+  "id": 197,
+  "rev": 1,
+  "code": "OUT-101",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-101 \u2014 Create an order via API",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>integration client</strong>, I want <strong>to submit a customer order</strong>, so that <strong>the warehouse can<br>fulfil it</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a valid customer, products, quantities, and ship-to address, <strong>when</strong> I post an</li><li>order, <strong>then</strong> it is created with status <code>new</code> and its ID returned.</li><li>- <strong>Given</strong> the order, <strong>then</strong> it records required date, priority, and whether partial</li><li>shipment is allowed.</li><li>- <strong>Given</strong> a zero or negative quantity, <strong>then</strong> it is rejected.</li><li>- <strong>Given</strong> an order line, <strong>then</strong> the product description is snapshotted onto it so later</li><li>master data changes do not rewrite history.</li><li>- <strong>Given</strong> creation succeeds, <strong>then</strong> <code>outbound.order_received</code> is published.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>masterdata</code> |<br>| Tables | <code>order</code>, <code>order_line</code>, <code>outbox</code> |<br>| Risks | Live master data on historical records ([doc 03 \u00a75](../../../docs/03-master-data.md)) |<br>| Tests | unit \u00b7 integration \u00b7 event assertion |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/41",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/197"
+}

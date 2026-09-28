@@ -1,0 +1,38 @@
+{
+  "id": 192,
+  "rev": 1,
+  "code": "INV-802",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-802 \u2014 Alert on reconciliation drift",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>a reconciliation failure to reach a person</strong>, so that <strong>the<br>system's core promise being broken is treated as an incident and not a log line</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the reconciliation finds any drift, <strong>then</strong> an alert is raised through the</li><li>configured channel.</li><li>- <strong>Given</strong> the alert, <strong>then</strong> it names the affected products and locations and links to the</li><li>detail.</li><li>- <strong>Given</strong> the reconciliation job fails to run at all, <strong>then</strong> that also alerts \u2014 a silent job</li><li>is indistinguishable from a passing one.</li><li>- <strong>Given</strong> drift is found, <strong>then</strong> it is classified critical, not informational.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code>, <code>platform</code> |<br>| Tables | reconciliation results |<br>| Risks | Drift found but never read ([doc 08 \u00a79](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/39",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/192"
+}

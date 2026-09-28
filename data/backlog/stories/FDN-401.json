@@ -1,0 +1,38 @@
+{
+  "id": 85,
+  "rev": 1,
+  "code": "FDN-401",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-401 \u2014 Log every write with actor and correlation ID",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor investigating a discrepancy</strong>, I want <strong>every change recorded with who made<br>it and when</strong>, so that <strong>\"who touched this?\" is always answerable</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> any request that changes data, <strong>then</strong> an audit row is written with the actor,</li><li>timestamp, endpoint, entity, and correlation ID.</li><li>- <strong>Given</strong> a request that is rejected, <strong>then</strong> the attempt is still audited with its outcome.</li><li>- <strong>Given</strong> an audit row, <strong>then</strong> it can never be updated or deleted.</li><li>- <strong>Given</strong> a business transaction that rolls back, <strong>then</strong> the audit reflects the attempt and</li><li>its failure.</li><li>- <strong>Given</strong> a request body containing a secret, <strong>then</strong> the secret is not stored in the audit</li><li>row.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code> |<br>| Tables | <code>audit_log</code> |<br>| Risks | Some write path bypasses audit; audit writes slowing hot scanner paths ([doc 04 \u00a73.1](../../../docs/04-modules.md)) |<br>| Tests | unit \u00b7 integration \u00b7 performance (confirm endpoint latency) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/18",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/85"
+}

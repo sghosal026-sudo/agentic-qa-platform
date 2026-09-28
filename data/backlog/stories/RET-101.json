@@ -1,0 +1,38 @@
+{
+  "id": 240,
+  "rev": 1,
+  "code": "RET-101",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-101 \u2014 Create an RMA against an order",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>customer service agent</strong>, I want <strong>to authorise a return against a shipped order</strong>, so<br>that <strong>the warehouse can match the parcel when it arrives</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a shipped order, <strong>when</strong> I create an RMA for specific lines and quantities, <strong>then</strong></li><li>it is created with an expiry date and a reference.</li><li>- <strong>Given</strong> an order not yet shipped, <strong>then</strong> RMA creation is rejected.</li><li>- <strong>Given</strong> a return reason, <strong>then</strong> it is mandatory and comes from a controlled list.</li><li>- <strong>Given</strong> an RMA, <strong>then</strong> it records who authorised it and when.</li><li>- <strong>Given</strong> creation, <strong>then</strong> <code>returns.rma_created</code> is published.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>outbound</code> |<br>| Tables | <code>rma</code> |<br>| Risks | Return reasons too vague to analyse ([doc 03 \u00a78](../../../docs/03-master-data.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/48",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/240"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 258,
+  "rev": 1,
+  "code": "RET-502",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-502 \u2014 Return rate by customer",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>commercial manager</strong>, I want <strong>to see which customers return the most</strong>, so that <strong>genuine<br>quality issues, over-ordering, and possible fraud can be told apart</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>then</strong> I get returns as a percentage of units shipped, per customer.</li><li>- <strong>Given</strong> a customer, <strong>then</strong> I can see their reason breakdown and their blind-return rate.</li><li>- <strong>Given</strong> customers with low volume, <strong>then</strong> they are excluded from the ranking.</li><li>- <strong>Given</strong> a customer whose returns are mostly \"no reason given\" or blind, <strong>then</strong> they are</li><li>flagged for review.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it identifies patterns; it does not take action.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>outbound</code> |<br>| Tables | return rate projection |<br>| Risks | Acting on small-sample noise |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/52",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/258"
+}

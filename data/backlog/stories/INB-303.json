@@ -1,0 +1,38 @@
+{
+  "id": 128,
+  "rev": 1,
+  "code": "INB-303",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-303 \u2014 Confirm a putaway and move the stock",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>putaway operator</strong>, I want <strong>to confirm that I have put stock away</strong>, so that <strong>the<br>system knows where it is and it becomes available to sell</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a task assigned to me, <strong>when</strong> I scan the destination and confirm the quantity,</li><li><strong>then</strong> stock moves from receiving to that location, a movement is written, and the task</li><li>closes \u2014 all in one transaction.</li><li>- <strong>Given</strong> a task assigned to someone else, <strong>then</strong> my confirmation is rejected.</li><li>- <strong>Given</strong> a destination that fails validation at scan time, <strong>then</strong> the confirm is rejected</li><li>and an alternative is suggested.</li><li>- <strong>Given</strong> a confirmed quantity less than the task quantity, <strong>then</strong> the remainder stays on</li><li>the task \u2014 see [INB-308](INB-308-split-putaway.md).</li><li>- <strong>Given</strong> the same confirm sent twice with one idempotency key, <strong>then</strong> the stock moves once.</li><li>- <strong>Given</strong> the confirm, <strong>then</strong> the stock becomes available for allocation.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>inventory</code> |<br>| Tables | <code>putaway_task</code>, <code>stock_balance</code>, <code>stock_movement</code> |<br>| Risks | Two operators on one task ([doc 09 \u00a74.3](../../../docs/09-defect-hotspots.md)); duplicate confirm ([doc 09 \u00a73.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 concurrency \u00b7 idempotency \u00b7 rollback |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/25",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/128"
+}

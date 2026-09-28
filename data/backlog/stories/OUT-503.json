@@ -1,0 +1,38 @@
+{
+  "id": 227,
+  "rev": 1,
+  "code": "OUT-503",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-503 \u2014 Suggest a carton size",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>packer</strong>, I want <strong>the system to suggest which box to use</strong>, so that <strong>I stop guessing<br>and we stop shipping air</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the order contents and product dimensions, <strong>then</strong> the smallest suitable carton</li><li>from the configured list is suggested.</li><li>- <strong>Given</strong> contents that will not fit any single carton, <strong>then</strong> a multi-carton split is</li><li>suggested.</li><li>- <strong>Given</strong> a product with missing or implausible dimensions, <strong>then</strong> no suggestion is made and</li><li>the product is flagged for a data quality report.</li><li>- <strong>Given</strong> the suggestion, <strong>then</strong> the packer may choose a different carton without a reason \u2014</li><li>it is advisory only.</li><li>- <strong>Given</strong> hazmat or temperature-controlled products, <strong>then</strong> packing restrictions are applied</li><li>before size optimisation.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>masterdata</code> |<br>| Tables | <code>carton</code>, <code>product</code> |<br>| Risks | Wrong product dimensions in master data ([doc 03 \u00a73](../../../docs/03-master-data.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/45",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/227"
+}

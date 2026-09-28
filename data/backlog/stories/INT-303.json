@@ -1,0 +1,38 @@
+{
+  "id": 151,
+  "rev": 1,
+  "code": "INT-303",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-303 \u2014 Daily stock snapshot",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>finance team member</strong>, I want <strong>a record of what we held at the end of each day</strong>, so<br>that <strong>month-end reporting does not mean replaying the entire movement ledger</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a nightly job, <strong>then</strong> it records on-hand, reserved, and in-transit per product per</li><li>warehouse as at a defined cut-off time.</li><li>- <strong>Given</strong> a past date, <strong>then</strong> the snapshot for it can be queried directly.</li><li>- <strong>Given</strong> a snapshot, <strong>then</strong> it is immutable once written.</li><li>- <strong>Given</strong> a missed run, <strong>then</strong> the gap is detected and the snapshot can be regenerated from</li><li>the ledger for that date.</li><li>- <strong>Given</strong> the cut-off time, <strong>then</strong> it is expressed in the warehouse timezone and recorded on</li><li>the snapshot.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>inventory</code> |<br>| Tables | <code>stock_snapshot_daily</code>, <code>stock_movement</code> |<br>| Risks | Timezone ambiguity on the cut-off ([doc 09 \u00a79.4](../../../docs/09-defect-hotspots.md)); missed runs unnoticed |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/29",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/151"
+}

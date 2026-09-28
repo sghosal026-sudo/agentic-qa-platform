@@ -1,0 +1,31 @@
+{
+  "id": 46,
+  "rev": 1,
+  "code": "OUT-6",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "OUT-6 \u2014 Shipping",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Load cartons onto a vehicle, confirm dispatch, and tell everyone who needs to know that the<br>goods have gone.</p>\n<h3>Scope</h3><p><strong>In.</strong> Shipment creation, carton scanning, dispatch confirmation, manifests, ERP notification,<br>partial shipment.<br><br><strong>Out.</strong> Carrier booking and rate shopping. Tracking-number allocation by the carrier's own<br>system.</p>\n<h3>Design notes</h3><p><strong>Dispatch is the point of no return.</strong> After it, only a return brings stock back. That makes<br><code>OUT-603</code> a story that deserves a rollback test and an idempotency test, not just a happy-path<br>one.<br><br><strong>Confirming dispatch does four things in one transaction:</strong> moves stock to <code>VIRT-CUSTOMER</code>,<br>writes movements, releases any leftover reservations for those orders, and sets order status to<br>shipped. Missing the reservation release leaves stock permanently reserved against a shipped<br>order.<br><br><strong>Confirm only after the physical load is complete.</strong> Confirming while loading is still in<br>progress produces records saying \"shipped\" for goods still on the dock \u2014 and if the vehicle<br>leaves without them, nobody finds out until the customer calls.<br><br><strong>A carton ships exactly once.</strong> Unique constraint on carton-to-shipment. A carton scanned onto<br>two shipments makes both manifests wrong.<br><br><strong>The ERP notification goes through the outbox</strong>, never as a direct call inside the<br>transaction. A slow ERP must not slow dispatch, and a failed call must not lose the invoice<br>trigger.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Carton loaded onto the wrong vehicle | [doc 05 WF 8](../../../docs/05-workflows.md) |<br>| Dispatch confirmed before loading finishes | [doc 05 WF 8](../../../docs/05-workflows.md) |<br>| Reservations not released on ship | [doc 09 \u00a75.2](../../../docs/09-defect-hotspots.md) |<br>| Same shipment confirmed twice | [doc 09 \u00a73.2](../../../docs/09-defect-hotspots.md) |<br>| ERP notification lost | [doc 09 \u00a72.4](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 29,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "outbound; OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/46"
+}

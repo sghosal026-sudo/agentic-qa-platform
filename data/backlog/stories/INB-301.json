@@ -1,0 +1,38 @@
+{
+  "id": 126,
+  "rev": 1,
+  "code": "INB-301",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-301 \u2014 Generate putaway tasks on receipt confirm",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>putaway operator</strong>, I want <strong>work to appear automatically when a receipt is confirmed</strong>,<br>so that <strong>stock does not sit on the dock waiting for someone to create a job</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a receipt confirms, <strong>then</strong> one putaway task exists per received line, in the same</li><li>transaction as the stock creation.</li><li>- <strong>Given</strong> the receipt transaction rolls back, <strong>then</strong> no putaway tasks exist.</li><li>- <strong>Given</strong> a task, <strong>then</strong> it records product, batch, quantity, and source receiving location.</li><li>- <strong>Given</strong> quarantined quantity on a line, <strong>then</strong> its putaway task targets the quarantine</li><li>area, not general storage.</li><li>- <strong>Given</strong> the tasks, <strong>then</strong> they are unassigned and available to any qualified operator.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code> |<br>| Tables | <code>putaway_task</code> |<br>| Risks | Tasks created before commit, referencing stock that does not exist ([doc 04 \u00a73.4](../../../docs/04-modules.md)) |<br>| Tests | integration \u00b7 rollback |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/25",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/126"
+}

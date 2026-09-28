@@ -1,0 +1,38 @@
+{
+  "id": 91,
+  "rev": 1,
+  "code": "FDN-504",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-504 \u2014 Bulk import locations",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>system administrator setting up a warehouse</strong>, I want <strong>to load thousands of locations<br>from a file</strong>, so that <strong>I do not create four thousand racking positions by hand</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a valid file, <strong>when</strong> I import it, <strong>then</strong> every location is created.</li><li>- <strong>Given</strong> a file with any invalid row, <strong>then</strong> <strong>nothing</strong> is imported and every problem is</li><li>reported at once, with row numbers.</li><li>- <strong>Given</strong> a row referencing a zone that does not exist, <strong>then</strong> it is reported as invalid.</li><li>- <strong>Given</strong> duplicate codes within the file, <strong>then</strong> they are reported as invalid.</li><li>- <strong>Given</strong> a row with a missing capacity or sequence, <strong>then</strong> it is reported as invalid.</li><li>- <strong>Given</strong> a file that has already been imported, <strong>then</strong> re-importing it changes nothing.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>masterdata</code> |<br>| Tables | <code>location</code> |<br>| Risks | Partial import leaves an unclear half-populated set ([doc 09 \u00a711.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 idempotency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/19",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/91"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 169,
+  "rev": 1,
+  "code": "INV-203",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-203 \u2014 Trace a movement to its source document",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor investigating a discrepancy</strong>, I want <strong>to jump from a movement to the receipt,<br>pick task, or count that caused it</strong>, so that <strong>a ledger entry is a story rather than a bare<br>fact</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a movement, <strong>then</strong> <code>reference_type</code> and <code>reference_id</code> identify the document that</li><li>caused it.</li><li>- <strong>Given</strong> a receipt, a pick task, or a count task, <strong>then</strong> I can list every movement it</li><li>produced.</li><li>- <strong>Given</strong> a movement with no source document \u2014 such as a manual adjustment \u2014 <strong>then</strong> it</li><li>references the adjustment record instead.</li><li>- <strong>Given</strong> any movement, <strong>then</strong> <code>reference_type</code> is never null.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_movement</code> |<br>| Risks | Movements with no traceable cause make investigation impossible |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/33",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/169"
+}

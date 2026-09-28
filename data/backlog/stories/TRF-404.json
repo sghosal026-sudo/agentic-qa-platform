@@ -1,0 +1,38 @@
+{
+  "id": 290,
+  "rev": 1,
+  "code": "TRF-404",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-404 \u2014 Investigate and resolve a discrepancy",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>to close a transfer discrepancy with a stated cause</strong>,<br>so that <strong>the adjustment is attributed to what actually happened</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an open discrepancy, <strong>then</strong> a cause must be chosen: origin picking error,</li><li>destination receiving error, loss in transit, damage in transit, or paperwork error.</li><li>- <strong>Given</strong> a cause of origin picking error, <strong>then</strong> the adjustment posts at the origin, not</li><li>the destination.</li><li>- <strong>Given</strong> a cause of loss in transit, <strong>then</strong> the stock is written off from</li><li><code>VIRT-INTRANSIT</code> to <code>VIRT-LOSS</code> with approval.</li><li>- <strong>Given</strong> resolution, <strong>then</strong> the adjustment posts in one transaction with the discrepancy</li><li>closure and carries the discrepancy reference.</li><li>- <strong>Given</strong> resolution above the value threshold, <strong>then</strong> it requires approval from someone</li><li>other than the investigator.</li><li>- <strong>Given</strong> resolved discrepancies, <strong>then</strong> they are reportable by cause, by route, and by</li><li>carrier.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code>, <code>inventory</code>, <code>platform</code> |<br>| Tables | transfer discrepancy, <code>adjustment</code>, <code>stock_balance</code>, <code>stock_movement</code> |<br>| Risks | Adjusting the wrong side; unattributed write-offs ([doc 09 \u00a79.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/60",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/290"
+}

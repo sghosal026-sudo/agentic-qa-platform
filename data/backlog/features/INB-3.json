@@ -1,0 +1,31 @@
+{
+  "id": 25,
+  "rev": 1,
+  "code": "INB-3",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INB-3 \u2014 Putaway",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Get stock off the dock and into a legal storage location, quickly and to somewhere sensible.</p>\n<h3>Scope</h3><p><strong>In.</strong> Task generation, destination suggestion (simple then smart), confirmation, override<br>with a reason, consolidation, pick-face top-up, splitting, task timeout.<br><br><strong>Out.</strong> Slotting strategy \u2014 deciding which products <em>should</em> live where is a separate<br>discipline.</p>\n<h3>Design notes</h3><p><strong>Build the suggestion twice, on purpose.</strong> <code>INB-302</code> is deliberately dumb \u2014 first active<br>location that fits. <code>INB-305</code> replaces it two stages later with capacity, zone, and<br>consolidation logic.<br><br>That is not wasted work. Six months of override reason codes from <code>INB-304</code> is a specification<br>for the smart rule that no amount of up-front design would have produced. Make the override<br>reasons specific, and report on them.<br><br><strong>Overrides are validated, not blindly accepted.</strong> The operator may choose a different<br>location; they may not choose an illegal one. Temperature zone, hazmat, weight, and mixing<br>rules still apply.<br><br><strong>Re-validate capacity at scan time.</strong> The suggested location may have been filled by someone<br>else in the two minutes since the task was issued. Suggest an alternative immediately rather<br>than leaving the operator stuck at the shelf.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Two operators claiming the same task | [doc 09 \u00a74.3](../../../docs/09-defect-hotspots.md) |<br>| Task created before the receipt transaction commits | [doc 09 \u00a72.1](../../../docs/09-defect-hotspots.md) |<br>| Stock put away physically but never confirmed | [doc 05 WF 3](../../../docs/05-workflows.md) |<br>| Suggested location full on arrival | [doc 05 WF 3](../../../docs/05-workflows.md) |<br>| Override reasons all defaulting to \"other\" | [doc 05 WF 3](../../../docs/05-workflows.md) |<br>| Null capacity producing nonsense suggestions | [doc 03 \u00a77.4](../../../docs/03-master-data.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 45,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "inbound; INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/25"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 265,
+  "rev": 1,
+  "code": "RPL-202",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-202 \u2014 Find a source location",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>replenishment operator</strong>, I want <strong>the system to choose where the stock comes from</strong>, so<br>that <strong>I make one trip rather than three and take the right batch</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a need, <strong>then</strong> candidate sources are bulk locations holding the product in</li><li>available status.</li><li>- <strong>Given</strong> candidates, <strong>then</strong> they are ordered FEFO for expiry-tracked products, FIFO</li><li>otherwise.</li><li>- <strong>Given</strong> a candidate that can cover the whole need alone, <strong>then</strong> it is preferred over</li><li>several partial sources.</li><li>- <strong>Given</strong> equally suitable candidates, <strong>then</strong> the nearest to the pick face is chosen.</li><li>- <strong>Given</strong> blocked, quarantined, or reserved stock, <strong>then</strong> it is excluded.</li><li>- <strong>Given</strong> no candidate at all, <strong>then</strong> no task is created \u2014 see</li><li>[RPL-205](RPL-205-alert-when-no-source.md).</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code>, <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>batch</code>, <code>location</code> |<br>| Risks | Breaking FEFO ([doc 09 \u00a74.1](../../../docs/09-defect-hotspots.md)); competing with allocation ([doc 09 \u00a77.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/54",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/265"
+}

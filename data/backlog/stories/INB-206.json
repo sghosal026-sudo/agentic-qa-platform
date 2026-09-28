@@ -1,0 +1,38 @@
+{
+  "id": 119,
+  "rev": 1,
+  "code": "INB-206",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-206 \u2014 Escalate an over-receipt beyond tolerance",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>large over-deliveries to need my approval</strong>, so that <strong>we do not<br>silently accept and pay for stock we did not order</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a quantity above tolerance, <strong>then</strong> the line is held pending approval and the</li><li>receipt cannot be confirmed.</li><li>- <strong>Given</strong> approval, <strong>then</strong> the full quantity is accepted and the approver recorded.</li><li>- <strong>Given</strong> rejection, <strong>then</strong> only the expected quantity is received and the excess is</li><li>recorded as refused.</li><li>- <strong>Given</strong> the clerk who recorded it, <strong>then</strong> they cannot approve it themselves.</li><li>- <strong>Given</strong> the escalation, <strong>then</strong> the supervisor is notified rather than having to discover</li><li>it.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>platform</code> |<br>| Tables | <code>receipt_line</code>, discrepancy |<br>| Risks | Approval bypassed; truck held while nobody is notified |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/24",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/119"
+}

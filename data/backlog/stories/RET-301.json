@@ -1,0 +1,38 @@
+{
+  "id": 248,
+  "rev": 1,
+  "code": "RET-301",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-301 \u2014 Record an inspection outcome",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>quality inspector</strong>, I want <strong>to record what I found when I examined a return</strong>, so that<br><strong>the disposition decision is based on evidence</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a quarantined return line, <strong>then</strong> I record a <strong>condition grade</strong> \u2014 not a yes/no.</li><li>- <strong>Given</strong> any grade other than \"as new\", <strong>then</strong> a reason is mandatory.</li><li>- <strong>Given</strong> the inspection, <strong>then</strong> the product identity is verified by scan \u2014 customers do</li><li>return the wrong item.</li><li>- <strong>Given</strong> an expiry-tracked product, <strong>then</strong> the expiry date is re-captured from the physical</li><li>goods.</li><li>- <strong>Given</strong> a quantity, <strong>then</strong> it can be split across grades \u2014 five as new, three damaged.</li><li>- <strong>Given</strong> the inspection, <strong>then</strong> <code>returns.inspection_completed</code> is published.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code> |<br>| Tables | <code>inspection</code> |<br>| Risks | Rubber-stamped inspection ([doc 09 \u00a78.2](../../../docs/09-defect-hotspots.md)); wrong product not detected ([doc 05 WF 9](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/50",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/248"
+}

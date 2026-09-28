@@ -1,0 +1,38 @@
+{
+  "id": 212,
+  "rev": 1,
+  "code": "OUT-302",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-302 \u2014 Preview wave workload",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>to see how much work a wave contains before I release it</strong>, so<br>that <strong>I do not release more than the shift can finish before the cut-off</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a planned wave, <strong>then</strong> I see order count, line count, unit count, and estimated</li><li>pick time.</li><li>- <strong>Given</strong> the preview, <strong>then</strong> it breaks work down by zone so I can see where the load falls.</li><li>- <strong>Given</strong> lines that cannot be picked because stock is missing, <strong>then</strong> they are listed</li><li>before release.</li><li>- <strong>Given</strong> pick faces that will run below minimum during the wave, <strong>then</strong> they are listed</li><li>with the replenishment needed.</li><li>- <strong>Given</strong> the estimate, <strong>then</strong> it is compared against the cut-off and a warning shown if it</li><li>will not finish.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>replenishment</code>, <code>inventory</code> |<br>| Tables | <code>wave</code>, <code>order_line</code>, <code>stock_balance</code> |<br>| Risks | Wave too large to finish before cut-off ([doc 05 WF 5](../../../docs/05-workflows.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/43",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/212"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 102,
+  "rev": 1,
+  "code": "FDN-701",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-701 \u2014 Reason codes",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>system administrator</strong>, I want <strong>a controlled list of reason codes</strong>, so that <strong>every<br>exception has a name that can be counted and analysed</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the reason code list, <strong>then</strong> each code has a category \u2014 adjustment, short receipt,</li><li>short pick, putaway override, scrap, count correction.</li><li>- <strong>Given</strong> a stock change endpoint, <strong>then</strong> it accepts only a code from the list for its</li><li>category, never free text alone.</li><li>- <strong>Given</strong> a code in use, <strong>then</strong> it can be deactivated but not deleted.</li><li>- <strong>Given</strong> a deactivated code, <strong>then</strong> historical records still resolve it.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>masterdata</code> |<br>| Tables | <code>reason_code</code> |<br>| Risks | Vague codes have no analytical value ([doc 05 WF 13](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 2,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/21",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/102"
+}

@@ -1,0 +1,22 @@
+{
+  "id": 3,
+  "rev": 1,
+  "code": "INB",
+  "fields": {
+    "System.WorkItemType": "Epic",
+    "System.Title": "EPIC INB \u2014 Inbound Receiving",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Goal</h3><p>Goods arriving at the dock become accurate, findable stock in storage locations, within four<br>hours of arrival.</p>\n<h3>Business value</h3><p>Stock that has been received but not recorded cannot be sold. Every hour a pallet sits on the<br>dock unrecorded is an hour it is invisible to customers, and dock congestion slows every<br>subsequent delivery.<br><br>Receiving is also the system's first control point. An error caught here costs minutes. The<br>same error caught at picking costs a customer.</p>\n<h3>Scope</h3><p><strong>In.</strong> Advance shipping notices. Physical receiving against an ASN and blind. Quantity,<br>batch, expiry, and serial capture. Short and over receipt with tolerance and approval. Damage<br>handling. Quality holds. Putaway task generation, suggestion, override, and confirmation.<br>Receiving exception reporting.<br><br><strong>Out.</strong> Purchasing decisions. Supplier contracts. Yard and dock scheduling.</p>\n<h3>Done when</h3><ul><li>A delivery can be received against an ASN, with batch and expiry captured.</li><li>A delivery can be received blind, with approval, landing in quarantine.</li><li>Short, over, and damaged receipts are recorded with reasons.</li><li>Confirming a receipt creates stock, movements, and putaway tasks in one transaction.</li><li>Confirming twice creates stock once.</li><li>Putaway suggests a legal location, allows an override with a reason, and moves the stock.</li><li>Stock stranded in receiving raises an alert.</li></ul>\n<h3>Key risks</h3><p>| Risk | Why it matters | Reference |<br>|---|---|---|<br>| Partial commit on confirm | Double receipt, or goods with no putaway task | [doc 09 \u00a72.1](../../docs/09-defect-hotspots.md) |<br>| Duplicate confirm from a scanner retry | Stock counted twice | [doc 09 \u00a73.2](../../docs/09-defect-hotspots.md) |<br>| Wrong case quantity in master data | Systematic, invisible stock drift | [doc 03 \u00a77.1](../../docs/03-master-data.md) |<br>| Two operators claiming one putaway task | Duplicate movement | [doc 09 \u00a74.3](../../docs/09-defect-hotspots.md) |<br>| Stock left in receiving over a weekend | Availability understated; orders fail | [doc 05 WF 3](../../docs/05-workflows.md) |<br>| Suggested location full on arrival | Operator stuck; override without validation | [doc 05 WF 3](../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "INB; Stage 1"
+  },
+  "relations": [],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3"
+}

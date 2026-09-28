@@ -1,0 +1,38 @@
+{
+  "id": 79,
+  "rev": 1,
+  "code": "CNT-502",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-502 \u2014 Count every location",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>count tasks for every location in the warehouse</strong>, so<br>that <strong>nothing is missed during a full count</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the freeze is active, <strong>then</strong> a count task exists for every active location,</li><li>including those the system believes are empty.</li><li>- <strong>Given</strong> an empty location, <strong>then</strong> it must still be counted and confirmed as empty \u2014</li><li>finding stock there is exactly what a full count is for.</li><li>- <strong>Given</strong> progress, <strong>then</strong> I can see how many locations are counted, outstanding, and in</li><li>progress.</li><li>- <strong>Given</strong> counting, <strong>then</strong> it is blind, as in [CNT-202](CNT-202-blind-count-entry.md).</li><li>- <strong>Given</strong> a location that cannot be counted, <strong>then</strong> it must be explicitly recorded as</li><li>skipped with a reason.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code> |<br>| Tables | <code>count_task</code>, <code>count_result</code> |<br>| Risks | Empty locations skipped, so found stock is never discovered |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/14",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/79"
+}

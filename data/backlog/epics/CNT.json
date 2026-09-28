@@ -1,0 +1,22 @@
+{
+  "id": 1,
+  "rev": 1,
+  "code": "CNT",
+  "fields": {
+    "System.WorkItemType": "Epic",
+    "System.Title": "EPIC CNT \u2014 Inventory Counting",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Goal</h3><p>Verify that the system's numbers match the shelf, correct them when they do not, and produce<br>the data that shows <em>why</em> they drifted.</p>\n<h3>Business value</h3><p>Inventory accuracy is not a feature you build once. It degrades continuously through small<br>process failures, and counting is the only thing that pushes back.<br><br>The second half of the goal matters as much as the first. A count that corrects a number<br>treats the symptom. A count whose variance data shows that one zone, one product class, or one<br>operator produces most of the drift treats the cause.</p>\n<h3>Scope</h3><p><strong>In.</strong> Count plans and ABC classification. Scheduled, event-triggered, and targeted counts.<br>Blind count entry. Location freezing. Variance calculation, recount thresholds, approval, and<br>posting. Accuracy reporting. Full physical counts.<br><br><strong>Out.</strong> Financial stock valuation. Statutory year-end reporting formats.</p>\n<h3>Done when</h3><ul><li>A count plan generates tasks on an ABC schedule.</li><li>A zero pick triggers a count of that location.</li><li>The count client never receives the expected quantity, in any field.</li><li>A location is frozen for the duration of its count.</li><li>Variance is calculated against the snapshot taken at freeze time.</li><li>A variance above threshold requires a recount before any adjustment.</li><li>Accuracy trends are reportable by zone, product class, and operator.</li></ul>\n<h3>Key risks</h3><p>| Risk | Why it matters | Reference |<br>|---|---|---|<br>| Stock moves during the count | Variances are timing artefacts; trust collapses | [doc 09 \u00a76.1](../../docs/09-defect-hotspots.md) |<br>| Expected quantity visible to the counter | Counts always match; real accuracy unknown | [doc 09 \u00a76.2](../../docs/09-defect-hotspots.md) |<br>| Only one batch counted | Phantom variance on the uncounted batch | [doc 09 \u00a76.3](../../docs/09-defect-hotspots.md) |<br>| Recount compared to the adjusted figure | The problem disappears from the record | [doc 09 \u00a76.4](../../docs/09-defect-hotspots.md) |<br>| Adjustment posted twice on retry | Corrupted by its own correction | [doc 09 \u00a73.2](../../docs/09-defect-hotspots.md) |<br>| Counting a location with open tasks | Guaranteed variance | [doc 09 \u00a76.5](../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "CNT; Stage 3"
+  },
+  "relations": [],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1"
+}

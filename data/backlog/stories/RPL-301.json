@@ -1,0 +1,38 @@
+{
+  "id": 269,
+  "rev": 1,
+  "code": "RPL-301",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-301 \u2014 Assign a replenishment task",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>replenishment operator</strong>, I want <strong>to be given the next replenishment job</strong>, so that <strong>I<br>work the highest-priority refill rather than picking one at random</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> open tasks, <strong>when</strong> I request work, <strong>then</strong> one is assigned and locked to me.</li><li>- <strong>Given</strong> tasks with different priorities, <strong>then</strong> wave-blocking tasks are issued first.</li><li>- <strong>Given</strong> several operators requesting simultaneously, <strong>then</strong> each task goes to exactly one</li><li>of them.</li><li>- <strong>Given</strong> a task assigned to someone else, <strong>then</strong> I cannot confirm it.</li><li>- <strong>Given</strong> an abandoned task, <strong>then</strong> it returns to the pool after the configured timeout.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code> |<br>| Tables | <code>replen_task</code> |<br>| Risks | Two operators on one task ([doc 09 \u00a74.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 concurrency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/55",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/269"
+}

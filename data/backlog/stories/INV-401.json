@@ -1,0 +1,38 @@
+{
+  "id": 174,
+  "rev": 1,
+  "code": "INV-401",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-401 \u2014 Quarantine stock",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>quality inspector</strong>, I want <strong>to put stock into quarantine</strong>, so that <strong>suspect goods<br>stop being sellable immediately, including stock already promised to orders</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> available stock, <strong>when</strong> I quarantine it, <strong>then</strong> its status changes and it is</li><li>excluded from availability.</li><li>- <strong>Given</strong> stock with existing reservations, <strong>when</strong> I quarantine it, <strong>then</strong> those</li><li>reservations are released in the same transaction and the affected orders are flagged for</li><li>re-allocation.</li><li>- <strong>Given</strong> a hold scoped to a batch, <strong>then</strong> it catches that batch in every location.</li><li>- <strong>Given</strong> stock already picked or packed but not shipped, <strong>then</strong> it is flagged for physical</li><li>interception.</li><li>- <strong>Given</strong> the change, <strong>then</strong> a movement with a quarantine reason code is written.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code>, <code>outbound</code> |<br>| Tables | <code>stock_balance</code>, <code>stock_movement</code>, <code>reservation</code> |<br>| Risks | Hold not catching allocated stock ([doc 09 \u00a78.5](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration (stock in every state) \u00b7 rollback |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/35",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/174"
+}

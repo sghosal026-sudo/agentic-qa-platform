@@ -1,0 +1,38 @@
+{
+  "id": 230,
+  "rev": 1,
+  "code": "OUT-506",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-506 \u2014 Multi-carton orders",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>packer</strong>, I want <strong>to split a large order across several boxes</strong>, so that <strong>orders that do<br>not fit in one carton can still be packed and tracked</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an order, <strong>then</strong> any number of cartons can be opened against it.</li><li>- <strong>Given</strong> several cartons, <strong>then</strong> each is labelled \"box N of M\" once all are closed.</li><li>- <strong>Given</strong> any carton unlabelled, <strong>then</strong> the order cannot be released to shipping.</li><li>- <strong>Given</strong> the cartons together, <strong>then</strong> their combined contents must exactly match the picked</li><li>quantities.</li><li>- <strong>Given</strong> a carton, <strong>then</strong> each item appears in exactly one carton \u2014 never counted twice.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>carton</code>, <code>carton_content</code> |<br>| Risks | Multi-carton order partly labelled and half-shipped ([doc 05 WF 7](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/45",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/230"
+}

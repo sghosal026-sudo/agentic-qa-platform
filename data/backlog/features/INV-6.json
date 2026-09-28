@@ -1,0 +1,31 @@
+{
+  "id": 37,
+  "rev": 1,
+  "code": "INV-6",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INV-6 \u2014 Batches and expiry",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Track stock by production batch and expiry date, so that dated goods are shipped in the right<br>order and a recall can find every affected unit.</p>\n<h3>Scope</h3><p><strong>In.</strong> Batch creation, batch queries, FEFO ordering, expiry blocking, expiring-stock reporting.<br><br><strong>Out.</strong> Serial number tracking \u2014 that is [OUT-408](../../stories/OUT/OUT-408-capture-serial-numbers.md)<br>and [INB-211](../../stories/INB/INB-211-capture-serial-numbers.md), at Stage 4.</p>\n<h3>Design notes</h3><p><strong>Batches add a dimension to every quantity question.</strong> Stock is no longer \"40 units in<br>location A\" but \"25 of batch B221 expiring in June and 15 of batch B240 expiring in September,<br>both in location A\". Allocation, counting, and reporting all have to respect it.<br><br><strong>FEFO must be applied at batch level, not location level.</strong> A location holding two batches<br>where the system picks \"the location\" will ship the wrong one, and the old batch expires<br>unsold.<br><br><strong>Switching a product to batch-tracked after it has stock is genuinely hard</strong> \u2014 the existing<br>stock has no batch. Plan for the flag to be set at product creation and frozen afterwards, with<br>a documented manual procedure for the rare exception. See<br>[FDN-607](../../stories/FDN/FDN-607-freeze-fields.md).</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| FEFO ignored for a mixed-batch location | [doc 09 \u00a74.1](../../../docs/09-defect-hotspots.md) |<br>| Batch typed rather than scanned, with a typo | [doc 05 WF 1](../../../docs/05-workflows.md) |<br>| Only one batch counted in a multi-batch location | [doc 09 \u00a76.3](../../../docs/09-defect-hotspots.md) |<br>| Returned stock restocked with the original expiry | [doc 09 \u00a78.3](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 19,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "inventory; INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/37"
+}

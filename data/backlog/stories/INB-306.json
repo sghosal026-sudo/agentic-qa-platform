@@ -1,0 +1,38 @@
+{
+  "id": 131,
+  "rev": 1,
+  "code": "INB-306",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-306 \u2014 Prefer consolidation with existing stock",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>new stock put with existing stock of the same product</strong>, so<br>that <strong>we stop filling the warehouse with half-empty locations</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a location already holding the product with room, <strong>then</strong> it is preferred over an</li><li>empty location.</li><li>- <strong>Given</strong> the product is batch-tracked and the location does not allow batch mixing, <strong>then</strong></li><li>consolidation is not suggested for a different batch.</li><li>- <strong>Given</strong> consolidation would breach FEFO picking order, <strong>then</strong> it is not suggested.</li><li>- <strong>Given</strong> no consolidation candidate, <strong>then</strong> the rule falls back to</li><li>[INB-305](INB-305-capacity-and-zone-rules.md).</li><li>- <strong>Given</strong> the change, <strong>then</strong> locations-holding-stock versus locations-available is</li><li>measurable before and after.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>inventory</code> |<br>| Tables | <code>putaway_task</code>, <code>stock_balance</code>, <code>location</code> |<br>| Risks | Consolidating batches so FEFO can no longer be honoured ([doc 09 \u00a74.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/25",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/131"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 242,
+  "rev": 1,
+  "code": "RET-103",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-103 \u2014 Query open RMAs",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>returns clerk</strong>, I want <strong>to look up an RMA when a parcel arrives</strong>, so that <strong>I know what<br>is expected inside it</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an RMA reference, <strong>then</strong> I get the expected products, quantities, customer, and</li><li>original order.</li><li>- <strong>Given</strong> a customer name or original order reference, <strong>then</strong> I can search for their open</li><li>RMAs.</li><li>- <strong>Given</strong> an expired or fully received RMA, <strong>then</strong> it does not appear in the open list.</li><li>- <strong>Given</strong> a partly received RMA, <strong>then</strong> it appears with outstanding quantities.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code> |<br>| Tables | <code>rma</code> |<br>| Risks | \u2014 |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 2,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/48",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/242"
+}

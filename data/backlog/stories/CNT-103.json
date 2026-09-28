@@ -1,0 +1,38 @@
+{
+  "id": 64,
+  "rev": 1,
+  "code": "CNT-103",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-103 \u2014 Schedule counts from a plan",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>count tasks generated automatically each day</strong>, so that<br><strong>counting happens steadily rather than only when someone remembers</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an active plan, <strong>then</strong> the scheduler generates the day's count tasks.</li><li>- <strong>Given</strong> a location with open pick, putaway, or replenishment tasks, <strong>then</strong> it is skipped</li><li>and rescheduled rather than counted.</li><li>- <strong>Given</strong> a location already having an open count task, <strong>then</strong> a second is not created.</li><li>- <strong>Given</strong> the daily generation, <strong>then</strong> it respects the plan's volume cap.</li><li>- <strong>Given</strong> a skipped location, <strong>then</strong> the reason is recorded so gaps are explainable.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code>, <code>inventory</code> |<br>| Tables | <code>count_plan</code>, <code>count_task</code> |<br>| Risks | Counting a location with open tasks ([doc 09 \u00a76.5](../../../docs/09-defect-hotspots.md)); duplicate tasks ([doc 09 \u00a77.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/10",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/64"
+}

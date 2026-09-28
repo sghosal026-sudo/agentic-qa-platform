@@ -1,0 +1,38 @@
+{
+  "id": 162,
+  "rev": 1,
+  "code": "INT-505",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-505 \u2014 Stale projections",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>to know when a projection has stopped updating</strong>, so that <strong>frozen<br>data is not served confidently as current</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> each projection, <strong>then</strong> the age of its <strong>newest</strong> row is monitored \u2014 not merely</li><li>whether the job ran.</li><li>- <strong>Given</strong> an age beyond that projection's freshness threshold, <strong>then</strong> an alert is raised.</li><li>- <strong>Given</strong> a projection whose update path has silently stopped, <strong>then</strong> it is detected even</li><li>though every row still looks valid.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it covers proxy tables and any external-system copies as well</li><li>as internal projections.</li><li>- <strong>Given</strong> an alert, <strong>then</strong> it names the projection, its age, and the rebuild job that would</li><li>fix it.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code> |<br>| Tables | all projections |<br>| Risks | Sync silently stopped, serving frozen data ([doc 08 \u00a74](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 2,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/31",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/162"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 232,
+  "rev": 1,
+  "code": "OUT-601",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-601 \u2014 Create a shipment",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>shipping clerk</strong>, I want <strong>to open a shipment for a carrier and vehicle</strong>, so that<br><strong>cartons have something to be loaded onto</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a carrier and vehicle reference, <strong>when</strong> I create a shipment, <strong>then</strong> it is created</li><li>in <code>loading</code> status.</li><li>- <strong>Given</strong> the shipment, <strong>then</strong> it records the carrier, vehicle, driver, dock, and planned</li><li>departure.</li><li>- <strong>Given</strong> an unknown carrier, <strong>then</strong> creation is rejected.</li><li>- <strong>Given</strong> an open shipment for the same carrier and vehicle, <strong>then</strong> I am warned before</li><li>creating a second.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>masterdata</code> |<br>| Tables | <code>shipment</code> |<br>| Risks | \u2014 |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/46",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/232"
+}

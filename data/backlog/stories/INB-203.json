@@ -1,0 +1,38 @@
+{
+  "id": 116,
+  "rev": 1,
+  "code": "INB-203",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-203 \u2014 Capture batch and expiry for tracked products",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk</strong>, I want <strong>to record the batch and expiry on arrival</strong>, so that <strong>FEFO<br>works and a recall can find the stock later</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a batch-tracked product, <strong>then</strong> a batch number must be captured before the line is</li><li>complete.</li><li>- <strong>Given</strong> an expiry-tracked product, <strong>then</strong> an expiry date must be captured.</li><li>- <strong>Given</strong> a batch label barcode, <strong>then</strong> scanning it populates the field \u2014 typing is a</li><li>fallback, not the default.</li><li>- <strong>Given</strong> a typed batch number, <strong>then</strong> it is validated against the configured format.</li><li>- <strong>Given</strong> one delivery containing two batches of a product, <strong>then</strong> they can be recorded as</li><li>two lines.</li><li>- <strong>Given</strong> an expiry date in the past, <strong>then</strong> it is rejected.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>inventory</code> |<br>| Tables | <code>receipt_line</code>, <code>batch</code> |<br>| Risks | Typo in a typed batch breaks FEFO ([doc 05 WF 1](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/24",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/116"
+}

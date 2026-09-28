@@ -1,0 +1,38 @@
+{
+  "id": 63,
+  "rev": 1,
+  "code": "CNT-102",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-102 \u2014 ABC classification of products",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>products classified by value and movement</strong>, so that<br><strong>counting effort concentrates on the stock where errors cost most</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> movement history and stock value, <strong>then</strong> each product is assigned class A, B, or C.</li><li>- <strong>Given</strong> the classification job, <strong>then</strong> it re-runs on a schedule as patterns change.</li><li>- <strong>Given</strong> a product, <strong>then</strong> its class can be overridden manually with a reason.</li><li>- <strong>Given</strong> a class, <strong>then</strong> its count frequency is configurable \u2014 for example A monthly, B</li><li>quarterly, C yearly.</li><li>- <strong>Given</strong> a newly created product, <strong>then</strong> it defaults to a configured class rather than</li><li>being unclassified.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code>, <code>masterdata</code>, <code>inventory</code> |<br>| Tables | <code>product</code>, count classification |<br>| Risks | Unclassified products never counted |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/10",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/63"
+}

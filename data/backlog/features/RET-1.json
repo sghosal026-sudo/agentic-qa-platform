@@ -1,0 +1,31 @@
+{
+  "id": 48,
+  "rev": 1,
+  "code": "RET-1",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "RET-1 \u2014 Return authorisation",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Give a customer permission to send something back, with a reference the warehouse can match the<br>arriving parcel against.</p>\n<h3>Scope</h3><p><strong>In.</strong> RMA creation, quantity validation against what shipped, RMA queries, expiry.<br><br><strong>Out.</strong> Refund calculation. Customer communication. Return shipping labels.</p>\n<h3>Design notes</h3><p><strong>An RMA is an expectation, exactly like an ASN.</strong> It never creates stock. Only a received and<br>inspected return does that.<br><br><strong>Validate against what shipped, not what was ordered.</strong> An order for 10 that shipped 8 can<br>have at most 8 returned. This requires a cross-module call into <code>outbound</code>.<br><br><strong>Orders shipped before go-live will not be found.</strong> That is not a bug to fix but a case to<br>handle \u2014 allow a blind return path with approval, and record an exception. See<br>[RET-202](../../stories/RET/RET-202-blind-return.md).<br><br><strong>Expire unused RMAs.</strong> Otherwise the open list grows forever and stops being a useful view of<br>what is genuinely expected back.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Original order not found | [doc 05 WF 9](../../../docs/05-workflows.md) |<br>| Return quantity exceeding what shipped | [doc 05 WF 9](../../../docs/05-workflows.md) |<br>| RMA used twice | [doc 09 \u00a78.4](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 13,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "returns; RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/48"
+}

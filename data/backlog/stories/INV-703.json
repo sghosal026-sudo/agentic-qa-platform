@@ -1,0 +1,38 @@
+{
+  "id": 189,
+  "rev": 1,
+  "code": "INV-703",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-703 \u2014 Report adjustments by reason and user",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>to see adjustment volume broken down by reason and by<br>person</strong>, so that <strong>I can find the broken process rather than keep correcting its output</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>then</strong> I get adjustment counts and quantities grouped by reason</li><li>code.</li><li>- <strong>Given</strong> the same range, <strong>then</strong> I can also group by user and by zone.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it shows a trend over time, not just a current total.</li><li>- <strong>Given</strong> an outlier \u2014 one reason, user, or zone far above the rest \u2014 <strong>then</strong> it is visible</li><li>without manual analysis.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>adjustment</code>, <code>stock_movement</code> |<br>| Risks | Adjustment used to hide process problems ([doc 05 WF 13](../../../docs/05-workflows.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/38",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/189"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 123,
+  "rev": 1,
+  "code": "INB-210",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-210 \u2014 Perform a blind receipt with no ASN",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk</strong>, I want <strong>to receive a delivery that nobody told us about</strong>, so that<br><strong>an unannounced truck can be unloaded instead of turned away</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> no matching ASN, <strong>when</strong> I start a blind receipt, <strong>then</strong> I can record supplier,</li><li>reference, products, and quantities.</li><li>- <strong>Given</strong> a blind receipt, <strong>then</strong> supervisor approval is required before confirmation.</li><li>- <strong>Given</strong> the system finds a plausible matching ASN or purchase order, <strong>then</strong> it offers the</li><li>match and the receipt becomes a normal one if accepted.</li><li>- <strong>Given</strong> no match, <strong>then</strong> stock is created in quarantine, not available.</li><li>- <strong>Given</strong> a blind receipt, <strong>then</strong> an exception record is raised for purchasing to resolve.</li><li>- <strong>Given</strong> a similar receipt from the same supplier within 48 hours, <strong>then</strong> a possible</li><li>duplicate is flagged.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>inventory</code> |<br>| Tables | <code>receipt</code>, <code>receipt_line</code>, <code>stock_balance</code> |<br>| Risks | Duplicate when the ASN arrives later; blind receipt used to bypass controls ([doc 05 WF 2](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/24",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/123"
+}

@@ -1,0 +1,22 @@
+{
+  "id": 7,
+  "rev": 1,
+  "code": "RET",
+  "fields": {
+    "System.WorkItemType": "Epic",
+    "System.Title": "EPIC RET \u2014 Returns",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Goal</h3><p>Goods coming back from customers are received, inspected, and routed to the right destination \u2014<br>without damaged stock ever reaching a sellable location.</p>\n<h3>Business value</h3><p>Returns are a cost centre that becomes a much larger cost centre when handled badly. The<br>expensive failure is not slow processing; it is restocking something that should not have been<br>restocked, shipping it again, and paying for a second return.<br><br>Return data is also a quality signal. A product with a return rate far above its peers usually<br>has a master data problem upstream \u2014 wrong description, wrong image, wrong size guide.</p>\n<h3>Scope</h3><p><strong>In.</strong> Return authorisations. Receiving returns against an RMA and blind. Quarantine landing.<br>Inspection with recorded outcome and evidence. Disposition: restock as new, restock as graded,<br>repair, return to supplier, scrap. ERP credit notification. Return rate reporting.<br><br><strong>Out.</strong> Refund calculation and payment. Customer communication. Repair work itself.</p>\n<h3>Done when</h3><ul><li>An RMA can be raised against a shipped order, with quantity validated against what shipped.</li><li>A return can be received with an RMA, or blind with approval.</li><li>Returned stock always lands in quarantine \u2014 there is no path that skips it.</li><li>Nothing becomes sellable without a recorded inspection outcome.</li><li>Restocked stock carries a fresh receipt date and re-captured expiry.</li><li>Scrapping requires approval and a reason code.</li></ul>\n<h3>Key risks</h3><p>| Risk | Why it matters | Reference |<br>|---|---|---|<br>| Returned stock goes straight to available | Damaged goods reship; the cycle repeats | [doc 09 \u00a78.1](../../docs/09-defect-hotspots.md) |<br>| Inspection is a rubber stamp | Same outcome, with an audit trail that says it was checked | [doc 09 \u00a78.2](../../docs/09-defect-hotspots.md) |<br>| Restocked with the original expiry | FEFO treats old stock as fresh | [doc 09 \u00a78.3](../../docs/09-defect-hotspots.md) |<br>| Return processed twice | Stock created from nothing; customer credited twice | [doc 09 \u00a78.4](../../docs/09-defect-hotspots.md) |<br>| Original order not found | Cannot validate quantity | [doc 05 WF 9](../../docs/05-workflows.md) |<br>| Quarantine stock never dispositioned | Space consumed, stock invisible | [doc 05 WF 9](../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 263,
+  "rev": 1,
+  "code": "RPL-104",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-104 \u2014 Report pick locations with no rule",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>a list of pick faces that will never replenish</strong>, so<br>that <strong>they do not run dry silently</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the report, <strong>then</strong> it lists every pick location holding stock with no active</li><li>replenishment rule.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it also lists rules that fail current validation.</li><li>- <strong>Given</strong> a pick location deliberately excluded from replenishment, <strong>then</strong> it can be marked</li><li>as such and suppressed from the report.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it runs weekly and its output reaches a person.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code>, <code>masterdata</code> |<br>| Tables | <code>replen_rule</code>, <code>location</code>, <code>stock_balance</code> |<br>| Risks | Pick faces with no rule running dry ([doc 09 \u00a77.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 2,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/53",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/263"
+}

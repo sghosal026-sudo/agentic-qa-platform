@@ -1,0 +1,38 @@
+{
+  "id": 176,
+  "rev": 1,
+  "code": "INV-403",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-403 \u2014 Mark stock damaged",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse operator</strong>, I want <strong>to mark stock as damaged where I find it</strong>, so that <strong>it<br>stops being allocated before someone tries to ship it</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> available stock, <strong>when</strong> I mark a quantity damaged, <strong>then</strong> that quantity changes</li><li>status and leaves availability.</li><li>- <strong>Given</strong> the change, <strong>then</strong> a reason code is mandatory.</li><li>- <strong>Given</strong> damaged stock, <strong>then</strong> it can still be counted and can still be adjusted or</li><li>scrapped.</li><li>- <strong>Given</strong> damaged stock, <strong>then</strong> it is never allocated.</li><li>- <strong>Given</strong> the change, <strong>then</strong> a movement is written recording who found it and where.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>stock_movement</code> |<br>| Risks | Damaged stock remaining allocatable ([doc 05 WF 1](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/35",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/176"
+}

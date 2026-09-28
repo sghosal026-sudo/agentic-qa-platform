@@ -1,0 +1,31 @@
+{
+  "id": 13,
+  "rev": 1,
+  "code": "CNT-4",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "CNT-4 \u2014 Accuracy reporting",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Show where inaccuracy comes from, so effort goes into fixing causes instead of repeatedly<br>correcting the same symptom.</p>\n<h3>Scope</h3><p><strong>In.</strong> Variance rates by zone, product class, and operator; trends over time.<br><br><strong>Out.</strong> Financial reporting on stock value. Labour performance management.</p>\n<h3>Design notes</h3><p><strong>These are aggregates over history, so they belong in a read model</strong>, refreshed daily. A live<br>query over every count result will get slower every month.<br><br><strong>Each cut answers a different question.</strong><br><br>| Cut | Points at |<br>|---|---|<br>| By zone | A layout, labelling, or congestion problem in one area |<br>| By product class | A master data problem \u2014 case quantity, UoM, barcode |<br>| By operator | A training need, or a shortcut being taken |<br>| Over time | Whether anything you did actually helped |<br><br><strong>Handle the operator cut carefully.</strong> It is a training signal, not a disciplinary tool. Used<br>as the latter, operators stop reporting shorts honestly and the data becomes worthless \u2014 which<br>costs more than the behaviour it was meant to correct.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Live aggregate query degrading over time | [doc 08 \u00a73](../../../docs/08-data-sync-and-migrations.md) |<br>| Operator metrics driving dishonest reporting | [doc 01 \u00a73](../../../docs/01-product-overview.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 14,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "counting; CNT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/13"
+}

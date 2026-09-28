@@ -1,0 +1,38 @@
+{
+  "id": 185,
+  "rev": 1,
+  "code": "INV-604",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-604 \u2014 Flag expired stock as unsellable",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>expired stock removed from availability<br>automatically</strong>, so that <strong>nobody can allocate or ship something past its date</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a batch whose expiry date has passed, <strong>then</strong> its stock is excluded from</li><li>availability without a manual step.</li><li>- <strong>Given</strong> stock that expires while reserved, <strong>then</strong> the reservation is flagged and the order</li><li>re-allocated.</li><li>- <strong>Given</strong> expired stock, <strong>then</strong> it remains visible, countable, and adjustable \u2014 it is</li><li>excluded from selling, not deleted.</li><li>- <strong>Given</strong> expired stock, <strong>then</strong> it appears on a disposal work list.</li><li>- <strong>Given</strong> the expiry boundary, <strong>then</strong> it is evaluated in the warehouse timezone, not UTC</li><li>midnight.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code>, <code>outbound</code> |<br>| Tables | <code>stock_balance</code>, <code>batch</code>, <code>reservation</code> |<br>| Risks | Expired stock shipped; timezone boundary errors ([doc 09 \u00a79.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/37",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/185"
+}

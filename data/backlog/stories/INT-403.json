@@ -1,0 +1,38 @@
+{
+  "id": 156,
+  "rev": 1,
+  "code": "INT-403",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-403 \u2014 Dock-to-stock time",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>the time from receipt to putaway tracked</strong>, so that <strong>I can<br>tell how quickly arriving stock becomes sellable</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>then</strong> average and 95th-percentile dock-to-stock time is shown.</li><li>- <strong>Given</strong> the four-hour target, <strong>then</strong> the proportion breaching it is shown.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it breaks down by supplier, zone, and hour of arrival.</li><li>- <strong>Given</strong> receipts still awaiting putaway, <strong>then</strong> they are included as in-progress with</li><li>their current age.</li><li>- <strong>Given</strong> this metric, <strong>then</strong> it reconciles with [INB-403](../INB/INB-403-dock-to-stock-report.md)</li><li>rather than computing it a second, different way.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>inbound</code> |<br>| Tables | throughput projection, <code>receipt</code>, <code>putaway_task</code> |<br>| Risks | Two reports computing the same metric differently |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/30",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/156"
+}

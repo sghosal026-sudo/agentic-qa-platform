@@ -1,0 +1,38 @@
+{
+  "id": 274,
+  "rev": 1,
+  "code": "RPL-402",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-402 \u2014 Replenish ahead of a wave",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>pick faces topped up for what a wave will need</strong>, so that <strong>the<br>wave completes without pickers hitting empty locations</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> wave demand exceeds current pick face stock, <strong>then</strong> a replenishment task is</li><li>created for the shortfall before the wave is released.</li><li>- <strong>Given</strong> demand exceeds even the rule maximum, <strong>then</strong> the task fills to capacity and the</li><li>remaining shortfall is flagged.</li><li>- <strong>Given</strong> an existing open task for that location, <strong>then</strong> its quantity is increased rather</li><li>than a second task created.</li><li>- <strong>Given</strong> the wave is cancelled before release, <strong>then</strong> any task created solely for it is</li><li>cancelled if not yet started.</li><li>- <strong>Given</strong> demand-driven and reactive triggers together, <strong>then</strong> exactly one open task per</li><li>location exists.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code>, <code>outbound</code>, <code>inventory</code> |<br>| Tables | <code>replen_task</code>, demand view |<br>| Risks | Duplicate tasks from two trigger sources ([doc 09 \u00a77.1](../../../docs/09-defect-hotspots.md)); over-replenishing cancelled waves |<br>| Tests | integration \u00b7 concurrency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/56",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/274"
+}

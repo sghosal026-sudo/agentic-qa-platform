@@ -1,0 +1,38 @@
+{
+  "id": 175,
+  "rev": 1,
+  "code": "INV-402",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-402 \u2014 Release stock from quarantine",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>quality inspector</strong>, I want <strong>to release quarantined stock back to available</strong>, so that<br><strong>stock that passed inspection can be sold again</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> quarantined stock with a recorded inspection outcome, <strong>when</strong> I release it, <strong>then</strong></li><li>its status returns to available.</li><li>- <strong>Given</strong> quarantined stock with <strong>no</strong> inspection record, <strong>then</strong> release is rejected.</li><li>- <strong>Given</strong> a partial release, <strong>then</strong> only the released quantity changes status.</li><li>- <strong>Given</strong> the release, <strong>then</strong> a movement with a release reason code is written.</li><li>- <strong>Given</strong> the release, <strong>then</strong> flagged orders can re-allocate against the stock.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>stock_movement</code> |<br>| Risks | Release without inspection returns bad stock to sale ([doc 09 \u00a78.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/35",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/175"
+}

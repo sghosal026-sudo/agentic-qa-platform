@@ -1,0 +1,38 @@
+{
+  "id": 208,
+  "rev": 1,
+  "code": "OUT-206",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-206 \u2014 Deallocate an order line",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>to release an allocation without cancelling the order</strong>, so that<br><strong>stock can be redirected to a more urgent order</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an allocated line not yet picked, <strong>when</strong> I deallocate it, <strong>then</strong> its reservations</li><li>are released and the line returns to unallocated.</li><li>- <strong>Given</strong> a line already picked, <strong>then</strong> deallocation is rejected.</li><li>- <strong>Given</strong> deallocation, <strong>then</strong> the stock immediately becomes available to other orders.</li><li>- <strong>Given</strong> deallocation, <strong>then</strong> the reason and the acting user are recorded.</li><li>- <strong>Given</strong> the line, <strong>then</strong> it can be reallocated afterwards.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>inventory</code> |<br>| Tables | <code>allocation</code>, <code>reservation</code>, <code>stock_balance</code> |<br>| Risks | Reservation not fully released ([doc 09 \u00a75.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/42",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/208"
+}

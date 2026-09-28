@@ -1,0 +1,38 @@
+{
+  "id": 236,
+  "rev": 1,
+  "code": "OUT-605",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-605 \u2014 Notify the ERP of dispatch",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>finance team member</strong>, I want <strong>the ERP told as soon as goods ship</strong>, so that <strong>invoices<br>are raised promptly and accurately</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> dispatch confirmation, <strong>then</strong> <code>outbound.order_shipped</code> is written to the outbox in</li><li>the same transaction.</li><li>- <strong>Given</strong> the ERP is unavailable, <strong>then</strong> the event is retried and warehouse work is</li><li>unaffected.</li><li>- <strong>Given</strong> the event, <strong>then</strong> it carries order reference, shipped quantities per line,</li><li>carrier, and tracking reference.</li><li>- <strong>Given</strong> delivery fails repeatedly, <strong>then</strong> the event moves to the dead-letter store and an</li><li>alert is raised.</li><li>- <strong>Given</strong> the event is delivered twice, <strong>then</strong> the ERP is documented as required to</li><li>deduplicate on <code>event_id</code>.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>platform</code> |<br>| Tables | <code>outbox</code> |<br>| Risks | Notification lost, so no invoice raised ([doc 09 \u00a72.4](../../../docs/09-defect-hotspots.md)); duplicate invoicing ([doc 09 \u00a73.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration \u00b7 event assertion |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/46",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/236"
+}

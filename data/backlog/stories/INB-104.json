@@ -1,0 +1,38 @@
+{
+  "id": 113,
+  "rev": 1,
+  "code": "INB-104",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-104 \u2014 Receive an ASN from the ERP automatically",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk</strong>, I want <strong>ASNs to arrive from the ERP without anyone typing them</strong>, so<br>that <strong>expectations are accurate and up to date</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a valid ERP message, <strong>when</strong> it is processed, <strong>then</strong> an ASN is created.</li><li>- <strong>Given</strong> the same message replayed, <strong>then</strong> one ASN exists, not two.</li><li>- <strong>Given</strong> a message referencing an unknown product, <strong>then</strong> it is rejected with a clear</li><li>reason and moved to the dead-letter store.</li><li>- <strong>Given</strong> an updated ASN for an existing reference, <strong>then</strong> the existing ASN is amended if it</li><li>has not been received against.</li><li>- <strong>Given</strong> any rejected message, <strong>then</strong> the original payload is retained for review.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>platform</code> |<br>| Tables | <code>asn</code>, <code>asn_line</code>, dead-letter |<br>| Risks | Duplicate from retry ([doc 09 \u00a73.3](../../../docs/09-defect-hotspots.md)); silent drop ([doc 08 \u00a76](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration \u00b7 idempotency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/23",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/113"
+}

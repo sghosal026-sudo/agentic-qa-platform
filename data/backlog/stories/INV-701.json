@@ -1,0 +1,38 @@
+{
+  "id": 187,
+  "rev": 1,
+  "code": "INV-701",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-701 \u2014 Adjust stock with a reason code",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>to correct a stock figure with a recorded reason</strong>, so<br>that <strong>the system matches reality and we know why it did not</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a location, product, and batch, <strong>when</strong> I set the correct quantity, <strong>then</strong> the</li><li>balance changes by the difference.</li><li>- <strong>Given</strong> an adjustment, <strong>then</strong> a reason code from the controlled list is mandatory.</li><li>- <strong>Given</strong> an upward adjustment, <strong>then</strong> a movement from <code>VIRT-GAIN</code> is written.</li><li>- <strong>Given</strong> a downward adjustment, <strong>then</strong> a movement to <code>VIRT-LOSS</code> is written.</li><li>- <strong>Given</strong> the same adjustment request sent twice with the same idempotency key, <strong>then</strong> the</li><li>balance changes once.</li><li>- <strong>Given</strong> the adjustment, <strong>then</strong> the adjustment record captures who requested it and when.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>stock_movement</code>, <code>adjustment</code> |<br>| Risks | Adjustment without a movement ([doc 09 \u00a72.2](../../../docs/09-defect-hotspots.md)); posted twice ([doc 09 \u00a73.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 idempotency \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/38",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/187"
+}

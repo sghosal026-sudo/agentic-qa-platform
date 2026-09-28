@@ -1,0 +1,38 @@
+{
+  "id": 101,
+  "rev": 1,
+  "code": "FDN-607",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-607 \u2014 Freeze fields once stock exists",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>certain product fields to become uneditable once stock exists</strong>, so<br>that <strong>a change cannot silently alter what every existing balance means</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a product with stock, <strong>when</strong> I change <code>case_quantity</code>, <code>base_uom</code>,</li><li><code>requires_batch</code>, or <code>requires_serial</code>, <strong>then</strong> it is rejected with an explanation.</li><li>- <strong>Given</strong> a product with no stock and no history, <strong>then</strong> those fields can be changed.</li><li>- <strong>Given</strong> a product with stock, <strong>then</strong> description, barcodes, and non-frozen physical</li><li>attributes can still be changed.</li><li>- <strong>Given</strong> a change to the SKU, <strong>then</strong> it is allowed and an alias record is kept so old codes</li><li>still resolve.</li><li>- <strong>Given</strong> an ERP master data update touching a frozen field, <strong>then</strong> it is rejected and</li><li>reported rather than applied.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>masterdata</code> |<br>| Tables | <code>product</code> |<br>| Risks | Frozen field changed while stock exists ([doc 03 \u00a75](../../../docs/03-master-data.md)); historical data reinterpreted ([doc 09 \u00a711.6](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/20",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/101"
+}

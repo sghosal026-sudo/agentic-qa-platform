@@ -1,0 +1,38 @@
+{
+  "id": 278,
+  "rev": 1,
+  "code": "TRF-103",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-103 \u2014 Query transfer status from both sites",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager at either site</strong>, I want <strong>to see where a transfer has got to</strong>, so<br>that <strong>the destination knows what to expect and when</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a transfer reference, <strong>then</strong> both origin and destination staff can see its state,</li><li>lines, dispatched quantities, and received quantities.</li><li>- <strong>Given</strong> a dispatched transfer, <strong>then</strong> the expected arrival date is shown.</li><li>- <strong>Given</strong> a partly received transfer, <strong>then</strong> outstanding quantities are shown per line.</li><li>- <strong>Given</strong> a discrepancy, <strong>then</strong> it is visible to both sites, not only to the one that</li><li>raised it.</li><li>- <strong>Given</strong> the query, <strong>then</strong> it is built so it would still work if the two sites later ran</li><li>separate databases.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code> |<br>| Tables | <code>transfer_order</code>, <code>transfer_shipment</code>, <code>transfer_receipt</code> |<br>| Risks | Sites disagreeing about state ([doc 09 \u00a79.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/57",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/278"
+}

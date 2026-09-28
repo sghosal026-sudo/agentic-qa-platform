@@ -1,0 +1,38 @@
+{
+  "id": 129,
+  "rev": 1,
+  "code": "INB-304",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-304 \u2014 Override the suggested location with a reason",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>putaway operator</strong>, I want <strong>to put stock somewhere other than the suggestion when<br>reality differs</strong>, so that <strong>the record matches where the stock actually is</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a suggested destination, <strong>when</strong> I scan a different location, <strong>then</strong> I must</li><li>choose a specific reason code.</li><li>- <strong>Given</strong> an override, <strong>then</strong> the destination is still validated against every rule \u2014 an</li><li>override is not a bypass.</li><li>- <strong>Given</strong> the reason codes, <strong>then</strong> they are specific: suggestion full, suggestion blocked,</li><li>physically unreachable, consolidating with existing stock, operator judgement.</li><li>- <strong>Given</strong> overrides over time, <strong>then</strong> they are reportable by reason and by suggested</li><li>location.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code> |<br>| Tables | <code>putaway_task</code> |<br>| Risks | Reasons all defaulting to \"other\", losing the signal ([doc 05 WF 3](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/25",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/129"
+}

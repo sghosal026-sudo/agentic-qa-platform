@@ -1,0 +1,38 @@
+{
+  "id": 215,
+  "rev": 1,
+  "code": "OUT-305",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-305 \u2014 Auto-wave by carrier cut-off",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>waves built automatically from carrier cut-off times</strong>, so that<br><strong>I am not manually assembling them every morning</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> configured cut-offs, <strong>then</strong> waves are created grouping orders by carrier and</li><li>cut-off, earliest cut-off first.</li><li>- <strong>Given</strong> a wave size cap, <strong>then</strong> it is respected and a second wave created for the</li><li>overflow.</li><li>- <strong>Given</strong> high-priority orders, <strong>then</strong> they are placed in the earliest feasible wave.</li><li>- <strong>Given</strong> an auto-created wave, <strong>then</strong> it is <code>planned</code>, not released \u2014 a human still</li><li>releases it.</li><li>- <strong>Given</strong> an order that cannot make any cut-off today, <strong>then</strong> it is flagged rather than</li><li>silently deferred.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>masterdata</code> |<br>| Tables | <code>wave</code>, <code>order</code>, <code>config</code> |<br>| Risks | Wave sizes chosen by guesswork ([doc 07 \u00a77](../../../docs/07-phased-delivery-plan.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/43",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/215"
+}

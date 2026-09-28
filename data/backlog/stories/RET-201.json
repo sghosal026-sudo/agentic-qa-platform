@@ -1,0 +1,38 @@
+{
+  "id": 244,
+  "rev": 1,
+  "code": "RET-201",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-201 \u2014 Receive against an RMA",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>returns clerk</strong>, I want <strong>to record what physically came back against an RMA</strong>, so that<br><strong>the return is tracked from the moment it arrives</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an open RMA, <strong>when</strong> I scan products and enter quantities, <strong>then</strong> a return receipt</li><li>is created.</li><li>- <strong>Given</strong> a quantity above the RMA's outstanding amount, <strong>then</strong> it is rejected or requires</li><li>approval.</li><li>- <strong>Given</strong> a product not on the RMA, <strong>then</strong> it is recorded as an unexpected item requiring</li><li>investigation.</li><li>- <strong>Given</strong> the same return receipt confirmed twice with one idempotency key, <strong>then</strong> stock is</li><li>created once.</li><li>- <strong>Given</strong> confirmation, <strong>then</strong> <code>returns.return_received</code> is published.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>inventory</code> |<br>| Tables | <code>return_receipt</code>, <code>return_line</code>, <code>rma</code> |<br>| Risks | Return processed twice ([doc 09 \u00a78.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 idempotency \u00b7 rollback |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/49",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/244"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 81,
+  "rev": 1,
+  "code": "CNT-504",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-504 \u2014 Unfreeze the warehouse",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>operations to resume once the count is posted</strong>, so<br>that <strong>the warehouse restarts cleanly on correct numbers</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> all counts are posted, <strong>when</strong> I unfreeze, <strong>then</strong> every blocked operation becomes</li><li>available again.</li><li>- <strong>Given</strong> outstanding uncounted locations, <strong>then</strong> unfreezing is rejected until they are</li><li>counted or explicitly skipped.</li><li>- <strong>Given</strong> unfreezing, <strong>then</strong> it is recorded with the acting user and the time.</li><li>- <strong>Given</strong> unfreezing, <strong>then</strong> allocation re-evaluates orders that were waiting on stock.</li><li>- <strong>Given</strong> a week later, <strong>then</strong> a verification count of a sample of locations is scheduled</li><li>automatically.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code>, <code>inventory</code>, <code>outbound</code> |<br>| Tables | freeze state |<br>| Risks | Unfreezing with locations uncounted; no verification count ([doc 08 \u00a78](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/14",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/81"
+}

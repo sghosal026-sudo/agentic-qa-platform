@@ -1,0 +1,38 @@
+{
+  "id": 178,
+  "rev": 1,
+  "code": "INV-501",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-501 \u2014 Reserve stock for an order line",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>stock promised to a specific order line and held</strong>, so that <strong>no<br>other order can be promised the same unit</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> available stock, <strong>when</strong> I reserve a quantity, <strong>then</strong> <code>qty_reserved</code> increases by</li><li>that amount, availability decreases, and a reservation row links it to the order line.</li><li>- <strong>Given</strong> a request for more than is available, <strong>then</strong> the reservation is rejected \u2014 never</li><li>partially applied silently.</li><li>- <strong>Given</strong> the balance row, <strong>then</strong> it is locked and availability re-checked under the lock</li><li>before the reservation is written.</li><li>- <strong>Given</strong> twenty concurrent reservations of one unit against ten units, <strong>then</strong> exactly ten</li><li>succeed.</li><li>- <strong>Given</strong> any point in time, <strong>then</strong> the sum of reservation rows equals <code>qty_reserved</code> on the</li><li>balance.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>reservation</code> |<br>| Risks | Double allocation ([doc 09 \u00a74.1](../../../docs/09-defect-hotspots.md)); divergence ([doc 09 \u00a72.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 concurrency (mandatory) \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/36",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/178"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 206,
+  "rev": 1,
+  "code": "OUT-204",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-204 \u2014 Lock balances to prevent double allocation",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>customer</strong>, I want <strong>stock promised to me to actually be there</strong>, so that <strong>I do not get<br>a delay email for something the system said was in stock</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> allocation has shortlisted candidate stock, <strong>then</strong> those balance rows are locked</li><li>before any reservation is written.</li><li>- <strong>Given</strong> the lock is acquired, <strong>then</strong> availability is <strong>re-checked</strong> under the lock before</li><li>committing.</li><li>- <strong>Given</strong> several locations, <strong>then</strong> their IDs are sorted before locking so lock order is</li><li>deterministic.</li><li>- <strong>Given</strong> twenty concurrent allocations of one unit against ten units, <strong>then</strong> exactly ten</li><li>succeed and ten are cleanly rejected \u2014 no exceptions, no partial writes.</li><li>- <strong>Given</strong> two allocations touching the same two locations in opposite order, <strong>then</strong> neither</li><li>deadlocks.</li><li>- <strong>Given</strong> the locked section, <strong>then</strong> it makes no external calls.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>reservation</code> |<br>| Risks | Double allocation ([doc 09 \u00a74.1](../../../docs/09-defect-hotspots.md)); deadlock ([doc 09 \u00a74.2](../../../docs/09-defect-hotspots.md)); contention ([doc 09 \u00a74.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | concurrency (mandatory) \u00b7 load \u00b7 deadlock |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/42",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/206"
+}

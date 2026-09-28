@@ -1,0 +1,38 @@
+{
+  "id": 226,
+  "rev": 1,
+  "code": "OUT-502",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-502 \u2014 Verify carton contents against the order",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>packer</strong>, I want <strong>the system to check the box against the order before I close it</strong>, so<br>that <strong>short and wrong shipments are caught here rather than by the customer</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an order whose cartons together match the picked quantities, <strong>then</strong> packing can</li><li>complete.</li><li>- <strong>Given</strong> a missing item, <strong>then</strong> completion is blocked and the missing lines are listed.</li><li>- <strong>Given</strong> an order cancelled during picking, <strong>then</strong> packing is blocked when the status is</li><li>re-checked at pack start.</li><li>- <strong>Given</strong> a short-picked line, <strong>then</strong> the expected pack quantity is the picked quantity, not</li><li>the ordered quantity.</li><li>- <strong>Given</strong> completion, <strong>then</strong> the order status becomes <code>packed</code>.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>carton</code>, <code>carton_content</code>, <code>order_line</code> |<br>| Risks | Items from a cancelled order shipped ([doc 05 WF 7](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/45",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/226"
+}

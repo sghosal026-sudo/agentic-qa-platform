@@ -1,0 +1,38 @@
+{
+  "id": 190,
+  "rev": 1,
+  "code": "INV-704",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-704 \u2014 Warn when adjusting reserved stock",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>to be told when an adjustment affects stock promised to<br>orders</strong>, so that <strong>the picker does not discover the problem at an empty shelf</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a downward adjustment on stock with reservations, <strong>then</strong> the affected orders are</li><li>listed before the adjustment is applied.</li><li>- <strong>Given</strong> the adjustment proceeds, <strong>then</strong> <code>inventory.stock_adjusted</code> is published carrying</li><li>the affected reservations.</li><li>- <strong>Given</strong> that event, <strong>then</strong> <code>outbound</code> re-checks and re-allocates the affected lines.</li><li>- <strong>Given</strong> a line that cannot be re-allocated, <strong>then</strong> it is flagged for a supervisor rather</li><li>than left silently short.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code>, <code>outbound</code> |<br>| Tables | <code>stock_balance</code>, <code>reservation</code>, <code>outbox</code> |<br>| Risks | Adjustment silently invalidating an allocation ([doc 09 \u00a74.5](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration \u00b7 event assertion |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/38",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/190"
+}

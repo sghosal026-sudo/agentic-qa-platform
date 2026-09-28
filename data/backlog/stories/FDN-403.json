@@ -1,0 +1,38 @@
+{
+  "id": 87,
+  "rev": 1,
+  "code": "FDN-403",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-403 \u2014 Partition the audit table",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>the audit table partitioned by month</strong>, so that <strong>its growth never<br>degrades the rest of the database</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the audit table, <strong>then</strong> it is partitioned by month with partitions created ahead</li><li>of time.</li><li>- <strong>Given</strong> a query filtered by date, <strong>then</strong> it reads only the relevant partitions.</li><li>- <strong>Given</strong> a partition older than the retention window, <strong>then</strong> it can be detached and</li><li>archived without locking current writes.</li><li>- <strong>Given</strong> the partitioning migration, <strong>then</strong> it runs against production-sized data within</li><li>the deployment window.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code> |<br>| Tables | <code>audit_log</code> |<br>| Risks | Audit growth taking the database down ([doc 04 \u00a73.1](../../../docs/04-modules.md)); migration untested at scale ([doc 09 \u00a711.5](../../../docs/09-defect-hotspots.md)) |<br>| Tests | migration (at production scale) \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/18",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/87"
+}

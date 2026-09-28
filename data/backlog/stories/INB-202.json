@@ -1,0 +1,38 @@
+{
+  "id": 115,
+  "rev": 1,
+  "code": "INB-202",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-202 \u2014 Record quantity received for a line",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk</strong>, I want <strong>to scan a product and enter how many arrived</strong>, so that<br><strong>the receipt records what is actually on the pallet</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a scanned barcode, <strong>then</strong> the product and the unit of measure that barcode</li><li>represents are resolved and displayed.</li><li>- <strong>Given</strong> a case barcode, <strong>then</strong> the entered quantity is treated as cases and converted to</li><li>base units, with the resolved UoM shown for confirmation.</li><li>- <strong>Given</strong> an unrecognised barcode, <strong>then</strong> the scan is rejected rather than falling back to</li><li>manual product selection silently.</li><li>- <strong>Given</strong> a quantity of zero, <strong>then</strong> it is accepted only as an explicit \"nothing arrived\"</li><li>with a reason.</li><li>- <strong>Given</strong> a recorded quantity, <strong>then</strong> it can be corrected before confirmation.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>masterdata</code> |<br>| Tables | <code>receipt_line</code> |<br>| Risks | Case/unit confusion ([doc 05 WF 1](../../../docs/05-workflows.md)); wrong case quantity ([doc 03 \u00a77.1](../../../docs/03-master-data.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/24",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/115"
+}

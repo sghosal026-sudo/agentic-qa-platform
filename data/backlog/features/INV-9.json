@@ -1,0 +1,31 @@
+{
+  "id": 40,
+  "rev": 1,
+  "code": "INV-9",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INV-9 \u2014 Availability projection",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Answer \"how much of this can I sell?\" in one indexed read instead of an aggregation across<br>thousands of balance rows.</p>\n<h3>Scope</h3><p><strong>In.</strong> Maintaining, rebuilding, and reconciling <code>product_availability</code>.<br><br><strong>Out.</strong> Using it for allocation. Never. See below.</p>\n<h3>Design notes</h3><p><strong>The honest query is expensive.</strong> Summing available quantity across all sellable locations,<br>excluding quarantine, damaged stock, blocked locations, and expired batches, means scanning<br>many rows and joining to locations and batches. Fine occasionally. Not fine when the webshop<br>asks for two hundred products every few seconds.<br><br><strong>Update it synchronously</strong>, in the same transaction as the movement. Availability is one of<br>the few projections that cannot tolerate staleness measured in seconds.<br><br><strong>Never allocate from it.</strong> This is the rule that matters most in this feature. A projection is<br>for looking, not for promising. Reservations read the real balance under a lock. Reading a<br>projection to decide whether to promise stock is how you sell the same unit twice.<br><br><strong><code>INV-902</code> ships with <code>INV-901</code>, not after it.</strong> During an incident you need to run the<br>rebuild, not write it. And testing the rebuild against the incremental update is the only way<br>to discover that the two disagree \u2014 which they will, quietly, until someone checks.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Projection used for allocation | [doc 09 \u00a712](../../../docs/09-defect-hotspots.md) |<br>| Projection drifts from source | [doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md) |<br>| Rebuild disagrees with incremental update | [doc 08 \u00a75.2](../../../docs/08-data-sync-and-migrations.md) |<br>| Staleness invisible to consumers | [doc 08 \u00a75.3](../../../docs/08-data-sync-and-migrations.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 13,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "inventory; INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/40"
+}

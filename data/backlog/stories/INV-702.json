@@ -1,0 +1,38 @@
+{
+  "id": 188,
+  "rev": 1,
+  "code": "INV-702",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-702 \u2014 Approval above a threshold",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>large adjustments to need a second person's approval</strong>, so<br>that <strong>nobody can write off significant stock alone</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an adjustment below the configured quantity and value thresholds, <strong>then</strong> it is</li><li>applied immediately.</li><li>- <strong>Given</strong> an adjustment above either threshold, <strong>then</strong> it is held pending approval and the</li><li>balance does not change.</li><li>- <strong>Given</strong> a pending adjustment, <strong>when</strong> the requester tries to approve it, <strong>then</strong> it is</li><li>rejected.</li><li>- <strong>Given</strong> approval by an authorised different user, <strong>then</strong> the adjustment applies and both</li><li>identities are recorded.</li><li>- <strong>Given</strong> a rejected adjustment, <strong>then</strong> it is closed with a reason and no balance changed.</li><li>- <strong>Given</strong> the approval rule, <strong>then</strong> it is enforced in the service layer, not the UI.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code>, <code>platform</code> |<br>| Tables | <code>adjustment</code>, <code>stock_balance</code> |<br>| Risks | Approval bypassed on some path ([doc 05 WF 13](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/38",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/188"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 213,
+  "rev": 1,
+  "code": "OUT-303",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-303 \u2014 Release a wave and generate pick tasks",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>releasing a wave to produce sequenced pick tasks</strong>, so that<br><strong>pickers can start immediately with an efficient route</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a planned wave, <strong>when</strong> I release it, <strong>then</strong> pick tasks are generated for every</li><li>allocated line, grouped by zone and sequenced by location.</li><li>- <strong>Given</strong> release, <strong>then</strong> the wave status becomes <code>released</code> and it can no longer be edited.</li><li>- <strong>Given</strong> release, <strong>then</strong> <code>outbound.wave_released</code> is published.</li><li>- <strong>Given</strong> the transaction fails partway, <strong>then</strong> no pick tasks exist and the wave stays</li><li>planned.</li><li>- <strong>Given</strong> a released wave, <strong>then</strong> its orders show as in-picking.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>wave</code>, <code>pick_task</code>, <code>pick_task_line</code>, <code>outbox</code> |<br>| Risks | Partial commit leaving a half-released wave ([doc 09 \u00a72.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 rollback \u00b7 event assertion |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/43",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/213"
+}

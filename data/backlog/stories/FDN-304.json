@@ -1,0 +1,38 @@
+{
+  "id": 83,
+  "rev": 1,
+  "code": "FDN-304",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-304 \u2014 API clients for machine callers",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>system administrator</strong>, I want <strong>the ERP and scanner app to authenticate as machine<br>clients</strong>, so that <strong>their actions are attributable without pretending to be a person</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a registered API client, <strong>when</strong> it authenticates with its credentials, <strong>then</strong> it</li><li>receives a token identifying it as a client, not a user.</li><li>- <strong>Given</strong> an API client, <strong>then</strong> it has its own permission set, separate from human roles.</li><li>- <strong>Given</strong> an action by an API client, <strong>then</strong> the audit row records the client ID.</li><li>- <strong>Given</strong> a revoked client, <strong>then</strong> its existing tokens stop working.</li><li>- <strong>Given</strong> a client credential, <strong>then</strong> it can be rotated without downtime.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code> |<br>| Tables | <code>api_client</code>, <code>audit_log</code> |<br>| Risks | Machine callers sharing a human account makes audit meaningless |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/17",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/83"
+}

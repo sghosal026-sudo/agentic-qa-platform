@@ -1,0 +1,38 @@
+{
+  "id": 154,
+  "rev": 1,
+  "code": "INT-401",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-401 \u2014 Open work by zone",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>to see outstanding work by area right now</strong>, so that <strong>I can move<br>staff before a bottleneck costs us the cut-off</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the view, <strong>then</strong> it shows open pick, putaway, replenishment, and count tasks</li><li>grouped by zone.</li><li>- <strong>Given</strong> each group, <strong>then</strong> it shows count, oldest task age, and how many are assigned</li><li>versus unassigned.</li><li>- <strong>Given</strong> tasks tied to a wave with an imminent cut-off, <strong>then</strong> they are highlighted.</li><li>- <strong>Given</strong> the view, <strong>then</strong> it refreshes frequently enough to act on within a shift.</li><li>- <strong>Given</strong> an unassigned task older than a threshold, <strong>then</strong> it is flagged.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, all task modules |<br>| Tables | <code>pick_task</code>, <code>putaway_task</code>, <code>replen_task</code>, <code>count_task</code> |<br>| Risks | Query across four task tables becoming slow at peak |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/30",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/154"
+}

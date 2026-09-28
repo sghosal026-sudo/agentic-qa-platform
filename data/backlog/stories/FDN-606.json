@@ -1,0 +1,38 @@
+{
+  "id": 100,
+  "rev": 1,
+  "code": "FDN-606",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-606 \u2014 Discontinue a product",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>system administrator</strong>, I want <strong>to discontinue a product</strong>, so that <strong>we stop receiving<br>it while still selling down the stock we hold</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an active product, <strong>when</strong> I discontinue it, <strong>then</strong> new receipts of it are</li><li>rejected.</li><li>- <strong>Given</strong> a discontinued product with stock, <strong>then</strong> it can still be allocated, picked, and</li><li>shipped.</li><li>- <strong>Given</strong> a discontinued product, <strong>then</strong> it can still be counted.</li><li>- <strong>Given</strong> a product with an open ASN, <strong>when</strong> I discontinue it, <strong>then</strong> I am warned and the</li><li>ASN is listed.</li><li>- <strong>Given</strong> any product, <strong>then</strong> there is no endpoint that hard deletes it.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>masterdata</code> |<br>| Tables | <code>product</code> |<br>| Risks | Hard delete orphans history ([doc 03 \u00a75](../../../docs/03-master-data.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 2,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/20",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/100"
+}

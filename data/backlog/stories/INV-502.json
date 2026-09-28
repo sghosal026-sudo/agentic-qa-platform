@@ -1,0 +1,38 @@
+{
+  "id": 179,
+  "rev": 1,
+  "code": "INV-502",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-502 \u2014 Release a reservation",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>a single way to release a reservation</strong>, so that <strong>every path that<br>cancels or supersedes a promise returns the stock to availability</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a reservation, <strong>when</strong> it is released, <strong>then</strong> <code>qty_reserved</code> decreases,</li><li>availability increases, and the reservation row is closed.</li><li>- <strong>Given</strong> a partial release, <strong>then</strong> only the released quantity returns to availability.</li><li>- <strong>Given</strong> an already-released reservation, <strong>when</strong> release is called again, <strong>then</strong> nothing</li><li>changes and no error is raised.</li><li>- <strong>Given</strong> every caller \u2014 order cancel, quality hold, wave cancel, short pick, transfer</li><li>cancel \u2014 <strong>then</strong> each uses this single method.</li><li>- <strong>Given</strong> a release, <strong>then</strong> it happens in the same transaction as the change that caused it.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>reservation</code> |<br>| Risks | A release path someone forgot ([doc 09 \u00a75.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration (one per calling path) \u00b7 idempotency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/36",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/179"
+}

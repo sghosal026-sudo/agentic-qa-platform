@@ -1,0 +1,38 @@
+{
+  "id": 172,
+  "rev": 1,
+  "code": "INV-303",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-303 \u2014 Prevent negative stock",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>any operation that would take stock below zero to be rejected</strong>, so<br>that <strong>an impossible number never enters the system and gets built upon</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a source with 5 units, <strong>when</strong> a move of 8 is attempted, <strong>then</strong> it is rejected \u2014</li><li>not clamped to zero.</li><li>- <strong>Given</strong> the rejection, <strong>then</strong> the error states the requested and available quantities.</li><li>- <strong>Given</strong> the database, <strong>then</strong> a check constraint enforces <code>qty_on_hand >= 0</code> as a backstop.</li><li>- <strong>Given</strong> the database, <strong>then</strong> a check constraint enforces</li><li><code>0 <= qty_reserved <= qty_on_hand</code>.</li><li>- <strong>Given</strong> any sequence of operations in a test, <strong>then</strong> the invariant holds afterwards.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code> |<br>| Risks | Clamping hides the bug that caused it ([doc 09 \u00a72.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 property/invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/34",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/172"
+}

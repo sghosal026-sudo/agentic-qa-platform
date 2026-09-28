@@ -1,0 +1,38 @@
+{
+  "id": 62,
+  "rev": 1,
+  "code": "CNT-101",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-101 \u2014 Create a count plan",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>to define what should be counted and how often</strong>, so<br>that <strong>counting effort is planned rather than reactive</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a scope \u2014 zone, location type, or product class \u2014 <strong>then</strong> a count plan can be</li><li>created with a frequency.</li><li>- <strong>Given</strong> a plan, <strong>then</strong> it records how many locations per day it expects to generate.</li><li>- <strong>Given</strong> overlapping plans, <strong>then</strong> a location is not scheduled twice on the same day.</li><li>- <strong>Given</strong> a plan, <strong>then</strong> it can be paused without being deleted.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code> |<br>| Tables | <code>count_plan</code> |<br>| Risks | Plan more ambitious than the staff available ([doc 05 WF 10](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/10",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/62"
+}

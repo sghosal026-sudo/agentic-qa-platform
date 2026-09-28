@@ -1,0 +1,38 @@
+{
+  "id": 74,
+  "rev": 1,
+  "code": "CNT-401",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-401 \u2014 Variance rate by zone",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>accuracy broken down by area</strong>, so that <strong>I can find the<br>part of the warehouse where stock goes wrong</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>then</strong> I get counts performed, counts with variance, and net and</li><li>absolute variance per zone.</li><li>- <strong>Given</strong> the report, <strong>then</strong> absolute variance is shown separately from net \u2014 offsetting</li><li>errors are still errors.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it is built from a daily read model, not a live aggregate.</li><li>- <strong>Given</strong> a zone far above the rest, <strong>then</strong> it is visible without manual comparison.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code> |<br>| Tables | accuracy projection, <code>variance</code> |<br>| Risks | Net variance hiding offsetting errors |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/13",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/74"
+}

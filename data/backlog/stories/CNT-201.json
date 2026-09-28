@@ -1,0 +1,38 @@
+{
+  "id": 66,
+  "rev": 1,
+  "code": "CNT-201",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-201 \u2014 Issue a count task",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>counter</strong>, I want <strong>to be given the next location to count</strong>, so that <strong>I can work<br>through a list without a supervisor directing each one</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> open count tasks, <strong>when</strong> I request work, <strong>then</strong> one is assigned and locked to me.</li><li>- <strong>Given</strong> the assigned task, <strong>then</strong> it shows the location and which products and batches are</li><li>expected to be there \u2014 but <strong>not</strong> their quantities.</li><li>- <strong>Given</strong> ten counters requesting work from ten tasks, <strong>then</strong> each task goes to exactly one</li><li>counter.</li><li>- <strong>Given</strong> a task assigned to someone else, <strong>then</strong> I cannot submit a result for it.</li><li>- <strong>Given</strong> assignment, <strong>then</strong> the location freeze from</li><li>[CNT-204](CNT-204-freeze-location.md) begins.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code> |<br>| Tables | <code>count_task</code> |<br>| Risks | Two counters on one location ([doc 09 \u00a74.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 concurrency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/11",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/66"
+}

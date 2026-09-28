@@ -1,0 +1,31 @@
+{
+  "id": 47,
+  "rev": 1,
+  "code": "OUT-7",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "OUT-7 \u2014 Order status projection",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Answer \"where is order 12345?\" in one read instead of a five-table join.</p>\n<h3>Scope</h3><p><strong>In.</strong> Maintaining the <code>order_status</code> projection and exposing a tracking endpoint.<br><br><strong>Out.</strong> Customer-facing tracking pages. This provides the data.</p>\n<h3>Design notes</h3><p><strong>The honest query joins order, allocation, pick task, carton, and shipment.</strong> Customer service<br>asks it constantly, and it is one of the first queries to become slow.<br><br><strong>Update it asynchronously from events.</strong> Unlike availability, order status tolerates a few<br>seconds of staleness \u2014 nobody is making a promise based on it. That keeps the update off the<br>hot dispatch transaction.<br><br><strong>Expose <code>last_updated_at</code>.</strong> A customer service agent who can see the status is four hours old<br>will check elsewhere. One who cannot will confidently quote stale information.<br><br><strong>Build the rebuild job with the projection.</strong> Same rule as<br>[INV-9](../INV/INV-9-availability-projection.md) \u2014 during an incident you need to run it, not<br>write it.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Projection drifts from source | [doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md) |<br>| No rebuild job exists | [doc 08 \u00a73](../../../docs/08-data-sync-and-migrations.md) |<br>| Staleness invisible to the reader | [doc 08 \u00a75.3](../../../docs/08-data-sync-and-migrations.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 10,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "outbound; OUT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/47"
+}

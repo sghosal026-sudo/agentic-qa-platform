@@ -1,0 +1,31 @@
+{
+  "id": 28,
+  "rev": 1,
+  "code": "INT-2",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INT-2 \u2014 Outbound integration",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Tell the ERP what happened in the warehouse, reliably, without letting a slow or absent ERP<br>affect warehouse work.</p>\n<h3>Scope</h3><p><strong>In.</strong> Publishing receipt, shipment, and adjustment confirmations; retry and dead-letter.<br><br><strong>Out.</strong> The outbox mechanism itself \u2014 that is [FDN-8](../FDN/FDN-8-outbox.md). This feature is<br>the payloads and the consumers.</p>\n<h3>Design notes</h3><p><strong>Everything goes through the outbox.</strong> A direct call inside the stock transaction means a slow<br>ERP slows receiving, an ERP outage stops receiving, and a successful call followed by a<br>rollback leaves the ERP believing something that never happened.<br><br><strong>Ordering matters per aggregate.</strong> A shipment confirmation must not overtake the receipt<br>confirmation for the same stock. Deliver in sequence per aggregate, and have consumers reject<br>out-of-order events rather than applying them.<br><br><strong>The consumer must deduplicate on <code>event_id</code>.</strong> At-least-once delivery is the guarantee;<br>exactly-once does not exist. Document this explicitly to whoever builds the ERP side \u2014 it is<br>easy for them to assume otherwise, and the result is double invoicing.<br><br><strong><code>INT-203</code> has financial consequences.</strong> A stock adjustment changes the value of what the<br>business holds. Publish it, and make sure the payload carries the reason code so the ERP can<br>post it correctly.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Event published before commit | [doc 09 \u00a72.4](../../../docs/09-defect-hotspots.md) |<br>| Event delivered twice to a non-idempotent consumer | [doc 09 \u00a73.4](../../../docs/09-defect-hotspots.md) |<br>| Events delivered out of order | [doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md) |<br>| Consumer failing permanently, backlog growing | [doc 04 \u00a73.1](../../../docs/04-modules.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 18,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "platform; INT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/28"
+}

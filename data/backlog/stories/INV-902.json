@@ -1,0 +1,38 @@
+{
+  "id": 195,
+  "rev": 1,
+  "code": "INV-902",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-902 \u2014 Rebuild the availability projection",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer during an incident</strong>, I want <strong>to regenerate the availability projection from<br>balances</strong>, so that <strong>drift is corrected in minutes rather than investigated for hours</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the projection is deleted, <strong>when</strong> the rebuild runs, <strong>then</strong> it is fully</li><li>regenerated from <code>stock_balance</code>.</li><li>- <strong>Given</strong> a correct projection, <strong>when</strong> the rebuild runs, <strong>then</strong> every row is unchanged \u2014</li><li>proving the incremental update and the rebuild agree.</li><li>- <strong>Given</strong> the rebuild, <strong>then</strong> it can be scoped to one product or one warehouse.</li><li>- <strong>Given</strong> the rebuild runs while the warehouse is operating, <strong>then</strong> it does not block</li><li>transactions.</li><li>- <strong>Given</strong> this story, <strong>then</strong> it is delivered in the same iteration as</li><li>[INV-901](INV-901-maintain-availability-table.md).</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>product_availability</code>, <code>stock_balance</code> |<br>| Risks | No rebuild job during an incident ([doc 08 \u00a73](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration (rebuild vs incremental agreement) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/40",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/195"
+}

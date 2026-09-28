@@ -1,0 +1,31 @@
+{
+  "id": 27,
+  "rev": 1,
+  "code": "INT-1",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INT-1 \u2014 Inbound integration",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Take messages from the ERP and turn them into WMS records \u2014 rejecting the bad ones loudly and<br>never creating the same thing twice.</p>\n<h3>Scope</h3><p><strong>In.</strong> ASN, order, and master data intake; malformed message handling; deduplication.<br><br><strong>Out.</strong> The ERP itself. Message transport choice.</p>\n<h3>Design notes</h3><p><strong>Validate at the edge, hard.</strong> A bad message accepted becomes bad master data, and bad master<br>data becomes wrong stock \u2014 slowly, across every transaction that touches it. Reject immediately<br>with a reason naming the offending field.<br><br><strong>Never let an inbound message change stock directly.</strong> The ERP can tell you what it expects.<br>It cannot tell you what is on the shelf. Stock changes only through warehouse actions.<br><br><strong><code>INT-104</code> prevents the worst integration failure</strong>: a malformed message silently dropped, so<br>the ERP believes in an order the WMS has never heard of. Failed messages go to a dead-letter<br>table with the error and the original payload, and someone reviews it daily.<br><br><strong><code>INT-105</code> is cheap and prevents double shipments.</strong> Unique constraint on<br><code>(source_system, external_reference)</code>. Treat a repeat as already processed and return the<br>original result.<br><br><strong>Master data updates need per-field thinking.</strong> Some changes are safe to apply<br>automatically \u2014 a description. Some must be rejected while stock exists \u2014 case quantity,<br>tracking flags. See [FDN-607](../../stories/FDN/FDN-607-freeze-fields.md).</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| ERP retry creating a duplicate order | [doc 09 \u00a73.3](../../../docs/09-defect-hotspots.md) |<br>| Malformed message dropped silently | [doc 08 \u00a76](../../../docs/08-data-sync-and-migrations.md) |<br>| Frozen master data field changed by an ERP update | [doc 03 \u00a75](../../../docs/03-master-data.md) |<br>| Bad data accepted at the edge | [doc 03 \u00a77](../../../docs/03-master-data.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 26,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "platform; INT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/27"
+}

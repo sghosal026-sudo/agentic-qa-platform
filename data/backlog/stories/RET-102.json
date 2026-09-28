@@ -1,0 +1,38 @@
+{
+  "id": 241,
+  "rev": 1,
+  "code": "RET-102",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-102 \u2014 Validate return quantity against what shipped",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>customer service agent</strong>, I want <strong>the system to stop me authorising more than we sent</strong>,<br>so that <strong>we do not credit or restock stock we never shipped</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an order line that shipped 8 of 10 ordered, <strong>then</strong> an RMA for more than 8 is</li><li>rejected.</li><li>- <strong>Given</strong> an existing RMA for part of a line, <strong>then</strong> a further RMA cannot exceed the</li><li>remaining shipped quantity.</li><li>- <strong>Given</strong> an already-returned quantity, <strong>then</strong> it is deducted from what is still returnable.</li><li>- <strong>Given</strong> a product not on the original order, <strong>then</strong> it cannot be added to that RMA.</li><li>- <strong>Given</strong> the validation, <strong>then</strong> it reads shipped quantities through an <code>outbound</code> service</li><li>call.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code>, <code>outbound</code> |<br>| Tables | <code>rma</code>, <code>order_line</code> |<br>| Risks | Returning more than was shipped creates stock from nothing ([doc 05 WF 9](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/48",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/241"
+}

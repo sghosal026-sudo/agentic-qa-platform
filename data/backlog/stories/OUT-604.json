@@ -1,0 +1,38 @@
+{
+  "id": 235,
+  "rev": 1,
+  "code": "OUT-604",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-604 \u2014 Generate a manifest",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>shipping clerk</strong>, I want <strong>a document listing what is on the vehicle</strong>, so that <strong>the<br>driver has a record of what they accepted</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a shipment, <strong>then</strong> the manifest lists every carton with its order reference,</li><li>weight, and destination.</li><li>- <strong>Given</strong> the manifest, <strong>then</strong> it shows total carton count and total weight.</li><li>- <strong>Given</strong> a shipment not yet confirmed, <strong>then</strong> a draft manifest can be produced and is</li><li>marked draft.</li><li>- <strong>Given</strong> a confirmed shipment, <strong>then</strong> the manifest is fixed and reflects exactly what was</li><li>dispatched.</li><li>- <strong>Given</strong> the manifest, <strong>then</strong> it is generated as content \u2014 the system does not print it.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>shipment</code>, <code>shipment_carton</code>, <code>carton</code> |<br>| Risks | Manifest regenerated after dispatch showing different content |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/46",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/235"
+}

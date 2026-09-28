@@ -1,0 +1,38 @@
+{
+  "id": 218,
+  "rev": 1,
+  "code": "OUT-402",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-402 \u2014 Sequence pick tasks by location",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>picker</strong>, I want <strong>my list ordered by where things are</strong>, so that <strong>I walk the aisle once<br>instead of doubling back</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a pick task with several lines, <strong>then</strong> they are ordered by the location</li><li><code>pick_sequence</code>, not by order line or by product.</li><li>- <strong>Given</strong> locations in different zones, <strong>then</strong> lines are grouped by zone before sequencing</li><li>within it.</li><li>- <strong>Given</strong> the sequence, <strong>then</strong> it is fixed at task creation so the route does not change</li><li>under the picker mid-walk.</li><li>- <strong>Given</strong> a realistic warehouse layout in the seed data, <strong>then</strong> a test asserts the resulting</li><li>route does not revisit an aisle.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>masterdata</code> |<br>| Tables | <code>pick_task_line</code>, <code>location</code> |<br>| Risks | Wrong sequence costs hours of walking daily and is invisible in unit tests ([doc 03 \u00a74](../../../docs/03-master-data.md)) |<br>| Tests | unit \u00b7 integration (against a realistic layout) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/44",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/218"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 276,
+  "rev": 1,
+  "code": "TRF-101",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-101 \u2014 Create a transfer order",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>network planner</strong>, I want <strong>to raise a transfer between two warehouses</strong>, so that <strong>stock<br>can be rebalanced with a proper record at both ends</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an origin warehouse, a destination warehouse, and lines, <strong>when</strong> I create a</li><li>transfer, <strong>then</strong> it is created with status <code>new</code> and a reference visible at both sites.</li><li>- <strong>Given</strong> the same warehouse as origin and destination, <strong>then</strong> creation is rejected.</li><li>- <strong>Given</strong> a product not stocked at the origin, <strong>then</strong> the line is rejected.</li><li>- <strong>Given</strong> the transfer, <strong>then</strong> it records an expected transit time used later by</li><li>[TRF-402](TRF-402-age-and-escalate-overdue.md).</li><li>- <strong>Given</strong> creation, <strong>then</strong> <code>transfers.transfer_created</code> is published.</li><li>- <strong>Given</strong> all timestamps, <strong>then</strong> they are stored in UTC.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code>, <code>masterdata</code> |<br>| Tables | <code>transfer_order</code>, <code>transfer_line</code> |<br>| Risks | Timezone differences producing nonsensical ordering ([doc 09 \u00a79.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/57",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/276"
+}

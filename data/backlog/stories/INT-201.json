@@ -1,0 +1,38 @@
+{
+  "id": 145,
+  "rev": 1,
+  "code": "INT-201",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-201 \u2014 Publish receipt confirmations",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>finance team member</strong>, I want <strong>the ERP told what was actually received</strong>, so that<br><strong>supplier invoices are matched against real deliveries</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a confirmed receipt, <strong>then</strong> an event is written to the outbox in the same</li><li>transaction carrying received quantities per line, batches, and any discrepancies.</li><li>- <strong>Given</strong> the ERP being unavailable, <strong>then</strong> the event is retried and receiving is unaffected.</li><li>- <strong>Given</strong> a short or over receipt, <strong>then</strong> the event states both expected and actual so the</li><li>ERP can reconcile.</li><li>- <strong>Given</strong> repeated delivery failure, <strong>then</strong> the event dead-letters and alerts.</li><li>- <strong>Given</strong> duplicate delivery, <strong>then</strong> the ERP is documented as required to deduplicate on</li><li><code>event_id</code>.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>inbound</code> |<br>| Tables | <code>outbox</code> |<br>| Risks | Event lost after commit ([doc 09 \u00a72.4](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration \u00b7 event assertion |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/28",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/145"
+}

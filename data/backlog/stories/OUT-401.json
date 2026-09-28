@@ -1,0 +1,38 @@
+{
+  "id": 217,
+  "rev": 1,
+  "code": "OUT-401",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-401 \u2014 Assign a pick task to a picker",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>picker</strong>, I want <strong>to be given the next piece of work</strong>, so that <strong>I always know what to<br>do without asking a supervisor</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> unassigned tasks, <strong>when</strong> I request work, <strong>then</strong> one task group is assigned to me</li><li>and locked to me.</li><li>- <strong>Given</strong> ten pickers requesting work simultaneously from a pool of ten tasks, <strong>then</strong> each</li><li>task goes to exactly one picker.</li><li>- <strong>Given</strong> assignment, <strong>then</strong> it uses a conditional update that affects exactly one row \u2014</li><li>not a read followed by a write.</li><li>- <strong>Given</strong> I already have an incomplete assignment, <strong>then</strong> I am returned to it rather than</li><li>given new work.</li><li>- <strong>Given</strong> a task assigned to someone else, <strong>then</strong> I cannot confirm any of its lines.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>pick_task</code> |<br>| Risks | Two pickers on one task ([doc 09 \u00a74.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 concurrency (mandatory) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/44",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/217"
+}

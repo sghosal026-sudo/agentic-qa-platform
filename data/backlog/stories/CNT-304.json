@@ -1,0 +1,38 @@
+{
+  "id": 73,
+  "rev": 1,
+  "code": "CNT-304",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-304 \u2014 Record an investigation note",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>to record why a variance happened</strong>, so that <strong>counting<br>fixes causes instead of endlessly correcting symptoms</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a variance above the investigation threshold, <strong>then</strong> a note with a cause category</li><li>is mandatory before approval.</li><li>- <strong>Given</strong> the cause categories, <strong>then</strong> they are specific: mis-pick, mis-putaway, damage not</li><li>recorded, master data error, theft suspected, unknown.</li><li>- <strong>Given</strong> notes over time, <strong>then</strong> they are reportable by category, zone, and product.</li><li>- <strong>Given</strong> a variance below the threshold, <strong>then</strong> a note is optional.</li><li>- <strong>Given</strong> \"unknown\" chosen repeatedly for the same location, <strong>then</strong> it is surfaced as a</li><li>pattern worth investigating.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code> |<br>| Tables | <code>variance</code> |<br>| Risks | High variance accepted without investigation ([doc 05 WF 10](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/12",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/73"
+}

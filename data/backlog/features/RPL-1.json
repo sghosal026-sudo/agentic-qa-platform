@@ -1,0 +1,31 @@
+{
+  "id": 53,
+  "rev": 1,
+  "code": "RPL-1",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "RPL-1 \u2014 Replenishment rules",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Define, per product per pick location, when a refill is needed and how much to bring.</p>\n<h3>Scope</h3><p><strong>In.</strong> Min/max rules, validation, bulk loading, coverage reporting.<br><br><strong>Out.</strong> Slotting \u2014 deciding which products belong in pick faces at all.</p>\n<h3>Design notes</h3><p><strong><code>RPL-102</code> is not a trivial validation.</strong> Min 10 and max 12 means every couple of picks<br>triggers a refill of two units \u2014 constant trips, no benefit. Require the gap to be at least one<br>case quantity, or a configurable multiple of the minimum.<br><br><strong>Max is capped by pick face capacity.</strong> A rule asking for more than the location physically<br>holds produces tasks that can never complete.<br><br><strong><code>RPL-104</code> is the coverage check.</strong> A pick face with no rule never replenishes and runs dry<br>silently. This is the same class of problem as a location with no capacity \u2014 an optional field<br>that the logic actually requires.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Min and max set too close causing thrashing | [doc 09 \u00a77.2](../../../docs/09-defect-hotspots.md) |<br>| Max exceeding pick face capacity | [doc 05 WF 11](../../../docs/05-workflows.md) |<br>| Pick faces with no rule at all | [doc 09 \u00a77.3](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 13,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "replenishment; RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/53"
+}

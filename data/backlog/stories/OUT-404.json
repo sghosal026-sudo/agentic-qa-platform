@@ -1,0 +1,38 @@
+{
+  "id": 220,
+  "rev": 1,
+  "code": "OUT-404",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-404 \u2014 Short pick with a reason",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>picker</strong>, I want <strong>to record that I found less than the task asked for</strong>, so that <strong>the<br>shortfall is resolved deliberately instead of discovered at packing</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> less stock than the task line requires, <strong>then</strong> I can confirm the quantity found</li><li>with a mandatory reason code.</li><li>- <strong>Given</strong> a short pick, <strong>then</strong> the picked quantity reduces on-hand and reserved; the</li><li><strong>remainder is explicitly resolved</strong> \u2014 re-allocated to another location or released and the</li><li>line shorted.</li><li>- <strong>Given</strong> the remainder cannot be re-allocated, <strong>then</strong> the order line is shorted and a</li><li>supervisor is notified.</li><li>- <strong>Given</strong> a short pick, <strong>then</strong> no reservation is left pointing at stock that is not there.</li><li>- <strong>Given</strong> a short pick, <strong>then</strong> <code>outbound.short_pick_recorded</code> is published.</li><li>- <strong>Given</strong> the short, <strong>then</strong> the location becomes a candidate for a count.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>inventory</code> |<br>| Tables | <code>pick_task_line</code>, <code>reservation</code>, <code>stock_balance</code>, <code>outbox</code> |<br>| Risks | Hanging reservation ([doc 09 \u00a75.4](../../../docs/09-defect-hotspots.md)); silent short shipment ([doc 05 WF 6](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/44",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/220"
+}

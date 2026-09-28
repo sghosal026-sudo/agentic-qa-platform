@@ -1,0 +1,38 @@
+{
+  "id": 158,
+  "rev": 1,
+  "code": "INT-501",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-501 \u2014 Products with no barcode",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>system administrator</strong>, I want <strong>a list of products that cannot be scanned</strong>, so that<br><strong>they are fixed before a picker mistypes a code and ships the wrong item</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the report, <strong>then</strong> it lists every active product with no barcode record.</li><li>- <strong>Given</strong> the report, <strong>then</strong> products currently holding stock are listed first \u2014 they are</li><li>the ones that will be scanned.</li><li>- <strong>Given</strong> a product deliberately without a barcode, <strong>then</strong> it can be marked as an accepted</li><li>exception and suppressed.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it runs weekly and its output reaches a person.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>masterdata</code> |<br>| Tables | <code>product</code>, <code>product_barcode</code>, <code>stock_balance</code> |<br>| Risks | Manual entry causing wrong-item picks ([doc 03 \u00a77.3](../../../docs/03-master-data.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 2,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/31",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/158"
+}

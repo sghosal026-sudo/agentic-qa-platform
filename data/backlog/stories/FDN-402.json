@@ -1,0 +1,38 @@
+{
+  "id": 86,
+  "rev": 1,
+  "code": "FDN-402",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-402 \u2014 Query the audit trail",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>to search the audit trail</strong>, so that <strong>I can reconstruct what<br>happened around a discrepancy without reading raw logs</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>when</strong> I query, <strong>then</strong> I get audit rows within it, newest first.</li><li>- <strong>Given</strong> a user, an entity type, or an entity ID, <strong>then</strong> I can filter by any of them.</li><li>- <strong>Given</strong> a correlation ID, <strong>then</strong> I get every audit row from that one original request.</li><li>- <strong>Given</strong> a large result set, <strong>then</strong> results are paginated.</li><li>- <strong>Given</strong> a caller without audit permission, <strong>then</strong> the query returns 403.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code> |<br>| Tables | <code>audit_log</code> |<br>| Risks | Unindexed queries over a very large table |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/18",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/86"
+}

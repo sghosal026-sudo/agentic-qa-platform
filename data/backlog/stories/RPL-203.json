@@ -1,0 +1,38 @@
+{
+  "id": 266,
+  "rev": 1,
+  "code": "RPL-203",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-203 \u2014 Create a replenishment task",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>replenishment operator</strong>, I want <strong>a task telling me what to move and where</strong>, so that<br><strong>refilling a pick face is a normal piece of assigned work</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a need and a chosen source, <strong>then</strong> a task is created with source, destination,</li><li>product, batch, and quantity.</li><li>- <strong>Given</strong> the quantity, <strong>then</strong> it fills to the rule maximum, capped by pick face capacity</li><li>and by what the source holds.</li><li>- <strong>Given</strong> a task, <strong>then</strong> it is unassigned and available to any qualified operator.</li><li>- <strong>Given</strong> a task tied to a released wave, <strong>then</strong> it carries a higher priority.</li><li>- <strong>Given</strong> creation, <strong>then</strong> <code>replenishment.task_created</code> is published.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code> |<br>| Tables | <code>replen_task</code>, <code>outbox</code> |<br>| Risks | Task quantity exceeding pick face capacity ([doc 05 WF 11](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/54",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/266"
+}

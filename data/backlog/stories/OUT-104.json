@@ -1,0 +1,38 @@
+{
+  "id": 200,
+  "rev": 1,
+  "code": "OUT-104",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-104 \u2014 Cancel an order and release reservations",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>customer service agent</strong>, I want <strong>to cancel an order and have its stock returned to<br>availability</strong>, so that <strong>cancelling does not quietly make stock unsellable forever</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an allocated order, <strong>when</strong> I cancel it, <strong>then</strong> every reservation is released in</li><li>the same transaction and availability increases accordingly.</li><li>- <strong>Given</strong> an order being picked, <strong>then</strong> cancellation is allowed and the open pick tasks are</li><li>cancelled too.</li><li>- <strong>Given</strong> a shipped order, <strong>then</strong> cancellation is rejected \u2014 use a return instead.</li><li>- <strong>Given</strong> cancellation from <strong>any</strong> entry point (API, ERP, wave cancel, timeout), <strong>then</strong> the</li><li>same release path runs.</li><li>- <strong>Given</strong> cancellation, <strong>then</strong> <code>outbound.order_cancelled</code> is published.</li><li>- <strong>Given</strong> cancellation, <strong>then</strong> no reservation row for that order remains open.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>inventory</code> |<br>| Tables | <code>order</code>, <code>reservation</code>, <code>stock_balance</code>, <code>pick_task</code> |<br>| Risks | Reservation leak ([doc 09 \u00a75.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration (per entry point) \u00b7 invariant \u00b7 rollback |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/41",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/200"
+}

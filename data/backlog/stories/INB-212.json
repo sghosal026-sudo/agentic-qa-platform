@@ -1,0 +1,38 @@
+{
+  "id": 125,
+  "rev": 1,
+  "code": "INB-212",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-212 \u2014 Reject stock with insufficient shelf life",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk</strong>, I want <strong>stock arriving too close to its expiry to be refused or<br>quarantined</strong>, so that <strong>we do not accept goods we cannot sell</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a product with a minimum shelf life on receipt, <strong>when</strong> stock arrives with less</li><li>remaining, <strong>then</strong> the line is flagged and cannot be received as available.</li><li>- <strong>Given</strong> the flag, <strong>then</strong> the clerk can refuse the goods or receive them into quarantine</li><li>with supervisor approval.</li><li>- <strong>Given</strong> quarantined short-life stock, <strong>then</strong> a discrepancy is recorded against the</li><li>supplier.</li><li>- <strong>Given</strong> the shelf life rule, <strong>then</strong> it is expressed as a proportion of total shelf life or</li><li>an absolute number of days, whichever the product specifies.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>masterdata</code>, <code>inventory</code> |<br>| Tables | <code>receipt_line</code>, <code>batch</code>, <code>product</code> |<br>| Risks | Short-life stock accepted then written off ([doc 05 WF 1](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/24",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/125"
+}

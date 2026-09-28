@@ -1,0 +1,31 @@
+{
+  "id": 12,
+  "rev": 1,
+  "code": "CNT-3",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "CNT-3 \u2014 Variance handling",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Turn a difference between counted and expected into either a correction or an investigation \u2014<br>never into a silent adjustment.</p>\n<h3>Scope</h3><p><strong>In.</strong> Variance calculation, recount thresholds, approval and posting, investigation notes.<br><br><strong>Out.</strong> General adjustments \u2014 that is [INV-7](../INV/INV-7-adjustments.md). Counting posts<br>through its own controlled path.</p>\n<h3>Design notes</h3><p><strong>Compare against the snapshot, not the live balance.</strong> This one line is the difference between<br>counting that works and counting that produces noise. A count entered at 10:05 against a<br>balance that changed at 10:02 shows a variance that is purely a timing artefact.<br><br><strong>Never adjust before the recount.</strong> If the first variance is posted and the recount is then<br>compared against the adjusted figure, it matches perfectly \u2014 the problem vanishes from the<br>record while remaining in the warehouse.<br><br><strong>The person who counted cannot approve their own large variance.</strong> Enforce in the service<br>layer.<br><br><strong><code>CNT-304</code> is what makes counting improve anything.</strong> A variance corrected is a symptom<br>treated. A variance with an investigation note \u2014 \"pallet found in the wrong aisle\", \"case<br>quantity wrong in master data\" \u2014 aggregated over a month, is a list of things to fix.<br><br><strong>Idempotency on posting.</strong> An adjustment posted twice on a retry corrupts the balance by twice<br>the original error in the opposite direction, which is deeply confusing to unpick.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Variance calculated against the live balance | [doc 09 \u00a76.1](../../../docs/09-defect-hotspots.md) |<br>| Recount compared to the adjusted figure | [doc 09 \u00a76.4](../../../docs/09-defect-hotspots.md) |<br>| Adjustment posted twice on retry | [doc 09 \u00a73.2](../../../docs/09-defect-hotspots.md) |<br>| High variance accepted without investigation | [doc 05 WF 10](../../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 21,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "counting; CNT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/12"
+}

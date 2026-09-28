@@ -1,0 +1,38 @@
+{
+  "id": 291,
+  "rev": 1,
+  "code": "TRF-501",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-501 \u2014 On-hand plus in-transit across warehouses",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>network planner</strong>, I want <strong>one view of what every site holds and what is moving between<br>them</strong>, so that <strong>I can decide what to rebalance without querying each warehouse separately</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a product, <strong>then</strong> the view shows on-hand, available, and inbound-in-transit per</li><li>warehouse \u2014 three separately named quantities, never one merged \"stock\" figure.</li><li>- <strong>Given</strong> in-transit stock, <strong>then</strong> it is attributed to the destination as inbound and is</li><li><strong>not</strong> counted as available anywhere.</li><li>- <strong>Given</strong> the view, <strong>then</strong> each row carries <code>last_updated_at</code> and the API exposes it.</li><li>- <strong>Given</strong> the projection, <strong>then</strong> a rebuild job exists and is delivered with this story.</li><li>- <strong>Given</strong> a nightly reconciliation, <strong>then</strong> the projection is compared against source</li><li>balances and any mismatch alerts.</li><li>- <strong>Given</strong> the view, <strong>then</strong> it is never used to make an allocation decision.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code>, <code>inventory</code> |<br>| Tables | network stock projection, <code>stock_balance</code> |<br>| Risks | In-transit counted as available at both sites ([doc 05 WF 12](../../../docs/05-workflows.md)); projection drift ([doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration \u00b7 rebuild-vs-incremental agreement \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/61",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/291"
+}

@@ -1,0 +1,38 @@
+{
+  "id": 239,
+  "rev": 1,
+  "code": "OUT-702",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-702 \u2014 Order tracking endpoint",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>integration client</strong>, I want <strong>a fast endpoint returning order progress</strong>, so that <strong>a<br>customer-facing page can show where a delivery has got to</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an order reference, <strong>then</strong> the endpoint returns state, progress, carrier, and</li><li>tracking reference in one read.</li><li>- <strong>Given</strong> the response, <strong>then</strong> it includes <code>last_updated_at</code> so the caller can judge</li><li>freshness.</li><li>- <strong>Given</strong> several order references, <strong>then</strong> they can be requested in one call.</li><li>- <strong>Given</strong> an unknown reference, <strong>then</strong> 404 is returned without revealing whether the order</li><li>ever existed.</li><li>- <strong>Given</strong> the endpoint, <strong>then</strong> it reads only the projection and never joins the</li><li>transactional tables.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>order_status</code> projection |<br>| Risks | Staleness invisible to the reader ([doc 08 \u00a75.3](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/47",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/239"
+}

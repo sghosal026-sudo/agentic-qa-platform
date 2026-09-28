@@ -1,0 +1,38 @@
+{
+  "id": 107,
+  "rev": 1,
+  "code": "FDN-803",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-803 \u2014 Retry with backoff",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>failed deliveries retried with increasing delays</strong>, so that <strong>a<br>temporary consumer outage resolves itself without anyone intervening</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a delivery fails, <strong>then</strong> the attempt count increases and the next attempt is</li><li>scheduled after a growing delay.</li><li>- <strong>Given</strong> the consumer recovers, <strong>then</strong> queued events are delivered in order.</li><li>- <strong>Given</strong> an event, <strong>then</strong> its attempt count and last error are visible for diagnosis.</li><li>- <strong>Given</strong> a consumer down for an hour, <strong>then</strong> no events are lost and warehouse operations</li><li>are unaffected.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code> |<br>| Tables | <code>outbox</code> |<br>| Risks | Tight retry loops hammering a struggling consumer |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/22",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/107"
+}

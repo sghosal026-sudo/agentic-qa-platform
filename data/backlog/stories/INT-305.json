@@ -1,0 +1,38 @@
+{
+  "id": 153,
+  "rev": 1,
+  "code": "INT-305",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-305 \u2014 Projection reconciliation jobs",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>every projection checked against its source on a schedule</strong>, so<br>that <strong>drift is detected rather than served to customers</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> each projection, <strong>then</strong> a scheduled job compares it against the source and reports</li><li>every mismatch.</li><li>- <strong>Given</strong> availability, <strong>then</strong> it reconciles hourly; reporting projections reconcile</li><li>nightly.</li><li>- <strong>Given</strong> a mismatch, <strong>then</strong> an alert reaches a person and the rebuild is offered \u2014 but not</li><li>run automatically.</li><li>- <strong>Given</strong> a projection row older than its freshness threshold, <strong>then</strong> it is reported as</li><li>stale even when the value matches.</li><li>- <strong>Given</strong> a reconciliation job that fails to run, <strong>then</strong> that also alerts.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code>, <code>inventory</code>, <code>outbound</code> |<br>| Tables | all projections |<br>| Risks | Projection drift ([doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md)); auto-correcting hides the cause ([doc 08 \u00a79](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/29",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/153"
+}

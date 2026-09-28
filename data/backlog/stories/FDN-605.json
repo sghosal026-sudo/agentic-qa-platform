@@ -1,0 +1,38 @@
+{
+  "id": 99,
+  "rev": 1,
+  "code": "FDN-605",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-605 \u2014 Bulk import products",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>system administrator going live</strong>, I want <strong>to load the product catalogue from a file</strong>,<br>so that <strong>thousands of products exist without manual entry</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a valid file, <strong>when</strong> I import it, <strong>then</strong> every product and its barcodes are</li><li>created.</li><li>- <strong>Given</strong> a file with any invalid row, <strong>then</strong> <strong>nothing</strong> is imported and every problem is</li><li>reported at once with row numbers.</li><li>- <strong>Given</strong> duplicate barcodes within the file or against the existing catalogue, <strong>then</strong> they</li><li>are reported as invalid.</li><li>- <strong>Given</strong> a weight or dimension outside a plausible range, <strong>then</strong> it is reported \u2014 a</li><li>4,200 kg carton is a unit error, not a product.</li><li>- <strong>Given</strong> a case quantity of zero or blank, <strong>then</strong> it is reported as invalid.</li><li>- <strong>Given</strong> rows with similar descriptions, <strong>then</strong> they are reported as possible duplicates</li><li>without blocking the import.</li><li>- <strong>Given</strong> the same file imported twice, <strong>then</strong> the second import changes nothing.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>masterdata</code> |<br>| Tables | <code>product</code>, <code>product_barcode</code> |<br>| Risks | Partial import ([doc 09 \u00a711.4](../../../docs/09-defect-hotspots.md)); duplicates ([doc 03 \u00a77.5](../../../docs/03-master-data.md)); mixed units ([doc 08 \u00a78](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | unit \u00b7 integration \u00b7 idempotency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/20",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/99"
+}

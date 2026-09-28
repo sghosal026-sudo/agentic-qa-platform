@@ -1,0 +1,38 @@
+{
+  "id": 168,
+  "rev": 1,
+  "code": "INV-202",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-202 \u2014 Query the movement ledger",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>to search stock movements</strong>, so that <strong>I can see<br>exactly what happened to a product or location and when</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a product, a location, a batch, or a date range, <strong>then</strong> I can filter by any</li><li>combination.</li><li>- <strong>Given</strong> results, <strong>then</strong> they are ordered by time and paginated.</li><li>- <strong>Given</strong> a movement, <strong>then</strong> the response includes the actor, the reason code, and the</li><li>source document reference.</li><li>- <strong>Given</strong> a correlation ID, <strong>then</strong> I get every movement caused by that one request.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_movement</code> |<br>| Risks | Unindexed queries over a table that only ever grows |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/33",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/168"
+}

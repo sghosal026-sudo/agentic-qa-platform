@@ -1,0 +1,38 @@
+{
+  "id": 211,
+  "rev": 1,
+  "code": "OUT-301",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-301 \u2014 Create a wave manually",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>to group allocated orders into a wave</strong>, so that <strong>picking work is<br>released in planned batches rather than one order at a time</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> allocated orders, <strong>when</strong> I select them, <strong>then</strong> a wave is created in <code>planned</code></li><li>status.</li><li>- <strong>Given</strong> an unallocated order, <strong>then</strong> it cannot be added to a wave.</li><li>- <strong>Given</strong> an order already in an open wave, <strong>then</strong> it cannot be added to a second \u2014 enforced</li><li>by a unique constraint.</li><li>- <strong>Given</strong> a planned wave, <strong>then</strong> orders can be added and removed until it is released.</li><li>- <strong>Given</strong> the wave, <strong>then</strong> it records who created it and its target cut-off time.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>wave</code>, <code>order</code> |<br>| Risks | An order landing in two waves and being double-picked ([doc 05 WF 5](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration \u00b7 concurrency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/43",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/211"
+}

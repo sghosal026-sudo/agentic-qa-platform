@@ -1,0 +1,38 @@
+{
+  "id": 247,
+  "rev": 1,
+  "code": "RET-204",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-204 \u2014 Record visible condition",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>returns clerk</strong>, I want <strong>to note the obvious state of goods as they arrive</strong>, so that<br><strong>the inspector knows what to look at and clearly damaged items are flagged immediately</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a return line, <strong>then</strong> a visible condition can be recorded: sealed, opened,</li><li>damaged packaging, damaged product, incomplete.</li><li>- <strong>Given</strong> clearly damaged goods, <strong>then</strong> they are routed to a separate quarantine area from</li><li>sealed returns.</li><li>- <strong>Given</strong> a condition note, <strong>then</strong> it does not replace inspection \u2014 it informs it.</li><li>- <strong>Given</strong> the arrival record, <strong>then</strong> it is retained even if the inspector later disagrees.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code> |<br>| Tables | <code>return_line</code> |<br>| Risks | Arrival condition treated as the inspection outcome ([doc 09 \u00a78.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/49",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/247"
+}

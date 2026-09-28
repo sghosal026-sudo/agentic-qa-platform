@@ -1,0 +1,38 @@
+{
+  "id": 143,
+  "rev": 1,
+  "code": "INT-104",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INT-104 \u2014 Handle malformed messages",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>unprocessable messages stored rather than dropped</strong>, so that <strong>the<br>ERP never believes in an order the WMS has no record of</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a message that fails parsing or validation, <strong>then</strong> it is stored in a dead-letter</li><li>table with its original payload, the error, and the timestamp.</li><li>- <strong>Given</strong> a dead-letter entry, <strong>then</strong> it is never silently deleted.</li><li>- <strong>Given</strong> the dead-letter table, <strong>then</strong> it can be listed and filtered, and someone reviews</li><li>it daily.</li><li>- <strong>Given</strong> a corrected underlying problem, <strong>then</strong> a dead-lettered message can be replayed.</li><li>- <strong>Given</strong> replay, <strong>then</strong> it is idempotent \u2014 replaying a message already processed changes</li><li>nothing.</li><li>- <strong>Given</strong> dead-letter volume above a threshold, <strong>then</strong> an alert is raised.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code> |<br>| Tables | dead-letter |<br>| Risks | Silent message drop ([doc 08 \u00a76](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration \u00b7 idempotency |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/27",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/4",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/143"
+}

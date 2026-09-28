@@ -1,0 +1,38 @@
+{
+  "id": 111,
+  "rev": 1,
+  "code": "INB-102",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-102 \u2014 View open ASNs for a warehouse",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk</strong>, I want <strong>to see what deliveries are expected</strong>, so that <strong>I can find<br>the right ASN when a truck arrives</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> open ASNs, <strong>when</strong> I query, <strong>then</strong> I get them with supplier, reference, expected</li><li>date, and line count.</li><li>- <strong>Given</strong> the list, <strong>then</strong> I can filter by supplier, by expected date, and by reference.</li><li>- <strong>Given</strong> a partly received ASN, <strong>then</strong> it still appears with its outstanding quantities.</li><li>- <strong>Given</strong> a fully received or cancelled ASN, <strong>then</strong> it does not appear in the open list.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code> |<br>| Tables | <code>asn</code>, <code>asn_line</code> |<br>| Risks | \u2014 |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 2,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/23",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/111"
+}

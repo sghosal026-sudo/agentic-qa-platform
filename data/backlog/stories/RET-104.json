@@ -1,0 +1,38 @@
+{
+  "id": 243,
+  "rev": 1,
+  "code": "RET-104",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RET-104 \u2014 Expire an unused RMA",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>returns clerk</strong>, I want <strong>old unused RMAs closed automatically</strong>, so that <strong>the open list<br>reflects what is genuinely expected back</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an RMA past its expiry with no receipts, <strong>then</strong> a scheduled job closes it as</li><li>expired.</li><li>- <strong>Given</strong> a partly received RMA past its expiry, <strong>then</strong> it is closed for the outstanding</li><li>quantity only.</li><li>- <strong>Given</strong> an expired RMA, <strong>then</strong> goods arriving against it are handled as a blind return \u2014</li><li>see [RET-202](RET-202-blind-return.md).</li><li>- <strong>Given</strong> expiry, <strong>then</strong> the customer service team can see which RMAs expired and when.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>returns</code> |<br>| Tables | <code>rma</code> |<br>| Risks | Open RMA list growing until it is useless |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RET; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/48",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/7",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/243"
+}

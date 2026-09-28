@@ -1,0 +1,38 @@
+{
+  "id": 110,
+  "rev": 1,
+  "code": "INB-101",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-101 \u2014 Create an ASN through the API",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>integration client</strong>, I want <strong>to create an ASN with its lines</strong>, so that <strong>receiving<br>knows what to expect and can check the delivery against it</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a valid supplier and products, <strong>when</strong> I post an ASN, <strong>then</strong> it is created with</li><li>status <code>open</code> and its ID is returned.</li><li>- <strong>Given</strong> a product that does not exist, <strong>then</strong> the ASN is rejected, naming the bad line.</li><li>- <strong>Given</strong> a blocked product, <strong>then</strong> the ASN is accepted with a warning flag on the line.</li><li>- <strong>Given</strong> a zero or negative quantity, <strong>then</strong> it is rejected.</li><li>- <strong>Given</strong> a supplier reference already used, <strong>then</strong> it is rejected as a duplicate.</li><li>- <strong>Given</strong> creation succeeds, <strong>then</strong> an audit row records who created it.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>masterdata</code> |<br>| Tables | <code>asn</code>, <code>asn_line</code> |<br>| Risks | Duplicate ASN from an ERP retry ([doc 09 \u00a73.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/23",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/110"
+}

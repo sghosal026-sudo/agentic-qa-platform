@@ -1,0 +1,31 @@
+{
+  "id": 41,
+  "rev": 1,
+  "code": "OUT-1",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "OUT-1 \u2014 Orders",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Accept an order, validate it, expose its state, and allow it to be cancelled or amended<br>cleanly.</p>\n<h3>Scope</h3><p><strong>In.</strong> Order creation via API and from the ERP, validation, status query, cancellation,<br>pre-allocation amendment.<br><br><strong>Out.</strong> Pricing, credit checks, and customer communication. The ERP owns the commercial side.</p>\n<h3>Design notes</h3><p><strong><code>OUT-104</code> is the highest-risk story in this feature</strong>, which surprises people who expect<br>cancellation to be a status update.<br><br>Cancelling must release every reservation, in the same transaction, from every entry point \u2014<br>API cancel, ERP cancel, wave cancellation, timeout. Miss one and reserved stock accumulates<br>silently, availability decays over months, and eventually someone finds a product with 500 on<br>hand and 12 available.<br><br><strong>Deduplicate ERP orders on the external reference.</strong> A retried message must create one order,<br>not two, or the customer receives two deliveries.<br><br><strong>Amendment is only legal before allocation.</strong> After that, deallocate first<br>([OUT-206](../../stories/OUT/OUT-206-deallocate-order-line.md)), then amend. Editing an<br>allocated line leaves reservations pointing at quantities that no longer exist.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Reservations not released on cancel | [doc 09 \u00a75.2](../../../docs/09-defect-hotspots.md) |<br>| ERP retry creating a duplicate order | [doc 09 \u00a73.3](../../../docs/09-defect-hotspots.md) |<br>| Amending an allocated line | [doc 09 \u00a75.5](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 21,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "outbound; OUT; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/41"
+}

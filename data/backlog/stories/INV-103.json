@@ -1,0 +1,38 @@
+{
+  "id": 165,
+  "rev": 1,
+  "code": "INV-103",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-103 \u2014 Query available quantity for a warehouse",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>integration client</strong>, I want <strong>one number saying how much of a product I can sell</strong>, so<br>that <strong>the webshop does not promise stock that is reserved, quarantined, or expired</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a product and warehouse, <strong>when</strong> I query availability, <strong>then</strong> I get on-hand minus</li><li>reserved, summed across sellable locations only.</li><li>- <strong>Given</strong> stock in quarantine, damaged status, or a blocked location, <strong>then</strong> it is excluded.</li><li>- <strong>Given</strong> an expired batch, <strong>then</strong> it is excluded.</li><li>- <strong>Given</strong> stock in a virtual location, <strong>then</strong> it is excluded.</li><li>- <strong>Given</strong> several products in one request, <strong>then</strong> all are returned in one response.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code>, <code>masterdata</code> |<br>| Tables | <code>stock_balance</code>, <code>batch</code>, <code>location</code> |<br>| Risks | This query becomes slow at volume \u2014 see [INV-9](../../features/INV/INV-9-availability-projection.md) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/32",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/165"
+}

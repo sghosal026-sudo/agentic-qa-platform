@@ -1,0 +1,38 @@
+{
+  "id": 272,
+  "rev": 1,
+  "code": "RPL-304",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-304 \u2014 Handle a partial replenishment",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>replenishment operator</strong>, I want <strong>to move less than the task asked for when that is all<br>there is</strong>, so that <strong>a partial refill is recorded properly instead of being abandoned</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> the source holds less than the task quantity, <strong>then</strong> I can confirm the lesser</li><li>amount with a reason.</li><li>- <strong>Given</strong> a partial confirmation, <strong>then</strong> the movement records what actually moved and the</li><li>task closes.</li><li>- <strong>Given</strong> the location is still below minimum after the partial, <strong>then</strong> a new task is</li><li>created on the next evaluation \u2014 not immediately, to avoid a loop.</li><li>- <strong>Given</strong> the destination filled before the full quantity was moved, <strong>then</strong> the remainder</li><li>stays at the source and the task closes with a capacity reason.</li><li>- <strong>Given</strong> partial completions, <strong>then</strong> they are reportable, since a high rate indicates</li><li>rules or capacities are wrong.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code>, <code>inventory</code> |<br>| Tables | <code>replen_task</code>, <code>stock_movement</code> |<br>| Risks | Immediate re-trigger causing a loop ([doc 09 \u00a77.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/55",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/272"
+}

@@ -1,0 +1,31 @@
+{
+  "id": 22,
+  "rev": 1,
+  "code": "FDN-8",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "FDN-8 \u2014 Event outbox",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Announce facts to other modules and external systems in a way that cannot lose an event or<br>announce something that did not happen.</p>\n<h3>Scope</h3><p><strong>In.</strong> Transactional event write, a delivery worker, retry with backoff, dead-letter handling,<br>pruning.<br><br><strong>Out.</strong> A message broker. The outbox table does this job with one fewer moving part \u2014 see<br>[doc 10 \u00a78](../../../docs/10-local-deployment.md).</p>\n<h3>Design notes</h3><p><strong>Why an outbox and not a direct call.</strong> If <code>inventory</code> calls the ERP inside the stock<br>transaction, a slow ERP makes receiving slow and an ERP outage makes receiving fail. Worse, if<br>the HTTP call succeeds and the transaction then rolls back, the ERP believes something that<br>never happened.<br><br>Writing the event into a table in the same transaction removes both failure modes.<br><br><strong>You get at-least-once delivery, never exactly-once.</strong> The worker can crash after delivering<br>and before marking sent. Every consumer must therefore deduplicate on <code>event_id</code>. Document this<br>to whoever builds the consumer \u2014 it is easy for them to assume otherwise.<br><br><strong>Every event carries</strong> <code>event_id</code>, <code>event_type</code>, <code>occurred_at</code>, <code>aggregate_id</code>, <code>version</code>,<br><code>payload</code>, <code>correlation_id</code>.<br><br><strong>Prune, or the delivery query slows every day.</strong> Index on <code>(status, created_at)</code> and delete<br>delivered rows after a retention window.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Event published before commit | [doc 09 \u00a72.4](../../../docs/09-defect-hotspots.md) |<br>| Event lost after commit | [doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md) |<br>| Duplicate delivery breaking a non-idempotent consumer | [doc 09 \u00a73.4](../../../docs/09-defect-hotspots.md) |<br>| Outbox never pruned | [doc 04 \u00a73.1](../../../docs/04-modules.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 18,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "platform; FDN; Stage 2"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/22"
+}

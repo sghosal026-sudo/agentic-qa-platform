@@ -1,0 +1,38 @@
+{
+  "id": 138,
+  "rev": 1,
+  "code": "INB-404",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-404 \u2014 Report supplier delivery performance",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>buyer</strong>, I want <strong>to see which suppliers deliver late, short, or damaged</strong>, so that <strong>I<br>can hold them to account with evidence</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a date range, <strong>then</strong> I get on-time rate, short-delivery rate, over-delivery rate,</li><li>and damage rate per supplier.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it also shows how often deliveries arrived with no ASN.</li><li>- <strong>Given</strong> the report, <strong>then</strong> it is built from a read model refreshed daily, not a live query</li><li>over all history.</li><li>- <strong>Given</strong> a supplier, <strong>then</strong> I can drill into the individual receipts behind their figures.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code> |<br>| Tables | supplier performance projection, <code>receipt</code>, discrepancy |<br>| Risks | Projection drift ([doc 08 \u00a710](../../../docs/08-data-sync-and-migrations.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/26",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/138"
+}

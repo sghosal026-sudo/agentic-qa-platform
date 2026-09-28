@@ -1,0 +1,38 @@
+{
+  "id": 285,
+  "rev": 1,
+  "code": "TRF-303",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-303 \u2014 Partial receipt of a transfer",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>receiving clerk at the destination</strong>, I want <strong>to book in part of a transfer</strong>, so that<br><strong>stock that arrived on the first lorry is usable while the rest is still coming</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a partial receipt, <strong>then</strong> the received quantity moves out of <code>VIRT-INTRANSIT</code> and</li><li>the outstanding quantity <strong>stays</strong> in transit.</li><li>- <strong>Given</strong> a partly received transfer, <strong>then</strong> its status is <code>partly received</code>, distinct from</li><li>both open and closed.</li><li>- <strong>Given</strong> subsequent receipts, <strong>then</strong> they reduce the outstanding quantity until it reaches</li><li>zero.</li><li>- <strong>Given</strong> outstanding quantity past the expected transit time, <strong>then</strong> it is aged by</li><li>[TRF-402](TRF-402-age-and-escalate-overdue.md).</li><li>- <strong>Given</strong> all receipts together, <strong>then</strong> their total can never exceed what was dispatched.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code>, <code>inventory</code> |<br>| Tables | <code>transfer_receipt</code>, <code>stock_balance</code> |<br>| Risks | Outstanding balance lost rather than left in transit ([doc 05 WF 12](../../../docs/05-workflows.md)) |<br>| Tests | unit \u00b7 integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/59",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/285"
+}

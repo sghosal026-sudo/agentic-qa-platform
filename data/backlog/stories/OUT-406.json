@@ -1,0 +1,38 @@
+{
+  "id": 222,
+  "rev": 1,
+  "code": "OUT-406",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-406 \u2014 Re-assign an abandoned task",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>work abandoned mid-shift to return to the pool</strong>, so that <strong>an<br>order is not stuck because someone went home</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an assigned pick task with no activity for the configured timeout, <strong>then</strong> its</li><li>unconfirmed lines return to the pool.</li><li>- <strong>Given</strong> lines already confirmed, <strong>then</strong> they stay confirmed and are not reissued.</li><li>- <strong>Given</strong> the reassignment, <strong>then</strong> the new picker sees only the outstanding lines.</li><li>- <strong>Given</strong> a supervisor, <strong>then</strong> they can force reassignment before the timeout.</li><li>- <strong>Given</strong> any reassignment, <strong>then</strong> the task history records both pickers.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code> |<br>| Tables | <code>pick_task</code>, <code>pick_task_line</code> |<br>| Risks | Reissuing already-picked lines causes double consumption ([doc 09 \u00a74.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/44",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/222"
+}

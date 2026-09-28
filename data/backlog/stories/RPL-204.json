@@ -1,0 +1,38 @@
+{
+  "id": 267,
+  "rev": 1,
+  "code": "RPL-204",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "RPL-204 \u2014 Prevent duplicate open tasks",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>replenishment operator</strong>, I want <strong>one task per shortage</strong>, so that <strong>my task list is not<br>twenty copies of the same job</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> an open task already exists for a pick location, <strong>then</strong> no second task is created,</li><li>regardless of how many times the trigger fires.</li><li>- <strong>Given</strong> the rule, <strong>then</strong> it is enforced by a <strong>unique database constraint</strong> on</li><li><code>(location_id, status)</code> for open statuses \u2014 not by a check-then-insert.</li><li>- <strong>Given</strong> fifty trigger events fired rapidly for one location, <strong>then</strong> exactly one task</li><li>exists.</li><li>- <strong>Given</strong> the open task completes and the location is still below minimum, <strong>then</strong> a new task</li><li>can be created.</li><li>- <strong>Given</strong> both a reactive and a demand-driven trigger for the same location, <strong>then</strong> still</li><li>only one task exists.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>replenishment</code> |<br>| Tables | <code>replen_task</code> |<br>| Risks | Task storm ([doc 09 \u00a77.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration \u00b7 concurrency (mandatory: rapid repeated triggers) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "RPL; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/54",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/267"
+}

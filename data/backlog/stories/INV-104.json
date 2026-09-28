@@ -1,0 +1,38 @@
+{
+  "id": 166,
+  "rev": 1,
+  "code": "INV-104",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INV-104 \u2014 Include batch detail in balance queries",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As an <strong>inventory controller</strong>, I want <strong>balances broken down by batch</strong>, so that <strong>I can see<br>which batch is expiring and count a multi-batch location correctly</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a batch-tracked product, <strong>then</strong> every balance row carries its batch.</li><li>- <strong>Given</strong> a location holding two batches of one product, <strong>then</strong> the query returns two rows,</li><li>not a merged total.</li><li>- <strong>Given</strong> an untracked product, <strong>then</strong> the batch field is null and the response does not</li><li>invent one.</li><li>- <strong>Given</strong> a batch, <strong>then</strong> its expiry date and receipt date are included.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inventory</code> |<br>| Tables | <code>stock_balance</code>, <code>batch</code> |<br>| Risks | Merging batches hides the data counting and FEFO need ([doc 09 \u00a76.3](../../../docs/09-defect-hotspots.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 3,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/32",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/166"
+}

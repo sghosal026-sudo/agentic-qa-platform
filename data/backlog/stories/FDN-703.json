@@ -1,0 +1,38 @@
+{
+  "id": 104,
+  "rev": 1,
+  "code": "FDN-703",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-703 \u2014 Configuration values",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>supervisor</strong>, I want <strong>operational settings stored in the database</strong>, so that <strong>changing<br>over-receipt tolerance does not require a deployment</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a configuration key, <strong>then</strong> its value can be read by any module through the</li><li>platform service.</li><li>- <strong>Given</strong> a configuration change, <strong>then</strong> it is audited with who changed it and the previous</li><li>value.</li><li>- <strong>Given</strong> a change, <strong>then</strong> it takes effect without a restart.</li><li>- <strong>Given</strong> a value outside its allowed range, <strong>then</strong> the change is rejected.</li><li>- <strong>Given</strong> a missing key, <strong>then</strong> a documented default is used rather than failing.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code> |<br>| Tables | <code>config</code>, <code>audit_log</code> |<br>| Risks | Behaviour changing with no record of who changed it |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 2,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/21",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/104"
+}

@@ -1,0 +1,31 @@
+{
+  "id": 33,
+  "rev": 1,
+  "code": "INV-2",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INV-2 \u2014 Movement ledger",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Record every change of stock as an immutable entry, so that any number can be explained and any<br>balance can be rebuilt.</p>\n<h3>Scope</h3><p><strong>In.</strong> Writing movements, querying the ledger, tracing a movement back to the document that<br>caused it.<br><br><strong>Out.</strong> Editing or deleting movements. This never happens \u2014 a mistake is corrected by an<br>opposite entry.</p>\n<h3>Design notes</h3><p><strong>Every movement is a transfer between two locations</strong>, one of which may be virtual. A receipt<br>is <code>VIRT-SUPPLIER -> RECV-01</code>. A write-off is <code>PICK-A-01 -> VIRT-LOSS</code>. Quantity is always<br>positive; direction comes from the two locations.<br><br>The payoff: total quantity across all locations never changes. Any change in the total means<br>something created or destroyed stock outside the ledger, which is exactly the bug you want to<br>detect.<br><br><strong>Append-only.</strong> No updates, no deletes, ever. This is the one part of the system that gets<br><em>easier</em> to reason about as it grows, because it never changes shape.<br><br><strong><code>reference_type</code> and <code>reference_id</code></strong> tie a movement to the pick task, receipt, or count that<br>caused it. Without this, a ledger entry is a fact with no story.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| A balance changed with no movement written | [doc 09 \u00a72.2](../../../docs/09-defect-hotspots.md) |<br>| Movement written outside the business transaction | [doc 09 \u00a72.1](../../../docs/09-defect-hotspots.md) |<br>| Movement with no reason code or actor | [doc 03 \u00a78](../../../docs/03-master-data.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 11,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "inventory; INV; Stage 1"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/33"
+}

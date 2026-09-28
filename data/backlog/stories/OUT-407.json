@@ -1,0 +1,38 @@
+{
+  "id": 223,
+  "rev": 1,
+  "code": "OUT-407",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-407 \u2014 Batch picking across orders",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>picker</strong>, I want <strong>to collect items for several orders in one trip</strong>, so that <strong>one walk<br>of the aisle serves twenty orders instead of one</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a wave, <strong>then</strong> pick lines across orders for the same location are combined into</li><li>one visit with a total quantity.</li><li>- <strong>Given</strong> a combined pick, <strong>then</strong> the picker is told which cart compartment each order's</li><li>units go into.</li><li>- <strong>Given</strong> a compartment scan, <strong>then</strong> placing units into the wrong compartment is rejected.</li><li>- <strong>Given</strong> a short pick on a combined line, <strong>then</strong> the shortfall is attributed to specific</li><li>orders by priority, not spread arbitrarily.</li><li>- <strong>Given</strong> the batch, <strong>then</strong> each order's consumption is recorded separately in the ledger.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>inventory</code> |<br>| Tables | <code>pick_task</code>, <code>pick_task_line</code>, <code>reservation</code> |<br>| Risks | Sortation errors causing wrong-item shipments ([doc 07 \u00a77](../../../docs/07-phased-delivery-plan.md)); ambiguous shortfall attribution |<br>| Tests | unit \u00b7 integration \u00b7 invariant |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 8,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/44",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/223"
+}

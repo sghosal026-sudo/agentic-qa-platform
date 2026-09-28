@@ -1,0 +1,22 @@
+{
+  "id": 8,
+  "rev": 1,
+  "code": "RPL",
+  "fields": {
+    "System.WorkItemType": "Epic",
+    "System.Title": "EPIC RPL \u2014 Replenishment",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Goal</h3><p>Pick faces are refilled from bulk storage before a picker finds them empty.</p>\n<h3>Business value</h3><p>A picker who arrives at an empty pick face loses the trip, shorts the line, and creates an<br>exception that a supervisor has to resolve. The stock was in the building the whole time.<br><br>Replenishment is pure efficiency work: it does not change what the warehouse can do, it<br>changes how much walking and how many exceptions it takes to do it.</p>\n<h3>Scope</h3><p><strong>In.</strong> Min and max rules per product per pick location. Reactive triggering on stock<br>movement. Source location selection with FEFO. Task creation with duplicate prevention. Task<br>execution with scan confirmation. Demand-driven replenishment from wave demand.<br><br><strong>Out.</strong> Deciding which products belong in pick faces at all \u2014 that is slotting, and it is a<br>separate discipline. Purchasing and reordering.</p>\n<h3>Done when</h3><ul><li>A pick face dropping below its minimum creates exactly one task, however many times the</li><li>trigger fires.</li><li>Source selection respects FEFO and prefers a location that covers the whole need.</li><li>No source available raises an alert on the supervisor's exception list.</li><li>Tasks are confirmed with source and destination scans.</li><li>Wave release triggers replenishment ahead of picking, not during it.</li></ul>\n<h3>Key risks</h3><p>| Risk | Why it matters | Reference |<br>|---|---|---|<br>| Task storm | Twenty tasks for one shortage; task list unusable | [doc 09 \u00a77.1](../../docs/09-defect-hotspots.md) |<br>| Min and max set too close | Constant refilling; wasted labour | [doc 09 \u00a77.2](../../docs/09-defect-hotspots.md) |<br>| No source found, nobody told | Pick face silently runs dry mid-wave | [doc 09 \u00a77.3](../../docs/09-defect-hotspots.md) |<br>| Competing with allocation for bulk stock | Either can fail unpredictably | [doc 09 \u00a77.4](../../docs/09-defect-hotspots.md) |<br>| Replenishment completes after the wave is picked | Wasted trip; pickers already shorted | [doc 05 WF 11](../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "RPL; Stage 3"
+  },
+  "relations": [],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/8"
+}

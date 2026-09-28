@@ -1,0 +1,38 @@
+{
+  "id": 136,
+  "rev": 1,
+  "code": "INB-402",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "INB-402 \u2014 Put received stock on quality hold",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>quality inspector</strong>, I want <strong>to hold stock from a receipt or a batch</strong>, so that<br><strong>suspect goods stop being sellable while I inspect them</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a hold scope \u2014 receipt, batch, product, or location \u2014 <strong>then</strong> all matching stock</li><li>moves to quarantine status.</li><li>- <strong>Given</strong> stock in scope with existing reservations, <strong>then</strong> those reservations are released</li><li>and the affected orders flagged, in the same transaction.</li><li>- <strong>Given</strong> stock in scope already picked or packed, <strong>then</strong> it is flagged for physical</li><li>interception.</li><li>- <strong>Given</strong> the hold, <strong>then</strong> it is retroactive \u2014 it catches stock received before the hold was</li><li>created.</li><li>- <strong>Given</strong> release, <strong>then</strong> it requires an inspection record \u2014 see</li><li>[INV-402](../INV/INV-402-release-from-quarantine.md).</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>inbound</code>, <code>inventory</code>, <code>outbound</code> |<br>| Tables | <code>quality_hold</code>, <code>stock_balance</code>, <code>reservation</code> |<br>| Risks | Hold missing allocated or picked stock ([doc 09 \u00a78.5](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration (stock in every state) \u00b7 rollback |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "INB; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/26",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/3",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/136"
+}

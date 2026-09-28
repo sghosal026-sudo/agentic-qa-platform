@@ -1,0 +1,38 @@
+{
+  "id": 77,
+  "rev": 1,
+  "code": "CNT-404",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "CNT-404 \u2014 Accuracy trend over time",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>warehouse manager</strong>, I want <strong>to see whether accuracy is improving</strong>, so that <strong>I know<br>whether the changes we made actually worked</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a period, <strong>then</strong> I get location accuracy and unit accuracy plotted over time.</li><li>- <strong>Given</strong> the trend, <strong>then</strong> it can be filtered by zone and product class.</li><li>- <strong>Given</strong> the target of 99.5%, <strong>then</strong> it is shown alongside the actual.</li><li>- <strong>Given</strong> a step change in the trend, <strong>then</strong> the report shows the date so it can be</li><li>correlated with a process change.</li><li>- <strong>Given</strong> the data, <strong>then</strong> it is refreshed daily from a read model.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>counting</code> |<br>| Tables | accuracy projection |<br>| Risks | Optimising without a baseline ([doc 07 \u00a77](../../../docs/07-phased-delivery-plan.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "CNT; Stage 4"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/13",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/1",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/77"
+}

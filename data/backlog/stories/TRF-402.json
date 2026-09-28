@@ -1,0 +1,38 @@
+{
+  "id": 288,
+  "rev": 1,
+  "code": "TRF-402",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "TRF-402 \u2014 Age and escalate overdue transfers",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>network planner</strong>, I want <strong>to be told when a transfer has not arrived on time</strong>, so that<br><strong>stock lost in transit is found rather than sitting in a virtual location forever</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a transfer past its expected arrival with outstanding quantity, <strong>then</strong> it appears</li><li>on an overdue list with its age.</li><li>- <strong>Given</strong> the check, <strong>then</strong> it runs daily.</li><li>- <strong>Given</strong> a transfer overdue beyond the escalation threshold, <strong>then</strong> an alert reaches a</li><li>person, not only a log.</li><li>- <strong>Given</strong> the overdue item, <strong>then</strong> the report shows quantity, value, origin, and destination</li><li>so it can be prioritised.</li><li>- <strong>Given</strong> an investigation is opened, <strong>then</strong> the transfer links to it via</li><li>[TRF-404](TRF-404-investigate-and-resolve.md).</li><li>- <strong>Given</strong> the report, <strong>then</strong> it never auto-adjusts or writes off anything.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>transfers</code>, <code>inventory</code> |<br>| Tables | <code>transfer_shipment</code>, <code>stock_balance</code> |<br>| Risks | Stock lost in transit, permanently and silently ([doc 09 \u00a79.1](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "TRF; Stage 5"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/60",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/9",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/288"
+}

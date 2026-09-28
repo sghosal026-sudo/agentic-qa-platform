@@ -1,0 +1,31 @@
+{
+  "id": 15,
+  "rev": 1,
+  "code": "FDN-1",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "FDN-1 \u2014 Service skeleton",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>A service that starts, reports that it is healthy, reads its settings from the environment, and<br>fails the same way every time something goes wrong.</p>\n<h3>Scope</h3><p><strong>In.</strong> Health endpoint, environment configuration, structured logging with correlation IDs,<br>one consistent error response shape.<br><br><strong>Out.</strong> Any business behaviour. Metrics and tracing \u2014 add those when there is something worth<br>measuring.</p>\n<h3>Design notes</h3><p><strong>Build the error shape before the second endpoint.</strong> Once there are twenty endpoints returning<br>errors in twenty formats, nobody goes back and unifies them, and every client ends up with<br>special cases.<br><br><strong>The correlation ID is generated at the edge</strong> and travels through logs, events, and audit<br>rows. It looks like overhead until the first production incident, when it is the difference<br>between a five-minute trace and a lost afternoon.<br><br><strong>Health checks come in two kinds.</strong> Liveness \u2014 is the process up. Readiness \u2014 can it reach the<br>database. Compose and any future orchestrator need both, and confusing them causes restart<br>loops.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Silent config defaults produce baffling failures later | [doc 10 \u00a77](../../../docs/10-local-deployment.md) |<br>| Inconsistent errors force client special-casing | \u2014 |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 9,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "platform; FDN"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/15"
+}

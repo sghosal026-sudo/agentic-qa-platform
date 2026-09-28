@@ -1,0 +1,31 @@
+{
+  "id": 43,
+  "rev": 1,
+  "code": "OUT-3",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "OUT-3 \u2014 Waves",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Group orders into batches of work released together, so pickers make one trip for twenty orders<br>instead of twenty trips.</p>\n<h3>Scope</h3><p><strong>In.</strong> Wave creation, workload preview, release, cancellation, auto-waving by cut-off,<br>blocking release on replenishment.<br><br><strong>Out.</strong> The picking itself \u2014 that is [OUT-4](OUT-4-picking.md). Labour scheduling.</p>\n<h3>Design notes</h3><p><strong>Waves are pointless below a volume threshold.</strong> One pick task per order is correct at Stage 2.<br>Do not build this until order volume makes the trip saving real.<br><br><strong><code>OUT-306</code> is the hardest coordination problem in the epic.</strong> Replenishment must complete<br>before the wave releases, or pickers hit empty pick faces mid-wave \u2014 which is worse than not<br>waving at all, because the work is already committed.<br><br><strong>A released wave cannot be edited.</strong> Cancel and rebuild. Editing a wave whose tasks are<br>partly picked produces states nothing downstream handles.<br><br><strong>Cancelling a wave must cancel its pick tasks and reset order state in one transaction.</strong><br>Orphan pick tasks in a picker's list are confusing and get confirmed anyway.<br><br><strong>Cap wave size by what can finish before the cut-off.</strong> A wave that cannot complete in time is<br>worse than no wave \u2014 the work is spread across every order instead of concentrated in the ones<br>that would have shipped.</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Replenishment not done before release | [doc 05 WF 5](../../../docs/05-workflows.md) |<br>| Wave too large to finish before cut-off | [doc 05 WF 5](../../../docs/05-workflows.md) |<br>| An order landing in two waves | [doc 05 WF 5](../../../docs/05-workflows.md) |<br>| Cancelling a wave leaving orphan tasks | [doc 05 WF 5](../../../docs/05-workflows.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 31,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "outbound; OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/43"
+}

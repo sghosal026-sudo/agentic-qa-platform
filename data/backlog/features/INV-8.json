@@ -1,0 +1,31 @@
+{
+  "id": 39,
+  "rev": 1,
+  "code": "INV-8",
+  "fields": {
+    "System.WorkItemType": "Feature",
+    "System.Title": "INV-8 \u2014 Reconciliation",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Purpose</h3><p>Check nightly that the ledger still explains the balances, alert when it does not, and be able<br>to rebuild balances from scratch when needed.</p>\n<h3>Scope</h3><p><strong>In.</strong> The ledger-vs-balance check, alerting, balance rebuild.<br><br><strong>Out.</strong> Other reconciliations \u2014 projections<br>([INV-903](../../stories/INV/INV-903-reconcile-projection.md)), reservations<br>([INV-504](../../stories/INV/INV-504-report-orphaned-reservations.md)), and the ERP comparison<br>([INT-504](../../stories/INT/INT-504-ledger-balance-drift-report.md)).</p>\n<h3>Design notes</h3><p><strong>This feature is the system's core promise, made checkable.</strong><br><br>Everything rests on one invariant: every balance change wrote a movement. If it holds, balances<br>are rebuildable, history is complete, and any number can be explained. If it is broken even<br>occasionally, you cannot trust any number and you cannot tell which ones to distrust.<br><br><strong>Treat a failure as a stop-everything incident, not a ticket.</strong> And do not auto-correct \u2014 a<br>discrepancy is a symptom, and correcting it hides the code path that caused it.<br><br><strong><code>INV-802</code> is not optional.</strong> A check that finds drift and writes it to a log nobody reads is<br>not a control. It has to reach a human.<br><br><strong>A note on go-live.</strong> If opening stock is loaded directly into balances without movements,<br>this job fails on day one, every night, and gets switched off \u2014 taking with it your ability to<br>detect the bug it exists for. Load opening stock as receipts against a <code>GO-LIVE</code> reason code.<br>See [doc 09 \u00a711.3](../../../docs/09-defect-hotspots.md).</p>\n<h3>Risks</h3><p>| Risk | Reference |<br>|---|---|<br>| Drift found but not alerted | [doc 08 \u00a79](../../../docs/08-data-sync-and-migrations.md) |<br>| Auto-correcting instead of investigating | [doc 08 \u00a79](../../../docs/08-data-sync-and-migrations.md) |<br>| Opening stock loaded without movements | [doc 09 \u00a711.3](../../../docs/09-defect-hotspots.md) |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 13,
+    "Microsoft.VSTS.Common.Priority": 1,
+    "System.Tags": "inventory; INV; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/5",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/39"
+}

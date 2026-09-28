@@ -1,0 +1,38 @@
+{
+  "id": 109,
+  "rev": 1,
+  "code": "FDN-805",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "FDN-805 \u2014 Prune delivered events",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>developer</strong>, I want <strong>delivered events removed after a retention window</strong>, so that <strong>the<br>\"unsent events\" query does not get slower every single day</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> events delivered longer ago than the retention window, <strong>when</strong> the prune job runs,</li><li><strong>then</strong> they are deleted.</li><li>- <strong>Given</strong> undelivered or dead events, <strong>then</strong> they are never pruned regardless of age.</li><li>- <strong>Given</strong> the prune job, <strong>then</strong> it deletes in batches so it never holds a long lock.</li><li>- <strong>Given</strong> the outbox table, <strong>then</strong> an index on <code>(status, created_at)</code> supports the delivery</li><li>query.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>platform</code> |<br>| Tables | <code>outbox</code> |<br>| Risks | Unpruned outbox slows delivery indefinitely ([doc 04 \u00a73.1](../../../docs/04-modules.md)); unbatched delete locking the table ([doc 09 \u00a711.2](../../../docs/09-defect-hotspots.md)) |<br>| Tests | integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 2,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "FDN; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/22",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/2",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/109"
+}

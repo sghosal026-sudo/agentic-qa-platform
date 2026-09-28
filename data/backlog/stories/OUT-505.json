@@ -1,0 +1,38 @@
+{
+  "id": 229,
+  "rev": 1,
+  "code": "OUT-505",
+  "fields": {
+    "System.WorkItemType": "User Story",
+    "System.Title": "OUT-505 \u2014 Generate label and packing slip content",
+    "System.State": "New",
+    "System.Reason": "New",
+    "System.CreatedDate": "2026-08-10T00:00:00Z",
+    "System.CreatedBy": "Project Collection Administrators",
+    "System.ChangedDate": "2026-08-10T00:00:00Z",
+    "System.ChangedBy": "Project Collection Administrators",
+    "System.AreaPath": "WMS\\Backend",
+    "System.IterationPath": "WMS\\Backlog",
+    "System.Description": "<h3>Story</h3><p>As a <strong>packer</strong>, I want <strong>the shipping label and packing slip content produced by the system</strong>,<br>so that <strong>a local print agent can produce them without anyone retyping an address</strong>.</p>\n<h3>Acceptance criteria</h3><ul><li>- <strong>Given</strong> a closed carton, <strong>then</strong> label content is generated with ship-to address, carton</li><li>reference, order reference, and weight.</li><li>- <strong>Given</strong> a packing slip, <strong>then</strong> product descriptions come from the <strong>order snapshot</strong>, not</li><li>from live master data.</li><li>- <strong>Given</strong> label generation, <strong>then</strong> the carton is marked as labelled and can no longer be</li><li>reopened \u2014 see [OUT-507](OUT-507-void-and-repack.md).</li><li>- <strong>Given</strong> a carrier, <strong>then</strong> the content includes the fields that carrier requires.</li><li>- <strong>Given</strong> the system, <strong>then</strong> it does not talk to a printer \u2014 it returns content only.</li></ul>\n<h3>Traceability</h3><p>| Aspect | Detail |<br>|---|---|<br>| Modules | <code>outbound</code>, <code>masterdata</code> |<br>| Tables | <code>carton</code>, <code>order_line</code> |<br>| Risks | Packing slip built from live master data differing from what was ordered ([doc 03 \u00a75](../../../docs/03-master-data.md)) |<br>| Tests | unit \u00b7 integration |</p>",
+    "Microsoft.VSTS.Scheduling.Effort": 5,
+    "Microsoft.VSTS.Common.Priority": 2,
+    "System.Tags": "OUT; Stage 3"
+  },
+  "relations": [
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/45",
+      "attributes": {
+        "name": "Parent"
+      }
+    },
+    {
+      "rel": "System.LinkTypes.Hierarchy-Forward",
+      "url": "https://dev.azure.com/WMS/_apis/wit/workItems/6",
+      "attributes": {
+        "name": "Parent"
+      }
+    }
+  ],
+  "url": "https://dev.azure.com/WMS/_apis/wit/workItems/229"
+}
