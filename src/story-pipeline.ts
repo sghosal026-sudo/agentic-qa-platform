@@ -79,8 +79,12 @@ export class StoryPipeline {
     if (!run) throw new Error(`Story ${adoId} has no persisted run`);
 
     if (run.status === "review_relations") {
-      const review = await applyReviews(run, this.workItems, this.graph);
-      await this.update(record, run.status, "active", run);
+      let review;
+      try {
+        review = await applyReviews(run, this.workItems, this.graph);
+      } finally {
+        await this.update(record, run.status, "active", run);
+      }
       if (review.pending || review.conflicts) return this.result(record, "waiting");
     }
 
@@ -92,7 +96,12 @@ export class StoryPipeline {
     }
 
     if (run.status === "review_artifacts") {
-      const review = await applyArtifactReviews(run, this.workItems);
+      let review;
+      try {
+        review = await applyArtifactReviews(run, this.workItems);
+      } finally {
+        await this.update(record, run.status, "active", run);
+      }
       if (review.rejected) {
         await this.update(record, run.status, "blocked", run);
         return this.result(record, "blocked");

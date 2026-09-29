@@ -23,14 +23,14 @@ export interface ModelClient {
 
 export interface WorkItemClient {
   task(runId: string, relation: Relation, story: Story): Promise<{ id: number; hash: string }>;
-  decision(taskId: number, expectedHash: string): Promise<RelationDecision | null>;
+  decision(taskId: number, expectedHash: string): Promise<RelationDecision | "missing" | null>;
 }
 
 export interface SprintWorkItemClient extends WorkItemClient {
   resetReviewTasks(): Promise<number>;
   sprintStories(iterationPath: string): Promise<Story[]>;
   artifactTask(runId: string, artifact: Artifact, story: Story): Promise<{ id: number; hash: string }>;
-  artifactDecision(taskId: number, expectedHash: string): Promise<RelationDecision | null>;
+  artifactDecision(taskId: number, expectedHash: string): Promise<RelationDecision | "missing" | null>;
   publishResult(story: Story, result: ExecutionResult, workflowUrl?: string): Promise<void>;
 }
 

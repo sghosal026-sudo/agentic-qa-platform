@@ -24,6 +24,14 @@ export async function applyArtifactReviews(run: Run, workItems: SprintWorkItemCl
     }
     if (!artifact.reviewTask) throw new Error(`Artifact ${artifact.id} has no ADO review Task`);
     const decision = await workItems.artifactDecision(artifact.reviewTask.id, artifact.reviewTask.hash);
+    if (decision === "missing") {
+      const story = run.stories.find((item) => item.id === artifact.storyId);
+      if (!story) throw new Error(`Artifact ${artifact.id} has no mapped Story`);
+      artifact.reviewTask = await workItems.artifactTask(run.id, artifact, story);
+      await saveRun(run);
+      result.pending += 1;
+      continue;
+    }
     if (!decision) {
       result.pending += 1;
       continue;

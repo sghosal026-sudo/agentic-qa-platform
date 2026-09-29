@@ -4,6 +4,12 @@ type AdoWorkItem = { id: number; rev?: number; fields: Record<string, unknown>; 
 import type { ExecutionResult } from "../contracts.js";
 import { parseDecision } from "../stages/review.js";
 
+class AdoHttpError extends Error {
+  constructor(readonly status: number, message: string) {
+    super(message);
+  }
+}
+
 export class Ado {
   private org = required("ADO_ORG_URL").replace(/\/+$/, "");
   private project = required("ADO_PROJECT");
@@ -23,7 +29,7 @@ export class Ado {
       },
       body: body === undefined ? undefined : JSON.stringify(body),
     });
-    if (!response.ok) throw new Error(`ADO ${method} failed: ${response.status} ${(await response.text()).slice(0, 200)}`);
+    if (!response.ok) throw new AdoHttpError(response.status, `ADO ${method} failed: ${response.status} ${(await response.text()).slice(0, 200)}`);
     return await response.json() as T;
   }
 
@@ -68,8 +74,14 @@ export class Ado {
     return { id: created.id, hash: proposalHash };
   }
 
-  async decision(taskId: number, expectedHash: string): Promise<RelationDecision | null> {
-    const item = await this.request<{ fields: Record<string, unknown> }>("GET", `workitems/${taskId}?api-version=7.1`);
+  async decision(taskId: number, expectedHash: string): Promise<RelationDecision | "missing" | null> {
+    let item: { fields: Record<string, unknown> };
+    try {
+      item = await this.request("GET", `workitems/${taskId}?api-version=7.1`);
+    } catch (error) {
+      if (error instanceof AdoHttpError && error.status === 404) return "missing";
+      throw error;
+    }
     if (item.fields["System.State"] !== this.done) return null;
     const comments = await this.request<{ comments?: Array<{ text: string; createdBy?: { uniqueName?: string; displayName?: string } }> }>("GET", `workItems/${taskId}/comments?$top=100&order=desc&api-version=7.1-preview.4`);
     for (const comment of comments.comments ?? []) {
@@ -172,9 +184,9 @@ export class Ado {
     return { id: created.id, hash: artifactHash };
   }
 
-  async artifactDecision(taskId: number, expectedHash: string): Promise<RelationDecision | null> {
+  async artifactDecision(taskId: number, expectedHash: string): Promise<RelationDecision | "missing" | null> {
     const result = await this.decision(taskId, expectedHash);
-    return result?.action === "correct" ? null : result;
+    return result && result !== "missing" && result.action === "correct" ? null : result;
   }
 
   async resetReviewTasks(): Promise<number> {

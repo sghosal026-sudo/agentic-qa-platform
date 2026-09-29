@@ -12,7 +12,9 @@ export function validRelation(type: string, source: NodeKind, target: NodeKind):
 }
 
 export function parseDecision(text: string, expectedHash: string, reviewer: string, taskId: number): RelationDecision | null {
-  const clean = text.replace(/<br\s*\/?\s*>|<\/p>|<\/div>/gi, "\n").replace(/<[^>]+>/g, "").replace(/&nbsp;/gi, " ");
+  const clean = text.replace(/<br\s*\/?\s*>|<\/p>|<\/div>/gi, "\n").replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/gi, " ").replace(/&quot;/gi, '"')
+    .replace(/\s+(?=(?:Review-Hash|Decision|Type|Direction|Reason):)/gi, "\n");
   const fields = new Map<string, string>();
   for (const line of clean.split(/\r?\n/)) {
     const match = /^([a-z-]+):\s*(.*)$/i.exec(line.trim());
@@ -79,6 +81,13 @@ export async function applyReviews(run: Run, ado: WorkItemClient, graph: GraphSt
       const task = relation.tasks[storyId];
       if (!task) throw new Error(`Relationship ${relation.id} has no Task under ${storyId}`);
       const decision = await ado.decision(task.id, task.hash);
+      if (decision === "missing") {
+        const story = run.stories.find((item) => item.id === storyId);
+        if (!story) throw new Error(`No Story mapped to relationship ${relation.id}`);
+        relation.tasks[storyId] = await ado.task(run.id, relation, story);
+        await saveRun(run);
+        continue;
+      }
       if (decision) decisions.push(decision);
     }
     if (decisions.length !== relation.storyIds.length) { result.pending += 1; continue; }

@@ -5,6 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { Ado } from "../src/adapters/ado.js";
+import { applyArtifactReviews } from "../src/stages/artifact-review.js";
 import { hash, runPath, type Run, type StoryPipelineRecord } from "../src/core/runtime.js";
 import type { GraphStore, ModelClient, SprintWorkItemClient } from "../src/contracts.js";
 import { applyReviews, consensus, parseDecision, validRelation } from "../src/stages/review.js";
@@ -19,6 +20,11 @@ test("structured ADO decisions require the current hash and a valid correction",
   assert.equal(parseDecision("Review-Hash: old\nDecision: approve", "abc", "Ada", 17), null);
   assert.equal(parseDecision("Review-Hash: abc\nDecision: reject", "abc", "Ada", 17), null);
   assert.equal(parseDecision("Review-Hash: abc\nDecision: correct\nType: USES\nDirection: reverse\nReason: direction", "abc", "Ada", 17)?.reverse, true);
+  const richTextDecision = parseDecision('<span>Review-Hash: <span>abc</span>\nDecision: correct\nType: <span>USES</span>&nbsp;Direction: forward Reason: The feature uses the module.</span>', "abc", "Ada", 17);
+  assert.equal(richTextDecision?.action, "correct");
+  assert.equal(richTextDecision?.type, "USES");
+  assert.equal(richTextDecision?.reverse, false);
+  assert.equal(richTextDecision?.reason, "The feature uses the module.");
   assert.equal(validRelation("IMPLEMENTS", "Endpoint", "BusinessRule"), true);
   assert.equal(validRelation("IMPLEMENTS", "BusinessRule", "Endpoint"), false);
   assert.equal(consensus([{ ...approved!, reviewer: "Ada" }, { ...approved!, reviewer: "Ben" }])?.action, "approve");
@@ -399,6 +405,83 @@ test("conflicting Story votes and invalid corrections stay pending", async () =>
     assert.equal((await applyReviews(run, ado, graph)).conflicts, 1);
     assert.equal(writes, 0);
     assert.equal(run.relations[0]?.state, "needs_review");
+  } finally {
+    await fs.rm(runPath(run.id), { recursive: true, force: true });
+  }
+});
+
+test("a deleted relationship review Task is recreated without restarting ingestion", async () => {
+  const previous = { org: process.env.ADO_ORG_URL, project: process.env.ADO_PROJECT, pat: process.env.ADO_PAT };
+  process.env.ADO_ORG_URL = "https://dev.azure.com/example";
+  process.env.ADO_PROJECT = "QA";
+  process.env.ADO_PAT = "test-token";
+  const story = { id: "ST-1", adoId: 41, title: "Story", text: "GET /warehouses", areaPath: "QA", iterationPath: "QA\\Sprint 1" };
+  const run: Run = {
+    id: randomUUID(), status: "review_relations", stories: [story], artifacts: [], specs: [], errors: [], createdAt: "2026-01-01",
+    relations: [{ id: "edge", sourceId: story.id, sourceType: "Story", targetId: "Endpoint:one", targetType: "Endpoint", type: "AFFECTS", evidence: story.text, confidence: 0.8, reason: "review", source: story.id, storyIds: [story.id], state: "needs_review", tasks: { [story.id]: { id: 2833, hash: "old" } }, decisions: [] }],
+  };
+  let created = 0;
+  const fetcher = async (url: string, init?: RequestInit): Promise<Response> => {
+    if (url.includes("workitems/2833?")) return new Response("deleted", { status: 404 });
+    if (url.includes("workitems/41?")) return new Response(JSON.stringify({ fields: { "System.AreaPath": "QA", "System.IterationPath": "QA\\Sprint 1" } }));
+    if (url.includes("wiql?")) return new Response(JSON.stringify({ workItems: [] }));
+    if (url.includes("workitems/$Task?") && init?.method === "POST") { created += 1; return new Response(JSON.stringify({ id: 2900 })); }
+    throw new Error(`Unexpected ADO request: ${url}`);
+  };
+  try {
+    const graph = { decide: async () => { throw new Error("No decision expected"); } } as unknown as GraphStore;
+    const result = await applyReviews(run, new Ado(fetcher as typeof fetch), graph);
+    assert.deepEqual(result, { pending: 1, conflicts: 0, applied: 0 });
+    assert.equal(created, 1);
+    assert.equal(run.relations[0]?.tasks[story.id]?.id, 2900);
+    assert.equal(run.status, "review_relations");
+  } finally {
+    await fs.rm(runPath(run.id), { recursive: true, force: true });
+    if (previous.org === undefined) delete process.env.ADO_ORG_URL; else process.env.ADO_ORG_URL = previous.org;
+    if (previous.project === undefined) delete process.env.ADO_PROJECT; else process.env.ADO_PROJECT = previous.project;
+    if (previous.pat === undefined) delete process.env.ADO_PAT; else process.env.ADO_PAT = previous.pat;
+  }
+});
+
+test("a deleted test artifact review Task is recreated and remains pending", async () => {
+  const story = { id: "ST-1", adoId: 41, title: "Story", text: "evidence", areaPath: "QA", iterationPath: "QA\\Sprint 1" };
+  const artifact = { id: "TestCase:one", kind: "TestCase" as const, name: "Case", storyId: story.id, content: { expected: "result" }, hash: hash({ expected: "result" }), reviewTask: { id: 2833, hash: "old" } };
+  const run: Run = { id: randomUUID(), status: "review_artifacts", stories: [story], relations: [], artifacts: [artifact], specs: [], errors: [], createdAt: "2026-01-01" };
+  const workItems = {
+    artifactDecision: async () => "missing" as const,
+    artifactTask: async () => ({ id: 2900, hash: "new" }),
+  } as SprintWorkItemClient;
+  try {
+    assert.deepEqual(await applyArtifactReviews(run, workItems), { pending: 1, rejected: 0, approved: 0 });
+    assert.deepEqual(artifact.reviewTask, { id: 2900, hash: "new" });
+    assert.equal(run.status, "review_artifacts");
+  } finally {
+    await fs.rm(runPath(run.id), { recursive: true, force: true });
+  }
+});
+
+test("a rebuilt Task ID stays in the Story pipeline when a later review fails", async () => {
+  const story = { id: "ST-1", adoId: 41, title: "Story", text: "evidence", areaPath: "QA", iterationPath: "QA\\Sprint 1" };
+  const makeRelation = (id: string, taskId: number) => ({
+    id, sourceId: story.id, sourceType: "Story" as const, targetId: `Endpoint:${id}`, targetType: "Endpoint" as const,
+    type: "AFFECTS", evidence: "evidence", confidence: 0.8, reason: "review", source: story.id,
+    storyIds: [story.id], state: "needs_review" as const, tasks: { [story.id]: { id: taskId, hash: "hash" } }, decisions: [],
+  });
+  const run: Run = { id: randomUUID(), status: "review_relations", stories: [story], relations: [makeRelation("first", 1), makeRelation("second", 2)], artifacts: [], specs: [], errors: [], createdAt: "2026-01-01" };
+  let saved: StoryPipelineRecord | undefined;
+  const record: StoryPipelineRecord = { version: 4, adoId: story.adoId, revision: 1, iterationPath: story.iterationPath, story, stage: "review_relations", status: "active", run, updatedAt: "2026-01-01" };
+  const graph = {
+    storyPipeline: async () => record,
+    saveStoryPipeline: async (value: StoryPipelineRecord) => { saved = structuredClone(value); },
+  } as unknown as GraphStore;
+  const workItems = {
+    decision: async (id: number) => { if (id === 1) return "missing" as const; throw new Error("Later review failed"); },
+    task: async () => ({ id: 3, hash: "new" }),
+  } as SprintWorkItemClient;
+  try {
+    await assert.rejects(new StoryPipeline(graph, () => ({ json: async () => ({}) }), workItems).advanceStory(story.adoId), /Later review failed/);
+    assert.equal(saved?.run?.relations[0]?.tasks[story.id]?.id, 3);
+    assert.equal(saved?.stage, "review_relations");
   } finally {
     await fs.rm(runPath(run.id), { recursive: true, force: true });
   }

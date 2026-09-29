@@ -211,6 +211,7 @@ Reason: <why the correction is required>
 `Direction` must be `forward` or `reverse`. Move the Task to the configured completed state after adding the comment. When a relationship maps to multiple Stories, every associated Story Task must reach the same decision.
 
 Approved and corrected relationships enter grounded graph retrieval. Rejected relationships remain excluded. Pending or conflicting decisions wait for the next poll.
+If a review Task is deleted, the next Story advance creates a replacement Task and stores its new ID. Its review must be submitted on the replacement Task.
 
 ### Test-artifact review in Azure DevOps
 
@@ -232,6 +233,7 @@ Reason: <why the test artifact is rejected>
 ```
 
 Move the Task to the configured completed state. All artifacts for that Story must be approved before spec generation. A rejected test artifact blocks only its Story.
+Deleted test artifact review Tasks are also recreated on the next Story advance.
 
 ### Generated-spec review in GitHub
 
