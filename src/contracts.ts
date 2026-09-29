@@ -8,7 +8,7 @@ export interface GraphStore {
   plannedFor(storyId: string, iterationPath: string, source?: { adoId: number; title: string }): Promise<void>;
   propose(relation: Relation): Promise<void>;
   decide(relation: Relation): Promise<void>;
-  storyContext(storyId: string): Promise<string>;
+  storyContext(storyId: string, parentIds?: string[]): Promise<string>;
   artifact(artifact: Artifact): Promise<void>;
   spec(spec: Spec, sha: string): Promise<void>;
   testRun(caseId: string, storyId: string, runId: string, sha: string, result: unknown): Promise<void>;

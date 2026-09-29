@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { z } from "zod";
-import { hash, newRun, runPath, saveRun, type Artifact, type NodeKind, type Relation, type Run, type Spec, type Story } from "../core/runtime.js";
+import { hash, newRun, runPath, saveRun, type Artifact, type NodeKind, type Relation, type Run, type Spec, type Story, type WorkItemParent } from "../core/runtime.js";
 import type { GraphStore, ModelClient, WorkItemClient } from "../contracts.js";
 import { semanticNodeId } from "../ontology/identifiers.js";
 import { resolveSemanticRelationship } from "../ontology/rules.js";
@@ -54,17 +54,19 @@ function storyFromJson(value: unknown): Story | null {
   return { id, adoId: item.id, revision: typeof item.rev === "number" ? item.rev : undefined, title: String(fields["System.Title"] ?? id), text: plain(String(fields["System.Description"] ?? "")), areaPath: String(fields["System.AreaPath"] ?? ""), iterationPath: String(fields["System.IterationPath"] ?? "") };
 }
 
-export function relationFromModel(story: Story, item: z.infer<typeof RelationshipOutput>, knownStories: Set<string>, source = story.id): Relation {
+export function relationFromModel(story: Story, item: z.infer<typeof RelationshipOutput>, knownStories: Set<string>, source = story.id, sourceItem?: WorkItemParent): Relation {
   const storyIds = [...new Set([story.id, ...(item.storyIds ?? [])])];
   for (const id of storyIds) if (!knownStories.has(id)) throw new Error(`Relationship has no resolved Story mapping: ${id}`);
   const targetId = item.targetType === "Story" ? item.targetName : semanticNodeId(item.targetType, item.targetName);
-  const resolved = resolveSemanticRelationship(item.type, "Story", item.targetType);
+  const sourceId = sourceItem?.id ?? story.id;
+  const sourceType = sourceItem?.kind ?? "Story";
+  const resolved = resolveSemanticRelationship(item.type, sourceType, item.targetType);
   const threshold = Number(process.env.RELATION_AUTO_APPROVE_CONFIDENCE ?? "0.9");
   if (!Number.isFinite(threshold) || threshold < 0 || threshold > 1) throw new Error("RELATION_AUTO_APPROVE_CONFIDENCE must be between 0 and 1");
   const state = resolved.reviewState !== "needs_review" && item.confidence >= threshold ? "approved" : "needs_review";
   return {
-    id: hash(`${story.id}|${item.type}|${targetId}|${item.evidence}`).slice(0, 32),
-    sourceId: story.id, sourceType: "Story", targetId, targetType: item.targetType as NodeKind,
+    id: hash(`${sourceId}|${item.type}|${targetId}|${item.evidence}`).slice(0, 32),
+    sourceId, sourceType, targetId, targetType: item.targetType as NodeKind,
     type: item.type.toUpperCase(), evidence: item.evidence, confidence: item.confidence, reason: item.reason,
     storyIds, source, state, tasks: {}, decisions: [],
   };
@@ -104,15 +106,18 @@ export async function ingestStory(story: Story, graph: GraphStore, model: ModelC
   }
   await saveRun(run);
   try {
-    const prompt = `Extract relationships relevant to Story ${story.id}. Return {"relationships": [{"targetName":"...","targetType":"${RELATION_TARGET_TYPE_PROMPT}","type":"${RELATIONSHIP_TYPE_PROMPT}","evidence":"short source quote","confidence":0.0,"reason":"why the relationship is clear or ambiguous","storyIds":["${story.id}"]}]}. Use only the listed relationship types. Confidence must reflect how explicitly the source supports the complete relationship. Source text:\n${story.text.slice(0, 16000)}`;
     const known = new Set([story.id]);
-    for (const item of await extractRelationshipItems(run, story.id, model, prompt)) {
-      const relation = relationFromModel(story, item, known);
-      if (relation.targetType !== "Story") await graph.node(relation.targetId, relation.targetType, item.targetName, { sourceStory: story.id });
-      await graph.propose(relation);
-      run.relations.push(relation);
+    for (const source of [...(story.parents ?? []).slice().reverse(), story]) {
+      const sourceType = "kind" in source ? source.kind : "Story";
+      const prompt = `Extract relationships from ${sourceType} ${source.id} that are relevant to Story ${story.id}. The source of each relationship is ${source.id} (${sourceType}). Return {"relationships": [{"targetName":"...","targetType":"${RELATION_TARGET_TYPE_PROMPT}","type":"${RELATIONSHIP_TYPE_PROMPT}","evidence":"short source quote","confidence":0.0,"reason":"why the relationship is clear or ambiguous","storyIds":["${story.id}"]}]}. Use only the listed relationship types. Use Story ${story.id} as the only storyIds value. Confidence must reflect how explicitly this source supports the complete relationship. Source text:\n${source.text}`;
+      for (const item of await extractRelationshipItems(run, source.id, model, prompt)) {
+        const relation = relationFromModel(story, item, known, source.id, "kind" in source ? source : undefined);
+        if (relation.targetType !== "Story") await graph.node(relation.targetId, relation.targetType, item.targetName, { sourceWorkItem: source.id });
+        await graph.propose(relation);
+        run.relations.push(relation);
+      }
+      await saveRun(run);
     }
-    await saveRun(run);
   } catch (error) {
     run.status = "mapping_error";
     run.errors.push(`${story.id}: ${error instanceof Error ? error.message : String(error)}`);
@@ -184,13 +189,14 @@ export async function design(run: Run, graph: GraphStore, model: ModelClient): P
   run.artifacts = [];
   await saveRun(run);
   for (const story of run.stories) {
-    const context = await graph.storyContext(story.id);
-    const response = DesignOutput.parse(await model.json(`Design evidence-grounded QA scenarios and cases for this Story. Return JSON {"scenarios":[{"name":"...","evidence":"exact quote from the Story","cases":[{"name":"...","steps":["..."],"expected":"...","route":{"method":"GET","path":"/known/path","expectedStatus":200}}]}]}. Omit route when source and target contract do not establish it. If the entire expected result is only an HTTP status, write it exactly as "HTTP 200" (using the actual status). For richer expected results, leave route omitted so the case remains manual until supported assertions exist. Story: ${story.text}\nApproved graph context: ${context}`));
+    const context = await graph.storyContext(story.id, (story.parents ?? []).map((parent) => parent.id));
+    const parentContent = (story.parents ?? []).slice().reverse().map((parent) => `${parent.kind} ${parent.id}: ${parent.title}\n${parent.text}`).join("\n\n");
+    const response = DesignOutput.parse(await model.json(`Design evidence-grounded QA scenarios and cases for this Story. Return JSON {"scenarios":[{"name":"...","evidence":"exact quote from the Story, Feature, or Epic","cases":[{"name":"...","steps":["..."],"expected":"...","route":{"method":"GET","path":"/known/path","expectedStatus":200}}]}]}. Use Epic and Feature context for constraints that apply to this Story. Omit route when source and target contract do not establish it. If the entire expected result is only an HTTP status, write it exactly as "HTTP 200" (using the actual status). For richer expected results, leave route omitted so the case remains manual until supported assertions exist. Story ${story.id}: ${story.text}\nParent source content:\n${parentContent}\nApproved graph context: ${context}`));
     const plan = artifact("TestPlan", `${story.id} test plan`, story.id, undefined, { objective: story.title, evidence: story.text });
     const suite = artifact("TestSuite", `${story.id} functional suite`, story.id, plan.id, { testType: "functional" });
     run.artifacts.push(plan, suite);
     for (const entry of response.scenarios) {
-      if (!story.text.includes(entry.evidence)) throw new Error(`Scenario evidence is not in Story ${story.id}`);
+      if (![story.text, ...(story.parents ?? []).map((parent) => parent.text)].some((text) => text.includes(entry.evidence))) throw new Error(`Scenario evidence is not in Story or parents of ${story.id}`);
       const scenario = artifact("TestScenario", entry.name, story.id, suite.id, { evidence: entry.evidence });
       run.artifacts.push(scenario);
       for (const testCase of entry.cases) run.artifacts.push(artifact("TestCase", testCase.name, story.id, scenario.id, testCase));

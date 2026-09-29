@@ -93,6 +93,49 @@ test("malformed relationship output retries and blocks before test design", asyn
   }
 });
 
+test("Story ingestion extracts Epic, Feature, and Story evidence and passes parents to design", async () => {
+  const story = {
+    id: "ST-1", adoId: 1, title: "Story", text: "Story route returns 200.", areaPath: "QA", iterationPath: "QA\\Sprint 1",
+    parents: [
+      { id: "FT-1", adoId: 10, revision: 1, kind: "Feature" as const, title: "Feature", text: "Feature requires a site code." },
+      { id: "EP-1", adoId: 20, revision: 1, kind: "Epic" as const, title: "Epic", text: "Epic requires audit entries." },
+    ],
+  };
+  const proposals: Array<{ sourceId: string; sourceType: string }> = [];
+  let contextParents: string[] = [];
+  const prompts: string[] = [];
+  const graph = {
+    setup: async () => {}, node: async () => {}, hierarchy: async () => {},
+    propose: async (relation: { sourceId: string; sourceType: string }) => { proposals.push(relation); },
+    storyContext: async (_id: string, parentIds: string[]) => { contextParents = parentIds; return "{}"; },
+  } as unknown as GraphStore;
+  const model = { json: async (prompt: string) => {
+    prompts.push(prompt);
+    if (prompt.startsWith("Extract")) {
+      const source = prompt.match(/from (Epic|Feature|Story) ([A-Z]+-\d+)/)?.[2];
+      return { relationships: [{ targetName: `${source} endpoint`, targetType: "Endpoint", type: "AFFECTS", evidence: "source evidence", confidence: 1, reason: "explicit" }] };
+    }
+    return { scenarios: [{ name: "Audit", evidence: "Epic requires audit entries.", cases: [{ name: "Audit entry", steps: ["Create item"], expected: "Audit entry exists" }] }] };
+  } } as ModelClient;
+  const ado = { task: async () => { throw new Error("No review Task expected"); }, decision: async () => null };
+  let run: Run | undefined;
+  try {
+    run = await ingestStory(story, graph, model, ado);
+    assert.equal(run.status, "ready_design");
+    assert.deepEqual(proposals.map((item) => [item.sourceId, item.sourceType]), [["EP-1", "Epic"], ["FT-1", "Feature"], ["ST-1", "Story"]]);
+    assert.ok(prompts[0]?.includes("Epic requires audit entries."));
+    assert.ok(prompts[1]?.includes("Feature requires a site code."));
+    assert.ok(prompts[2]?.includes("Story route returns 200."));
+    await design(run, graph, model);
+    assert.deepEqual(contextParents, ["FT-1", "EP-1"]);
+    assert.ok(prompts[3]?.includes("Epic requires audit entries."));
+    assert.ok(prompts[3]?.includes("Feature requires a site code."));
+    assert.equal(run.status, "review_artifacts");
+  } finally {
+    if (run) await fs.rm(runPath(run.id), { recursive: true, force: true });
+  }
+});
+
 test("the CI pipeline coordinates injected integrations and closes the graph", async () => {
   const temporary = await fs.mkdtemp(path.join(os.tmpdir(), "qa-pipeline-"));
   await fs.writeFile(path.join(temporary, "story.json"), JSON.stringify({

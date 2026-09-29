@@ -38,8 +38,8 @@ function agentProvenance(id: string, evidence?: string): Provenance {
 function unreviewedNodeProvenance(id: string, content: Record<string, unknown>): Provenance {
   return ProvenanceSchema.parse({
     sourceSystem: "openrouter",
-    sourceDocument: typeof content.sourceStory === "string" ? content.sourceStory : id,
-    sourceDocumentId: typeof content.sourceStory === "string" ? `ado:${content.sourceStory}` : id,
+    sourceDocument: typeof content.sourceWorkItem === "string" ? content.sourceWorkItem : typeof content.sourceStory === "string" ? content.sourceStory : id,
+    sourceDocumentId: typeof content.sourceWorkItem === "string" ? `ado:${content.sourceWorkItem}` : typeof content.sourceStory === "string" ? `ado:${content.sourceStory}` : id,
     extractionMethod: "llm",
     confidence: 0.5,
     inferred: false,
@@ -63,7 +63,7 @@ function llmProvenance(relation: Relation): Provenance {
   return ProvenanceSchema.parse({
     sourceSystem: "openrouter",
     sourceDocument: relation.source,
-    sourceDocumentId: `ado:${relation.storyIds[0] ?? relation.sourceId}`,
+    sourceDocumentId: `ado:${relation.sourceId}`,
     extractionMethod: "llm",
     evidenceText: relation.evidence,
     confidence: relation.confidence,
@@ -183,9 +183,11 @@ export class Graph {
     });
   }
 
-  async storyContext(storyId: string): Promise<string> {
-    const neighborhood = await this.repository.getNeighborhood([storyId], { depth: 1, maxNodes: 100, maxEdges: 200 });
-    const edges = neighborhood.edges.filter((edge) => edge.reviewState === "approved");
+  async storyContext(storyId: string, parentIds: string[] = []): Promise<string> {
+    const sources = new Set([storyId, ...parentIds]);
+    const neighborhood = await this.repository.getNeighborhood([...sources], { depth: 1, maxNodes: 100, maxEdges: 200 });
+    const edges = neighborhood.edges.filter((edge) => edge.reviewState === "approved"
+      && (edge.relationshipType !== "PARENT_OF" || (sources.has(edge.sourceId) && sources.has(edge.targetId))));
     const included = new Set([storyId, ...edges.flatMap((edge) => [edge.sourceId, edge.targetId])]);
     const nodes = neighborhood.nodes.filter((node) => included.has(node.id));
     if (!nodes.some((node) => node.id === storyId && node.nodeType === "Story")) throw new Error(`Story ${storyId} is absent from the graph`);

@@ -20,6 +20,8 @@ Each Story has an independent pipeline record. A pending, rejected, or slow Stor
 The graph core is ported from the sibling `knowledgeGraph` project. It uses the same node and relationship ontology, semantic relationship rules, provenance model, merge behavior, Neo4j row mapping, full-text index, traversal queries, and atomic relationship-review correction.
 
 - Sprint discovery writes all authoritative `Epic -[:PARENT_OF]-> Feature -[:PARENT_OF]-> Story` relationships before semantic extraction.
+- Advancing a Story extracts evidence-backed semantic relationships from its Epic, Feature, and Story descriptions. Each relationship is attributed to its source work item, while ambiguous review Tasks remain under the Story being advanced.
+- Test design receives the Story, both parent descriptions, and approved graph relationships connected to those three work items.
 - Every discovered Story is linked to `Sprint:<iteration-path>` with `PLANNED_FOR`.
 - Source metadata has deterministic, approved provenance.
 - LLM entities and relationships retain model evidence and confidence.
