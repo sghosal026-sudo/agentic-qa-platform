@@ -53,6 +53,11 @@ cli.command("poll-sprint").requiredOption("--iteration <path>").action(async ({ 
   console.log(JSON.stringify({ iteration, stories }, null, 2));
 });
 
+cli.command("reset").requiredOption("--all", "Delete the full Neo4j graph and pipeline ADO review Tasks")
+  .action(async () => {
+    console.log(JSON.stringify(await pipeline.resetAll(), null, 2));
+  });
+
 cli.command("advance-story").requiredOption("--ado-id <id>").option("--target <file>").option("--workflow-url <url>")
   .action(async ({ adoId, target, workflowUrl }: { adoId: string; target?: string; workflowUrl?: string }) => {
     const id = Number(adoId);

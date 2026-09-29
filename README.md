@@ -268,6 +268,14 @@ The sprint poll output is uploaded for 14 days.
 
 Local sprint processing uses the same graph-backed per-Story state as GitHub Actions.
 
+### Reset all pipeline state
+
+```powershell
+npm run qa "--" reset --all
+```
+
+This moves matching pipeline review Tasks in the configured ADO project to its recycle bin, then deletes every node and relationship in the configured Neo4j database, including Story pipeline records. Tasks must have a pipeline review tag and a generated title containing a run ID. If ADO deletion fails, the graph is retained so the command can be retried. Local `runs/` files and generated Playwright pull requests remain; a new sprint poll and Story advance create new runs.
+
 ### 1. Discover Stories
 
 Use the exact Azure DevOps iteration path:
@@ -451,6 +459,7 @@ All commands use `npm run qa -- <command>`.
 | `execute-approved --run <id> --target <file> --owner <owner> --repo <repo> --pr <number> --sha <sha>` | Verify PR approvals and execute specs |
 | `status --run <id>` | Print a run summary |
 | `poll-sprint --iteration <path>` | Discover or refresh sprint Stories and their ADO parents |
+| `reset --all` | Recycle pipeline ADO review Tasks and clear the configured Neo4j database |
 | `advance-story --ado-id <id> [--target <file>] [--workflow-url <url>]` | Advance one independent Story to its next eligible stage |
 | `record-spec-pr --ado-id <id> --owner <owner> --repo <repo> --pr <number> --sha <sha>` | Attach a generated-spec PR to a Story pipeline |
 

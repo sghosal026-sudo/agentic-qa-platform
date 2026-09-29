@@ -85,6 +85,16 @@ export class QaPipeline {
     return await this.withGraph((graph) => new StoryPipeline(graph, this.dependencies.model, this.sprintWorkItems()).pollSprint(iterationPath));
   }
 
+  async resetAll(): Promise<{ deletedTasks: number; deletedGraphNodes: number }> {
+    const workItems = this.sprintWorkItems();
+    return await this.withGraph(async (graph) => {
+      await graph.setup();
+      const deletedTasks = await workItems.resetReviewTasks();
+      const deletedGraphNodes = await graph.deleteAll();
+      return { deletedTasks, deletedGraphNodes };
+    });
+  }
+
   async advanceStory(adoId: number, targetFile?: string, workflowUrl?: string): Promise<StoryAdvanceResult> {
     return await this.withGraph((graph) => new StoryPipeline(graph, this.dependencies.model, this.sprintWorkItems()).advanceStory(adoId, targetFile, workflowUrl));
   }

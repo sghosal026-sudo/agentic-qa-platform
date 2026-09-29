@@ -84,6 +84,10 @@ export class Graph {
     await this.client.run("CREATE CONSTRAINT qa_story_pipeline_ado_id IF NOT EXISTS FOR (p:StoryPipeline) REQUIRE p.adoId IS UNIQUE");
   }
 
+  async deleteAll(): Promise<number> {
+    return await this.repository.deleteAll();
+  }
+
   async node(id: string, kind: NodeKind, name: string, content: unknown): Promise<void> {
     const parsedType = NodeTypeSchema.safeParse(kind);
     if (!parsedType.success) throw new Error(`Unsupported knowledge-graph node type: ${kind}`);

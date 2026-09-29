@@ -177,6 +177,28 @@ export class Ado {
     return result?.action === "correct" ? null : result;
   }
 
+  async resetReviewTasks(): Promise<number> {
+    const query = "SELECT [System.Id] FROM WorkItems WHERE [System.TeamProject] = @project AND [System.WorkItemType] = 'Task' AND ([System.Tags] CONTAINS 'qa-relation-review' OR [System.Tags] CONTAINS 'qa-test-review')";
+    const found = await this.request<{ workItems?: Array<{ id: number }> }>("POST", "wiql?api-version=7.1", { query });
+    const taskIds: number[] = [];
+    for (const item of found.workItems ?? []) {
+      const task = await this.request<AdoWorkItem>("GET", `workitems/${item.id}?api-version=7.1`);
+      const title = String(task.fields["System.Title"] ?? "");
+      const tags = String(task.fields["System.Tags"] ?? "").split(";").map((tag) => tag.trim());
+      const expectedTag = title.startsWith("[QA relation ") ? "qa-relation-review" : "qa-test-review";
+      if (task.fields["System.WorkItemType"] !== "Task" || !/^\[QA (?:relation|test) [a-f0-9-]{36}\] [a-f0-9]{16}$/.test(title) || !tags.includes(expectedTag)) continue;
+      taskIds.push(item.id);
+    }
+    for (const id of taskIds) {
+      const response = await this.fetcher(`${this.org}/${encodeURIComponent(this.project)}/_apis/wit/workitems/${id}?api-version=7.1`, {
+        method: "DELETE",
+        headers: { Authorization: `Basic ${Buffer.from(`:${this.token}`).toString("base64")}` },
+      });
+      if (!response.ok) throw new Error(`ADO Task ${id} deletion failed: ${response.status} ${(await response.text()).slice(0, 200)}`);
+    }
+    return taskIds.length;
+  }
+
   async publishResult(story: Story, result: ExecutionResult, workflowUrl?: string): Promise<void> {
     const status = result.failures ? "failed" : "passed";
     const text = `QA execution ${status}. Tests: ${result.tests}. Failures: ${result.failures}. Execution: ${result.executionId}.${workflowUrl ? ` Workflow: ${workflowUrl}` : ""}`;

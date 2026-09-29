@@ -2,6 +2,7 @@ import type { Artifact, NodeKind, Relation, RelationDecision, Run, Spec, Story, 
 
 export interface GraphStore {
   setup(): Promise<void>;
+  deleteAll(): Promise<number>;
   node(id: string, kind: NodeKind, name: string, content: unknown): Promise<void>;
   hierarchy(parentId: string, childId: string, source?: { adoId: number; title: string }): Promise<void>;
   plannedFor(storyId: string, iterationPath: string, source?: { adoId: number; title: string }): Promise<void>;
@@ -26,6 +27,7 @@ export interface WorkItemClient {
 }
 
 export interface SprintWorkItemClient extends WorkItemClient {
+  resetReviewTasks(): Promise<number>;
   sprintStories(iterationPath: string): Promise<Story[]>;
   artifactTask(runId: string, artifact: Artifact, story: Story): Promise<{ id: number; hash: string }>;
   artifactDecision(taskId: number, expectedHash: string): Promise<RelationDecision | null>;

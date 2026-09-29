@@ -265,6 +265,77 @@ test("ADO retry reuses the Story child Task and copies its paths", async () => {
   }
 });
 
+test("reset deletes only pipeline review Tasks before clearing the graph", async () => {
+  const previous = { org: process.env.ADO_ORG_URL, project: process.env.ADO_PROJECT, pat: process.env.ADO_PAT };
+  process.env.ADO_ORG_URL = "https://dev.azure.com/example";
+  process.env.ADO_PROJECT = "QA";
+  process.env.ADO_PAT = "test-token";
+  const events: string[] = [];
+  const runId = randomUUID();
+  const fetcher = async (url: string, init?: RequestInit): Promise<Response> => {
+    if (url.includes("wiql?")) return new Response(JSON.stringify({ workItems: [{ id: 10 }, { id: 11 }, { id: 12 }] }));
+    if (init?.method === "DELETE") {
+      events.push(`delete ${url.match(/workitems\/(\d+)/)?.[1]}`);
+      return new Response(null, { status: 204 });
+    }
+    const id = Number(url.match(/workitems\/(\d+)/)?.[1]);
+    const fields = id === 10
+      ? { "System.WorkItemType": "Task", "System.Title": `[QA relation ${runId}] ${"a".repeat(16)}`, "System.Tags": "qa-relation-review" }
+      : id === 11
+        ? { "System.WorkItemType": "Task", "System.Title": `[QA test ${runId}] ${"b".repeat(16)}`, "System.Tags": "qa-test-review" }
+        : { "System.WorkItemType": "Task", "System.Title": "Unrelated Task", "System.Tags": "qa-test-review" };
+    return new Response(JSON.stringify({ id, fields }));
+  };
+  try {
+    const ado = new Ado(fetcher as typeof fetch);
+    const pipeline = new QaPipeline({
+      graph: () => ({ setup: async () => { events.push("setup"); }, deleteAll: async () => { events.push("graph"); return 7; } }) as GraphStore,
+      model: () => ({ json: async () => ({}) }),
+      workItems: () => ado,
+      sprintWorkItems: () => ado,
+    });
+    assert.deepEqual(await pipeline.resetAll(), { deletedTasks: 2, deletedGraphNodes: 7 });
+    assert.deepEqual(events, ["setup", "delete 10", "delete 11", "graph"]);
+  } finally {
+    if (previous.org === undefined) delete process.env.ADO_ORG_URL; else process.env.ADO_ORG_URL = previous.org;
+    if (previous.project === undefined) delete process.env.ADO_PROJECT; else process.env.ADO_PROJECT = previous.project;
+    if (previous.pat === undefined) delete process.env.ADO_PAT; else process.env.ADO_PAT = previous.pat;
+  }
+});
+
+test("reset keeps the graph when an ADO Task cannot be deleted", async () => {
+  const previous = { org: process.env.ADO_ORG_URL, project: process.env.ADO_PROJECT, pat: process.env.ADO_PAT };
+  process.env.ADO_ORG_URL = "https://dev.azure.com/example";
+  process.env.ADO_PROJECT = "QA";
+  process.env.ADO_PAT = "test-token";
+  let graphDeleted = false;
+  const runId = randomUUID();
+  const fetcher = async (url: string, init?: RequestInit): Promise<Response> => {
+    if (url.includes("wiql?")) return new Response(JSON.stringify({ workItems: [{ id: 10 }] }));
+    if (init?.method === "DELETE") return new Response("forbidden", { status: 403 });
+    return new Response(JSON.stringify({ fields: {
+      "System.WorkItemType": "Task",
+      "System.Title": `[QA relation ${runId}] ${"a".repeat(16)}`,
+      "System.Tags": "qa-relation-review",
+    } }));
+  };
+  try {
+    const ado = new Ado(fetcher as typeof fetch);
+    const pipeline = new QaPipeline({
+      graph: () => ({ setup: async () => {}, deleteAll: async () => { graphDeleted = true; return 1; } }) as GraphStore,
+      model: () => ({ json: async () => ({}) }),
+      workItems: () => ado,
+      sprintWorkItems: () => ado,
+    });
+    await assert.rejects(pipeline.resetAll(), /ADO Task 10 deletion failed: 403/);
+    assert.equal(graphDeleted, false);
+  } finally {
+    if (previous.org === undefined) delete process.env.ADO_ORG_URL; else process.env.ADO_ORG_URL = previous.org;
+    if (previous.project === undefined) delete process.env.ADO_PROJECT; else process.env.ADO_PROJECT = previous.project;
+    if (previous.pat === undefined) delete process.env.ADO_PAT; else process.env.ADO_PAT = previous.pat;
+  }
+});
+
 test("conflicting Story votes and invalid corrections stay pending", async () => {
   const run: Run = {
     id: randomUUID(), status: "review_relations", stories: [], artifacts: [], specs: [], errors: [], createdAt: "2026-01-01",
