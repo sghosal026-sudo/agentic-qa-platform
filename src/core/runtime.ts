@@ -10,14 +10,25 @@ export type Relation = {
   graphEdgeId?: string;
   type: string; evidence: string; confidence: number; reason: string; storyIds: string[];
   source: string;
+  sourceText?: string;
   state: "needs_review" | "approved" | "rejected";
   tasks: Record<string, { id: number; hash: string }>; decisions: RelationDecision[];
 };
 export type WorkItemParent = { id: string; adoId: number; revision: number; kind: "Feature" | "Epic"; title: string; text: string };
 export type Story = { id: string; adoId: number; revision?: number; title: string; text: string; areaPath: string; iterationPath: string; parents?: WorkItemParent[] };
-export type Artifact = { id: string; kind: "TestPlan" | "TestSuite" | "TestScenario" | "TestCase"; name: string; storyId: string; parentId?: string; content: Record<string, unknown>; hash: string; reviewTask?: { id: number; hash: string }; reviewer?: string; approvedAt?: string };
+export type Artifact = { id: string; kind: "TestPlan" | "TestSuite" | "TestScenario" | "TestCase"; name: string; storyId: string; parentId?: string; content: Record<string, unknown>; hash: string;
+  baseHash?: string; beforeContent?: Record<string, unknown>; reviewTask?: { id: number; hash: string }; reviewer?: string; approvedAt?: string };
+export type TestReviewItem = { id: string; kind: Artifact["kind"] | "Gap"; name: string; suite?: string; hash: string;
+  baseHash?: string; proposedHash?: string; confidence?: number;
+  reviewReason: string; evidence?: string; sourceRevision?: string; before?: unknown; after?: unknown;
+  changedSteps?: Array<{ index: number; before: unknown; after: unknown }>;
+  sourceText?: string;
+  affectedCaseId?: string;
+  status: "pending" | "approved" | "rejected" | "manual_fix"; reviewer?: string; reviewedAt?: string; note?: string };
+export type TestReview = { taskId?: number; items: TestReviewItem[]; sourceHash: string; reportPath?: string };
 export type Spec = { caseId: string; storyId: string; file: string; status: "generated" | "fixme"; reason?: string };
-export type Run = { id: string; status: "ingesting" | "review_relations" | "mapping_error" | "ready_design" | "review_artifacts" | "ready_specs" | "review_specs" | "executed"; stories: Story[]; relations: Relation[]; artifacts: Artifact[]; specs: Spec[]; warnings?: string[]; errors: string[]; createdAt: string };
+export type Run = { id: string; status: "ingesting" | "review_relations" | "mapping_error" | "ready_design" | "design_gap" | "review_artifacts" | "ready_specs" | "review_specs" | "executed"; stories: Story[]; relations: Relation[]; artifacts: Artifact[]; specs: Spec[]; specBatches?: Array<{ caseIds: string[]; specs: Spec[]; manifest?: string; config?: string; snapshot?: unknown; executionEvidence?: unknown; diagnoses?: unknown; parentBatch?: number; automaticRepairAttempted?: boolean; sha?: string; executionId?: string; failures?: number }>;
+  designAttempt?: number; testDesign?: { json: string; workbook: string; coverage: string; gaps: string[]; failedBatches: string[] }; testReview?: TestReview; warnings?: string[]; errors: string[]; createdAt: string };
 export type StoryPipelineRecord = {
   version?: number;
   adoId: number;
@@ -29,6 +40,16 @@ export type StoryPipelineRecord = {
   run?: Run;
   pullRequest?: { owner: string; repo: string; number: number; sha: string };
   result?: { executionId: string; tests: number; failures: number; workflowUrl?: string };
+  previousRunId?: string;
+  previousStory?: Story;
+  impactSourceHash?: string;
+  impactCaseIds?: string[];
+  impactGaps?: Array<{ id: string; name: string; suite?: string; confidence: number; reason: string; evidence: string; sourceText?: string; caseId?: string }>;
+  impactRevisions?: Array<{ artifact: Artifact; baseHash: string; confidence: number; reason: string; evidence: string; sourceText?: string }>;
+  pendingImpact?: { sourceHash: string; revisions: Array<{ artifact: Artifact; baseHash: string; confidence: number; reason: string; evidence: string; sourceText?: string }>;
+    gaps: Array<{ id: string; name: string; suite?: string; confidence: number; reason: string; evidence: string; sourceText?: string; storyId: string; caseId?: string }> };
+  pendingImpacts?: Array<NonNullable<StoryPipelineRecord["pendingImpact"]>>;
+  reviewMode?: "story";
   updatedAt: string;
 };
 

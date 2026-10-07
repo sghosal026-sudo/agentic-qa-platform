@@ -1,0 +1,487 @@
+{
+  "documentType": "sprintTestDesign",
+  "schemaVersion": "1.0.0",
+  "howToReadThisDocument": {
+    "purpose": "Test design for one sprint: a test plan, its suites (one per test type), the test scenarios in each suite, and the test cases that cover each scenario.",
+    "identity": "nodeId is the knowledge-graph id. Items created here use <NodeType>:<slug of name>; existing nodes keep the id they already have, such as FDN-501 or Sprint:WMS\\Sprint 1.",
+    "origin": "\"origin\" says whether an item already existed in the graph (\"existingInGraph\") or was created by this design run (\"createdByAgent\").",
+    "acceptanceCriteria": "Acceptance criteria are not nodes. They are referenced by the backlog item id and the label used in that item's text.",
+    "relationshipKeys": {
+      "testPlan.plannedForSprint": "TestPlan TRACES_TO Sprint",
+      "testPlan.testSuites": "TestPlan CONTAINS TestSuite",
+      "testPlan.inScope": "TestPlan TRACES_TO the backlog item or part of the system",
+      "testPlan.risks[].mitigatedRisk": "TestPlan MITIGATES Risk",
+      "testSuite.testScenarios": "TestSuite CONTAINS TestScenario",
+      "testScenario.testCases": "TestSuite CONTAINS TestCase, and TestCase COVERS TestScenario",
+      "testScenario.reusedTestCases": "TestSuite CONTAINS TestCase, and TestCase COVERS TestScenario (the case already exists)",
+      "testScenario.tracesTo.backlogItems": "TestScenario TRACES_TO Story, Feature, Task or Defect",
+      "testScenario.covers": "TestScenario COVERS BusinessRule, Requirement, Capability, Constraint, Workflow or Process",
+      "testScenario.exercises": "TestScenario EXERCISES the named part of the system",
+      "testCase.validates": "TestCase VALIDATES BusinessRule, Requirement or Constraint",
+      "testCase.exercises": "TestCase EXERCISES the named part of the system",
+      "testCase.alsoInSuites": "TestSuite CONTAINS TestCase (the case runs in that suite too)",
+      "testSuite.includedTestCasesFromOtherSuites": "TestSuite CONTAINS TestCase (defined under another suite)"
+    }
+  },
+  "generatedBy": {
+    "agent": "test-design-agent",
+    "agentVersion": "0.1.0",
+    "model": "example",
+    "runId": "fixture",
+    "generatedAt": "2026-01-01T00:00:00.000Z",
+    "sourceContextCollectedAt": "2026-01-01T00:00:00.000Z"
+  },
+  "sprint": {
+    "nodeId": "Sprint:DEMO\\Sprint 9",
+    "nodeType": "Sprint",
+    "name": "Sprint 9"
+  },
+  "testPlan": {
+    "nodeId": "TestPlan:demo-sprint-9",
+    "nodeType": "TestPlan",
+    "name": "Demo Sprint 9 test plan",
+    "origin": "createdByAgent",
+    "objective": "Prove the sprint's master-data work behaves as specified and breaks nothing delivered earlier.",
+    "scopeSummary": "Every backlog item of the sprint, the interfaces it touches, and the behaviour earlier sprints delivered on the same parts.",
+    "plannedForSprint": {
+      "nodeId": "Sprint:DEMO\\Sprint 9",
+      "nodeType": "Sprint",
+      "name": "Sprint 9"
+    },
+    "inScope": [
+      {
+        "nodeId": "FDN-501",
+        "nodeType": "Story",
+        "name": "FDN-501",
+        "reason": "Delivered in this sprint: Create a warehouse."
+      },
+      {
+        "nodeId": "FDN-502",
+        "nodeType": "Story",
+        "name": "FDN-502",
+        "reason": "Delivered in this sprint: Create a zone."
+      }
+    ],
+    "outOfScope": [
+      {
+        "item": "Reporting",
+        "reason": "Untouched by this sprint and not dependent on it."
+      }
+    ],
+    "risks": [
+      {
+        "mitigatedRisk": {
+          "nodeId": "Risk:master-data-changes-break-earlier-imports",
+          "nodeType": "Risk",
+          "name": "Master data changes break earlier imports",
+          "origin": "createdByAgent"
+        },
+        "description": "The warehouse table is shared with the import work delivered earlier.",
+        "likelihood": "medium",
+        "impact": "high",
+        "mitigation": "Run the regression suite over the import behaviour before release.",
+        "relatedNodes": []
+      }
+    ],
+    "environments": [
+      "A test environment with an empty warehouse table."
+    ],
+    "testDataNeeds": [
+      "A warehouse code that already exists."
+    ],
+    "assumptions": [
+      "The API is reachable from the test environment."
+    ],
+    "openQuestions": [],
+    "testSuites": [
+      {
+        "nodeId": "TestSuite:demo-functional",
+        "nodeType": "TestSuite",
+        "name": "Demo functional suite",
+        "origin": "createdByAgent",
+        "testType": "functional",
+        "purpose": "Run the functional suite.",
+        "entryCriteria": [
+          "The build is deployed."
+        ],
+        "exitCriteria": [
+          "Every case has been run."
+        ],
+        "includedTestCasesFromOtherSuites": [],
+        "testScenarios": [
+          {
+            "nodeId": "TestScenario:duplicate-code",
+            "nodeType": "TestScenario",
+            "name": "Duplicate warehouse code is rejected",
+            "origin": "createdByAgent",
+            "description": "Duplicate warehouse code is rejected.",
+            "expectedOutcome": "Duplicate warehouse code is rejected.",
+            "priority": "high",
+            "tracesTo": {
+              "backlogItems": [
+                {
+                  "nodeId": "FDN-901",
+                  "nodeType": "Story",
+                  "name": "FDN-901"
+                }
+              ],
+              "acceptanceCriteria": []
+            },
+            "covers": [
+              {
+                "nodeId": "BusinessRule:warehouse-code-is-unique",
+                "nodeType": "BusinessRule",
+                "name": "A warehouse code is unique"
+              }
+            ],
+            "exercises": [
+              {
+                "nodeId": "Endpoint:post-warehouses",
+                "nodeType": "Endpoint",
+                "name": "POST /warehouses"
+              }
+            ],
+            "testCases": [
+              {
+                "nodeId": "TestCase:api-duplicate-code-is-rejected",
+                "nodeType": "TestCase",
+                "name": "Duplicate warehouse code is rejected",
+                "origin": "createdByAgent",
+                "objective": "Confirm that duplicate warehouse code is rejected.",
+                "caseKind": "negative",
+                "priority": "high",
+                "testTypes": [
+                  "functional",
+                  "integration"
+                ],
+                "preconditions": [
+                  "The tester is signed in."
+                ],
+                "testData": [
+                  {
+                    "name": "code",
+                    "value": "WH-01"
+                  }
+                ],
+                "steps": [
+                  {
+                    "stepNumber": 1,
+                    "action": "Send POST /warehouses with the test data.",
+                    "expectedResult": "The response status code is 409."
+                  },
+                  {
+                    "stepNumber": 2,
+                    "action": "Send POST /warehouses with the same code again.",
+                    "expectedResult": "The system responds as the scenario expects."
+                  }
+                ],
+                "coversAcceptanceCriteria": [],
+                "validates": [
+                  {
+                    "nodeId": "BusinessRule:warehouse-code-is-unique",
+                    "nodeType": "BusinessRule",
+                    "name": "A warehouse code is unique"
+                  }
+                ],
+                "exercises": [
+                  {
+                    "nodeId": "Endpoint:post-warehouses",
+                    "nodeType": "Endpoint",
+                    "name": "POST /warehouses"
+                  }
+                ],
+                "alsoInSuites": [
+                  {
+                    "nodeId": "TestSuite:demo-integration",
+                    "nodeType": "TestSuite",
+                    "name": "Demo integration suite"
+                  }
+                ],
+                "automation": {
+                  "candidate": true
+                }
+              }
+            ],
+            "reusedTestCases": []
+          },
+          {
+            "nodeId": "TestScenario:warehouse-created",
+            "nodeType": "TestScenario",
+            "name": "A warehouse is created",
+            "origin": "createdByAgent",
+            "description": "A warehouse is created.",
+            "expectedOutcome": "A warehouse is created.",
+            "priority": "high",
+            "tracesTo": {
+              "backlogItems": [
+                {
+                  "nodeId": "FDN-901",
+                  "nodeType": "Story",
+                  "name": "FDN-901"
+                },
+                {
+                  "nodeId": "FDN-902",
+                  "nodeType": "Story",
+                  "name": "FDN-902"
+                }
+              ],
+              "acceptanceCriteria": []
+            },
+            "covers": [],
+            "exercises": [
+              {
+                "nodeId": "Screen:warehouse-form",
+                "nodeType": "Screen",
+                "name": "Warehouse form"
+              }
+            ],
+            "testCases": [
+              {
+                "nodeId": "TestCase:ui-warehouse-is-created",
+                "nodeType": "TestCase",
+                "name": "A warehouse is created from the form",
+                "origin": "createdByAgent",
+                "objective": "Confirm that a warehouse is created from the form.",
+                "caseKind": "positive",
+                "priority": "high",
+                "testTypes": [
+                  "functional"
+                ],
+                "preconditions": [
+                  "The tester is signed in."
+                ],
+                "testData": [
+                  {
+                    "name": "code",
+                    "value": "WH-02"
+                  }
+                ],
+                "steps": [
+                  {
+                    "stepNumber": 1,
+                    "action": "Open the warehouse form.",
+                    "expectedResult": "The warehouse form is shown."
+                  },
+                  {
+                    "stepNumber": 2,
+                    "action": "Fill the code field with the test data and click Save.",
+                    "expectedResult": "A success message is displayed."
+                  },
+                  {
+                    "stepNumber": 3,
+                    "action": "Check the warehouse table.",
+                    "expectedResult": "A row with the code exists in the warehouse table."
+                  }
+                ],
+                "coversAcceptanceCriteria": [],
+                "validates": [],
+                "exercises": [
+                  {
+                    "nodeId": "Screen:warehouse-form",
+                    "nodeType": "Screen",
+                    "name": "Warehouse form"
+                  },
+                  {
+                    "nodeId": "DataTable:warehouse",
+                    "nodeType": "DataTable",
+                    "name": "warehouse"
+                  }
+                ],
+                "alsoInSuites": [],
+                "automation": {
+                  "candidate": true
+                }
+              },
+              {
+                "nodeId": "TestCase:prose-only-case",
+                "nodeType": "TestCase",
+                "name": "The reconciliation report reads correctly",
+                "origin": "createdByAgent",
+                "objective": "Confirm that the reconciliation report reads correctly.",
+                "caseKind": "positive",
+                "priority": "high",
+                "testTypes": [
+                  "functional"
+                ],
+                "preconditions": [
+                  "The tester is signed in."
+                ],
+                "testData": [],
+                "steps": [
+                  {
+                    "stepNumber": 1,
+                    "action": "Review the printed reconciliation report.",
+                    "expectedResult": "The report reads correctly."
+                  },
+                  {
+                    "stepNumber": 2,
+                    "action": "Confirm the totals with finance.",
+                    "expectedResult": "Finance agrees."
+                  }
+                ],
+                "coversAcceptanceCriteria": [],
+                "validates": [],
+                "exercises": [],
+                "alsoInSuites": [],
+                "automation": {
+                  "candidate": true
+                }
+              },
+              {
+                "nodeId": "TestCase:manual-sign-off",
+                "nodeType": "TestCase",
+                "name": "Regulatory sign-off is recorded",
+                "origin": "createdByAgent",
+                "objective": "Confirm that regulatory sign-off is recorded.",
+                "caseKind": "positive",
+                "priority": "high",
+                "testTypes": [
+                  "functional"
+                ],
+                "preconditions": [
+                  "The tester is signed in."
+                ],
+                "testData": [],
+                "steps": [
+                  {
+                    "stepNumber": 1,
+                    "action": "Open the sign-off screen.",
+                    "expectedResult": "The sign-off screen is shown."
+                  }
+                ],
+                "coversAcceptanceCriteria": [],
+                "validates": [],
+                "exercises": [
+                  {
+                    "nodeId": "Screen:warehouse-form",
+                    "nodeType": "Screen",
+                    "name": "Warehouse form"
+                  }
+                ],
+                "alsoInSuites": [],
+                "automation": {
+                  "candidate": false,
+                  "notes": "Needs a human signature on paper."
+                }
+              }
+            ],
+            "reusedTestCases": []
+          }
+        ]
+      },
+      {
+        "nodeId": "TestSuite:demo-integration",
+        "nodeType": "TestSuite",
+        "name": "Demo integration suite",
+        "origin": "createdByAgent",
+        "testType": "integration",
+        "purpose": "Run the integration suite.",
+        "entryCriteria": [
+          "The build is deployed."
+        ],
+        "exitCriteria": [
+          "Every case has been run."
+        ],
+        "includedTestCasesFromOtherSuites": [
+          {
+            "nodeId": "TestCase:api-duplicate-code-is-rejected",
+            "nodeType": "TestCase",
+            "name": "Duplicate warehouse code is rejected",
+            "definedInSuite": {
+              "nodeId": "TestSuite:demo-functional",
+              "nodeType": "TestSuite",
+              "name": "Demo functional suite"
+            },
+            "coversScenario": {
+              "nodeId": "TestScenario:duplicate-code",
+              "nodeType": "TestScenario",
+              "name": "Duplicate warehouse code is rejected"
+            }
+          }
+        ],
+        "testScenarios": [
+          {
+            "nodeId": "TestScenario:duplicate-code",
+            "nodeType": "TestScenario",
+            "name": "Duplicate warehouse code is rejected",
+            "origin": "createdByAgent",
+            "description": "Duplicate warehouse code is rejected.",
+            "expectedOutcome": "Duplicate warehouse code is rejected.",
+            "priority": "high",
+            "tracesTo": {
+              "backlogItems": [
+                {
+                  "nodeId": "FDN-901",
+                  "nodeType": "Story",
+                  "name": "FDN-901"
+                }
+              ],
+              "acceptanceCriteria": []
+            },
+            "covers": [],
+            "exercises": [
+              {
+                "nodeId": "Endpoint:post-warehouses",
+                "nodeType": "Endpoint",
+                "name": "POST /warehouses"
+              }
+            ],
+            "testCases": [],
+            "reusedTestCases": [
+              {
+                "nodeId": "TestCase:lives-only-in-the-graph",
+                "nodeType": "TestCase",
+                "name": "Lives only in the graph",
+                "origin": "existingInGraph",
+                "reason": "Already covers this scenario.",
+                "designedInSuites": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "coverageSummary": {
+    "acceptanceCriteria": {
+      "total": 0,
+      "covered": 0,
+      "uncovered": []
+    },
+    "scenarios": {
+      "existingInGraph": 0,
+      "createdByAgent": 3
+    },
+    "testCases": {
+      "createdByAgent": 4,
+      "reusedFromGraph": 1,
+      "byTestType": {
+        "functional": 4,
+        "integration": 1
+      }
+    },
+    "backlogItems": [
+      {
+        "nodeId": "FDN-901",
+        "title": "Create a warehouse",
+        "scenarios": 2,
+        "testCases": 3,
+        "testTypes": [
+          "functional",
+          "integration"
+        ]
+      },
+      {
+        "nodeId": "FDN-902",
+        "title": "Warehouse form",
+        "scenarios": 1,
+        "testCases": 3,
+        "testTypes": [
+          "functional"
+        ]
+      }
+    ],
+    "gaps": []
+  },
+  "warnings": []
+}

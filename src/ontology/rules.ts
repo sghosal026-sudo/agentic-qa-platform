@@ -35,18 +35,24 @@ export const NODE_TYPE_DESCRIPTIONS: Record<NodeType, string> = {
   TestRun: "Execution of test cases (source metadata)",
   Defect: "Bug or defect (source metadata)",
 
+  SystemElement: "A named technical part that fits no more specific system type, such as a device or model; record its actual kind in the name or properties",
   Application: "A deployable application or external system, e.g. WMS, ERP, carrier system",
   Service: "A backend service, e.g. inventory service",
   Module: "A software module or bounded context, e.g. inbound, inventory",
   Component:
     "An internal software part inside a module or service, e.g. putaway suggestion engine. A user-facing operation such as 'Create warehouse' is a Capability, not a Component",
+  Interface: "A named boundary for interaction, including a file feed, UI, command interface or API. Use API for an explicitly HTTP or service API",
+  Operation: "A technical action such as a batch job, consumer handler, procedure or scheduled task. Use Endpoint for a named API route",
   API: "An API offered by a service, e.g. inventory API",
   Endpoint: "A single API operation, written as method and path when given, e.g. POST /receipts/{id}/confirm",
+  DataStore: "A named persistent or shared data store such as a cache, object store, file store or search index. Use Database for a database",
   Database: "A database or schema, e.g. inventory database",
   DataTable: "A database table, named exactly as written, e.g. stock_movement",
   Field: "A column or data attribute, e.g. batch number, expiry date",
+  DataContract: "A named payload, file layout or schema exchanged between parts of a system, with a version when stated",
   DomainEvent: "An event the system publishes, named exactly as written, e.g. inbound.receipt_confirmed",
   MessageTopic: "A message topic, queue or stream that carries events, e.g. inbound-events",
+  IntegrationFlow: "One documented hop of data or control between two parts of a system; use separate hops for intermediaries",
 
   BusinessEntity: "A business object, e.g. receipt, purchase order, pallet",
   Capability: "A business capability or user-facing operation the system provides, e.g. blind receiving, create warehouse, deactivate reason code",
@@ -55,8 +61,10 @@ export const NODE_TYPE_DESCRIPTIONS: Record<NodeType, string> = {
     "The rule itself that the system must always enforce, e.g. a receipt can only be confirmed once. A check that the rule holds ('confirming twice is rejected') is a TestScenario",
   Constraint: "A technical or business constraint, e.g. confirm must run in one transaction",
   Workflow: "A multi-step business flow through the system, e.g. receive, put away, confirm. Not a test area: something that checks behaviour is a TestScenario",
+  WorkflowStep: "A named step within a business workflow, such as validate, reserve or notify",
   Process: "A business process, e.g. inbound receiving",
   State: "A lifecycle state of an entity or workflow, e.g. receipt status confirmed",
+  StateTransition: "A named change between two states when its trigger, condition or outcome matters independently",
   Role: "A user role or persona, e.g. receiving clerk",
 
   Concept: "A domain or technical concept, e.g. idempotency, FEFO",
@@ -121,8 +129,12 @@ const WORK_ITEMS = WORK_ITEM_NODE_TYPES;
 const SUT = SUT_NODE_TYPES;
 const BUSINESS = BUSINESS_NODE_TYPES;
 const TEST_EXECUTION: readonly NodeType[] = ["TestCase", "TestRun", "Defect"];
-/** Things data can be mapped between: a column, table, API operation, event, topic or business object. */
-const DATA_ELEMENTS: readonly NodeType[] = ["Field", "DataTable", "Endpoint", "DomainEvent", "MessageTopic", "BusinessEntity"];
+/** Things data can be mapped between: a field, payload, API operation, event or business object. */
+const DATA_ELEMENTS: readonly NodeType[] = ["Field", "DataTable", "DataContract", "Endpoint", "Operation", "DomainEvent", "MessageTopic", "BusinessEntity"];
+const SYSTEM_PARTS: readonly NodeType[] = ["SystemElement", "Application", "Service", "Module", "Component", "Interface", "API", "Endpoint", "Operation"];
+const FLOW_ENDPOINTS: readonly NodeType[] = [...SYSTEM_PARTS, "DataStore", "Database", "DataTable", "MessageTopic"];
+const DATA_SOURCES: readonly NodeType[] = ["DataStore", "Database", "DataTable", "Field"];
+const DATA_REPRESENTATIONS: readonly NodeType[] = ["DataContract", "DataTable", "Field", "DomainEvent", "BusinessEntity"];
 const ANY: readonly NodeType[] = NODE_TYPES;
 
 export const RELATIONSHIP_RULES: Record<RelationshipType, RelationshipRule> = {
@@ -136,13 +148,15 @@ export const RELATIONSHIP_RULES: Record<RelationshipType, RelationshipRule> = {
       "Containment. Structural when a planning container holds an item; semantic when a SUT part contains a smaller part (Application → Service → Module → Component, Database → DataTable → Field, API → Endpoint, a service or module owns its data tables), a process contains workflows and states, or a test plan contains suites and a suite contains scenarios and cases",
     pairs: [
       structural(["PI", "Sprint", "Release"], ["Sprint", ...WORK_ITEMS, "Defect"]),
-      semantic(["Application"], ["Service", "Module", "Component", "API", "Database"]),
-      semantic(["Service"], ["Module", "Component", "API", "Endpoint"]),
-      semantic(["Module"], ["Module", "Component", "API", "Endpoint"]),
-      semantic(["Component"], ["Component"]),
+      semantic(["Application"], ["SystemElement", "Service", "Module", "Component", "Interface", "API", "DataStore", "Database"]),
+      semantic(["Service"], ["Module", "Component", "Interface", "Operation", "API", "Endpoint"]),
+      semantic(["Module"], ["Module", "Component", "Interface", "Operation", "API", "Endpoint"]),
+      semantic(["Component"], ["Component", "Operation"]),
+      semantic(["Interface"], ["Operation", "API", "Endpoint"]),
       semantic(["API"], ["Endpoint"]),
+      semantic(["DataStore"], ["DataTable"]),
       semantic(["Database"], ["DataTable"]),
-      semantic(["DataTable", "BusinessEntity"], ["Field"]),
+      semantic(["DataTable", "DataContract", "BusinessEntity"], ["Field"]),
       semantic(["Process", "Workflow"], ["Workflow", "State"]),
       semantic(["Service", "Module"], ["DataTable"]),
       semantic(["TestPlan"], ["TestSuite"]),
@@ -165,7 +179,7 @@ export const RELATIONSHIP_RULES: Record<RelationshipType, RelationshipRule> = {
     description: "Source implements a capability, requirement, business rule or workflow",
     pairs: [
       semantic(
-        [...WORK_ITEMS, "Application", "Service", "Module", "Component", "API", "Endpoint"],
+        [...WORK_ITEMS, ...SYSTEM_PARTS, "IntegrationFlow"],
         ["Capability", "Requirement", "BusinessRule", "Feature", "Workflow", "Process"]
       ),
     ],
@@ -174,20 +188,88 @@ export const RELATIONSHIP_RULES: Record<RelationshipType, RelationshipRule> = {
     description: "Source is part of a larger component, entity, capability or process",
     pairs: [
       semantic(
-        [...SUT, "BusinessEntity", "Capability", "Workflow", "Process", "State"],
-        ["Application", "Service", "Module", "Component", "API", "Database", "DataTable", "BusinessEntity", "Capability", "Workflow", "Process"]
+        [...SUT, "BusinessEntity", "Capability", "Workflow", "WorkflowStep", "Process", "State", "StateTransition"],
+        ["SystemElement", "Application", "Service", "Module", "Component", "Interface", "API", "DataStore", "Database", "DataTable", "BusinessEntity", "Capability", "Workflow", "Process"]
       ),
     ],
+  },
+  OWNS: {
+    description: "A system part is responsible for a store, topic, contract or event; ownership must be stated, not inferred from access",
+    pairs: [semantic(["SystemElement", "Application", "Service", "Module", "Component"], ["DataStore", "Database", "DataTable", "MessageTopic", "DataContract", "DomainEvent"])],
+  },
+  CALLS: {
+    description: "A system part synchronously invokes another interface, operation or system part",
+    pairs: [semantic(SYSTEM_PARTS, ["Application", "Service", "Interface", "API", "Endpoint", "Operation"])],
   },
   PUBLISHES: {
     description: "Source publishes a domain event or to a message topic",
     pairs: [
-      semantic([...WORK_ITEMS, "Application", "Service", "Module", "Component", "API", "Endpoint", "Workflow", "Process"], ["DomainEvent", "MessageTopic"]),
+      semantic([...SYSTEM_PARTS, "IntegrationFlow", "Workflow", "WorkflowStep", "Process"], ["DomainEvent", "MessageTopic"]),
     ],
+  },
+  CARRIES: {
+    description: "A topic, queue or stream carries an event or payload contract",
+    pairs: [semantic(["MessageTopic"], ["DomainEvent", "DataContract"])],
+  },
+  SUBSCRIBES_TO: {
+    description: "A system part consumes messages from a topic or subscribes to a named event",
+    pairs: [semantic([...SYSTEM_PARTS, "IntegrationFlow"], ["MessageTopic", "DomainEvent"])],
+  },
+  READS_FROM: {
+    description: "A system part or integration flow reads persisted data from a store, table or field",
+    pairs: [semantic([...SYSTEM_PARTS, "IntegrationFlow"], DATA_SOURCES)],
+  },
+  WRITES_TO: {
+    description: "A system part or integration flow writes persisted data to a store, table or field",
+    pairs: [semantic([...SYSTEM_PARTS, "IntegrationFlow"], DATA_SOURCES)],
+  },
+  TRANSFORMS_TO: {
+    description: "One data representation is transformed into another; evidence must state the conversion, not just a shared name",
+    pairs: [semantic(DATA_REPRESENTATIONS, DATA_REPRESENTATIONS)],
+  },
+  TRIGGERS: {
+    description: "An event, operation, endpoint, flow or workflow step starts a flow, step, operation or state transition",
+    pairs: [semantic(["DomainEvent", "Endpoint", "Operation", "IntegrationFlow", "WorkflowStep"], ["IntegrationFlow", "Workflow", "WorkflowStep", "Operation", "StateTransition"])],
+  },
+  HAS_STATE: {
+    description: "A business entity, process or workflow has a named lifecycle state",
+    pairs: [semantic(["BusinessEntity", "Process", "Workflow"], ["State"])],
+  },
+  HAS_STEP: {
+    description: "A process or workflow includes a named step",
+    pairs: [semantic(["Process", "Workflow"], ["WorkflowStep"])],
+  },
+  TRANSITIONS_TO: {
+    description: "A state can move to another state; use a StateTransition node when trigger or conditions need separate identity",
+    pairs: [semantic(["State"], ["State"])],
+  },
+  FROM_STATE: {
+    description: "A named transition starts in this state",
+    pairs: [semantic(["StateTransition"], ["State"])],
+  },
+  TO_STATE: {
+    description: "A named transition ends in this state",
+    pairs: [semantic(["StateTransition"], ["State"])],
+  },
+  FLOW_SOURCE: {
+    description: "An integration flow starts at this system part or data source",
+    pairs: [semantic(["IntegrationFlow"], FLOW_ENDPOINTS)],
+  },
+  FLOW_TARGET: {
+    description: "An integration flow ends at this system part or data destination",
+    pairs: [semantic(["IntegrationFlow"], FLOW_ENDPOINTS)],
+  },
+  USES_CONTRACT: {
+    description: "An interface, operation, event, topic or flow uses a named payload or file contract",
+    pairs: [semantic(["IntegrationFlow", "Interface", "API", "Endpoint", "Operation", "DomainEvent", "MessageTopic"], ["DataContract"])],
+  },
+  DEPLOYED_IN: {
+    description: "A system part or shared store is deployed in a named environment",
+    pairs: [semantic([...SYSTEM_PARTS, "DataStore", "Database", "MessageTopic"], ["Environment"])],
   },
   PERFORMED_BY: {
     description: "Work, a capability or a scenario is performed by a role or team",
-    pairs: [semantic([...WORK_ITEMS, "Capability", "BusinessRule", "Workflow", "Process", "TestScenario"], ["Role", "Team"])],
+    pairs: [semantic([...WORK_ITEMS, "Capability", "BusinessRule", "Workflow", "WorkflowStep", "Process", "TestScenario"], ["Role", "Team"])],
   },
   HAS_RISK: {
     description: "Source is exposed to a risk",
@@ -204,17 +286,17 @@ export const RELATIONSHIP_RULES: Record<RelationshipType, RelationshipRule> = {
   },
   CONSTRAINED_BY: {
     description: "Source must respect a constraint or business rule",
-    pairs: [semantic([...WORK_ITEMS, ...SUT, "Capability", "Requirement", "BusinessEntity", "Workflow", "Process", "State"], ["Constraint", "BusinessRule"])],
+    pairs: [semantic([...WORK_ITEMS, ...SUT, "Capability", "Requirement", "BusinessEntity", "Workflow", "WorkflowStep", "Process", "State", "StateTransition"], ["Constraint", "BusinessRule"])],
   },
   DEPENDS_ON: {
     description: "Source depends on target",
-    pairs: [semantic([...WORK_ITEMS, ...SUT, "Capability", "Workflow", "Process"], [...WORK_ITEMS, ...SUT, "Capability", "Workflow", "Process"])],
+    pairs: [semantic([...WORK_ITEMS, ...SUT, "Capability", "Workflow", "Process", "TestCase"], [...WORK_ITEMS, ...SUT, "Capability", "Workflow", "Process", "TestCase"])],
   },
   BLOCKS: { description: "Source blocks target", pairs: [semantic([...WORK_ITEMS, ...TEST_EXECUTION, "Risk"], [...WORK_ITEMS, ...TEST_EXECUTION])] },
   BLOCKED_BY: { description: "Source is blocked by target", pairs: [semantic([...WORK_ITEMS, ...TEST_EXECUTION], [...WORK_ITEMS, ...TEST_EXECUTION, "Risk"])] },
   INTEGRATES_WITH: {
     description: "SUT parts integrate with each other",
-    pairs: [semantic(["Application", "Service", "Module", "Component", "API"], ["Application", "Service", "Module", "Component", "API", "MessageTopic"])],
+    pairs: [semantic(SYSTEM_PARTS, [...SYSTEM_PARTS, "MessageTopic"])],
   },
   AFFECTS: {
     description: "Source affects target, e.g. an API updates a data table, or a capability changes how a module behaves",
@@ -237,13 +319,13 @@ export const RELATIONSHIP_RULES: Record<RelationshipType, RelationshipRule> = {
   MENTIONS: { description: "Source text refers to target", pairs: [semantic(ANY, ANY)] },
   EXPOSES: {
     description:
-      "A service, application, module or component exposes an API or endpoint; an API exposes endpoints. A work item never exposes anything: it USES or CHANGES the endpoint",
-    pairs: [semantic(["Application", "Service", "Module", "Component"], ["API", "Endpoint"]), semantic(["API"], ["Endpoint"])],
+      "A system part exposes an interface, API or operation; an API or interface exposes its operations. A work item never exposes anything",
+    pairs: [semantic(["SystemElement", "Application", "Service", "Module", "Component"], ["Interface", "API", "Endpoint", "Operation"]), semantic(["Interface", "API"], ["Endpoint", "Operation"])],
   },
   CHANGES: {
     description:
       "A work item changes a SUT part or business rule. Use only when the source explicitly or strongly indicates the change; otherwise prefer USES, AFFECTS or TRACES_TO",
-    pairs: [semantic(["Story", "Feature", "Task", "Defect"], [...SUT, "BusinessRule", "Capability", "Requirement", "BusinessEntity", "Workflow", "Process", "State"])],
+    pairs: [semantic(["Story", "Feature", "Task", "Defect"], [...SUT, "BusinessRule", "Capability", "Requirement", "BusinessEntity", "Workflow", "WorkflowStep", "Process", "State", "StateTransition"])],
   },
 
   RESOLVES: {
@@ -273,7 +355,7 @@ export const RELATIONSHIP_RULES: Record<RelationshipType, RelationshipRule> = {
     description: "A test case covers a test scenario; a test scenario covers a requirement, capability, business rule, constraint or workflow",
     pairs: [
       semantic(["TestCase"], ["TestScenario"]),
-      semantic(["TestScenario"], ["Requirement", "Capability", "BusinessRule", "Constraint", "Workflow", "Process"]),
+      semantic(["TestScenario"], ["Requirement", "Capability", "BusinessRule", "Constraint", "Workflow", "WorkflowStep", "Process", "StateTransition"]),
     ],
   },
   VALIDATES: {
@@ -286,7 +368,7 @@ export const RELATIONSHIP_RULES: Record<RelationshipType, RelationshipRule> = {
     pairs: [
       semantic(
         ["TestCase", "TestScenario"],
-        ["Application", "Service", "Module", "Component", "API", "Endpoint", "DomainEvent", "MessageTopic", "DataTable", "Field", "BusinessEntity", "Workflow", "State"]
+        [...SUT, "BusinessEntity", "Workflow", "WorkflowStep", "State", "StateTransition"]
       ),
     ],
   },
@@ -350,6 +432,10 @@ export const relationshipKey = (raw: string): string => raw.trim().toUpperCase()
 const RELATIONSHIP_TYPE_ALIASES: Readonly<Record<string, RelationshipType>> = {
   IMPLEMENT: "IMPLEMENTS",
   IMPLEMENTES: "IMPLEMENTS",
+  CONSUMES: "SUBSCRIBES_TO",
+  LISTENS_TO: "SUBSCRIBES_TO",
+  READS: "READS_FROM",
+  WRITES: "WRITES_TO",
 };
 
 /** "depends on", "has-risk" and known aliases become canonical ontology types; unknown names return undefined. */
@@ -364,7 +450,15 @@ export const INVERSE_RELATIONSHIP_NAMES: Readonly<Record<string, RelationshipTyp
   CONSTRAINS: "CONSTRAINED_BY",
   IMPLEMENTED_BY: "IMPLEMENTS",
   USED_BY: "USES",
+  OWNED_BY: "OWNS",
+  CALLED_BY: "CALLS",
   PUBLISHED_BY: "PUBLISHES",
+  CARRIED_BY: "CARRIES",
+  SUBSCRIBED_BY: "SUBSCRIBES_TO",
+  READ_BY: "READS_FROM",
+  WRITTEN_BY: "WRITES_TO",
+  TRANSFORMED_FROM: "TRANSFORMS_TO",
+  TRIGGERED_BY: "TRIGGERS",
   EXPOSED_BY: "EXPOSES",
   CHANGED_BY: "CHANGES",
   PERFORMS: "PERFORMED_BY",

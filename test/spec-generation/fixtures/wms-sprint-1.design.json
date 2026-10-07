@@ -1,0 +1,703 @@
+{
+  "documentType": "sprintTestDesign",
+  "schemaVersion": "1.0.0",
+  "howToReadThisDocument": {
+    "purpose": "Test design for one sprint: a test plan, its suites (one per test type), the test scenarios in each suite, and the test cases that cover each scenario.",
+    "identity": "nodeId is the knowledge-graph id. Items created here use <NodeType>:<slug of name>; existing nodes keep the id they already have, such as FDN-501 or Sprint:WMS\\Sprint 1.",
+    "origin": "\"origin\" says whether an item already existed in the graph (\"existingInGraph\") or was created by this design run (\"createdByAgent\").",
+    "acceptanceCriteria": "Acceptance criteria are not nodes. They are referenced by the backlog item id and the label used in that item's text.",
+    "relationshipKeys": {
+      "testPlan.plannedForSprint": "TestPlan TRACES_TO Sprint",
+      "testPlan.testSuites": "TestPlan CONTAINS TestSuite",
+      "testPlan.inScope": "TestPlan TRACES_TO the backlog item or part of the system",
+      "testPlan.risks[].mitigatedRisk": "TestPlan MITIGATES Risk",
+      "testSuite.testScenarios": "TestSuite CONTAINS TestScenario",
+      "testScenario.testCases": "TestSuite CONTAINS TestCase, and TestCase COVERS TestScenario",
+      "testScenario.reusedTestCases": "TestSuite CONTAINS TestCase, and TestCase COVERS TestScenario (the case already exists)",
+      "testScenario.tracesTo.backlogItems": "TestScenario TRACES_TO Story, Feature, Task or Defect",
+      "testScenario.covers": "TestScenario COVERS BusinessRule, Requirement, Capability, Constraint, Workflow or Process",
+      "testScenario.exercises": "TestScenario EXERCISES the named part of the system",
+      "testCase.validates": "TestCase VALIDATES BusinessRule, Requirement or Constraint",
+      "testCase.exercises": "TestCase EXERCISES the named part of the system",
+      "testCase.alsoInSuites": "TestSuite CONTAINS TestCase (the case runs in that suite too)",
+      "testSuite.includedTestCasesFromOtherSuites": "TestSuite CONTAINS TestCase (defined under another suite)"
+    }
+  },
+  "generatedBy": {
+    "agent": "test-design-agent",
+    "agentVersion": "0.1.0",
+    "model": "example",
+    "runId": "wms-fixture",
+    "generatedAt": "2026-01-01T00:00:00.000Z",
+    "sourceContextCollectedAt": "2026-01-01T00:00:00.000Z"
+  },
+  "sprint": {
+    "nodeId": "Sprint:WMS-Sprint 1",
+    "nodeType": "Sprint",
+    "name": "Sprint 1"
+  },
+  "testPlan": {
+    "nodeId": "TestPlan:wms-sprint-1",
+    "nodeType": "TestPlan",
+    "name": "WMS Sprint 1 test plan",
+    "origin": "createdByAgent",
+    "objective": "Prove the sprint's master-data work behaves as specified and breaks nothing delivered earlier.",
+    "scopeSummary": "Every backlog item of the sprint, the interfaces it touches, and the behaviour earlier sprints delivered on the same parts.",
+    "plannedForSprint": {
+      "nodeId": "Sprint:WMS-Sprint 1",
+      "nodeType": "Sprint",
+      "name": "Sprint 1"
+    },
+    "inScope": [
+      {
+        "nodeId": "FDN-501",
+        "nodeType": "Story",
+        "name": "FDN-501",
+        "reason": "Delivered in this sprint: Create a warehouse."
+      },
+      {
+        "nodeId": "FDN-502",
+        "nodeType": "Story",
+        "name": "FDN-502",
+        "reason": "Delivered in this sprint: Create a zone."
+      }
+    ],
+    "outOfScope": [
+      {
+        "item": "Reporting",
+        "reason": "Untouched by this sprint and not dependent on it."
+      }
+    ],
+    "risks": [
+      {
+        "mitigatedRisk": {
+          "nodeId": "Risk:master-data-changes-break-earlier-imports",
+          "nodeType": "Risk",
+          "name": "Master data changes break earlier imports",
+          "origin": "createdByAgent"
+        },
+        "description": "The warehouse table is shared with the import work delivered earlier.",
+        "likelihood": "medium",
+        "impact": "high",
+        "mitigation": "Run the regression suite over the import behaviour before release.",
+        "relatedNodes": []
+      }
+    ],
+    "environments": [
+      "A test environment with an empty warehouse table."
+    ],
+    "testDataNeeds": [
+      "A warehouse code that already exists."
+    ],
+    "assumptions": [
+      "The API is reachable from the test environment."
+    ],
+    "openQuestions": [],
+    "testSuites": [
+      {
+        "nodeId": "TestSuite:wms-sprint-1-functional",
+        "nodeType": "TestSuite",
+        "name": "WMS Sprint 1 functional suite",
+        "origin": "createdByAgent",
+        "testType": "functional",
+        "purpose": "Run the functional suite for this sprint.",
+        "entryCriteria": [
+          "The build is deployed to the test environment."
+        ],
+        "exitCriteria": [
+          "Every case has been run."
+        ],
+        "includedTestCasesFromOtherSuites": [],
+        "testScenarios": [
+          {
+            "nodeId": "TestScenario:warehouse-is-created",
+            "nodeType": "TestScenario",
+            "name": "A warehouse is created",
+            "origin": "createdByAgent",
+            "description": "A warehouse is created.",
+            "expectedOutcome": "A warehouse is created.",
+            "priority": "high",
+            "tracesTo": {
+              "backlogItems": [
+                {
+                  "nodeId": "FDN-501",
+                  "nodeType": "Story",
+                  "name": "FDN-501"
+                }
+              ],
+              "acceptanceCriteria": []
+            },
+            "covers": [],
+            "exercises": [
+              {
+                "nodeId": "Endpoint:post-warehouses",
+                "nodeType": "Endpoint",
+                "name": "POST /warehouses"
+              },
+              {
+                "nodeId": "Endpoint:get-warehouses-id",
+                "nodeType": "Endpoint",
+                "name": "GET /warehouses/{warehouse_id}"
+              }
+            ],
+            "testCases": [
+              {
+                "nodeId": "TestCase:a-warehouse-is-created-and-can-be-read-back",
+                "nodeType": "TestCase",
+                "name": "A warehouse is created and can be read back",
+                "origin": "createdByAgent",
+                "objective": "Confirm that a warehouse is created and can be read back.",
+                "caseKind": "positive",
+                "priority": "high",
+                "testTypes": [
+                  "functional",
+                  "smoke",
+                  "integration"
+                ],
+                "preconditions": [
+                  "The API is reachable and the caller is authenticated."
+                ],
+                "testData": [
+                  {
+                    "name": "code",
+                    "value": "WH-S1-501"
+                  },
+                  {
+                    "name": "name",
+                    "value": "Main Warehouse"
+                  },
+                  {
+                    "name": "address",
+                    "value": "100 Warehouse Road"
+                  },
+                  {
+                    "name": "timezone",
+                    "value": "Asia/Calcutta"
+                  }
+                ],
+                "steps": [
+                  {
+                    "stepNumber": 1,
+                    "action": "Send a POST /warehouses request with the test data.",
+                    "expectedResult": "The response status code is 201 and the returned warehouse is active."
+                  },
+                  {
+                    "stepNumber": 2,
+                    "action": "Read the new warehouse back by the id in the create response.",
+                    "expectedResult": "The returned code matches the code that was sent."
+                  }
+                ],
+                "coversAcceptanceCriteria": [],
+                "validates": [],
+                "exercises": [
+                  {
+                    "nodeId": "Endpoint:post-warehouses",
+                    "nodeType": "Endpoint",
+                    "name": "POST /warehouses"
+                  },
+                  {
+                    "nodeId": "Endpoint:get-warehouses-id",
+                    "nodeType": "Endpoint",
+                    "name": "GET /warehouses/{warehouse_id}"
+                  }
+                ],
+                "alsoInSuites": [],
+                "automation": {
+                  "candidate": true
+                }
+              },
+              {
+                "nodeId": "TestCase:a-warehouse-can-be-created",
+                "nodeType": "TestCase",
+                "name": "A warehouse can be created",
+                "origin": "createdByAgent",
+                "objective": "Confirm that a warehouse can be created.",
+                "caseKind": "positive",
+                "priority": "high",
+                "testTypes": [
+                  "sanity"
+                ],
+                "preconditions": [
+                  "The API is reachable and the caller is authenticated."
+                ],
+                "testData": [
+                  {
+                    "name": "code",
+                    "value": "WH-S1-504"
+                  },
+                  {
+                    "name": "name",
+                    "value": "Fourth Warehouse"
+                  },
+                  {
+                    "name": "address",
+                    "value": "400 Warehouse Road"
+                  },
+                  {
+                    "name": "timezone",
+                    "value": "Asia/Calcutta"
+                  }
+                ],
+                "steps": [
+                  {
+                    "stepNumber": 1,
+                    "action": "Send a POST /warehouses request with the test data.",
+                    "expectedResult": "The system responds as the scenario expects."
+                  }
+                ],
+                "coversAcceptanceCriteria": [],
+                "validates": [],
+                "exercises": [
+                  {
+                    "nodeId": "Endpoint:post-warehouses",
+                    "nodeType": "Endpoint",
+                    "name": "POST /warehouses"
+                  }
+                ],
+                "alsoInSuites": [],
+                "automation": {
+                  "candidate": true
+                }
+              }
+            ],
+            "reusedTestCases": []
+          },
+          {
+            "nodeId": "TestScenario:warehouse-creation-is-validated",
+            "nodeType": "TestScenario",
+            "name": "Warehouse creation is validated",
+            "origin": "createdByAgent",
+            "description": "Warehouse creation is validated.",
+            "expectedOutcome": "Warehouse creation is validated.",
+            "priority": "high",
+            "tracesTo": {
+              "backlogItems": [
+                {
+                  "nodeId": "FDN-501",
+                  "nodeType": "Story",
+                  "name": "FDN-501"
+                }
+              ],
+              "acceptanceCriteria": []
+            },
+            "covers": [
+              {
+                "nodeId": "BusinessRule:warehouse-code-is-unique",
+                "nodeType": "BusinessRule",
+                "name": "A warehouse code is unique"
+              }
+            ],
+            "exercises": [
+              {
+                "nodeId": "Endpoint:post-warehouses",
+                "nodeType": "Endpoint",
+                "name": "POST /warehouses"
+              }
+            ],
+            "testCases": [
+              {
+                "nodeId": "TestCase:a-duplicate-warehouse-code-is-rejected",
+                "nodeType": "TestCase",
+                "name": "A duplicate warehouse code is rejected",
+                "origin": "createdByAgent",
+                "objective": "Confirm that a duplicate warehouse code is rejected.",
+                "caseKind": "negative",
+                "priority": "high",
+                "testTypes": [
+                  "functional",
+                  "integration"
+                ],
+                "preconditions": [
+                  "The API is reachable and the caller is authenticated."
+                ],
+                "testData": [
+                  {
+                    "name": "code",
+                    "value": "WH-S1-502"
+                  },
+                  {
+                    "name": "name",
+                    "value": "Second Warehouse"
+                  },
+                  {
+                    "name": "address",
+                    "value": "200 Warehouse Road"
+                  },
+                  {
+                    "name": "timezone",
+                    "value": "Asia/Calcutta"
+                  }
+                ],
+                "steps": [
+                  {
+                    "stepNumber": 1,
+                    "action": "Send a POST /warehouses request with the test data.",
+                    "expectedResult": "The response status code is 201."
+                  },
+                  {
+                    "stepNumber": 2,
+                    "action": "Send the same POST /warehouses request again with the same code.",
+                    "expectedResult": "The response status code is 409 because the code is already taken."
+                  }
+                ],
+                "coversAcceptanceCriteria": [],
+                "validates": [
+                  {
+                    "nodeId": "BusinessRule:warehouse-code-is-unique",
+                    "nodeType": "BusinessRule",
+                    "name": "A warehouse code is unique"
+                  }
+                ],
+                "exercises": [
+                  {
+                    "nodeId": "Endpoint:post-warehouses",
+                    "nodeType": "Endpoint",
+                    "name": "POST /warehouses"
+                  }
+                ],
+                "alsoInSuites": [],
+                "automation": {
+                  "candidate": true
+                }
+              },
+              {
+                "nodeId": "TestCase:an-invalid-timezone-is-rejected",
+                "nodeType": "TestCase",
+                "name": "An invalid timezone is rejected",
+                "origin": "createdByAgent",
+                "objective": "Confirm that an invalid timezone is rejected.",
+                "caseKind": "negative",
+                "priority": "high",
+                "testTypes": [
+                  "functional"
+                ],
+                "preconditions": [
+                  "The API is reachable and the caller is authenticated."
+                ],
+                "testData": [
+                  {
+                    "name": "code",
+                    "value": "WH-S1-503"
+                  },
+                  {
+                    "name": "name",
+                    "value": "Third Warehouse"
+                  },
+                  {
+                    "name": "address",
+                    "value": "300 Warehouse Road"
+                  },
+                  {
+                    "name": "timezone",
+                    "value": "Not/AZone"
+                  }
+                ],
+                "steps": [
+                  {
+                    "stepNumber": 1,
+                    "action": "Send a POST /warehouses request with the invalid timezone in the test data.",
+                    "expectedResult": "The response status code is 422."
+                  }
+                ],
+                "coversAcceptanceCriteria": [],
+                "validates": [],
+                "exercises": [
+                  {
+                    "nodeId": "Endpoint:post-warehouses",
+                    "nodeType": "Endpoint",
+                    "name": "POST /warehouses"
+                  }
+                ],
+                "alsoInSuites": [],
+                "automation": {
+                  "candidate": true
+                }
+              }
+            ],
+            "reusedTestCases": []
+          },
+          {
+            "nodeId": "TestScenario:warehouse-is-persisted",
+            "nodeType": "TestScenario",
+            "name": "A created warehouse is persisted",
+            "origin": "createdByAgent",
+            "description": "A created warehouse is persisted.",
+            "expectedOutcome": "A created warehouse is persisted.",
+            "priority": "high",
+            "tracesTo": {
+              "backlogItems": [
+                {
+                  "nodeId": "FDN-501",
+                  "nodeType": "Story",
+                  "name": "FDN-501"
+                }
+              ],
+              "acceptanceCriteria": []
+            },
+            "covers": [],
+            "exercises": [
+              {
+                "nodeId": "Endpoint:post-warehouses",
+                "nodeType": "Endpoint",
+                "name": "POST /warehouses"
+              }
+            ],
+            "testCases": [
+              {
+                "nodeId": "TestCase:the-created-warehouse-is-persisted",
+                "nodeType": "TestCase",
+                "name": "The created warehouse is persisted",
+                "origin": "createdByAgent",
+                "objective": "Confirm that the created warehouse is written to the warehouse table.",
+                "caseKind": "positive",
+                "priority": "high",
+                "testTypes": [
+                  "functional",
+                  "integration"
+                ],
+                "preconditions": [
+                  "The API is reachable and the caller is authenticated."
+                ],
+                "testData": [
+                  {
+                    "name": "code",
+                    "value": "WH-S1-505"
+                  },
+                  {
+                    "name": "name",
+                    "value": "Fifth Warehouse"
+                  },
+                  {
+                    "name": "address",
+                    "value": "500 Warehouse Road"
+                  },
+                  {
+                    "name": "timezone",
+                    "value": "Asia/Calcutta"
+                  }
+                ],
+                "steps": [
+                  {
+                    "stepNumber": 1,
+                    "action": "Send a POST /warehouses request with the test data.",
+                    "expectedResult": "The response status code is 201."
+                  },
+                  {
+                    "stepNumber": 2,
+                    "action": "Check the warehouse table in the database.",
+                    "expectedResult": "Exactly one row with that code is stored in the warehouse table, and it is active."
+                  }
+                ],
+                "coversAcceptanceCriteria": [],
+                "validates": [],
+                "exercises": [
+                  {
+                    "nodeId": "Endpoint:post-warehouses",
+                    "nodeType": "Endpoint",
+                    "name": "POST /warehouses"
+                  },
+                  {
+                    "nodeId": "DataTable:warehouse",
+                    "nodeType": "DataTable",
+                    "name": "warehouse"
+                  }
+                ],
+                "alsoInSuites": [],
+                "automation": {
+                  "candidate": true
+                }
+              }
+            ],
+            "reusedTestCases": []
+          },
+          {
+            "nodeId": "TestScenario:the-warehouse-admin-screen",
+            "nodeType": "TestScenario",
+            "name": "The warehouse admin screen",
+            "origin": "createdByAgent",
+            "description": "A warehouse is created from the admin screen.",
+            "expectedOutcome": "A warehouse is created from the admin screen.",
+            "priority": "high",
+            "tracesTo": {
+              "backlogItems": [
+                {
+                  "nodeId": "FDN-503",
+                  "nodeType": "Story",
+                  "name": "FDN-503"
+                }
+              ],
+              "acceptanceCriteria": []
+            },
+            "covers": [],
+            "exercises": [
+              {
+                "nodeId": "Screen:warehouse-form",
+                "nodeType": "Screen",
+                "name": "Warehouse form"
+              }
+            ],
+            "testCases": [
+              {
+                "nodeId": "TestCase:a-warehouse-is-created-from-the-form",
+                "nodeType": "TestCase",
+                "name": "A warehouse is created from the form",
+                "origin": "createdByAgent",
+                "objective": "Confirm a warehouse can be created from the admin screen.",
+                "caseKind": "positive",
+                "priority": "high",
+                "testTypes": [
+                  "functional",
+                  "smoke"
+                ],
+                "preconditions": [
+                  "The tester is signed in as a system administrator."
+                ],
+                "testData": [
+                  {
+                    "name": "code",
+                    "value": "WH-S1-601"
+                  },
+                  {
+                    "name": "name",
+                    "value": "Form Warehouse"
+                  },
+                  {
+                    "name": "address",
+                    "value": "600 Warehouse Road"
+                  },
+                  {
+                    "name": "timezone",
+                    "value": "Asia/Calcutta"
+                  },
+                  {
+                    "name": "confirmation",
+                    "value": "was saved"
+                  }
+                ],
+                "steps": [
+                  {
+                    "stepNumber": 1,
+                    "action": "Open the warehouse admin screen.",
+                    "expectedResult": "The warehouse code field is shown."
+                  },
+                  {
+                    "stepNumber": 2,
+                    "action": "Fill the warehouse code, name, address and timezone fields with the test data and click Save warehouse.",
+                    "expectedResult": "The status message contains \"was saved\"."
+                  }
+                ],
+                "coversAcceptanceCriteria": [],
+                "validates": [],
+                "exercises": [
+                  {
+                    "nodeId": "Screen:warehouse-form",
+                    "nodeType": "Screen",
+                    "name": "Warehouse form"
+                  }
+                ],
+                "alsoInSuites": [],
+                "automation": {
+                  "candidate": true
+                }
+              },
+              {
+                "nodeId": "TestCase:the-warehouse-list-shows-the-new-warehouse",
+                "nodeType": "TestCase",
+                "name": "The warehouse list shows the new warehouse",
+                "origin": "createdByAgent",
+                "objective": "Confirm the new warehouse appears in the list on the screen.",
+                "caseKind": "positive",
+                "priority": "medium",
+                "testTypes": [
+                  "functional"
+                ],
+                "preconditions": [
+                  "The tester is signed in as a system administrator."
+                ],
+                "testData": [
+                  {
+                    "name": "code",
+                    "value": "WH-S1-602"
+                  }
+                ],
+                "steps": [
+                  {
+                    "stepNumber": 1,
+                    "action": "Open the warehouse admin screen.",
+                    "expectedResult": "The warehouse code field is shown."
+                  },
+                  {
+                    "stepNumber": 2,
+                    "action": "Read the existing warehouses list on the screen.",
+                    "expectedResult": "The list of existing warehouses contains the code."
+                  }
+                ],
+                "coversAcceptanceCriteria": [],
+                "validates": [],
+                "exercises": [
+                  {
+                    "nodeId": "Screen:warehouse-form",
+                    "nodeType": "Screen",
+                    "name": "Warehouse form"
+                  }
+                ],
+                "alsoInSuites": [],
+                "automation": {
+                  "candidate": true
+                }
+              }
+            ],
+            "reusedTestCases": []
+          }
+        ]
+      }
+    ]
+  },
+  "coverageSummary": {
+    "acceptanceCriteria": {
+      "total": 0,
+      "covered": 0,
+      "uncovered": []
+    },
+    "scenarios": {
+      "existingInGraph": 0,
+      "createdByAgent": 4
+    },
+    "testCases": {
+      "createdByAgent": 7,
+      "reusedFromGraph": 0,
+      "byTestType": {
+        "functional": 4,
+        "smoke": 1,
+        "integration": 2,
+        "sanity": 1
+      }
+    },
+    "backlogItems": [
+      {
+        "nodeId": "FDN-501",
+        "title": "Create warehouse",
+        "scenarios": 3,
+        "testCases": 5,
+        "testTypes": [
+          "functional",
+          "smoke",
+          "integration",
+          "sanity"
+        ]
+      },
+      {
+        "nodeId": "FDN-503",
+        "title": "Warehouse admin screen",
+        "scenarios": 1,
+        "testCases": 2,
+        "testTypes": [
+          "functional",
+          "smoke"
+        ]
+      }
+    ],
+    "gaps": []
+  },
+  "warnings": []
+}

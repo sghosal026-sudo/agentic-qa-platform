@@ -485,6 +485,16 @@ export class GraphRepository {
     return this.nodes(result, "n");
   }
 
+  async hasApprovedRelationship(sourceId: string, relationshipType: RelationshipType, targetId: string): Promise<boolean> {
+    const result = await this.client.run(
+      `MATCH (s:Node {id: $sourceId})-[r]->(t:Node {id: $targetId})
+       WHERE type(r) = $relationshipType AND r.reviewState = 'approved'
+       RETURN count(r) > 0 AS found`,
+      { sourceId, relationshipType: safeRelationshipType(relationshipType), targetId },
+    );
+    return result.records[0]?.get("found") === true;
+  }
+
   /** Case-insensitive match of keys against node ids, canonical names and aliases. */
   async findNodesByKeys(keys: readonly string[], limit = 25): Promise<NodeKeyMatch[]> {
     const cleaned = unique(keys.map((key) => key.trim()).filter(Boolean));
@@ -533,6 +543,21 @@ export class GraphRepository {
       limit: int(limit),
     });
     return this.nodes(result, "n");
+  }
+
+  async managedTestCases(): Promise<Array<{ node: Node; storyIds: string[]; dependsOnCaseIds: string[] }>> {
+    const result = await this.client.run(
+      `MATCH (c:Node {nodeType: 'TestCase'})
+       OPTIONAL MATCH (c)-[r:TRACES_TO]->(s:Node {nodeType: 'Story'})
+       WHERE r.reviewState = 'approved'
+       WITH c, collect(DISTINCT s.id) AS storyIds
+       OPTIONAL MATCH (c)-[d:DEPENDS_ON]->(other:Node {nodeType: 'TestCase'})
+       WHERE d.reviewState = 'approved'
+       RETURN c, storyIds, collect(DISTINCT other.id) AS dependsOnCaseIds ORDER BY c.id`,
+    );
+    return result.records.map((record) => ({ node: nodeFromRecord(record.get("c")),
+      storyIds: (record.get("storyIds") as Array<string | null>).filter((id): id is string => typeof id === "string"),
+      dependsOnCaseIds: (record.get("dependsOnCaseIds") as Array<string | null>).filter((id): id is string => typeof id === "string") }));
   }
 
   // ---------------------------------------------------------------- hierarchy

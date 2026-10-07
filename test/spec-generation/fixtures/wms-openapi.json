@@ -1,0 +1,2969 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "WMS API",
+  "version": "0.1.0"
+ },
+ "paths": {
+  "/health": {
+   "get": {
+    "tags": [
+     "platform"
+    ],
+    "summary": "Health",
+    "operationId": "health_health_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Health Health Get"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/warehouses": {
+   "post": {
+    "tags": [
+     "warehouses"
+    ],
+    "summary": "Create Warehouse",
+    "operationId": "create_warehouse_warehouses_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/WarehouseCreate"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Warehouse"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/warehouses/{warehouse_id}": {
+   "get": {
+    "tags": [
+     "warehouses"
+    ],
+    "summary": "Get Warehouse",
+    "operationId": "get_warehouse_warehouses__warehouse_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "warehouse_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Warehouse Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Warehouse"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/warehouses/{warehouse_id}/virtual-locations": {
+   "get": {
+    "tags": [
+     "locations"
+    ],
+    "summary": "List Virtual Locations",
+    "operationId": "list_virtual_locations_warehouses__warehouse_id__virtual_locations_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "warehouse_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Warehouse Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/Location"
+         },
+         "title": "Response List Virtual Locations Warehouses  Warehouse Id  Virtual Locations Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/warehouses/{warehouse_id}/zones": {
+   "post": {
+    "tags": [
+     "zones"
+    ],
+    "summary": "Create Zone",
+    "operationId": "create_zone_warehouses__warehouse_id__zones_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "warehouse_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Warehouse Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ZoneCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Zone"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/zones/{zone_id}": {
+   "delete": {
+    "tags": [
+     "zones"
+    ],
+    "summary": "Delete Zone",
+    "operationId": "delete_zone_zones__zone_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "zone_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Zone Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Delete Zone Zones  Zone Id  Delete"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/zones/{zone_id}/locations": {
+   "post": {
+    "tags": [
+     "locations"
+    ],
+    "summary": "Create Location",
+    "operationId": "create_location_zones__zone_id__locations_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "zone_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Zone Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/LocationCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Location"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/locations/{location_id}": {
+   "delete": {
+    "tags": [
+     "locations"
+    ],
+    "summary": "Retire Location",
+    "operationId": "retire_location_locations__location_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "location_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Location Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Retire Location Locations  Location Id  Delete"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/products": {
+   "post": {
+    "tags": [
+     "products"
+    ],
+    "summary": "Create Product",
+    "operationId": "create_product_products_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ProductCreate"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Product"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/products/{product_id}": {
+   "get": {
+    "tags": [
+     "products"
+    ],
+    "summary": "Get Product",
+    "operationId": "get_product_products__product_id__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "product_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Product Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Product"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/products/{product_id}/tracking": {
+   "patch": {
+    "tags": [
+     "products"
+    ],
+    "summary": "Update Product Tracking",
+    "operationId": "update_product_tracking_products__product_id__tracking_patch",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "product_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Product Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ProductTrackingUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Product"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/partners": {
+   "post": {
+    "tags": [
+     "partners"
+    ],
+    "summary": "Create Partner",
+    "operationId": "create_partner_partners_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/PartnerCreate"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Partner"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/partners/{partner_id}/deactivate": {
+   "patch": {
+    "tags": [
+     "partners"
+    ],
+    "summary": "Deactivate Partner",
+    "operationId": "deactivate_partner_partners__partner_id__deactivate_patch",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "partner_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Partner Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Partner"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/products/{product_id}/barcodes": {
+   "post": {
+    "tags": [
+     "products"
+    ],
+    "summary": "Add Barcode",
+    "operationId": "add_barcode_products__product_id__barcodes_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "product_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Product Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/BarcodeCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Barcode"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/barcodes/{barcode}": {
+   "get": {
+    "tags": [
+     "products"
+    ],
+    "summary": "Resolve Barcode",
+    "operationId": "resolve_barcode_barcodes__barcode__get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "barcode",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Barcode"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Resolve Barcode Barcodes  Barcode  Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/products/{product_id}/barcodes/{barcode}": {
+   "delete": {
+    "tags": [
+     "products"
+    ],
+    "summary": "Remove Barcode",
+    "operationId": "remove_barcode_products__product_id__barcodes__barcode__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "product_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Product Id"
+      }
+     },
+     {
+      "name": "barcode",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Barcode"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BarcodeRemoval"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/products/{product_id}/uom-conversions": {
+   "post": {
+    "tags": [
+     "products"
+    ],
+    "summary": "Add Uom Conversion",
+    "operationId": "add_uom_conversion_products__product_id__uom_conversions_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "product_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Product Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/UomConversionCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/UomConversion"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/products/{product_id}/convert": {
+   "post": {
+    "tags": [
+     "products"
+    ],
+    "summary": "Convert Quantity",
+    "operationId": "convert_quantity_products__product_id__convert_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "product_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Product Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/QuantityConversionRequest"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/QuantityConversion"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/reason-codes": {
+   "post": {
+    "tags": [
+     "reason-codes"
+    ],
+    "summary": "Create Reason Code",
+    "operationId": "create_reason_code_reason_codes_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReasonCodeCreate"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ReasonCode"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/reason-codes/{reason_code_id}/deactivate": {
+   "patch": {
+    "tags": [
+     "reason-codes"
+    ],
+    "summary": "Deactivate Reason Code",
+    "operationId": "deactivate_reason_code_reason_codes__reason_code_id__deactivate_patch",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "reason_code_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Reason Code Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ReasonCode"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/reason-codes/{category}/{code}/validate": {
+   "get": {
+    "tags": [
+     "reason-codes"
+    ],
+    "summary": "Validate Reason Code",
+    "operationId": "validate_reason_code_reason_codes__category___code__validate_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "category",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "$ref": "#/components/schemas/ReasonCategory"
+      }
+     },
+     {
+      "name": "code",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Code"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Validate Reason Code Reason Codes  Category   Code  Validate Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/reason-codes/{reason_code_id}": {
+   "delete": {
+    "tags": [
+     "reason-codes"
+    ],
+    "summary": "Delete Reason Code",
+    "operationId": "delete_reason_code_reason_codes__reason_code_id__delete",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "reason_code_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Reason Code Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/movements": {
+   "post": {
+    "tags": [
+     "inventory"
+    ],
+    "summary": "Record Movement",
+    "operationId": "record_movement_movements_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/MovementCreate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Record Movement Movements Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "tags": [
+     "inventory"
+    ],
+    "summary": "List Movements",
+    "operationId": "list_movements_movements_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "product_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Product Id"
+      }
+     },
+     {
+      "name": "location_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Location Id"
+      }
+     },
+     {
+      "name": "start",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Start"
+      }
+     },
+     {
+      "name": "end",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "End"
+      }
+     },
+     {
+      "name": "correlation_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Correlation Id"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "default": 50,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "default": 0,
+       "title": "Offset"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": true
+         },
+         "title": "Response List Movements Movements Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/asns": {
+   "post": {
+    "tags": [
+     "inbound"
+    ],
+    "summary": "Create Asn",
+    "operationId": "create_asn_asns_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/AsnCreate"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "additionalProperties": true,
+         "type": "object",
+         "title": "Response Create Asn Asns Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    },
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ]
+   }
+  },
+  "/warehouses/{warehouse_id}/asns/open": {
+   "get": {
+    "tags": [
+     "inbound"
+    ],
+    "summary": "List Open Asns",
+    "operationId": "list_open_asns_warehouses__warehouse_id__asns_open_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "warehouse_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Warehouse Id"
+      }
+     },
+     {
+      "name": "supplier_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Supplier Id"
+      }
+     },
+     {
+      "name": "expected_date",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Expected Date"
+      }
+     },
+     {
+      "name": "reference",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Reference"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": true
+         },
+         "title": "Response List Open Asns Warehouses  Warehouse Id  Asns Open Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/asns/{asn_id}/receipts": {
+   "post": {
+    "tags": [
+     "inbound"
+    ],
+    "summary": "Start Receipt",
+    "operationId": "start_receipt_asns__asn_id__receipts_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "asn_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Asn Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReceiptStart"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Start Receipt Asns  Asn Id  Receipts Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/receipts/{receipt_id}/lines/{line_id}": {
+   "put": {
+    "tags": [
+     "inbound"
+    ],
+    "summary": "Update Receipt Line",
+    "operationId": "update_receipt_line_receipts__receipt_id__lines__line_id__put",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "receipt_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Receipt Id"
+      }
+     },
+     {
+      "name": "line_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Line Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/ReceiptLineUpdate"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Update Receipt Line Receipts  Receipt Id  Lines  Line Id  Put"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/receipts/{receipt_id}/confirm": {
+   "post": {
+    "tags": [
+     "inbound"
+    ],
+    "summary": "Confirm Receipt",
+    "operationId": "confirm_receipt_receipts__receipt_id__confirm_post",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "receipt_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "title": "Receipt Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "additionalProperties": true,
+         "title": "Response Confirm Receipt Receipts  Receipt Id  Confirm Post"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/audit": {
+   "get": {
+    "tags": [
+     "platform"
+    ],
+    "summary": "List Audit",
+    "operationId": "list_audit_audit_get",
+    "security": [
+     {
+      "HTTPBearer": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "start",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Start"
+      }
+     },
+     {
+      "name": "end",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "End"
+      }
+     },
+     {
+      "name": "actor",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Actor"
+      }
+     },
+     {
+      "name": "entity_type",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Entity Type"
+      }
+     },
+     {
+      "name": "entity_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Entity Id"
+      }
+     },
+     {
+      "name": "correlation_id",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Correlation Id"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "default": 50,
+       "title": "Limit"
+      }
+     },
+     {
+      "name": "offset",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "default": 0,
+       "title": "Offset"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "additionalProperties": true
+         },
+         "title": "Response List Audit Audit Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "AsnCreate": {
+    "properties": {
+     "warehouse_id": {
+      "type": "string",
+      "title": "Warehouse Id"
+     },
+     "supplier_id": {
+      "type": "string",
+      "title": "Supplier Id"
+     },
+     "supplier_reference": {
+      "type": "string",
+      "maxLength": 100,
+      "minLength": 1,
+      "title": "Supplier Reference"
+     },
+     "expected_date": {
+      "type": "string",
+      "maxLength": 40,
+      "minLength": 1,
+      "title": "Expected Date"
+     },
+     "lines": {
+      "items": {
+       "$ref": "#/components/schemas/AsnLineCreate"
+      },
+      "type": "array",
+      "minItems": 1,
+      "title": "Lines"
+     }
+    },
+    "type": "object",
+    "required": [
+     "warehouse_id",
+     "supplier_id",
+     "supplier_reference",
+     "expected_date",
+     "lines"
+    ],
+    "title": "AsnCreate"
+   },
+   "AsnLineCreate": {
+    "properties": {
+     "product_id": {
+      "type": "string",
+      "title": "Product Id"
+     },
+     "quantity": {
+      "type": "integer",
+      "exclusiveMinimum": 0.0,
+      "title": "Quantity"
+     }
+    },
+    "type": "object",
+    "required": [
+     "product_id",
+     "quantity"
+    ],
+    "title": "AsnLineCreate"
+   },
+   "Barcode": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "product_id": {
+      "type": "string",
+      "title": "Product Id"
+     },
+     "barcode": {
+      "type": "string",
+      "title": "Barcode"
+     },
+     "uom": {
+      "type": "string",
+      "title": "Uom"
+     },
+     "is_primary": {
+      "type": "boolean",
+      "title": "Is Primary"
+     },
+     "active": {
+      "type": "boolean",
+      "title": "Active"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "product_id",
+     "barcode",
+     "uom",
+     "is_primary",
+     "active"
+    ],
+    "title": "Barcode"
+   },
+   "BarcodeCreate": {
+    "properties": {
+     "barcode": {
+      "type": "string",
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Barcode"
+     },
+     "uom": {
+      "type": "string",
+      "maxLength": 16,
+      "minLength": 1,
+      "title": "Uom"
+     },
+     "is_primary": {
+      "type": "boolean",
+      "title": "Is Primary",
+      "default": false
+     }
+    },
+    "type": "object",
+    "required": [
+     "barcode",
+     "uom"
+    ],
+    "title": "BarcodeCreate"
+   },
+   "BarcodeRemoval": {
+    "properties": {
+     "warning": {
+      "type": "string",
+      "title": "Warning"
+     }
+    },
+    "type": "object",
+    "required": [
+     "warning"
+    ],
+    "title": "BarcodeRemoval"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "Location": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "warehouse_id": {
+      "type": "string",
+      "title": "Warehouse Id"
+     },
+     "zone_id": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Zone Id"
+     },
+     "code": {
+      "type": "string",
+      "title": "Code"
+     },
+     "type": {
+      "$ref": "#/components/schemas/LocationType"
+     },
+     "max_weight_kg": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Max Weight Kg"
+     },
+     "max_volume_m3": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Max Volume M3"
+     },
+     "pick_sequence": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Pick Sequence"
+     },
+     "allow_multiple_products": {
+      "type": "boolean",
+      "title": "Allow Multiple Products"
+     },
+     "allow_multiple_batches": {
+      "type": "boolean",
+      "title": "Allow Multiple Batches"
+     },
+     "is_virtual": {
+      "type": "boolean",
+      "title": "Is Virtual"
+     },
+     "available_for_fulfilment": {
+      "type": "boolean",
+      "title": "Available For Fulfilment"
+     },
+     "suggest_for_work": {
+      "type": "boolean",
+      "title": "Suggest For Work"
+     },
+     "active": {
+      "type": "boolean",
+      "title": "Active"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "warehouse_id",
+     "zone_id",
+     "code",
+     "type",
+     "max_weight_kg",
+     "max_volume_m3",
+     "pick_sequence",
+     "allow_multiple_products",
+     "allow_multiple_batches",
+     "is_virtual",
+     "available_for_fulfilment",
+     "suggest_for_work",
+     "active"
+    ],
+    "title": "Location"
+   },
+   "LocationCreate": {
+    "properties": {
+     "code": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Code"
+     },
+     "type": {
+      "$ref": "#/components/schemas/LocationType"
+     },
+     "max_weight_kg": {
+      "type": "number",
+      "exclusiveMinimum": 0.0,
+      "title": "Max Weight Kg"
+     },
+     "max_volume_m3": {
+      "type": "number",
+      "exclusiveMinimum": 0.0,
+      "title": "Max Volume M3"
+     },
+     "pick_sequence": {
+      "type": "integer",
+      "minimum": 0.0,
+      "title": "Pick Sequence"
+     },
+     "allow_multiple_products": {
+      "type": "boolean",
+      "title": "Allow Multiple Products"
+     },
+     "allow_multiple_batches": {
+      "type": "boolean",
+      "title": "Allow Multiple Batches"
+     }
+    },
+    "type": "object",
+    "required": [
+     "code",
+     "type",
+     "max_weight_kg",
+     "max_volume_m3",
+     "pick_sequence",
+     "allow_multiple_products",
+     "allow_multiple_batches"
+    ],
+    "title": "LocationCreate"
+   },
+   "LocationType": {
+    "type": "string",
+    "enum": [
+     "storage",
+     "pick_face",
+     "staging",
+     "dock",
+     "quarantine",
+     "virtual"
+    ],
+    "title": "LocationType"
+   },
+   "MovementCreate": {
+    "properties": {
+     "product_id": {
+      "type": "string",
+      "title": "Product Id"
+     },
+     "from_location_id": {
+      "type": "string",
+      "title": "From Location Id"
+     },
+     "to_location_id": {
+      "type": "string",
+      "title": "To Location Id"
+     },
+     "quantity": {
+      "type": "integer",
+      "exclusiveMinimum": 0.0,
+      "title": "Quantity"
+     },
+     "uom": {
+      "type": "string",
+      "maxLength": 16,
+      "minLength": 1,
+      "title": "Uom"
+     }
+    },
+    "type": "object",
+    "required": [
+     "product_id",
+     "from_location_id",
+     "to_location_id",
+     "quantity",
+     "uom"
+    ],
+    "title": "MovementCreate"
+   },
+   "Partner": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "code": {
+      "type": "string",
+      "title": "Code"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "roles": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Roles"
+     },
+     "address": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Address"
+     },
+     "partial_shipment_allowed": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Partial Shipment Allowed"
+     },
+     "minimum_shelf_life_days": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minimum Shelf Life Days"
+     },
+     "active": {
+      "type": "boolean",
+      "title": "Active"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "code",
+     "name",
+     "roles",
+     "active"
+    ],
+    "title": "Partner"
+   },
+   "PartnerCreate": {
+    "properties": {
+     "code": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Code"
+     },
+     "name": {
+      "type": "string",
+      "maxLength": 240,
+      "minLength": 1,
+      "title": "Name"
+     },
+     "roles": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "title": "Roles"
+     },
+     "address": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 500
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Address"
+     },
+     "partial_shipment_allowed": {
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Partial Shipment Allowed"
+     },
+     "minimum_shelf_life_days": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Minimum Shelf Life Days"
+     }
+    },
+    "type": "object",
+    "required": [
+     "code",
+     "name",
+     "roles"
+    ],
+    "title": "PartnerCreate"
+   },
+   "Product": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "sku": {
+      "type": "string",
+      "title": "Sku"
+     },
+     "description": {
+      "type": "string",
+      "title": "Description"
+     },
+     "base_uom": {
+      "type": "string",
+      "title": "Base Uom"
+     },
+     "weight_kg": {
+      "type": "number",
+      "title": "Weight Kg"
+     },
+     "length_cm": {
+      "type": "number",
+      "title": "Length Cm"
+     },
+     "width_cm": {
+      "type": "number",
+      "title": "Width Cm"
+     },
+     "height_cm": {
+      "type": "number",
+      "title": "Height Cm"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "warnings": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Warnings",
+      "default": []
+     },
+     "requires_batch": {
+      "type": "boolean",
+      "title": "Requires Batch",
+      "default": false
+     },
+     "requires_expiry": {
+      "type": "boolean",
+      "title": "Requires Expiry",
+      "default": false
+     },
+     "requires_serial": {
+      "type": "boolean",
+      "title": "Requires Serial",
+      "default": false
+     },
+     "temperature_class": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Temperature Class"
+     },
+     "hazmat_class": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Hazmat Class"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "sku",
+     "description",
+     "base_uom",
+     "weight_kg",
+     "length_cm",
+     "width_cm",
+     "height_cm",
+     "status"
+    ],
+    "title": "Product"
+   },
+   "ProductCreate": {
+    "properties": {
+     "sku": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "title": "Sku"
+     },
+     "description": {
+      "type": "string",
+      "maxLength": 240,
+      "minLength": 2,
+      "title": "Description"
+     },
+     "base_uom": {
+      "type": "string",
+      "maxLength": 16,
+      "minLength": 1,
+      "title": "Base Uom"
+     },
+     "weight_kg": {
+      "type": "number",
+      "maximum": 10000.0,
+      "exclusiveMinimum": 0.0,
+      "title": "Weight Kg"
+     },
+     "length_cm": {
+      "type": "number",
+      "maximum": 1000.0,
+      "exclusiveMinimum": 0.0,
+      "title": "Length Cm"
+     },
+     "width_cm": {
+      "type": "number",
+      "maximum": 1000.0,
+      "exclusiveMinimum": 0.0,
+      "title": "Width Cm"
+     },
+     "height_cm": {
+      "type": "number",
+      "maximum": 1000.0,
+      "exclusiveMinimum": 0.0,
+      "title": "Height Cm"
+     },
+     "case_quantity": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "exclusiveMinimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Case Quantity"
+     },
+     "pallet_case_quantity": {
+      "anyOf": [
+       {
+        "type": "integer",
+        "exclusiveMinimum": 0.0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Pallet Case Quantity"
+     }
+    },
+    "type": "object",
+    "required": [
+     "sku",
+     "description",
+     "base_uom",
+     "weight_kg",
+     "length_cm",
+     "width_cm",
+     "height_cm"
+    ],
+    "title": "ProductCreate"
+   },
+   "ProductTrackingUpdate": {
+    "properties": {
+     "requires_batch": {
+      "type": "boolean",
+      "title": "Requires Batch",
+      "default": false
+     },
+     "requires_expiry": {
+      "type": "boolean",
+      "title": "Requires Expiry",
+      "default": false
+     },
+     "requires_serial": {
+      "type": "boolean",
+      "title": "Requires Serial",
+      "default": false
+     },
+     "temperature_class": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 40
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Temperature Class"
+     },
+     "hazmat_class": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 40
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Hazmat Class"
+     }
+    },
+    "type": "object",
+    "title": "ProductTrackingUpdate"
+   },
+   "QuantityConversion": {
+    "properties": {
+     "product_id": {
+      "type": "string",
+      "title": "Product Id"
+     },
+     "entered_quantity": {
+      "type": "integer",
+      "title": "Entered Quantity"
+     },
+     "entered_uom": {
+      "type": "string",
+      "title": "Entered Uom"
+     },
+     "base_quantity": {
+      "type": "integer",
+      "title": "Base Quantity"
+     },
+     "base_uom": {
+      "type": "string",
+      "title": "Base Uom"
+     }
+    },
+    "type": "object",
+    "required": [
+     "product_id",
+     "entered_quantity",
+     "entered_uom",
+     "base_quantity",
+     "base_uom"
+    ],
+    "title": "QuantityConversion"
+   },
+   "QuantityConversionRequest": {
+    "properties": {
+     "quantity": {
+      "type": "integer",
+      "exclusiveMinimum": 0.0,
+      "title": "Quantity"
+     },
+     "from_uom": {
+      "type": "string",
+      "maxLength": 16,
+      "minLength": 1,
+      "title": "From Uom"
+     }
+    },
+    "type": "object",
+    "required": [
+     "quantity",
+     "from_uom"
+    ],
+    "title": "QuantityConversionRequest"
+   },
+   "ReasonCategory": {
+    "type": "string",
+    "enum": [
+     "adjustment",
+     "short_receipt",
+     "short_pick",
+     "putaway_override",
+     "scrap",
+     "count_correction"
+    ],
+    "title": "ReasonCategory"
+   },
+   "ReasonCode": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "code": {
+      "type": "string",
+      "title": "Code"
+     },
+     "category": {
+      "$ref": "#/components/schemas/ReasonCategory"
+     },
+     "description": {
+      "type": "string",
+      "title": "Description"
+     },
+     "active": {
+      "type": "boolean",
+      "title": "Active"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "code",
+     "category",
+     "description",
+     "active"
+    ],
+    "title": "ReasonCode"
+   },
+   "ReasonCodeCreate": {
+    "properties": {
+     "code": {
+      "type": "string",
+      "maxLength": 40,
+      "minLength": 1,
+      "title": "Code"
+     },
+     "category": {
+      "$ref": "#/components/schemas/ReasonCategory"
+     },
+     "description": {
+      "type": "string",
+      "maxLength": 240,
+      "minLength": 1,
+      "title": "Description"
+     }
+    },
+    "type": "object",
+    "required": [
+     "code",
+     "category",
+     "description"
+    ],
+    "title": "ReasonCodeCreate"
+   },
+   "ReceiptLineUpdate": {
+    "properties": {
+     "barcode": {
+      "type": "string",
+      "title": "Barcode"
+     },
+     "quantity": {
+      "type": "integer",
+      "minimum": 0.0,
+      "title": "Quantity"
+     },
+     "batch_number": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 100,
+        "minLength": 1
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Batch Number"
+     },
+     "expiry_date": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Expiry Date"
+     },
+     "nothing_arrived_reason": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 240,
+        "minLength": 1
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Nothing Arrived Reason"
+     }
+    },
+    "type": "object",
+    "required": [
+     "barcode",
+     "quantity"
+    ],
+    "title": "ReceiptLineUpdate"
+   },
+   "ReceiptStart": {
+    "properties": {
+     "receiving_location_id": {
+      "type": "string",
+      "title": "Receiving Location Id"
+     },
+     "dock": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 64
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Dock"
+     },
+     "vehicle_reference": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 100
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Vehicle Reference"
+     }
+    },
+    "type": "object",
+    "required": [
+     "receiving_location_id"
+    ],
+    "title": "ReceiptStart"
+   },
+   "UomConversion": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "product_id": {
+      "type": "string",
+      "title": "Product Id"
+     },
+     "from_uom": {
+      "type": "string",
+      "title": "From Uom"
+     },
+     "to_uom": {
+      "type": "string",
+      "title": "To Uom"
+     },
+     "factor": {
+      "type": "integer",
+      "title": "Factor"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "product_id",
+     "from_uom",
+     "to_uom",
+     "factor"
+    ],
+    "title": "UomConversion"
+   },
+   "UomConversionCreate": {
+    "properties": {
+     "from_uom": {
+      "type": "string",
+      "maxLength": 16,
+      "minLength": 1,
+      "title": "From Uom"
+     },
+     "to_uom": {
+      "type": "string",
+      "maxLength": 16,
+      "minLength": 1,
+      "title": "To Uom"
+     },
+     "factor": {
+      "type": "integer",
+      "exclusiveMinimum": 0.0,
+      "title": "Factor"
+     }
+    },
+    "type": "object",
+    "required": [
+     "from_uom",
+     "to_uom",
+     "factor"
+    ],
+    "title": "UomConversionCreate"
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   },
+   "Warehouse": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "code": {
+      "type": "string",
+      "title": "Code"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "address": {
+      "type": "string",
+      "title": "Address"
+     },
+     "timezone": {
+      "type": "string",
+      "title": "Timezone"
+     },
+     "active": {
+      "type": "boolean",
+      "title": "Active"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "code",
+     "name",
+     "address",
+     "timezone",
+     "active"
+    ],
+    "title": "Warehouse"
+   },
+   "WarehouseCreate": {
+    "properties": {
+     "code": {
+      "type": "string",
+      "maxLength": 32,
+      "minLength": 1,
+      "title": "Code"
+     },
+     "name": {
+      "type": "string",
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Name"
+     },
+     "address": {
+      "type": "string",
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Address"
+     },
+     "timezone": {
+      "type": "string",
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Timezone"
+     }
+    },
+    "type": "object",
+    "required": [
+     "code",
+     "name",
+     "address",
+     "timezone"
+    ],
+    "title": "WarehouseCreate"
+   },
+   "Zone": {
+    "properties": {
+     "id": {
+      "type": "string",
+      "title": "Id"
+     },
+     "warehouse_id": {
+      "type": "string",
+      "title": "Warehouse Id"
+     },
+     "code": {
+      "type": "string",
+      "title": "Code"
+     },
+     "type": {
+      "$ref": "#/components/schemas/ZoneType"
+     },
+     "temperature_class": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Temperature Class"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "warehouse_id",
+     "code",
+     "type",
+     "temperature_class"
+    ],
+    "title": "Zone"
+   },
+   "ZoneCreate": {
+    "properties": {
+     "code": {
+      "type": "string",
+      "maxLength": 32,
+      "minLength": 1,
+      "title": "Code"
+     },
+     "type": {
+      "$ref": "#/components/schemas/ZoneType"
+     },
+     "temperature_class": {
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 40
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Temperature Class"
+     }
+    },
+    "type": "object",
+    "required": [
+     "code",
+     "type"
+    ],
+    "title": "ZoneCreate"
+   },
+   "ZoneType": {
+    "type": "string",
+    "enum": [
+     "receiving",
+     "bulk",
+     "pick",
+     "quarantine",
+     "staging",
+     "dock"
+    ],
+    "title": "ZoneType"
+   }
+  },
+  "securitySchemes": {
+   "HTTPBearer": {
+    "type": "http",
+    "scheme": "bearer"
+   }
+  }
+ }
+}

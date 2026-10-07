@@ -93,16 +93,25 @@ export async function applyReviews(run: Run, ado: WorkItemClient, graph: GraphSt
     if (decisions.length !== relation.storyIds.length) { result.pending += 1; continue; }
     const agreed = consensus(decisions);
     if (!agreed) { result.conflicts += 1; continue; }
-    if (agreed.action === "approve" && !validRelation(relation.type, relation.sourceType, relation.targetType)) { result.conflicts += 1; continue; }
+    const unchangedCorrection = agreed.action === "correct" && !agreed.reverse
+      && agreed.type === normalizeRelationshipType(relation.type);
+    if ((agreed.action === "approve" || unchangedCorrection)
+      && !validRelation(relation.type, relation.sourceType, relation.targetType)) { result.conflicts += 1; continue; }
+    let type = relation.type;
     if (agreed.action === "correct") {
       const source = agreed.reverse ? relation.targetType : relation.sourceType;
       const target = agreed.reverse ? relation.sourceType : relation.targetType;
       if (!agreed.type || !validRelation(agreed.type, source, target)) { result.conflicts += 1; continue; }
-      relation.type = agreed.type;
+      type = agreed.type;
     }
-    relation.decisions = decisions;
-    relation.state = agreed.action === "reject" ? "rejected" : "approved";
-    await graph.decide(relation);
+    const next = {
+      ...relation,
+      type,
+      decisions: unchangedCorrection ? decisions.map((decision) => ({ ...decision, action: "approve" as const, type: undefined, reverse: undefined })) : decisions,
+      state: agreed.action === "reject" ? "rejected" as const : "approved" as const,
+    };
+    await graph.decide(next);
+    Object.assign(relation, next);
     await saveRun(run);
     result.applied += 1;
   }

@@ -1,0 +1,5 @@
+import type { Relation } from "../core/runtime.js";
+
+export function relationshipReviewPrompt(relation: Relation, sourceText: string, forward: string[], reverse: string[]): string {
+  return `Review this proposed graph relationship independently. Return one JSON object with action (approve|correct|reject|unsure), reason, an exact short quote from the source, and for a correction type and direction (forward|reverse). Check the identity of both endpoints, the action, and its direction separately. Approve only if the source supports this exact entity type and relationship meaning. A quoted mention alone does not prove USES, IMPLEMENTS, PART_OF, or EXPOSES. Reject only if the proposal is contradicted; use unsure for missing evidence. Original model confidence is not proof.\nSource: ${relation.sourceId} (${relation.sourceType})\nTarget: ${relation.targetId} (${relation.targetType})\nProposed type: ${relation.type}\nOriginal evidence: ${relation.evidence}\nOriginal reason: ${relation.reason}\nAllowed forward types: ${forward.join(", ")}\nAllowed reverse types: ${reverse.join(", ")}\nSource text:\n${sourceText}`;
+}

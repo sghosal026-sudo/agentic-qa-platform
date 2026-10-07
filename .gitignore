@@ -6,3 +6,4 @@ runs/
 test-results/
 playwright-report/
 *.log
+global-bundle.pem

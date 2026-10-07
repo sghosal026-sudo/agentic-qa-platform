@@ -1,4 +1,4 @@
-import { hash, required, type Artifact, type Relation, type RelationDecision, type Story, type WorkItemParent } from "../core/runtime.js";
+import { hash, required, type Artifact, type Relation, type RelationDecision, type Story, type TestReview, type WorkItemParent } from "../core/runtime.js";
 
 type AdoWorkItem = { id: number; rev?: number; fields: Record<string, unknown>; relations?: Array<{ rel: string; url: string }> };
 import type { ExecutionResult } from "../contracts.js";
@@ -93,6 +93,25 @@ export class Ado {
     throw new Error(`Completed Task ${taskId} has no valid decision for its current proposal`);
   }
 
+  async recommendationStatus(taskId: number, proposalHash: string, model: string): Promise<"needed" | "present" | "unavailable"> {
+    let item: { fields: Record<string, unknown> };
+    try {
+      item = await this.request("GET", `workitems/${taskId}?api-version=7.1`);
+    } catch (error) {
+      if (error instanceof AdoHttpError && error.status === 404) return "unavailable";
+      throw error;
+    }
+    if (item.fields["System.State"] === this.done || !String(item.fields["System.Description"] ?? "").includes(proposalHash)) return "unavailable";
+    const comments = await this.request<{ comments?: Array<{ text: string }> }>("GET", `workItems/${taskId}/comments?$top=100&order=desc&api-version=7.1-preview.4`);
+    const marker = `AI relationship recommendation | ${proposalHash} | ${model}`;
+    return comments.comments?.some((comment) => comment.text.includes(marker)) ? "present" : "needed";
+  }
+
+  async postRecommendation(taskId: number, proposalHash: string, model: string, text: string): Promise<void> {
+    if (await this.recommendationStatus(taskId, proposalHash, model) !== "needed") return;
+    await this.request("POST", `workItems/${taskId}/comments?api-version=7.1-preview.4`, { text });
+  }
+
   async sprintStories(iterationPath: string): Promise<Story[]> {
     const escapedIteration = iterationPath.replace(/'/g, "''");
     const query = `SELECT [System.Id] FROM WorkItems WHERE [System.TeamProject] = @project AND [System.IterationPath] = '${escapedIteration}' AND [System.WorkItemType] IN ('User Story', 'Product Backlog Item', 'Story') ORDER BY [System.Id]`;
@@ -116,6 +135,16 @@ export class Ado {
       });
     }
     return stories;
+  }
+
+  async storyById(adoId: number): Promise<Story> {
+    const workItem = await this.request<AdoWorkItem>("GET", `workitems/${adoId}?$expand=Relations&api-version=7.1`);
+    const title = String(workItem.fields["System.Title"] ?? `ADO-${adoId}`);
+    return { id: workItemCode(adoId, title, "Story"), adoId, revision: workItem.rev ?? 0, title,
+      text: plain(String(workItem.fields["System.Description"] ?? "")),
+      areaPath: String(workItem.fields["System.AreaPath"] ?? ""),
+      iterationPath: String(workItem.fields["System.IterationPath"] ?? ""),
+      parents: await this.parents(workItem, new Map([[adoId, workItem]])) };
   }
 
   private async parents(workItem: AdoWorkItem, workItems: Map<number, AdoWorkItem>): Promise<WorkItemParent[]> {
@@ -187,6 +216,69 @@ export class Ado {
   async artifactDecision(taskId: number, expectedHash: string): Promise<RelationDecision | "missing" | null> {
     const result = await this.decision(taskId, expectedHash);
     return result && result !== "missing" && result.action === "correct" ? null : result;
+  }
+
+  async testReviewTask(runId: string, review: TestReview, story: Story): Promise<number> {
+    const key = hash(`${runId}|${story.id}|test-review`).slice(0, 16);
+    const title = `[QA test ${runId}] ${key}`;
+    const workflowUrl = process.env.WORKFLOW_URL;
+    const details = review.items.map((item) => `<h3>${escape(item.kind)}: ${escape(item.name)}</h3>`
+      + `<p>Item-ID: ${escape(item.id)} | Review-Hash: ${item.hash} | Status: ${item.status}</p>`
+      + `<p>Base hash: ${escape(item.baseHash ?? "new item")} | Proposed hash: ${escape(item.proposedHash ?? "not applicable")}</p>`
+      + `<p>Suite: ${escape(item.suite ?? "unspecified")}</p>`
+      + `<p>Confidence: ${item.confidence ?? "not supplied"} | Review reason: ${escape(item.reviewReason)}</p>`
+      + `<p>Evidence: ${escape(item.evidence ?? "none")} | Source revision: ${escape(item.sourceRevision ?? review.sourceHash)}</p>`
+      + (item.changedSteps?.length ? `<p>Changed steps: ${escape(item.changedSteps.map((step) => String(step.index + 1)).join(", "))}</p>` : "")
+      + `<p>Before: ${escape(JSON.stringify(item.before ?? "none").slice(0, 500))}</p>`
+      + `<p>After: ${escape(JSON.stringify(item.after ?? "none").slice(0, 500))}</p>`
+      + (item.affectedCaseId ? `<p>Affected test: ${escape(item.affectedCaseId)} | Missing evidence or oracle: ${escape(item.reviewReason)}</p>` : "")).join("");
+    const description = `<p>Story: ${escape(story.id)} | Run: ${runId} | Source hash: ${review.sourceHash}</p>`
+      + `<p>Full JSON/XLSX diff: ${escape(review.reportPath ?? `runs/${runId}/test-review.json`)} and runs/${runId}/test-review.xlsx${workflowUrl ? ` | Workflow artifact: ${escape(workflowUrl)}` : ""}</p>`
+      + details
+      + "<pre>Item-ID: (copy item ID)\nReview-Hash: (copy item hash)\nDecision: approve | reject | correct\nReason: (reject/correct)\nCorrection: (plain-language correction only)</pre>";
+    const query = `SELECT [System.Id] FROM WorkItems WHERE [System.TeamProject] = @project AND [System.Title] = '${title.replace(/'/g, "''")}'`;
+    const found = await this.request<{ workItems?: Array<{ id: number }> }>("POST", "wiql?api-version=7.1", { query });
+    const id = found.workItems?.[0]?.id;
+    if (id) {
+      const current = await this.request<{ fields: Record<string, unknown>; relations?: Array<{ rel: string; url: string }> }>("GET", `workitems/${id}?$expand=Relations&api-version=7.1`);
+      if (!current.relations?.some((item) => item.rel === "System.LinkTypes.Hierarchy-Reverse" && item.url.endsWith(`/${story.adoId}`))) throw new Error(`Test review Task ${id} has the wrong parent`);
+      if (current.fields["System.Description"] !== description) await this.request("PATCH", `workitems/${id}?api-version=7.1`, [
+        { op: "add", path: "/fields/System.Description", value: description },
+      ]);
+      return id;
+    }
+    const created = await this.request<{ id: number }>("POST", "workitems/$Task?api-version=7.1", [
+      { op: "add", path: "/fields/System.Title", value: title },
+      { op: "add", path: "/fields/System.Description", value: description },
+      { op: "add", path: "/fields/System.AreaPath", value: story.areaPath },
+      { op: "add", path: "/fields/System.IterationPath", value: story.iterationPath },
+      { op: "add", path: "/fields/System.State", value: this.pending },
+      { op: "add", path: "/fields/System.Tags", value: "qa-test-review" },
+      { op: "add", path: "/relations/-", value: { rel: "System.LinkTypes.Hierarchy-Reverse", url: `${this.org}/_apis/wit/workItems/${story.adoId}` } },
+    ]);
+    return created.id;
+  }
+
+  async testReviewComments(taskId: number): Promise<Array<{ text: string; reviewer: string; at: string }>> {
+    const comments: Array<{ text: string; reviewer: string; at: string }> = [];
+    let continuation = "";
+    do {
+      const page: { comments?: Array<{ text: string; createdDate?: string; createdBy?: { uniqueName?: string; displayName?: string } }>; continuationToken?: string } =
+        await this.request("GET", `workItems/${taskId}/comments?$top=100&order=desc${continuation ? `&continuationToken=${encodeURIComponent(continuation)}` : ""}&api-version=7.1-preview.4`);
+      for (const comment of page.comments ?? []) {
+        const reviewer = comment.createdBy?.uniqueName ?? comment.createdBy?.displayName;
+        if (reviewer) comments.push({ text: comment.text, reviewer, at: comment.createdDate ?? new Date().toISOString() });
+      }
+      continuation = page.continuationToken ?? "";
+    } while (continuation);
+    return comments;
+  }
+
+  async closeTestReviewTask(taskId: number): Promise<void> {
+    const item = await this.request<{ fields: Record<string, unknown> }>("GET", `workitems/${taskId}?api-version=7.1`);
+    if (item.fields["System.State"] !== this.done) await this.request("PATCH", `workitems/${taskId}?api-version=7.1`, [
+      { op: "add", path: "/fields/System.State", value: this.done },
+    ]);
   }
 
   async resetReviewTasks(): Promise<number> {

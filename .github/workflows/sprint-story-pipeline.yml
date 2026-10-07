@@ -5,8 +5,30 @@ on:
     - cron: "2/5 * * * *"
   workflow_dispatch:
     inputs:
+      spec_stage:
+        description: Manual spec stage (advance runs the Story chain)
+        type: choice
+        default: advance
+        options: [advance, evidence, explore, plan, render, diagnose, repair]
+      selected_story_ado_id:
+        description: Required for a manual spec stage
+        type: string
+      ui_screen:
+        description: Screen name for exploration
+        type: string
+      ui_url:
+        description: Path for exploration
+        type: string
       iteration_path:
         description: Exact Azure DevOps iteration path
+        required: false
+        type: string
+      retry_design_ado_id:
+        description: ADO Story ID whose blocked design should be retried once
+        required: false
+        type: string
+      retry_mapping_ado_id:
+        description: ADO Story ID whose blocked graph mapping should be retried once
         required: false
         type: string
 
@@ -15,7 +37,7 @@ permissions:
 
 jobs:
   discover:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, qa-rds]
     outputs:
       stories: ${{ steps.poll.outputs.stories }}
       has_stories: ${{ steps.poll.outputs.has_stories }}
@@ -29,6 +51,13 @@ jobs:
       NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
       NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
       NEO4J_DATABASE: ${{ vars.NEO4J_DATABASE || 'neo4j' }}
+      LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+      LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+      LANGFUSE_BASE_URL: ${{ vars.LANGFUSE_BASE_URL }}
+      LANGFUSE_TRACING_ENVIRONMENT: ${{ vars.LANGFUSE_TRACING_ENVIRONMENT }}
+      LANGFUSE_RELEASE: ${{ github.sha }}
+      SELECTED_STORY: ${{ inputs.selected_story_ado_id }}
+      SPEC_STAGE: ${{ inputs.spec_stage || 'advance' }}
       ITERATION_PATH: ${{ inputs.iteration_path || vars.ADO_ITERATION_PATH }}
     steps:
       - uses: actions/checkout@v4
@@ -41,11 +70,19 @@ jobs:
         id: poll
         shell: bash
         run: |
+          if [ "$SPEC_STAGE" != "advance" ] && [ -z "$SELECTED_STORY" ]; then
+            echo "selected_story_ado_id is required for a manual stage" >&2
+            exit 1
+          fi
+          if [ -n "$SELECTED_STORY" ]; then
+            node -e 'const id=Number(process.env.SELECTED_STORY); if(!Number.isInteger(id)||id<1) throw new Error("Invalid Story ID"); console.log(JSON.stringify({stories:[{adoId:id,storyId:"ADO-"+id}]}))' > poll.json
+          else
           if [ -z "$ITERATION_PATH" ]; then
             echo "ADO_ITERATION_PATH is required" >&2
             exit 1
           fi
-          npm run qa -- poll-sprint --iteration "$ITERATION_PATH" > poll.json
+          npm run --silent qa -- poll-sprint --iteration "$ITERATION_PATH" > poll.json
+          fi
           stories=$(jq -c '.stories' poll.json)
           count=$(jq '.stories | length' poll.json)
           echo "stories=$stories" >> "$GITHUB_OUTPUT"
@@ -63,7 +100,7 @@ jobs:
   process-story:
     if: needs.discover.outputs.has_stories == 'true'
     needs: discover
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64, qa-rds]
     strategy:
       fail-fast: false
       max-parallel: 4
@@ -82,8 +119,29 @@ jobs:
       NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
       NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
       NEO4J_DATABASE: ${{ vars.NEO4J_DATABASE || 'neo4j' }}
+      LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+      LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+      LANGFUSE_BASE_URL: ${{ vars.LANGFUSE_BASE_URL }}
+      LANGFUSE_TRACING_ENVIRONMENT: ${{ vars.LANGFUSE_TRACING_ENVIRONMENT }}
+      LANGFUSE_RELEASE: ${{ github.sha }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      POSTGRES_HOST: ${{ vars.POSTGRES_HOST }}
+      POSTGRES_PORT: ${{ vars.POSTGRES_PORT || '5432' }}
+      POSTGRES_DATABASE: ${{ vars.POSTGRES_DATABASE || 'postgres' }}
+      POSTGRES_USER: ${{ vars.POSTGRES_USER || 'postgres' }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_CA_PATH: ./global-bundle.pem
+      OPENROUTER_EMBEDDING_MODEL: ${{ vars.OPENROUTER_EMBEDDING_MODEL || 'openai/text-embedding-3-small' }}
+      EMBEDDING_DIMENSIONS: ${{ vars.EMBEDDING_DIMENSIONS || '1536' }}
       OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'openai/gpt-oss-120b' }}
+      SPEC_GENERATION_MODEL: ${{ vars.SPEC_GENERATION_MODEL || vars.OPENROUTER_MODEL }}
+      SPEC_DIAGNOSIS_MODEL: ${{ vars.SPEC_DIAGNOSIS_MODEL || vars.OPENROUTER_MODEL }}
+      SPEC_REPAIR_MODEL: ${{ vars.SPEC_REPAIR_MODEL || vars.OPENROUTER_MODEL }}
+      SPEC_STAGE: ${{ inputs.spec_stage || 'advance' }}
+      UI_SCREEN: ${{ inputs.ui_screen }}
+      UI_URL: ${{ inputs.ui_url }}
+      TEST_DESIGN_MODEL: ${{ vars.TEST_DESIGN_MODEL || 'openai/gpt-oss-120b' }}
+      REVIEWER_OPENROUTER_MODEL: ${{ vars.REVIEWER_OPENROUTER_MODEL || 'qwen/qwen3.8-flash' }}
       RELATION_AUTO_APPROVE_CONFIDENCE: ${{ vars.RELATION_AUTO_APPROVE_CONFIDENCE || '0.9' }}
       GITHUB_TOKEN: ${{ secrets.PLAYWRIGHT_REPO_TOKEN }}
       GH_TOKEN: ${{ secrets.PLAYWRIGHT_REPO_TOKEN }}
@@ -104,6 +162,13 @@ jobs:
             echo "PLAYWRIGHT_REPOSITORY and TARGET_CONFIG_JSON are required" >&2
             exit 1
           fi
+          if [ -z "$POSTGRES_HOST" ] || [ -z "$POSTGRES_PASSWORD" ]; then
+            echo "POSTGRES_HOST and POSTGRES_PASSWORD are required for test authoring" >&2
+            exit 1
+          fi
+      - name: Download Amazon RDS CA bundle
+        if: env.POSTGRES_HOST != ''
+        run: curl --fail --silent --show-error https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem -o global-bundle.pem
       - name: Check out Playwright repository
         uses: actions/checkout@v4
         with:
@@ -111,18 +176,48 @@ jobs:
           token: ${{ secrets.PLAYWRIGHT_REPO_TOKEN }}
           path: automation
           fetch-depth: 0
+      - name: Install target dependencies and browser
+        run: |
+          npm --prefix automation ci
+          npx playwright install --with-deps chromium
       - name: Write target configuration
         run: node -e "require('node:fs').writeFileSync('target.config.ci.json', process.env.TARGET_CONFIG_JSON)"
-      - name: Advance Story
+      - name: Retry blocked test design
+        if: inputs.retry_design_ado_id != '' && inputs.retry_design_ado_id == format('{0}', matrix.story.adoId)
+        run: npm run qa -- retry-design --ado-id "${{ matrix.story.adoId }}"
+      - name: Retry blocked graph mapping
+        if: inputs.retry_mapping_ado_id != '' && inputs.retry_mapping_ado_id == format('{0}', matrix.story.adoId)
+        run: npm run qa -- retry-mapping --ado-id "${{ matrix.story.adoId }}"
+      - name: Advance Story or run the selected spec stage
         id: advance
         shell: bash
         run: |
           set +e
-          npm run qa -- advance-story --ado-id "${{ matrix.story.adoId }}" --target target.config.ci.json --workflow-url "$WORKFLOW_URL" | tee advance.json
-          command_status=${PIPESTATUS[0]}
+          if [ "$SPEC_STAGE" = "advance" ]; then
+            npm run --silent qa -- advance-story --ado-id "${{ matrix.story.adoId }}" --target target.config.ci.json --workflow-url "$WORKFLOW_URL" | tee advance.json
+            command_status=${PIPESTATUS[0]}
+          else
+            npm run --silent qa -- story-status --ado-id "${{ matrix.story.adoId }}" > story.json
+            run_id=$(jq -r '.runId' story.json)
+            batch=$(jq -r '.batch' story.json)
+            execution=$(jq -r '.executionId // empty' story.json)
+            case "$SPEC_STAGE" in
+              evidence) npm run --silent qa -- inspect-evidence --target target.config.ci.json > evidence.json ;;
+              explore) npm run --silent qa -- explore-ui --target target.config.ci.json --screen "$UI_SCREEN" --url "$UI_URL" > exploration.json ;;
+              plan) npm run --silent qa -- plan-specs --run "$run_id" --target target.config.ci.json > plan.json ;;
+              render) npm run --silent qa -- render-specs --run "$run_id" --batch "$((batch + 1))" > advance.json ;;
+              diagnose) npm run --silent qa -- diagnose-specs --run "$run_id" --execution "$execution" > diagnosis.json ;;
+              repair) npm run --silent qa -- repair-story --ado-id "${{ matrix.story.adoId }}" > advance.json ;;
+            esac
+            command_status=$?
+            if [ ! -f advance.json ]; then
+              jq '{runId, action:"manual_stage_completed"}' story.json > advance.json
+            fi
+          fi
           set -e
           echo "action=$(jq -r '.action' advance.json)" >> "$GITHUB_OUTPUT"
           echo "run_id=$(jq -r '.runId // empty' advance.json)" >> "$GITHUB_OUTPUT"
+          echo "batch=$(jq -r '.batch // empty' advance.json)" >> "$GITHUB_OUTPUT"
           exit "$command_status"
       - name: Publish generated specs
         if: steps.advance.outputs.action == 'specs_generated'
@@ -132,7 +227,7 @@ jobs:
         run: |
           owner=${PLAYWRIGHT_REPOSITORY%%/*}
           repo=${PLAYWRIGHT_REPOSITORY#*/}
-          branch="qa/story-${{ matrix.story.adoId }}"
+          branch="qa/story-${{ matrix.story.adoId }}/run-${{ steps.advance.outputs.run_id }}/batch-${{ steps.advance.outputs.batch || '1' }}"
           git config user.name "qa-pipeline[bot]"
           git config user.email "qa-pipeline[bot]@users.noreply.github.com"
           git checkout -B "$branch"
@@ -167,6 +262,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: qa-story-${{ matrix.story.adoId }}-${{ github.run_id }}-${{ github.run_attempt }}
-          path: runs/${{ steps.advance.outputs.run_id }}
+          path: |
+            runs/${{ steps.advance.outputs.run_id }}
+            evidence.json
+            exploration.json
+            diagnosis.json
+            plan.json
+            .specgen/ui-proposals.json
           if-no-files-found: error
           retention-days: 30

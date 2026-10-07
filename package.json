@@ -3,7 +3,9 @@
   "version": "0.2.0",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "qa": "tsx src/cli.ts",
     "check": "npm run typecheck && npm test && npm run build",
@@ -13,15 +15,29 @@
     "test": "tsx --test \"test/**/*.test.ts\""
   },
   "dependencies": {
+    "@langfuse/otel": "^5.11.1",
+    "@langfuse/tracing": "^5.11.1",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/sdk-node": "^0.222.0",
+    "@scalar/openapi-parser": "^0.29.11",
+    "aws-sdk": "^2.1693.0",
     "commander": "^12.1.0",
     "dotenv": "^16.4.5",
+    "exceljs": "^4.4.0",
     "neo4j-driver": "^5.22.0",
+    "node-sqlite3-wasm": "^0.8.60",
     "openai": "^7.23.0",
+    "pg": "^8.23.0",
+    "prettier": "^3.9.9",
+    "yaml": "^2.9.1",
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@opentelemetry/context-async-hooks": "^2.11.0",
+    "@opentelemetry/sdk-trace-base": "^2.11.0",
     "@playwright/test": "^1.63.0",
-    "@types/node": "^22.10.0",
+    "@types/node": "^22.20.4",
+    "@types/pg": "^8.23.1",
     "tsx": "^4.23.13",
     "typescript": "~5.9.2"
   }
